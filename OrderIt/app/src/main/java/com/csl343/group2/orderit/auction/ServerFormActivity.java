@@ -1,18 +1,37 @@
 package com.csl343.group2.orderit.auction;
 
-import android.support.v7.app.ActionBarActivity;
+
+
+
+
+import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.csl343.group2.orderit.R;
+import com.csl343.group2.orderit.utilFragments.TimePickerFragment;
 
-public class ServerFormActivity extends ActionBarActivity {
+import java.util.Calendar;
+import java.util.Date;
 
+public class ServerFormActivity extends FragmentActivity implements TimePickerFragment.OnTimeSetListener{
+
+    TextView aucEndTime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_server_form);
+        aucEndTime = (TextView) findViewById(R.id.auc_end_time);
+        aucEndTime.setText(Calendar.getInstance().getTime().toString());
+        aucEndTime.setOnClickListener(showTimePickerDialog);
     }
 
 
@@ -36,5 +55,27 @@ public class ServerFormActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    View.OnClickListener showTimePickerDialog = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            TimePickerFragment time = (TimePickerFragment) getSupportFragmentManager().findFragmentByTag("timepicker");
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            if(time==null) {
+                time = new TimePickerFragment();
+                ft.add(time,"timepicker");
+            }
+
+            ft.show(time);
+            ft.commit();
+        }
+    };
+
+
+
+    @Override
+    public void onTimePicked(int hourOfDay, int minute) {
+        aucEndTime.setText(hourOfDay + ":" + minute);
     }
 }
