@@ -12,6 +12,11 @@
 bin/
 gen/
 
+
+#Android Studio
+
+.idea
+
 # Gradle files
 .gradle/
 build/
