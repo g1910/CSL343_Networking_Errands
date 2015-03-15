@@ -27,3 +27,7 @@ proguard/
 
 # Temporary File
 *~
+
+#Android Studio
+.idea
+*.iml
