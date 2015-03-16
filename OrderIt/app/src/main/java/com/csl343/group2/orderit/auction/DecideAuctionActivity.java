@@ -1,5 +1,6 @@
 package com.csl343.group2.orderit.auction;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -22,7 +23,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DecideAuctionActivity extends ActionBarActivity implements ServerConnect.OnResponseListener{
+
+public class DecideAuctionActivity extends Activity implements ServerConnect.OnResponseListener{
+
 
     private boolean isRunning;
     @Override

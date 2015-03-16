@@ -1,5 +1,6 @@
 package com.csl343.group2.orderit.main;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.csl343.group2.orderit.R;
 import com.csl343.group2.orderit.auction.DecideAuctionActivity;
 import com.csl343.group2.orderit.auction.ServerFormActivity;
+import com.csl343.group2.orderit.bidding.CurrAuctionActivity;
 import com.csl343.group2.orderit.utilFragments.ServerConnect;
 
 import org.apache.http.NameValuePair;
@@ -23,7 +25,7 @@ import org.apache.http.message.BasicNameValuePair;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends ActionBarActivity implements View.OnClickListener{
+public class MainActivity extends Activity implements View.OnClickListener{
 
     Button sp,cs;
 
@@ -76,7 +78,10 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 i = new Intent(this, DecideAuctionActivity.class);
                 startActivity(i);
                 break;
-            case R.id.csBtn:break;
+            case R.id.csBtn:
+                i = new Intent(this, CurrAuctionActivity.class);
+                startActivity(i);
+                break;
         }
     }
 }

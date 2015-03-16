@@ -8,7 +8,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@android:style/Theme.Holo">
         <activity
             android:name=".main.MainActivity"
             android:label="@string/title_activity_main" >
@@ -27,8 +27,13 @@
             android:label="@string/title_activity_decide_auction" >
         </activity>
         <activity
+<<<<<<< HEAD
+            android:name=".bidding.CurrAuctionActivity"
+            android:label="@string/title_activity_curr_auction" >
+=======
             android:name=".auction.AuctionActivity"
             android:label="@string/title_activity_auction" >
+>>>>>>> 8dcfa0e52a5c89b2f472f3a4aa04f871b9e63026
         </activity>
     </application>
 

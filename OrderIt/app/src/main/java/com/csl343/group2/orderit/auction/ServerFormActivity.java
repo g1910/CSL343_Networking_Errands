@@ -1,9 +1,5 @@
 package com.csl343.group2.orderit.auction;
 
-
-
-
-
 import android.app.Activity;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
