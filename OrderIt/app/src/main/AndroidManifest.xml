@@ -27,13 +27,13 @@
             android:label="@string/title_activity_decide_auction" >
         </activity>
         <activity
-<<<<<<< HEAD
             android:name=".bidding.CurrAuctionActivity"
-            android:label="@string/title_activity_curr_auction" >
-=======
+            android:label="@string/title_activity_curr_auction" />
+
+        <activity
             android:name=".auction.AuctionActivity"
             android:label="@string/title_activity_auction" >
->>>>>>> 8dcfa0e52a5c89b2f472f3a4aa04f871b9e63026
+
         </activity>
     </application>
 
