@@ -1,9 +1,12 @@
 package com.csl343.group2.orderit.utilFragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.csl343.group2.orderit.auction.ServerFormActivity;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -11,20 +14,36 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.BufferUnderflowException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by mohit on 15/3/15.
  */
-public class ServerConnect extends AsyncTask<Object,Void,Void> {
+public class ServerConnect extends AsyncTask<Object,Void,JSONObject> {
     HttpPost httppost;
     HttpClient httpclient;
     List<NameValuePair> value;
+
+    OnResponseListener listener = null;
+
+    public ServerConnect(Activity a){
+        listener = (OnResponseListener) a;
+    }
+
+    public interface OnResponseListener {
+        public void onResponse(JSONObject j);
+    };
 
     @Override
     protected void onPreExecute() {
@@ -34,16 +53,24 @@ public class ServerConnect extends AsyncTask<Object,Void,Void> {
 
 
     @Override
-    protected Void doInBackground(Object... params) {
+    protected JSONObject doInBackground(Object... params) {
         try {
 
             httpclient=new DefaultHttpClient();
+            //ServerFormActivity a = (ServerFormActivity) params[0];
+            //listener = (OnResponseListener) a;
+
             value=(ArrayList<NameValuePair>)params[1];
 
             httppost= new HttpPost((String)params[0]);
             httppost.setEntity(new UrlEncodedFormEntity(value));
 
             HttpResponse response = httpclient.execute(httppost);
+            Log.d("ServerConnect",response.toString());
+            //Log.d("ServerConnect",Integer.toString(response.getEntity().getContent().read()));
+
+            return handleResponse(response);
+
 
         } catch (IOException e) {
 
@@ -54,9 +81,30 @@ public class ServerConnect extends AsyncTask<Object,Void,Void> {
 
 
     @Override
-    protected void onPostExecute(Void aVoid) {
-        super.onPostExecute(aVoid);
+    protected void onPostExecute(JSONObject j) {
+        super.onPostExecute(j);
+        listener.onResponse(j);
         Log.d("ServerConnect","Task Completed!");
+    }
+
+    private JSONObject handleResponse(HttpResponse response){
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+            String json = reader.readLine();
+            JSONTokener tokener = new JSONTokener(json);
+            JSONObject j = new JSONObject(tokener);
+
+            return j;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+
+
     }
 
 }
