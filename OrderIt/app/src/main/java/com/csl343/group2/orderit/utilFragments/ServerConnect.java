@@ -25,6 +25,14 @@ public class ServerConnect extends AsyncTask<Object,Void,Void> {
     HttpPost httppost;
     HttpClient httpclient;
     List<NameValuePair> value;
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        Log.d("ServerConnect","Starting Task...");
+    }
+
+
     @Override
     protected Void doInBackground(Object... params) {
         try {
@@ -35,13 +43,20 @@ public class ServerConnect extends AsyncTask<Object,Void,Void> {
             httppost= new HttpPost((String)params[0]);
             httppost.setEntity(new UrlEncodedFormEntity(value));
 
-            HttpResponse response =httpclient.execute(httppost);
+            HttpResponse response = httpclient.execute(httppost);
 
         } catch (IOException e) {
 
             e.printStackTrace();
         }
         return null;
+    }
+
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        super.onPostExecute(aVoid);
+        Log.d("ServerConnect","Task Completed!");
     }
 
 }

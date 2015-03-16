@@ -91,5 +91,13 @@
         android:layout_alignRight="@+id/auction_location"
         android:layout_alignEnd="@+id/auction_location" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start Button"
+        android:id="@+id/auc_start_btn"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
 
 </RelativeLayout>
