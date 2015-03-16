@@ -11,5 +11,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_decide_auction">DecideAuctionActivity</string>
     <string name="title_activity_curr_auction">Running Auctions</string>
+    <string name="title_activity_auction">AuctionActivity</string>
+
 
 </resources>

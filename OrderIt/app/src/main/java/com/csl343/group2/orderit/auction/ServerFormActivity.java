@@ -25,6 +25,7 @@ import com.csl343.group2.orderit.utilFragments.TimePickerFragment;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -178,7 +179,7 @@ public class ServerFormActivity extends FragmentActivity implements TimePickerFr
     }
 
     @Override
-    public void onResponse(JSONObject j) {
+    public void onResponse(JSONArray j) {
         Log.d("ResponseListener","onResponseListened");
         Toast toast = Toast.makeText(this, "Auction Started Successfully", Toast.LENGTH_SHORT);
         toast.show();

@@ -14,6 +14,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -30,7 +31,7 @@ import java.util.List;
 /**
  * Created by mohit on 15/3/15.
  */
-public class ServerConnect extends AsyncTask<Object,Void,JSONObject> {
+public class ServerConnect extends AsyncTask<Object,Void,JSONArray> {
     HttpPost httppost;
     HttpClient httpclient;
     List<NameValuePair> value;
@@ -41,8 +42,10 @@ public class ServerConnect extends AsyncTask<Object,Void,JSONObject> {
         listener = (OnResponseListener) a;
     }
 
+
+
     public interface OnResponseListener {
-        public void onResponse(JSONObject j);
+        public void onResponse(JSONArray j);
     };
 
     @Override
@@ -53,7 +56,7 @@ public class ServerConnect extends AsyncTask<Object,Void,JSONObject> {
 
 
     @Override
-    protected JSONObject doInBackground(Object... params) {
+    protected JSONArray doInBackground(Object... params) {
         try {
 
             httpclient=new DefaultHttpClient();
@@ -81,18 +84,18 @@ public class ServerConnect extends AsyncTask<Object,Void,JSONObject> {
 
 
     @Override
-    protected void onPostExecute(JSONObject j) {
+    protected void onPostExecute(JSONArray j) {
         super.onPostExecute(j);
         listener.onResponse(j);
         Log.d("ServerConnect","Task Completed!");
     }
 
-    private JSONObject handleResponse(HttpResponse response){
+    private JSONArray handleResponse(HttpResponse response){
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
             String json = reader.readLine();
             JSONTokener tokener = new JSONTokener(json);
-            JSONObject j = new JSONObject(tokener);
+            JSONArray j = new JSONArray(tokener);
 
             return j;
 
