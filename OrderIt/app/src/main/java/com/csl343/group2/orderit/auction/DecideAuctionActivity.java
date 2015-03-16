@@ -1,5 +1,6 @@
 package com.csl343.group2.orderit.auction;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,18 +12,29 @@ import com.csl343.group2.orderit.R;
 import com.csl343.group2.orderit.utilFragments.ServerConnect;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-public class DecideAuctionActivity extends ActionBarActivity {
+public class DecideAuctionActivity extends ActionBarActivity implements ServerConnect.OnResponseListener{
 
+    private boolean isRunning;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_decide_auction);
         ProgressBar bar=(ProgressBar) findViewById(R.id.decideBar);
-        ServerConnect myServer=new ServerConnect();
-     //   myServer.execute("http://10.20.9.85/Networks/CSL343_Networking_Errands/Server/getAuction.php");
+        ServerConnect myServer=new ServerConnect(this);
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+        nameValuePairs.add(new BasicNameValuePair("id_user","1"));
+        myServer.execute("http://10.20.9.85/Networks/CSL343_Networking_Errands/Server/getAuction.php",nameValuePairs);
+
         Log.e("OrderIt","Hi");
 
     }
@@ -48,5 +60,24 @@ public class DecideAuctionActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onResponse(JSONArray j) {
+        try {
+            isRunning=Boolean.valueOf (((JSONObject)j.get(0)).get("isRunning").toString());
+            if (isRunning)
+            {
+                Intent i = new Intent(this, AuctionActivity.class);
+                startActivity(i);
+            }
+            else {
+                Intent i = new Intent(this, ServerFormActivity.class);
+                startActivity(i);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
