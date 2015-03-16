@@ -14,5 +14,6 @@ mysqli_query($con,"INSERT INTO `Auction`( `location`, `start_time`, `end_time`, 
 $arr = array(
     "message" => "Success", 
 );
+$output[]=$arr;
 print(json_encode($output));
 ?>
