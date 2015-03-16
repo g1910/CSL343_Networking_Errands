@@ -4,6 +4,7 @@ package com.csl343.group2.orderit.auction;
 
 
 
+import android.app.Activity;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -19,6 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.csl343.group2.orderit.R;
 import com.csl343.group2.orderit.utilFragments.DatePickerFragment;
@@ -27,17 +29,19 @@ import com.csl343.group2.orderit.utilFragments.TimePickerFragment;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class ServerFormActivity extends FragmentActivity implements TimePickerFragment.OnTimeSetListener, DatePickerFragment.OnDateSetListener{
+public class ServerFormActivity extends FragmentActivity implements TimePickerFragment.OnTimeSetListener, DatePickerFragment.OnDateSetListener, ServerConnect.OnResponseListener{
 
     TextView aucEndTime,aucEndDate,aucExpTime,aucExpDate;
     EditText aucDesc, aucLocation;
     Button aucStartBtn;
+    Activity a = this;
     Calendar c = Calendar.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,7 +157,7 @@ public class ServerFormActivity extends FragmentActivity implements TimePickerFr
             nameValuePairs.add(new BasicNameValuePair("expected",aucExpDate.getText().toString() + " " + aucExpTime.getText().toString()+":00"));
             nameValuePairs.add(new BasicNameValuePair("description",aucDesc.getText().toString()));
             nameValuePairs.add(new BasicNameValuePair("id_user","1"));
-            ServerConnect myServer=new ServerConnect();
+            ServerConnect myServer=new ServerConnect(a);
             myServer.execute("http://10.20.9.85/Networks/CSL343_Networking_Errands/Server/auction.php",nameValuePairs,this);
         }
     };
@@ -177,4 +181,10 @@ public class ServerFormActivity extends FragmentActivity implements TimePickerFr
         }
     }
 
+    @Override
+    public void onResponse(JSONObject j) {
+        Log.d("ResponseListener","onResponseListened");
+        Toast toast = Toast.makeText(this, "Auction Started Successfully", Toast.LENGTH_SHORT);
+        toast.show();
+    }
 }
