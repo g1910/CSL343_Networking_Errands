@@ -48,7 +48,7 @@ public class ServerFormActivity extends FragmentActivity implements TimePickerFr
         aucLocation = (EditText) findViewById(R.id.auction_location);
 
         String time = String.format("%02d:%02d",c.get(Calendar.HOUR_OF_DAY),c.get(Calendar.MINUTE));
-        String date = String.format("%02d-%02d-%04d",c.get(Calendar.DAY_OF_MONTH),c.get(Calendar.MONTH),c.get(Calendar.YEAR));
+        String date = String.format("%04d-%02d-%02d",c.get(Calendar.YEAR),c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH));
         aucEndTime = (TextView) findViewById(R.id.auc_end_time);
         aucEndTime.setText(time);
         aucEndTime.setOnClickListener(showTimePickerDialog);
@@ -148,6 +148,7 @@ public class ServerFormActivity extends FragmentActivity implements TimePickerFr
         public void onClick(View v) {
             List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
             nameValuePairs.add(new BasicNameValuePair("location", aucLocation.getText().toString()));
+            Log.e("OrderIt",aucEndDate.getText().toString() + " " + aucEndTime.getText().toString()+":00");
             nameValuePairs.add(new BasicNameValuePair("endtime",aucEndDate.getText().toString() + " " + aucEndTime.getText().toString()+":00"));
             nameValuePairs.add(new BasicNameValuePair("expected",aucExpDate.getText().toString() + " " + aucExpTime.getText().toString()+":00"));
             nameValuePairs.add(new BasicNameValuePair("description",aucDesc.getText().toString()));
@@ -169,7 +170,7 @@ public class ServerFormActivity extends FragmentActivity implements TimePickerFr
 
     @Override
     public void onDatePicked(int view,int year, int monthOfYear, int dayOfMonth) {
-        String date = String.format("%02d-%02d-%04d",dayOfMonth,monthOfYear,year);
+        String date = String.format("%04d-%02d-%02d",year,monthOfYear,dayOfMonth);
         switch(view){
             case R.id.auc_end_date:aucEndDate.setText(date);break;
             case R.id.auc_exp_date:aucExpDate.setText(date);break;
