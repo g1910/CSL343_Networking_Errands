@@ -1,16 +1,26 @@
 package com.csl343.group2.orderit.main;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.csl343.group2.orderit.R;
 import com.csl343.group2.orderit.auction.ServerFormActivity;
+import com.csl343.group2.orderit.utilFragments.ServerConnect;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener{
 
@@ -56,6 +66,12 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         Intent i;
         switch(v.getId()){
             case R.id.spBtn:
+                Context context = getApplicationContext();
+                CharSequence text = "Auction Started Successfully";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+
                 i = new Intent(this, ServerFormActivity.class);
                 startActivity(i);
                 break;
