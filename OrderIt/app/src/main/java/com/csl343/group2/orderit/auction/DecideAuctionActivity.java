@@ -1,5 +1,6 @@
 package com.csl343.group2.orderit.auction;
 
+import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,14 +15,14 @@ import org.apache.http.HttpResponse;
 
 import java.io.IOException;
 
-public class DecideAuctionActivity extends ActionBarActivity {
+public class DecideAuctionActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_decide_auction);
         ProgressBar bar=(ProgressBar) findViewById(R.id.decideBar);
-        ServerConnect myServer=new ServerConnect();
+        ServerConnect myServer=new ServerConnect(this);
      //   myServer.execute("http://10.20.9.85/Networks/CSL343_Networking_Errands/Server/getAuction.php");
         Log.e("OrderIt","Hi");
 
