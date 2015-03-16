@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.csl343.group2.orderit.R;
+import com.csl343.group2.orderit.auction.DecideAuctionActivity;
 import com.csl343.group2.orderit.auction.ServerFormActivity;
 import com.csl343.group2.orderit.utilFragments.ServerConnect;
 
@@ -72,7 +73,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
 
-                i = new Intent(this, ServerFormActivity.class);
+                i = new Intent(this, DecideAuctionActivity.class);
                 startActivity(i);
                 break;
             case R.id.csBtn:break;
