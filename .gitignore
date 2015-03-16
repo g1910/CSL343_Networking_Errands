@@ -13,10 +13,6 @@ bin/
 gen/
 
 
-#Android Studio
-
-.idea
-
 # Gradle files
 .gradle/
 build/
@@ -33,6 +29,3 @@ proguard/
 # Temporary File
 *~
 
-#Android Studio
-.idea
-*.iml
