@@ -25,6 +25,7 @@ import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListe
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
 
+
 public class MainActivity extends Activity implements OnClickListener, ConnectionCallbacks, OnConnectionFailedListener {
 
 	private static final int RC_SIGN_IN = 0;
@@ -156,8 +157,9 @@ public class MainActivity extends Activity implements OnClickListener, Connectio
 		} else {
             if (mGoogleApiClient.isConnected()) {
                 Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
-                mGoogleApiClient.disconnect();
-                mGoogleApiClient.connect();}
+                //mGoogleApiClient.disconnect();
+                //mGoogleApiClient.connect();
+                }
 			signinFrame.setVisibility(View.VISIBLE);
 			profileFrame.setVisibility(View.GONE);
 		}

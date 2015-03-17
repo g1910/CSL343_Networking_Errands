@@ -6,7 +6,8 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="15dp"
-    tools:context=".AndroidGooglePlusExample" >
+    tools:context=".AndroidGooglePlusExample"
+    android:background="@drawable/january">
 
     <LinearLayout
         android:id="@+id/profileFrame"
@@ -61,6 +62,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="10dp"
+            android:textStyle="bold"
             android:text="@string/loginText"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#ffffff" />

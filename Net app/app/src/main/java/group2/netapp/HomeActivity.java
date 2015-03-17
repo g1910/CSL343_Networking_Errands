@@ -7,8 +7,11 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,6 +22,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import org.apache.http.HttpHost;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.conn.params.ConnRoutePNames;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,6 +35,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -41,7 +52,9 @@ public class HomeActivity extends Activity
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
-
+    private String pname;
+    private String picurl;
+    private String email;
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
@@ -60,51 +73,76 @@ public class HomeActivity extends Activity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
-        String pname=getIntent().getStringExtra("pname");
-        String picurl=getIntent().getStringExtra("picurl");
-        String email=getIntent().getStringExtra("email");
-        /*try {
-            postData(pname, email, "http://10.1.13.44/add_user.php");
-        }
-        catch(JSONException e)
-        {
-            System.out.println(e);
-        }*/
+        pname=getIntent().getStringExtra("pname");
+        picurl=getIntent().getStringExtra("picurl");
+        email=getIntent().getStringExtra("email");
+        new adduser(pname,email,"http://netapp.byethost33.com/add_user.php").execute(null,null,null);
+        SharedPreferences sp = getSharedPreferences("my_prefs", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("user_name",pname);
+        editor.putString("email",email);
+        editor.putString("picurl",picurl);
+        editor.commit();
+
     }
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
+        Fragment fragment=null;
         FragmentManager fragmentManager = getFragmentManager();
+
+        switch (position)
+        {
+            case 1:
+                fragment=new ProfileFragment();
+                break;
+            case 4:
+                fragment=new UserRequestFragment();
+                break;
+            case 2:
+                fragment=new FeedbackFragment();
+                break;
+            case 3:
+                fragment=new RateFragment();
+                break;
+            case 0:
+                fragment=new HomeFragment();
+                break;
+            case 5:
+                Intent logout = new Intent(getApplicationContext(),MainActivity.class);
+                logout.putExtra("loggedout",1);
+                startActivity(logout);
+                finish();
+                break;
+
+        }
+        if(position!=5)
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                .replace(R.id.container, fragment)
                 .commit();
     }
 
     public void onSectionAttached(int number) {
         switch (number) {
-            case 1:
+            case 0:
                 mTitle=getString(R.string.title_activity_home);
                 break;
-            case 2:
+            case 1:
                mTitle = getString(R.string.title_section1);
                 break;
-            case 3:
+            case 2:
                 mTitle = getString(R.string.title_section2);
 
                 break;
-            case 4:
+            case 3:
                 mTitle = getString(R.string.title_section3);
                 break;
-            case 5:
+            case 4:
                 mTitle = getString(R.string.title_section4);
                 break;
-            case 6:
+            case 5:
                 mTitle = getString(R.string.title_section5);
-                Intent logout = new Intent(getApplicationContext(),MainActivity.class);
-                logout.putExtra("loggedout",1);
-                startActivity(logout);
-                finish();
                 break;
 
 
@@ -193,62 +231,77 @@ public class HomeActivity extends Activity
         }
     }
 
-    public void postData(String pname,String email,String host) throws JSONException {
-        // Create a new HttpClient and Post Header
-        HttpClient httpclient = new DefaultHttpClient();
-        HttpPost httppost = new HttpPost(host);
-        JSONObject json = new JSONObject();
 
-        try {
-            // JSON data:
-            json.put("name", pname);
-            json.put("email", email);
 
-            JSONArray postjson=new JSONArray();
-            postjson.put(json);
+    class adduser extends AsyncTask<String,String,String>
+    {
+        private String pname,email,host;
+        public adduser(String a, String b, String c)
+        {
+            pname=a;
+            email=b;
+            host=c;
+        }
+        @Override
+        protected String doInBackground(String[] params) {
 
-            // Post the data:
-            httppost.setHeader("json",json.toString());
-            httppost.getParams().setParameter("jsonpost",postjson);
 
-            // Execute HTTP Post Request
-            System.out.print(json);
-            HttpResponse response = httpclient.execute(httppost);
+            // Create a new HttpClient and Post Header
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppost = new HttpPost(host);
+            httppost.setHeader("Content-Type", "application/x-www-form-urlencoded");
+            String text;
+            //HttpHost proxy = new HttpHost("10.1.201.4", 3128);
+            //httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
+            try {
 
-            // for JSON:
-            /*if(response != null)
-            {
-                InputStream is = response.getEntity().getContent();
+                /*JSONObject obj = new JSONObject();
+                obj.put("pname", pname);
+                obj.put("email", email);
+                httppost.setEntity(new StringEntity(obj.toString(), "UTF-8"));
+                HttpResponse response = httpclient.execute(httppost);*/
 
-                BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-                StringBuilder sb = new StringBuilder();
+                // Add your data
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+                nameValuePairs.add(new BasicNameValuePair("pname", pname));
+                nameValuePairs.add(new BasicNameValuePair("email", email));
+                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
-                String line = null;
-                try {
-                    while ((line = reader.readLine()) != null) {
-                        sb.append(line + "\n");
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } finally {
+                // Execute HTTP Post Request
+                HttpResponse response = httpclient.execute(httppost);
+                if(response != null)
+                {
+                    InputStream is = response.getEntity().getContent();
+
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+                    StringBuilder sb = new StringBuilder();
+
+                    String line = null;
                     try {
-                        is.close();
+                        while ((line = reader.readLine()) != null) {
+                            sb.append(line + "\n");
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
+                    } finally {
+                        try {
+                            is.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
+                    text = sb.toString();
+                    System.out.println(text);
                 }
-                text = sb.toString();
+
+            } catch (Exception e) {
+                System.out.println(e);
+                // TODO Auto-generated catch block
             }
-
-            tv.setText(text); */
-
-        }catch (ClientProtocolException e) {
-            // TODO Auto-generated catch block
-            System.out.println(e);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            System.out.println(e);
+            return null;
         }
     }
 
 }
+
+

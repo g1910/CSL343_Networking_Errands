@@ -1,0 +1,18 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:context="group2.netapp.UserRequestFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <SearchView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/searchView"
+        android:layout_gravity="right|top"
+        android:iconifiedByDefault="true"
+        android:focusable="false"
+        android:inputType="textShortMessage|textAutoComplete|textAutoCorrect"
+        android:outlineProvider="bounds"
+        android:queryHint="@string/request_search_hint" />
+
+</FrameLayout>

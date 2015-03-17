@@ -4,6 +4,7 @@ package group2.netapp;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.content.Intent;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -250,8 +251,10 @@ public class NavigationDrawerFragment extends Fragment {
             return true;
         }
 
-        if (item.getItemId() == R.id.action_example) {
-            Toast.makeText(getActivity(), "Example action.", Toast.LENGTH_SHORT).show();
+        if (item.getItemId() == R.id.broadcast_request) {
+            Toast.makeText(getActivity(), "Enter the request details.", Toast.LENGTH_LONG).show();
+            Intent broadcast = new Intent(getActivity(),Broadcast.class);
+            startActivity(broadcast);
             return true;
         }
 
