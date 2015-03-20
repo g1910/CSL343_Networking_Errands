@@ -116,11 +116,12 @@ public class Broadcast extends Activity {
             try
             {
                 // Add your data
-                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(6);
-                /*SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                String email = sp.getString("email",null);
-                System.out.println(email);*/
-               //nameValuePairs.add(new BasicNameValuePair("email", email));
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(7);
+                SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                //SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                String email = saved_values.getString("email",null);
+                System.out.println(email);
+                nameValuePairs.add(new BasicNameValuePair("email", email));
                 nameValuePairs.add(new BasicNameValuePair("item", item));
                 nameValuePairs.add(new BasicNameValuePair("location", location));
                 nameValuePairs.add(new BasicNameValuePair("quantity", quantity));

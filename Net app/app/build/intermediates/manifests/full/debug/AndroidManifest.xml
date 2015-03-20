@@ -103,9 +103,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="group2.netapp.HomeActivity" />
         </activity>
-        <activity
-            android:name="android.support.v7.widget.TestActivity"
-            android:label="RecyclerViewTestActivity" />
     </application>
 
 </manifest>

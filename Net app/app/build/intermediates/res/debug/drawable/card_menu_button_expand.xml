@@ -27,4 +27,4 @@
           android:state_selected="true"/>
     <item android:drawable="@drawable/ic_menu_expand_card_dark_normal"/>
 
-</selector><!-- From: file:/home/gabriele/Lavoro/Android/AndroidStudioProjects/wrks/cardslib/library-core/src/main/res/drawable/card_menu_button_expand.xml --><!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable/card_menu_button_expand.xml -->
+</selector><!-- From: file:/home/gabriele/Lavoro/Android/AndroidStudioProjects/wrks/cardslib/library/src/main/res/drawable/card_menu_button_expand.xml --><!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/library/1.9.1/res/drawable/card_menu_button_expand.xml -->

@@ -1,18 +1,32 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="group2.netapp.UserRequestFragment">
+    android:layout_height="wrap_content" tools:context="group2.netapp.UserRequestFragment"
+    android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
 
-    <SearchView
-        android:layout_width="wrap_content"
+    <EditText
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/searchView"
-        android:layout_gravity="right|top"
-        android:iconifiedByDefault="true"
-        android:focusable="false"
-        android:inputType="textShortMessage|textAutoComplete|textAutoCorrect"
-        android:outlineProvider="bounds"
-        android:queryHint="@string/request_search_hint" />
+        android:id="@+id/SearchText"
+        android:layout_gravity="top"
+        android:hint="Search"
+        android:inputType="textVisiblePassword"/>
 
-</FrameLayout>
+   <!-- <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">-->
+
+
+            <it.gmariotti.cardslib.library.view.CardListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ReqCardList">
+            </it.gmariotti.cardslib.library.view.CardListView>
+
+
+
+    <!---->
+
+</LinearLayout>
+

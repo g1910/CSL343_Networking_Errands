@@ -3,7 +3,7 @@
     <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="black_overlay">#66000000</color>
-    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/values/values.xml -->
+    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/library/1.9.1/res/values/values.xml -->
     <eat-comment/>
     <color name="card_activated">#CFE9F3</color>
     <color name="card_activated_kitkat">#ADE1F4</color>
@@ -15,29 +15,13 @@
     <color name="card_expand_title_color">#B3B2B2</color>
     <color name="card_foreground_activated">#99CFE9F3</color>
     <color name="card_foreground_activated_kitkat">#99ADE1F4</color>
-    <color name="card_native_background">@android:color/transparent</color>
-    <color name="card_native_base_cardwithlist_background_list_color">#10000000</color>
-    <color name="card_native_base_cardwithlist_divider_color">#E5E5E5</color>
     <color name="card_pressed">#7E0099CC</color>
     <color name="card_pressed_kitkat">#10000000</color>
-    <color name="card_section_container_color">#10000000</color>
+    <color name="card_section_container_color">@android:color/transparent</color>
     <color name="card_section_title_color">@android:color/black</color>
     <color name="card_text_color_header">#000</color>
-    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/res/values/values.xml -->
-    <eat-comment/>
-    <color name="card_thumbnail_image_text_over_textcolor">#FFF</color>
-    <color name="card_topcolored_subtitle_textcolor">#80FFFFFF</color>
-    <color name="card_topcolored_title_textcolor">#FFF</color>
-    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/values/values.xml -->
-    <eat-comment/>
     <color name="card_undobar_material_background_color">#323232</color>
     <color name="card_undobar_material_text_color">#4CAF50</color>
-    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/21.0.0/res/values/values.xml -->
-    <eat-comment/>
-    <color name="cardview_dark_background">#FF202020</color>
-    <color name="cardview_light_background">#FFFAFAFA</color>
-    <color name="cardview_shadow_end_color">#03000000</color>
-    <color name="cardview_shadow_start_color">#37000000</color>
     <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values/common_colors.xml -->
     <eat-comment/>
     <color name="common_action_bar_splitter">#d2d2d2</color>
@@ -67,7 +51,6 @@
     <color name="wallet_link_text_light">#0000ee</color>
     <declare-styleable name="AdsAttrs"><attr format="string" name="adSize"/><attr format="string" name="adSizes"/><attr format="string" name="adUnitId"/></declare-styleable>
     <declare-styleable name="ButtonBarContainerTheme"><attr format="reference" name="metaButtonBarStyle"/><attr format="reference" name="metaButtonBarButtonStyle"/></declare-styleable>
-    <declare-styleable name="CardView"><attr format="color" name="cardBackgroundColor"/><attr format="dimension" name="cardCornerRadius"/><attr format="dimension" name="cardElevation"/><attr format="dimension" name="cardMaxElevation"/><attr format="boolean" name="cardUseCompatPadding"/><attr format="boolean" name="cardPreventCornerOverlap"/><attr format="dimension" name="contentPadding"/><attr format="dimension" name="contentPaddingLeft"/><attr format="dimension" name="contentPaddingRight"/><attr format="dimension" name="contentPaddingTop"/><attr format="dimension" name="contentPaddingBottom"/></declare-styleable>
     <declare-styleable name="ForegroundLinearLayout"><attr name="android:foreground"/><attr name="android:foregroundInsidePadding"/><attr name="android:foregroundGravity"/></declare-styleable>
     <declare-styleable name="LoadingImageView"><attr format="enum" name="imageAspectRatioAdjust"><enum name="none" value="0"/><enum name="adjust_width" value="1"/><enum name="adjust_height" value="2"/></attr><attr format="float" name="imageAspectRatio"/><attr format="boolean" name="circleCrop"/></declare-styleable>
     <declare-styleable name="MapAttrs"><attr format="enum" name="mapType"><enum name="none" value="0"/><enum name="normal" value="1"/><enum name="satellite" value="2"/><enum name="terrain" value="3"/><enum name="hybrid" value="4"/></attr><attr format="float" name="cameraBearing"/><attr format="float" name="cameraTargetLat"/><attr format="float" name="cameraTargetLng"/><attr format="float" name="cameraTilt"/><attr format="float" name="cameraZoom"/><attr format="boolean" name="liteMode"/><attr format="boolean" name="uiCompass"/><attr format="boolean" name="uiRotateGestures"/><attr format="boolean" name="uiScrollGestures"/><attr format="boolean" name="uiTiltGestures"/><attr format="boolean" name="uiZoomControls"/><attr format="boolean" name="uiZoomGestures"/><attr format="boolean" name="useViewLifecycle"/><attr format="boolean" name="zOrderOnTop"/><attr format="boolean" name="uiMapToolbar"/></declare-styleable>
@@ -75,21 +58,14 @@
     <declare-styleable name="WalletFragmentOptions"><attr format="enum" name="appTheme"><enum name="holo_dark" value="0"/><enum name="holo_light" value="1"/></attr><attr format="enum" name="environment"><enum name="production" value="1"/><enum name="sandbox" value="0"/><enum name="strict_sandbox" value="2"/></attr><attr format="reference" name="fragmentStyle"/><attr format="enum" name="fragmentMode"><enum name="buyButton" value="1"/><enum name="selectionDetails" value="2"/></attr></declare-styleable>
     <declare-styleable name="WalletFragmentStyle"><attr format="dimension" name="buyButtonHeight"><enum name="match_parent" value="-1"/><enum name="wrap_content" value="-2"/></attr><attr format="dimension" name="buyButtonWidth"><enum name="match_parent" value="-1"/><enum name="wrap_content" value="-2"/></attr><attr format="enum" name="buyButtonText"><enum name="buy_with_google" value="1"/><enum name="buy_now" value="2"/><enum name="book_now" value="3"/><enum name="donate_with_google" value="4"/></attr><attr format="enum" name="buyButtonAppearance"><enum name="classic" value="1"/><enum name="grayscale" value="2"/><enum name="monochrome" value="3"/></attr><attr format="reference" name="maskedWalletDetailsTextAppearance"/><attr format="reference" name="maskedWalletDetailsHeaderTextAppearance"/><attr format="reference|color" name="maskedWalletDetailsBackground"/><attr format="reference" name="maskedWalletDetailsButtonTextAppearance"/><attr format="reference|color" name="maskedWalletDetailsButtonBackground"/><attr format="color" name="maskedWalletDetailsLogoTextColor"/><attr format="enum" name="maskedWalletDetailsLogoImageType"><enum name="classic" value="1"/><enum name="monochrome" value="2"/></attr></declare-styleable>
     <declare-styleable name="card_listItem"><attr format="dimension" name="card_list_item_dividerHeight"/></declare-styleable>
-    <declare-styleable name="card_options"><attr format="reference" name="card_layout_resourceID"/><attr format="reference" name="card_shadow_layout_resourceID"/><attr format="reference" name="card_header_layout_resourceID"/><attr format="reference" name="card_thumbnail_layout_resourceID"/><attr format="reference" name="list_card_layout_resourceID"/><attr format="reference" name="list_card_layout_resourceIDs"/></declare-styleable>
-    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/res/values/values.xml -->
-    <eat-comment/>
-    <dimen name="actions_icon_height">54dp</dimen>
-    <dimen name="actions_icon_width">54dp</dimen>
-    <dimen name="actions_padding">16dp</dimen>
-    <dimen name="actions_padding_left">8dp</dimen>
-    <dimen name="actions_textsize">14sp</dimen>
+    <declare-styleable name="card_options"><attr format="reference" name="card_layout_resourceID"/><attr format="reference" name="card_shadow_layout_resourceID"/><attr format="reference" name="card_header_layout_resourceID"/><attr format="reference" name="card_thumbnail_layout_resourceID"/><attr format="reference" name="list_card_layout_resourceID"/></declare-styleable>
     <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/values/values.xml -->
+    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/library/1.9.1/res/values/values.xml -->
     <eat-comment/>
-    <dimen name="card_background_default_radius">2dp</dimen>
+    <dimen name="card_background_default_radius">2dip</dimen>
     <dimen name="card_base_cardwithlist_dividerHeight">1dp</dimen>
     <dimen name="card_base_cardwithlist_layout_leftmargin">0dp</dimen>
     <dimen name="card_base_cardwithlist_layout_rightmargin">0dp</dimen>
@@ -100,20 +76,7 @@
     <dimen name="card_content_outer_view_margin_left">0dp</dimen>
     <dimen name="card_content_outer_view_margin_right">0dp</dimen>
     <dimen name="card_content_outer_view_margin_top">0dp</dimen>
-    <dimen name="card_default_native_margin_bottom">12dp</dimen>
-    <dimen name="card_default_native_margin_left">8dp</dimen>
-    <dimen name="card_default_native_margin_right">8dp</dimen>
-    <dimen name="card_default_native_margin_top">12dp</dimen>
     <dimen name="card_expand_layout_padding">2dp</dimen>
-    <dimen name="card_expand_native_layout_padding_bottom">12dp</dimen>
-    <dimen name="card_expand_native_layout_padding_left">12dp</dimen>
-    <dimen name="card_expand_native_layout_padding_right">12dp</dimen>
-    <dimen name="card_expand_native_layout_padding_top">12dp</dimen>
-    <dimen name="card_expand_native_margin_left">0dp</dimen>
-    <dimen name="card_expand_native_margin_right">0dp</dimen>
-    <dimen name="card_expand_native_simple_title_padding_left">0dp</dimen>
-    <dimen name="card_expand_native_simple_title_padding_right">0dp</dimen>
-    <dimen name="card_expand_native_simple_title_text_size">14sp</dimen>
     <dimen name="card_expand_simple_title_paddingLeft">10dp</dimen>
     <dimen name="card_expand_simple_title_paddingRight">10dp</dimen>
     <dimen name="card_expand_simple_title_text_size">14sp</dimen>
@@ -123,19 +86,6 @@
     <dimen name="card_header_button_padding_left">10dp</dimen>
     <dimen name="card_header_button_padding_right">0dp</dimen>
     <dimen name="card_header_button_padding_top">0dp</dimen>
-    <dimen name="card_header_default_padding">12dp</dimen>
-    <dimen name="card_header_native_button_margin_left">0dp</dimen>
-    <dimen name="card_header_native_button_margin_right">0dp</dimen>
-    <dimen name="card_header_native_default_paddingBottom">0dp</dimen>
-    <dimen name="card_header_native_default_paddingLeft">12dp</dimen>
-    <dimen name="card_header_native_default_paddingRight">12dp</dimen>
-    <dimen name="card_header_native_default_paddingTop">12dp</dimen>
-    <dimen name="card_header_native_simple_title_margin">0dp</dimen>
-    <dimen name="card_header_native_simple_title_margin_bottom">0dp</dimen>
-    <dimen name="card_header_native_simple_title_margin_left">0dp</dimen>
-    <dimen name="card_header_native_simple_title_margin_right">0dp</dimen>
-    <dimen name="card_header_native_simple_title_margin_top">0dp</dimen>
-    <dimen name="card_header_native_simple_title_text_size">18sp</dimen>
     <dimen name="card_header_outer_view_margin_bottom">0dp</dimen>
     <dimen name="card_header_outer_view_margin_left">0dp</dimen>
     <dimen name="card_header_outer_view_margin_right">0dp</dimen>
@@ -145,42 +95,12 @@
     <dimen name="card_header_simple_title_margin_right">20dp</dimen>
     <dimen name="card_header_simple_title_margin_top">5dp</dimen>
     <dimen name="card_header_simple_title_text_size">20sp</dimen>
-    <dimen name="card_main_content_native_cardwithlist_paddingBottom">12dp</dimen>
-    <dimen name="card_main_content_native_cardwithlist_paddingLeft">0dp</dimen>
-    <dimen name="card_main_content_native_cardwithlist_paddingRight">0dp</dimen>
-    <dimen name="card_main_content_native_cardwithlist_paddingTop">12dp</dimen>
-    <dimen name="card_main_content_native_default_paddingBottom">12dp</dimen>
-    <dimen name="card_main_content_native_default_paddingLeft">12dp</dimen>
-    <dimen name="card_main_content_native_default_paddingRight">12dp</dimen>
-    <dimen name="card_main_content_native_default_paddingTop">12dp</dimen>
-    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/res/values/values.xml -->
-    <eat-comment/>
-    <dimen name="card_main_content_native_material_large_image_paddingBottom">16dp</dimen>
-    <dimen name="card_main_content_native_material_large_image_paddingLeft">16dp</dimen>
-    <dimen name="card_main_content_native_material_large_image_paddingRight">16dp</dimen>
-    <dimen name="card_main_content_native_material_large_image_paddingTop">16dp</dimen>
-    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/values/values.xml -->
-    <eat-comment/>
-    <dimen name="card_main_content_native_simple_title_text_size">16sp</dimen>
-    <dimen name="card_main_layout_native_view_margin_bottom">0dp</dimen>
-    <dimen name="card_main_layout_native_view_margin_left">0dp</dimen>
-    <dimen name="card_main_layout_native_view_margin_right">0dp</dimen>
-    <dimen name="card_main_layout_native_view_margin_top">0dp</dimen>
     <dimen name="card_main_layout_view_margin_bottom">0dp</dimen>
     <dimen name="card_main_layout_view_margin_left">0dp</dimen>
     <dimen name="card_main_layout_view_margin_right">0dp</dimen>
     <dimen name="card_main_layout_view_margin_top">0dp</dimen>
-    <dimen name="card_main_native_simple_title_margin_left">0dp</dimen>
-    <dimen name="card_main_native_simple_title_margin_top">0dp</dimen>
-    <dimen name="card_main_simple_title_margin_bottom">0dp</dimen>
     <dimen name="card_main_simple_title_margin_left">5dp</dimen>
-    <dimen name="card_main_simple_title_margin_right">0dp</dimen>
     <dimen name="card_main_simple_title_margin_top">0dp</dimen>
-    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/res/values/values.xml -->
-    <eat-comment/>
-    <dimen name="card_material_largeimage_height">200dp</dimen>
-    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/values/values.xml -->
-    <eat-comment/>
     <dimen name="card_section_container_padding_left">15dp</dimen>
     <dimen name="card_section_container_padding_right">15dp</dimen>
     <dimen name="card_section_title">18sp</dimen>
@@ -191,30 +111,7 @@
     <dimen name="card_shadow_view_margin_right">@dimen/card_background_default_radius</dimen>
     <dimen name="card_shadow_view_margin_top">0dp</dimen>
     <dimen name="card_thumbnail_height">72dp</dimen>
-    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/res/values/values.xml -->
-    <eat-comment/>
-    <dimen name="card_thumbnail_image_text_over_padding_bottom">16dp</dimen>
-    <dimen name="card_thumbnail_image_text_over_padding_left">16dp</dimen>
-    <dimen name="card_thumbnail_image_text_over_padding_right">16dp</dimen>
-    <dimen name="card_thumbnail_image_text_over_padding_top">16dp</dimen>
-    <dimen name="card_thumbnail_image_text_over_textsize">24sp</dimen>
-    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/values/values.xml -->
-    <eat-comment/>
     <dimen name="card_thumbnail_width">72dp</dimen>
-    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/res/values/values.xml -->
-    <eat-comment/>
-    <dimen name="card_topcolored_layout_minHeigth">72dp</dimen>
-    <dimen name="card_topcolored_layout_padding">16dp</dimen>
-    <dimen name="card_topcolored_subtitle_paddingtop">18dp</dimen>
-    <dimen name="card_topcolored_subtitle_textsize">14dp</dimen>
-    <dimen name="card_topcolored_title_textsize">22dp</dimen>
-    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/21.0.0/res/values/values.xml -->
-    <eat-comment/>
-    <dimen name="cardview_compat_inset_shadow">1dp</dimen>
-    <dimen name="cardview_default_elevation">2dp</dimen>
-    <dimen name="cardview_default_radius">2dp</dimen>
-    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/values/values.xml -->
-    <eat-comment/>
     <dimen name="grid_card_padding_bottom">2dp</dimen>
     <dimen name="grid_card_padding_left">2dp</dimen>
     <dimen name="grid_card_padding_right">2dp</dimen>
@@ -223,21 +120,13 @@
     <dimen name="list_card_padding_left">8dp</dimen>
     <dimen name="list_card_padding_right">8dp</dimen>
     <dimen name="list_card_padding_top">2dp</dimen>
-    <dimen name="native_list_card_margin_bottom">6dp</dimen>
-    <dimen name="native_list_card_margin_left">0dp</dimen>
-    <dimen name="native_list_card_margin_right">0dp</dimen>
-    <dimen name="native_list_card_margin_top">6dp</dimen>
-    <dimen name="native_recyclerview_card_margin_bottom">6dp</dimen>
-    <dimen name="native_recyclerview_card_margin_left">0dp</dimen>
-    <dimen name="native_recyclerview_card_margin_right">0dp</dimen>
-    <dimen name="native_recyclerview_card_margin_top">6dp</dimen>
     <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="navigation_drawer_width">240dp</dimen>
     <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values/version.xml -->
     <eat-comment/>
     <integer name="google_play_services_version">6587000</integer>
-    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/values/values.xml -->
+    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/library/1.9.1/res/values/values.xml -->
     <eat-comment/>
     <integer name="list_card_swipe_distance_divisor">2</integer>
     <integer name="list_card_undobar_hide_delay">5000</integer>
@@ -257,15 +146,9 @@
     <string name="action_settings">Settings</string>
     <string name="app_name" translatable="false">Net app</string>
     <string name="broadcast_request">Broadcast Request</string>
-    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/values/values.xml -->
+    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/library/1.9.1/res/values/values.xml -->
     <eat-comment/>
     <string name="card_empty_cardwithlist_text">No data....</string>
-    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/res/values/values.xml -->
-    <eat-comment/>
-    <string name="card_native_font_fontFamily_top_colored">sans-serif</string>
-    <string name="card_native_progressbar_text">Loading...</string>
-    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/values/values.xml -->
-    <eat-comment/>
     <string name="card_progressbar_cardwithlist_text">Loading data...</string>
     <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values/common_strings.xml -->
     <eat-comment/>
@@ -306,7 +189,7 @@
     <eat-comment/>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/values/values.xml -->
+    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/library/1.9.1/res/values/values.xml -->
     <eat-comment/>
     <string name="font_fontFamily_medium">sans-serif</string>
     <string name="font_fontFamily_regular">sans-serif</string>
@@ -314,7 +197,7 @@
     <eat-comment/>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hello_world">Hello world!</string>
-    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/values/values.xml -->
+    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/library/1.9.1/res/values/values.xml -->
     <eat-comment/>
     <string name="list_card_undo_title">Undo</string>
     <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/src/main/res/values/strings.xml -->
@@ -350,24 +233,6 @@
         <item name="android:background">@android:drawable/bottom_bar</item>
     </style>
     <style name="ButtonBarButton"/>
-    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/21.0.0/res/values/values.xml -->
-    <eat-comment/>
-    <style name="CardView">
-        <item name="cardBackgroundColor">@color/cardview_light_background</item>
-        <item name="cardCornerRadius">@dimen/cardview_default_radius</item>
-        <item name="cardElevation">@dimen/cardview_default_elevation</item>
-        <item name="cardMaxElevation">@dimen/cardview_default_elevation</item>
-        <item name="cardUseCompatPadding">false</item>
-        <item name="cardPreventCornerOverlap">true</item>
-    </style>
-    <style name="CardView.Dark">
-        <item name="cardBackgroundColor">@color/cardview_dark_background</item>
-    </style>
-    <style name="CardView.Light">
-        <item name="cardBackgroundColor">@color/cardview_light_background</item>
-    </style>
-    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/src/main/res/values/styles.xml -->
-    <eat-comment/>
     <style name="FullscreenTheme" parent="android:Theme.NoTitleBar">
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@null</item>
@@ -418,18 +283,14 @@
         <item name="maskedWalletDetailsLogoTextColor">@color/wallet_bright_foreground_holo_dark</item>
         <item name="maskedWalletDetailsLogoImageType">classic</item>
     </style>
-    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/values/values.xml -->
+    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/library/1.9.1/res/values/values.xml -->
     <eat-comment/>
-    <style name="card">
-        <!-- this style should be empty -->
-    </style>
+    <style name="card"/>
     <style name="card.base_simple_title">
         <item name="android:textStyle">bold</item>
         <item name="android:layout_gravity">left|center_vertical</item>
         <item name="android:layout_marginLeft">@dimen/card_main_simple_title_margin_left</item>
         <item name="android:layout_marginTop">@dimen/card_main_simple_title_margin_top</item>
-        <item name="android:layout_marginRight">@dimen/card_main_simple_title_margin_right</item>
-        <item name="android:layout_marginBottom">@dimen/card_main_simple_title_margin_bottom</item>
     </style>
     <style name="card.content_outer_layout">
         <item name="android:layout_width">match_parent</item>
@@ -456,24 +317,18 @@
         <item name="android:focusableInTouchMode">false</item>
         <item name="android:clickable">true</item>
         <item name="android:layout_centerVertical">true</item>
-        <item name="android:layout_gravity">center_vertical</item>
         <item name="android:layout_marginRight">@dimen/card_header_button_margin_right</item>
     </style>
     <style name="card.header_button_base.expand">
         <item name="android:background">@drawable/card_menu_button_expand</item>
     </style>
-    <style name="card.header_button_base.other">
-
-    </style>
+    <style name="card.header_button_base.other"/>
     <style name="card.header_button_base.overflow">
         <item name="android:background">@drawable/card_menu_button_rounded_overflow</item>
+        <item name="android:layout_marginRight">@dimen/card_header_button_overflow_margin_right</item>
     </style>
-    <style name="card.header_button_frame">
-
-    </style>
-    <style name="card.header_compound_view">
-
-    </style>
+    <style name="card.header_button_frame"/>
+    <style name="card.header_compound_view"/>
     <style name="card.header_outer_layout">
         <item name="android:layout_marginTop">@dimen/card_header_outer_view_margin_top</item>
         <item name="android:layout_marginBottom">@dimen/card_header_outer_view_margin_bottom</item>
@@ -514,177 +369,6 @@
     <style name="card.main_layout_foreground.kitkat">
         <item name="android:foreground">@drawable/card_foreground_kitkat_selector</item>
     </style>
-    <style name="card.native">
-        <!-- this style should be empty -->
-    </style>
-    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/res/values/values.xml -->
-    <eat-comment/>
-    <style name="card.native.actions">
-        <item name="android:textSize">@dimen/actions_textsize</item>
-    </style>
-    <style name="card.native.actions.button">
-        <item name="android:layout_height">@dimen/actions_icon_height</item>
-        <item name="android:layout_width">@dimen/actions_icon_width</item>
-    </style>
-    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/values/values.xml -->
-    <eat-comment/>
-    <style name="card.native.base_simple_title">
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">@dimen/card_main_content_native_simple_title_text_size</item>
-        <item name="android:layout_gravity">left|center_vertical</item>
-        <item name="android:layout_marginLeft">@dimen/card_main_native_simple_title_margin_left</item>
-        <item name="android:layout_marginTop">@dimen/card_main_native_simple_title_margin_top</item>
-    </style>
-    <style name="card.native.card_thumbnail_image">
-        <item name="android:layout_width">@dimen/card_thumbnail_width</item>
-        <item name="android:layout_height">@dimen/card_thumbnail_height</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:gravity">center</item>
-        <item name="android:scaleType">centerCrop</item>
-    </style>
-    <style name="card.native.card_thumbnail_outer_layout">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-    </style>
-    <style name="card.native.content_outer_layout">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:minHeight">@dimen/card_base_empty_height</item>
-        <item name="android:paddingLeft">@dimen/card_main_content_native_default_paddingLeft</item>
-        <item name="android:paddingRight">@dimen/card_main_content_native_default_paddingRight</item>
-        <item name="android:paddingTop">@dimen/card_main_content_native_default_paddingTop</item>
-        <item name="android:paddingBottom">@dimen/card_main_content_native_default_paddingBottom</item>
-    </style>
-    <style name="card.native.content_outer_layout.cardwithlist">
-        <item name="android:paddingLeft">@dimen/card_main_content_native_cardwithlist_paddingLeft</item>
-        <item name="android:paddingRight">@dimen/card_main_content_native_cardwithlist_paddingRight</item>
-        <item name="android:paddingTop">@dimen/card_main_content_native_cardwithlist_paddingTop</item>
-        <item name="android:paddingBottom">@dimen/card_main_content_native_cardwithlist_paddingBottom</item>
-    </style>
-    <style name="card.native.expand_simple_title">
-        <item name="android:layout_gravity">left|center_vertical</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:textSize">@dimen/card_expand_native_simple_title_text_size</item>
-        <item name="android:paddingLeft">@dimen/card_expand_native_simple_title_padding_left</item>
-        <item name="android:paddingRight">@dimen/card_expand_native_simple_title_padding_right</item>
-        <item name="android:textColor">@color/card_expand_title_color</item>
-    </style>
-    <style name="card.native.header_button_base">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_alignParentRight">true</item>
-        <item name="android:focusable">false</item>
-        <item name="android:focusableInTouchMode">false</item>
-        <item name="android:clickable">true</item>
-        <item name="android:layout_centerVertical">true</item>
-        <item name="android:layout_gravity">center_vertical</item>
-        <item name="android:layout_marginLeft">@dimen/card_header_native_button_margin_left</item>
-        <item name="android:layout_marginRight">@dimen/card_header_native_button_margin_right</item>
-        <item name="android:paddingLeft">0dp</item>
-    </style>
-    <style name="card.native.header_button_base.expand">
-        <item name="android:background">@drawable/card_menu_button_expand_material_animator</item>
-    </style>
-    <style name="card.native.header_button_base.other">
-
-    </style>
-    <style name="card.native.header_button_base.overflow">
-        <item name="android:background">@drawable/card_menu_button_overflow_material</item>
-    </style>
-    <style name="card.native.header_button_frame">
-        <item name="android:layout_centerVertical">true</item>
-        <item name="android:layout_alignParentRight">true</item>
-    </style>
-    <style name="card.native.header_compound_view">
-
-    </style>
-    <style name="card.native.header_inner_frame">
-        <item name="android:layout_centerVertical">true</item>
-    </style>
-    <style name="card.native.header_outer_layout">
-        <item name="android:paddingLeft">@dimen/card_header_native_default_paddingLeft</item>
-        <item name="android:paddingRight">@dimen/card_header_native_default_paddingRight</item>
-        <item name="android:paddingTop">@dimen/card_header_native_default_paddingTop</item>
-        <item name="android:paddingBottom">@dimen/card_header_native_default_paddingBottom</item>
-    </style>
-    <style name="card.native.header_outer_layout.nomargin">
-        <item name="android:paddingLeft">0dp</item>
-        <item name="android:paddingRight">0dp</item>
-        <item name="android:paddingTop">0dp</item>
-        <item name="android:paddingBottom">0dp</item>
-    </style>
-    <style name="card.native.header_simple_title">
-        <item name="android:textSize">@dimen/card_header_native_simple_title_text_size</item>
-        <item name="android:textColor">@color/card_text_color_header</item>
-        <item name="android:layout_gravity">left|center_vertical</item>
-        <item name="android:layout_marginLeft">@dimen/card_header_native_simple_title_margin_left</item>
-        <item name="android:layout_marginTop">@dimen/card_header_native_simple_title_margin_top</item>
-        <item name="android:layout_marginRight">@dimen/card_header_native_simple_title_margin_right</item>
-        <item name="android:layout_marginBottom">@dimen/card_header_native_simple_title_margin_bottom</item>
-    </style>
-    <style name="card.native.main_contentExpand">
-        <item name="android:background">@color/card_backgroundExpand</item>
-        <item name="android:layout_marginLeft">@dimen/card_expand_native_margin_right</item>
-        <item name="android:layout_marginRight">@dimen/card_expand_native_margin_right</item>
-        <item name="android:paddingLeft">@dimen/card_expand_native_layout_padding_left</item>
-        <item name="android:paddingRight">@dimen/card_expand_native_layout_padding_right</item>
-        <item name="android:paddingTop">@dimen/card_expand_native_layout_padding_top</item>
-        <item name="android:paddingBottom">@dimen/card_expand_native_layout_padding_bottom</item>
-    </style>
-    <style name="card.native.main_layout">
-        <item name="android:background">?android:selectableItemBackground</item>
-        <item name="android:layout_marginTop">@dimen/card_main_layout_native_view_margin_top</item>
-        <item name="android:layout_marginBottom">@dimen/card_main_layout_native_view_margin_bottom</item>
-        <item name="android:layout_marginLeft">@dimen/card_main_layout_native_view_margin_left</item>
-        <item name="android:layout_marginRight">@dimen/card_main_layout_native_view_margin_right</item>
-    </style>
-    <style name="card.native.main_layout_foreground">
-        <item name="android:foreground">?android:selectableItemBackground</item>
-        <item name="android:background">@color/card_native_background</item>
-        <item name="android:layout_marginTop">@dimen/card_main_layout_native_view_margin_top</item>
-        <item name="android:layout_marginBottom">@dimen/card_main_layout_native_view_margin_bottom</item>
-        <item name="android:layout_marginLeft">@dimen/card_main_layout_native_view_margin_left</item>
-        <item name="android:layout_marginRight">@dimen/card_main_layout_native_view_margin_right</item>
-    </style>
-    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/res/values/values.xml -->
-    <eat-comment/>
-    <style name="card.native.material_large_image_content_outer_layout" parent="card.native.content_outer_layout">
-        <item name="android:paddingLeft">@dimen/card_main_content_native_material_large_image_paddingLeft</item>
-        <item name="android:paddingRight">@dimen/card_main_content_native_material_large_image_paddingRight</item>
-        <item name="android:paddingTop">@dimen/card_main_content_native_material_large_image_paddingTop</item>
-        <item name="android:paddingBottom">@dimen/card_main_content_native_material_large_image_paddingBottom</item>
-    </style>
-    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/values/values.xml -->
-    <eat-comment/>
-    <style name="card.native.thumbnail_compound_view">
-
-    </style>
-    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/res/values/values.xml -->
-    <eat-comment/>
-    <style name="card.native.top_colored_layout">
-        <item name="android:minHeight">@dimen/card_topcolored_layout_minHeigth</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">@dimen/card_topcolored_layout_padding</item>
-    </style>
-    <style name="card.native.top_colored_subtitle">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:textSize">@dimen/card_topcolored_subtitle_textsize</item>
-        <item name="android:textColor">@color/card_topcolored_subtitle_textcolor</item>
-        <item name="android:layout_gravity">left|center_vertical</item>
-        <item name="android:paddingTop">@dimen/card_topcolored_subtitle_paddingtop</item>
-    </style>
-    <style name="card.native.top_colored_title">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">@dimen/card_topcolored_title_textsize</item>
-        <item name="android:textColor">@color/card_topcolored_title_textcolor</item>
-        <item name="android:layout_gravity">left|center_vertical</item>
-    </style>
-    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/values/values.xml -->
-    <eat-comment/>
     <style name="card.shadow_image">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/card_shadow_height</item>
@@ -698,12 +382,6 @@
         <item name="android:layout_marginRight">@dimen/card_shadow_view_margin_right</item>
     </style>
     <style name="card.thumbnail_compound_view"/>
-    <style name="card_external">
-        <item name="android:layout_marginTop">@dimen/card_default_native_margin_top</item>
-        <item name="android:layout_marginBottom">@dimen/card_default_native_margin_bottom</item>
-        <item name="android:layout_marginLeft">@dimen/card_default_native_margin_left</item>
-        <item name="android:layout_marginRight">@dimen/card_default_native_margin_right</item>
-    </style>
     <style name="card_section_container">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -730,14 +408,6 @@
         <item name="android:gravity">center</item>
         <item name="android:scaleType">centerCrop</item>
     </style>
-    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/res/values/values.xml -->
-    <eat-comment/>
-    <style name="card_thumbnail_image_text_over_textstyle">
-        <item name="android:textColor">@color/card_thumbnail_image_text_over_textcolor</item>
-        <item name="android:textSize">@dimen/card_thumbnail_image_text_over_textsize</item>
-    </style>
-    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/values/values.xml -->
-    <eat-comment/>
     <style name="card_thumbnail_outer_layout">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -763,12 +433,8 @@
         <item name="android:paddingBottom">@dimen/list_card_padding_bottom</item>
         <item name="android:paddingTop">@dimen/list_card_padding_top</item>
     </style>
-    <style name="list_card.base">
-
-    </style>
-    <style name="list_card.thumbnail">
-
-    </style>
+    <style name="list_card.base"/>
+    <style name="list_card.thumbnail"/>
     <style name="list_card_UndoBar">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">48dp</item>
@@ -803,7 +469,7 @@
         <item name="android:gravity">right</item>
         <item name="android:background">?android:selectableItemBackground</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:paddingLeft">24dp</item>
+        <item name="android:layout_marginLeft">24dp</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/card_undobar_material_text_color</item>
@@ -814,10 +480,12 @@
         <item name="android:gravity">right</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingBottom">18dp</item>
-        <item name="android:paddingTop">18dp</item>
-        <item name="android:paddingLeft">24dp</item>
-        <item name="android:paddingRight">24dp</item>
+        <item name="android:layout_marginLeft">0dp</item>
+        <item name="android:layout_marginRight">0dp</item>
+        <item name="android:layout_marginBottom">18dp</item>
+        <item name="android:layout_marginTop">18dp</item>
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:paddingRight">0dp</item>
         <item name="android:background">?android:selectableItemBackground</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textAllCaps">true</item>
@@ -834,7 +502,6 @@
         <item name="android:layout_marginRight">16dp</item>
         <item name="android:textAppearance">?android:textAppearanceSmall</item>
         <item name="android:textColor">#fff</item>
-
     </style>
     <style name="list_card_UndoBarMessage_material">
         <item name="android:layout_width">0dp</item>
@@ -883,54 +550,9 @@
         <item name="android:layout_marginRight">0dp</item>
         <item name="android:layout_marginBottom">0dp</item>
         <item name="android:paddingLeft">24dp</item>
-        <item name="android:paddingRight">0dp</item>
+        <item name="android:paddingRight">24dp</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:background">@color/card_undobar_material_background_color</item>
         <item name="android:clickable">true</item>
-    </style>
-    <style name="native_cardwithlist">
-        <item name="android:layout_marginTop">@dimen/card_base_cardwithlist_list_margin_top</item>
-        <item name="android:layout_marginLeft">@dimen/card_base_cardwithlist_list_margin_left</item>
-        <item name="android:divider">@color/card_native_base_cardwithlist_divider_color</item>
-        <item name="android:showDividers">middle|beginning</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:background">@color/card_native_base_cardwithlist_background_list_color</item>
-    </style>
-    <style name="native_grid_card">
-        <item name="android:paddingLeft">@dimen/grid_card_padding_left</item>
-        <item name="android:paddingRight">@dimen/grid_card_padding_right</item>
-        <item name="android:paddingBottom">@dimen/grid_card_padding_bottom</item>
-        <item name="android:paddingTop">@dimen/grid_card_padding_top</item>
-    </style>
-    <style name="native_list_card">
-        <item name="android:layout_marginLeft">@dimen/native_list_card_margin_left</item>
-        <item name="android:layout_marginRight">@dimen/native_list_card_margin_right</item>
-        <item name="android:layout_marginBottom">@dimen/native_list_card_margin_bottom</item>
-        <item name="android:layout_marginTop">@dimen/native_list_card_margin_top</item>
-    </style>
-    <style name="native_list_card.base">
-
-    </style>
-    <style name="native_list_card.thumbnail">
-
-    </style>
-    <style name="native_list_external">
-        <item name="android:clipToPadding">false</item>
-        <item name="android:scrollbarStyle">outsideOverlay</item>
-    </style>
-    <!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-recyclerview/2.0.1/res/values/values.xml -->
-    <eat-comment/>
-    <style name="native_recyclerview_card">
-        <item name="android:layout_marginLeft">@dimen/native_recyclerview_card_margin_left</item>
-        <item name="android:layout_marginRight">@dimen/native_recyclerview_card_margin_right</item>
-        <item name="android:layout_marginBottom">@dimen/native_recyclerview_card_margin_bottom</item>
-        <item name="android:layout_marginTop">@dimen/native_recyclerview_card_margin_top</item>
-    </style>
-    <style name="native_recyclerview_card.base">
-
-    </style>
-    <style name="native_recyclerview_card.thumbnail">
-
     </style>
 </resources>

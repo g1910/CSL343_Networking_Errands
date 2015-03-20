@@ -16,11 +16,18 @@
         <dex dex="/home/gaurav/AndroidstudioProjects/Net app/app/build/intermediates/pre-dexed/debug/Parse-1.8.3-f92fb34021838f748c4dae8986ea8c98f9883951.jar" />
     </item>
     <item
-        jar="/home/gaurav/AndroidstudioProjects/Net app/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/21.0.0/classes.jar"
+        jar="/home/gaurav/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3/5fc52c41ef0239d1093a1eb7c3697036183677ce/gson-2.3.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="efeda77c808750cb670ee9c48d8a1835d89dbcb2">
-        <dex dex="/home/gaurav/AndroidstudioProjects/Net app/app/build/intermediates/pre-dexed/debug/classes-41a381c1ab46552e25fea9c42a3e6740c2352c04.jar" />
+        sha1="5fc52c41ef0239d1093a1eb7c3697036183677ce">
+        <dex dex="/home/gaurav/AndroidstudioProjects/Net app/app/build/intermediates/pre-dexed/debug/gson-2.3-5d6f9c14175c2fc2484dfb061f60a044bbb9df6c.jar" />
+    </item>
+    <item
+        jar="/home/gaurav/AndroidstudioProjects/Net app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/library-extra/1.9.1/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="e9fed2e65b3d6c2967a8fdd6ddcdd561f8763f38">
+        <dex dex="/home/gaurav/AndroidstudioProjects/Net app/app/build/intermediates/pre-dexed/debug/classes-f1ddd51aa01e552812ccfb57ef4a03a8d2ab3be4.jar" />
     </item>
     <item
         jar="/home/gaurav/AndroidstudioProjects/Net app/app/libs/bolts-android-1.1.4.jar"
@@ -37,11 +44,11 @@
         <dex dex="/home/gaurav/AndroidstudioProjects/Net app/app/build/intermediates/pre-dexed/debug/classes-aa5b3a8aabc9f88703f96655ed2a36b7d73e5589.jar" />
     </item>
     <item
-        jar="/home/gaurav/AndroidstudioProjects/Net app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/classes.jar"
+        jar="/home/gaurav/AndroidstudioProjects/Net app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/library/1.9.1/classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="81d6467247ced8a5d51f8ff73a6595d517eddba6">
-        <dex dex="/home/gaurav/AndroidstudioProjects/Net app/app/build/intermediates/pre-dexed/debug/classes-46933d18ce22146fba0b98acfe05040d0b2cfe13.jar" />
+        sha1="a64671bd87b29748d87865871cc95147b89a2192">
+        <dex dex="/home/gaurav/AndroidstudioProjects/Net app/app/build/intermediates/pre-dexed/debug/classes-8610c7089ac67f95ec627ec4f9255fb8de5085a2.jar" />
     </item>
     <item
         jar="/home/gaurav/.gradle/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar"
@@ -51,39 +58,11 @@
         <dex dex="/home/gaurav/AndroidstudioProjects/Net app/app/build/intermediates/pre-dexed/debug/library-2.4.0-e84c90b36b76b57d69e3cbfddd2f4142c7b3312f.jar" />
     </item>
     <item
-        jar="/home/gaurav/AndroidstudioProjects/Net app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-recyclerview/2.0.1/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="15d2052aed6aa62f341d22e1ba6177697c7dc552">
-        <dex dex="/home/gaurav/AndroidstudioProjects/Net app/app/build/intermediates/pre-dexed/debug/classes-178b9d694ff211ef18930d05461adde0e8525dc2.jar" />
-    </item>
-    <item
-        jar="/home/gaurav/AndroidstudioProjects/Net app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-extra-dragdrop/2.0.1/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="c2ccd61dc70f7b1dc968c73626f90a61eb542905">
-        <dex dex="/home/gaurav/AndroidstudioProjects/Net app/app/build/intermediates/pre-dexed/debug/classes-b122f450cb2de64e5ee26eeab071e7dff5fe7565.jar" />
-    </item>
-    <item
         jar="/home/gaurav/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
         <dex dex="/home/gaurav/AndroidstudioProjects/Net app/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-c44a29884461fd8953d0bd751b0fea96b27e4eeb.jar" />
-    </item>
-    <item
-        jar="/home/gaurav/AndroidstudioProjects/Net app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="d851788f6c23d14aa5fa8fbfd6d1b17725ad44c5">
-        <dex dex="/home/gaurav/AndroidstudioProjects/Net app/app/build/intermediates/pre-dexed/debug/classes-3ad29a9347bc4c0d300f078fb826bc99d0932fcf.jar" />
-    </item>
-    <item
-        jar="/home/gaurav/AndroidstudioProjects/Net app/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/21.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="7d2525cba8ed61fff102977caed964fc22061e34">
-        <dex dex="/home/gaurav/AndroidstudioProjects/Net app/app/build/intermediates/pre-dexed/debug/classes-c94954f097426c1f54e5178625975be82e300cbf.jar" />
     </item>
     <item
         jar="/home/gaurav/.gradle/caches/modules-2/files-2.1/com.nhaarman.listviewanimations/lib-core/3.1.0/f3f9629b068554d8513a2aaf34418171bf430851/lib-core-3.1.0.jar"
@@ -98,13 +77,6 @@
         revision="21.1.2"
         sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
         <dex dex="/home/gaurav/AndroidstudioProjects/Net app/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-0cecd5c66c2c11a937af171b457669b3ecff0157.jar" />
-    </item>
-    <item
-        jar="/home/gaurav/AndroidstudioProjects/Net app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-extra-staggeredgrid/2.0.1/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="53c7b3252488ffcd664c6889d8d536a09ae3ad80">
-        <dex dex="/home/gaurav/AndroidstudioProjects/Net app/app/build/intermediates/pre-dexed/debug/classes-2961efe6074d23ee23222e1b570b9b1769785021.jar" />
     </item>
     <item
         jar="/home/gaurav/AndroidstudioProjects/Net app/app/build/intermediates/exploded-aar/com.etsy.android.grid/library/1.0.5/classes.jar"

@@ -22,33 +22,33 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText5"
+                android:id="@+id/emailText"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="30dp"
                 android:textStyle="italic"
-                android:text="paras_opus@iitrpr.ac.in"
+                android:text="email"
                 android:textColor="#ff3d413c" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Paras Ahuja"
+                android:text="name"
                 android:textStyle="bold"
-                android:id="@+id/textView4"
+                android:id="@+id/nameText"
                 android:layout_marginBottom="5dp"
-                android:layout_above="@id/editText5"
+                android:layout_above="@id/emailText"
                 android:layout_centerHorizontal="true" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/imageView2"
-                android:layout_above="@id/textView4"
+                android:layout_above="@id/nameText"
+                android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/img"/>
+                android:layout_marginBottom="20dp"/>
 
         </RelativeLayout>
 

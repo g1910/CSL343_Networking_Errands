@@ -1,12 +1,27 @@
 package group2.netapp;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Parcel;
+import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.io.InputStream;
+import java.net.URL;
+import java.util.List;
 
 
 /**
@@ -63,8 +78,25 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+        String email = saved_values.getString("email",null);
+        String picurl = saved_values.getString("picurl",null);
+        String name = saved_values.getString("user_name",null);
+
+        View infh = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        TextView emailText = (TextView)infh.findViewById(R.id.emailText);
+        emailText.setText(email);
+
+        TextView nameText = (TextView)infh.findViewById(R.id.nameText);
+        nameText.setText(name);
+
+        ImageView profileImage=(ImageView)infh.findViewById(R.id.imageView2);
+        picurl+="0";
+        new LoadProfileImage(profileImage).execute(picurl);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        return infh;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -105,6 +137,31 @@ public class ProfileFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
+    }
+
+    private class LoadProfileImage extends AsyncTask<String, Void, Bitmap> {
+        ImageView downloadedImage;
+
+        public LoadProfileImage(ImageView image) {
+            this.downloadedImage = image;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String url = urls[0];
+            Bitmap icon = null;
+            try {
+                InputStream in = new java.net.URL(url).openStream();
+                icon = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return icon;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            downloadedImage.setImageBitmap(result);
+        }
     }
 
 }

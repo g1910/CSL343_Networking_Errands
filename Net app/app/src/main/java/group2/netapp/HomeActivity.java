@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -77,12 +78,12 @@ public class HomeActivity extends Activity
         picurl=getIntent().getStringExtra("picurl");
         email=getIntent().getStringExtra("email");
         new adduser(pname,email,"http://netapp.byethost33.com/add_user.php").execute(null,null,null);
-        SharedPreferences sp = getSharedPreferences("my_prefs", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
+        SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor=saved_values.edit();
         editor.putString("user_name",pname);
         editor.putString("email",email);
         editor.putString("picurl",picurl);
-        editor.commit();
+        editor.apply();
 
     }
 
