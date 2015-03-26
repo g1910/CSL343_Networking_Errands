@@ -18,11 +18,13 @@ ADDED from AndroidManifest.xml:7:5
 MERGED from com.android.support:support-v4:21.0.3:15:5
 MERGED from com.google.android.gms:play-services:6.5.87:18:5
 MERGED from com.android.support:support-v4:21.0.3:15:5
-MERGED from com.github.gabrielemariotti.cards:library:1.9.1:24:5
-MERGED from com.github.gabrielemariotti.cards:library-extra:1.9.1:24:5
-MERGED from com.etsy.android.grid:library:1.0.5:4:5
+MERGED from com.github.gabrielemariotti.cards:cardslib-core:2.0.1:24:5
+MERGED from com.android.support:cardview-v7:21.0.0:15:5
 MERGED from com.android.support:support-v4:21.0.3:15:5
-MERGED from com.github.gabrielemariotti.cards:library:1.9.1:24:5
+MERGED from com.github.gabrielemariotti.cards:cardslib-cards:2.0.1:24:5
+MERGED from com.github.gabrielemariotti.cards:cardslib-core:2.0.1:24:5
+MERGED from com.android.support:cardview-v7:21.0.0:15:5
+MERGED from com.android.support:support-v4:21.0.3:15:5
 	android:targetSdkVersion
 		ADDED from AndroidManifest.xml:9:9
 		INJECTED from AndroidManifest.xml:0:0
@@ -94,11 +96,13 @@ ADDED from AndroidManifest.xml:34:5
 MERGED from com.android.support:support-v4:21.0.3:16:5
 MERGED from com.google.android.gms:play-services:6.5.87:20:5
 MERGED from com.android.support:support-v4:21.0.3:16:5
-MERGED from com.github.gabrielemariotti.cards:library:1.9.1:28:5
-MERGED from com.github.gabrielemariotti.cards:library-extra:1.9.1:28:5
-MERGED from com.etsy.android.grid:library:1.0.5:6:5
+MERGED from com.github.gabrielemariotti.cards:cardslib-core:2.0.1:28:5
+MERGED from com.android.support:cardview-v7:21.0.0:16:5
 MERGED from com.android.support:support-v4:21.0.3:16:5
-MERGED from com.github.gabrielemariotti.cards:library:1.9.1:28:5
+MERGED from com.github.gabrielemariotti.cards:cardslib-cards:2.0.1:28:5
+MERGED from com.github.gabrielemariotti.cards:cardslib-core:2.0.1:28:5
+MERGED from com.android.support:cardview-v7:21.0.0:16:5
+MERGED from com.android.support:support-v4:21.0.3:16:5
 	android:label
 		ADDED from AndroidManifest.xml:40:9
 	android:allowBackup

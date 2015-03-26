@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/home/gabriele/Lavoro/Android/AndroidStudioProjects/wrks/cardslib/library-cards/src/main/res/values-v21/refs.xml -->
+    <eat-comment/>
+    <item name="topcolored_bg" type="drawable">@null</item>
+    <!-- From: file:/home/gabriele/Lavoro/Android/AndroidStudioProjects/wrks/cardslib/library-cards/src/main/res/values-v21/fonts.xml -->
+    <eat-comment/>
+    <string name="card_font_fontFamily_image_text_over">sans-serif-medium</string>
+    <string name="card_native_font_fontFamily_action">sans-serif-medium</string>
+</resources>

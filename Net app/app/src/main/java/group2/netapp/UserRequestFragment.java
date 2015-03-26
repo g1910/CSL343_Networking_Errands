@@ -63,13 +63,13 @@ public class UserRequestFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     private static int counter=1;
-    private CardListView list;
+    private CardListView listView;
     ArrayList<Card> cards;
     CardArrayAdapter cardListAdapter;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    private AsyncTask asynctask;
     private OnFragmentInteractionListener mListener;
 
     /**
@@ -111,11 +111,11 @@ public class UserRequestFragment extends Fragment {
         // Inflate the layout for this fragment
 
         View infh = inflater.inflate(R.layout.fragment_user_request, container, false);
-        list=(CardListView) infh.findViewById(R.id.ReqCardList);
+
         cards = new ArrayList<Card>();
         cardListAdapter = new CardArrayAdapter(getActivity().getApplicationContext(),cards);
 
-        CardListView listView = (CardListView) infh.findViewById(R.id.ReqCardList);
+         listView = (CardListView) infh.findViewById(R.id.ReqCardList);
         if (listView != null) {
             listView.setAdapter(cardListAdapter);
         }
@@ -126,6 +126,7 @@ public class UserRequestFragment extends Fragment {
 // Adding button to listview at footer
         listView.addFooterView(LoadMore);
 
+
         LoadMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,7 +134,9 @@ public class UserRequestFragment extends Fragment {
                 ArrayList<NameValuePair> list1 = new ArrayList<NameValuePair>();
                 list1.add(new BasicNameValuePair("tag", "1"));
                 list1.add(new BasicNameValuePair("query", String.valueOf(counter)));
-                new get_requests(list1, "http://netapp.byethost33.com/get_broadcast.php").execute(null, null, null);
+                if(asynctask.getStatus() == AsyncTask.Status.PENDING || asynctask.getStatus() == AsyncTask.Status.RUNNING)
+                    asynctask.cancel(true);
+                asynctask = new get_requests(list1, "http://netapp.byethost33.com/get_broadcast.php").execute(null, null, null);
             }
         });
 
@@ -151,7 +154,9 @@ public class UserRequestFragment extends Fragment {
                     ArrayList<NameValuePair> list1 = new ArrayList<NameValuePair>();
                     list1.add(new BasicNameValuePair("tag", "2"));
                     list1.add(new BasicNameValuePair("query", s.toString()));
-                    new get_requests(list1, "http://netapp.byethost33.com/get_broadcast.php").execute(null, null, null);
+                    if(asynctask.getStatus() == AsyncTask.Status.PENDING || asynctask.getStatus() == AsyncTask.Status.RUNNING)
+                        asynctask.cancel(true);
+                    asynctask = new get_requests(list1, "http://netapp.byethost33.com/get_broadcast.php").execute(null, null, null);
                 }
                 else
                 {
@@ -159,7 +164,9 @@ public class UserRequestFragment extends Fragment {
                     ArrayList<NameValuePair> list1 = new ArrayList<NameValuePair>();
                     list1.add(new BasicNameValuePair("tag", "1"));
                     list1.add(new BasicNameValuePair("query", String.valueOf(counter)));
-                    new get_requests(list1, "http://netapp.byethost33.com/get_broadcast.php").execute(null, null, null);
+                    if(asynctask.getStatus() == AsyncTask.Status.PENDING || asynctask.getStatus() == AsyncTask.Status.RUNNING)
+                        asynctask.cancel(true);
+                    asynctask = new get_requests(list1, "http://netapp.byethost33.com/get_broadcast.php").execute(null, null, null);
                 }
             }
 
@@ -172,7 +179,8 @@ public class UserRequestFragment extends Fragment {
         ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
         nameValuePairs.add(new BasicNameValuePair("tag","1"));
         nameValuePairs.add(new BasicNameValuePair("query", String.valueOf(1)));
-        new get_requests(nameValuePairs,"http://netapp.byethost33.com/get_broadcast.php").execute(null,null,null);
+
+        asynctask = new get_requests(nameValuePairs,"http://netapp.byethost33.com/get_broadcast.php").execute(null,null,null);
         return infh;
     }
 
@@ -218,6 +226,7 @@ public class UserRequestFragment extends Fragment {
 
     class get_requests extends AsyncTask<String,String,String>
     {
+        private boolean running = true;
         private ArrayList<NameValuePair> list;
         private String host;
         HttpResponse response;
@@ -228,6 +237,10 @@ public class UserRequestFragment extends Fragment {
             host=h;
         }
 
+        @Override
+        protected void onCancelled() {
+            running = false;
+        }
 
         @Override
         protected String doInBackground(String... params) {
@@ -235,7 +248,7 @@ public class UserRequestFragment extends Fragment {
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost(host);
             httppost.setHeader("Content-Type", "application/x-www-form-urlencoded");
-            String text;
+
             try
             {
 
@@ -257,8 +270,8 @@ public class UserRequestFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String Result) {
-
-            Reader reader = new InputStreamReader(is);
+            if(running)
+            {Reader reader = new InputStreamReader(is);
             List<UserRequests> posts = new ArrayList<UserRequests>();
             try {
                 JsonParser parser = new JsonParser();
@@ -266,53 +279,46 @@ public class UserRequestFragment extends Fragment {
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 Gson gson = gsonBuilder.create();
 
-                Type listType = new TypeToken<List<UserRequests>>() {}.getType();
-                posts = gson.fromJson(data.get("UserRequests"), listType);
+                Type listType = new TypeToken<List<UserRequests>>() {
+                }.getType();
+                if (running)
+                    posts = gson.fromJson(data.get("UserRequests"), listType);
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
             cards.clear();
 
-            for(int i=0;i<posts.size();++i)
-            {
-                UserRequests a=posts.get(i);
+            if (posts != null && running)
+                for (int i = 0; i < posts.size(); ++i) {
+                    UserRequests a = posts.get(i);
 
-                Card card = new Card(getActivity().getApplicationContext());
-                CardHeader ch = new CardHeader(getActivity().getApplicationContext());
-                ch.setTitle(a.location);
-                card.setTitle(a.item);
-                CustomCardExpand expand = new CustomCardExpand(getActivity().getApplicationContext(),a.quantity,a.exprice,a.exptime,a.expdate);
-                card.addCardExpand(expand);
-                card.setViewToClickToExpand(ViewToClickToExpand.builder());
-                card.setViewToClickToExpand(card.getViewToClickToExpand());
+                    UserReqCard card = new UserReqCard(getActivity().getApplicationContext(), a.item, a.location);
+                    CardHeader ch = new CardHeader(getActivity().getApplicationContext());
+                    ch.setTitle(a.item);
+                    card.addCardHeader(ch);
 
-                card.setOnClickListener(new Card.OnCardClickListener() {
-                    @Override
-                    public void onClick(Card card, View view) {
-                        card.doToogleExpand();
-                    }
-                });
-                card.addCardHeader(ch);
+                    CustomCardExpand expand = new CustomCardExpand(getActivity().getApplicationContext(), a.quantity, a.exprice, a.exptime, a.expdate);
+                    card.addCardExpand(expand);
 
-                CardThumbnail thumb = new CardThumbnail(getActivity().getApplicationContext());
+                    ch.setButtonExpandVisible(true);
 
-                thumb.setDrawableResource(R.drawable.location);
-                card.addCardThumbnail(thumb);
+                    ViewToClickToExpand viewToClickToExpand = ViewToClickToExpand.builder()
+                            .highlightView(true)
+                            .setupCardElement(ViewToClickToExpand.CardElementUI.CARD);
+                    card.setViewToClickToExpand(viewToClickToExpand);
 
-                cards.add(card);
-            }
+                    cards.add(card);
+                }
             cardListAdapter.notifyDataSetChanged();
 
-            try
-            {
+            try {
                 reader.close();
                 is.close();
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 System.out.println(e);
             }
+        }
         }
     }
 
@@ -351,6 +357,30 @@ class CustomCardExpand extends CardExpand {
         tx3.setText(time);
         tx4.setText(date);
 
+    }
+}
+
+class UserReqCard extends Card{
+
+    private String location_name;
+
+    public UserReqCard(Context context, String item, String location){
+        super(context, R.layout.user_request_card);
+
+        location_name=location;
+    }
+
+    public UserReqCard(Context context){
+        super(context, R.layout.user_request_card);
+    }
+
+    @Override
+    public void setupInnerViewElements(ViewGroup parent, View view){
+
+        TextView location = (TextView)parent.findViewById(R.id.req_card_location);
+
+
+        location.setText(location_name);
     }
 }
 

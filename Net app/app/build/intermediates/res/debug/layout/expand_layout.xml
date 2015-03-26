@@ -3,11 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
 
-    android:background="#ff1c566d">
+    android:background="#ffc4c4c4">
 
     <ImageView
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:id="@+id/quantityimage"
         android:src="@drawable/quantity"
         android:layout_marginLeft="10dp"
@@ -22,11 +22,11 @@
         android:layout_alignTop="@+id/quantityimage"
         android:layout_marginLeft="10dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#ffffffff" />
+        android:textColor="#ff616161" />
 
     <ImageView
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:id="@+id/costimage"
         android:src="@drawable/cost"
         android:layout_toLeftOf="@+id/cost"
@@ -44,13 +44,13 @@
         android:layout_alignTop="@+id/costimage"
 
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#ffffffff" />
+        android:textColor="#ff616161" />
 
     <ImageView
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:id="@+id/clockimage"
-        android:src="@drawable/clock"
+        android:src="@drawable/clock1"
         android:layout_marginLeft="10dp"
         android:layout_below="@+id/cost"
         android:layout_marginTop="10dp"
@@ -67,13 +67,13 @@
 
         android:layout_toRightOf="@+id/clockimage"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#ffffffff" />
+        android:textColor="#ff616161" />
 
     <ImageView
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:id="@+id/calendarimage"
-        android:src="@drawable/calendar"
+        android:src="@drawable/calendar1"
         android:layout_toLeftOf="@+id/date"
         android:layout_marginRight="10dp"
         android:layout_below="@+id/cost"
@@ -85,12 +85,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
+
         android:id="@+id/date"
         android:layout_below="@+id/cost"
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
         android:layout_alignParentRight="true"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#ffffffff" />
+        android:textColor="#ff616161" />
 
 </RelativeLayout><!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/src/main/res/layout/expand_layout.xml -->

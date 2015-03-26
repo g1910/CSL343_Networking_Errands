@@ -24,4 +24,4 @@
     <item android:state_activated="true" android:drawable="@drawable/activated_background_card"/>
     <item android:state_pressed="true" android:drawable="@drawable/pressed_background_card"/>
     <item android:drawable="@drawable/card_background"/>
-</selector><!-- From: file:/home/gabriele/Lavoro/Android/AndroidStudioProjects/wrks/cardslib/library/src/main/res/drawable/card_selector.xml --><!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/library/1.9.1/res/drawable/card_selector.xml -->
+</selector><!-- From: file:/home/gabriele/Lavoro/Android/AndroidStudioProjects/wrks/cardslib/library-core/src/main/res/drawable/card_selector.xml --><!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable/card_selector.xml -->
