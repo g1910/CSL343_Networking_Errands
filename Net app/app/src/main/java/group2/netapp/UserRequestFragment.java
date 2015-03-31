@@ -5,7 +5,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.os.StrictMode;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -226,7 +226,7 @@ public class UserRequestFragment extends Fragment {
 
     class get_requests extends AsyncTask<String,String,String>
     {
-        private boolean running = true;
+        public boolean running = true;
         private ArrayList<NameValuePair> list;
         private String host;
         HttpResponse response;
@@ -249,17 +249,17 @@ public class UserRequestFragment extends Fragment {
             HttpPost httppost = new HttpPost(host);
             httppost.setHeader("Content-Type", "application/x-www-form-urlencoded");
 
-            try
-            {
-
+            try {
+                if(running)
+                {
                 httppost.setEntity(new UrlEncodedFormEntity(list));
 
                 // Execute HTTP Post Request
                 response = httpclient.execute(httppost);
-                if(response != null)
-                {
+                if (response != null) {
                     is = response.getEntity().getContent();
                 }
+            }
 
             } catch (Exception e) {
                 System.out.println(e);
@@ -293,7 +293,7 @@ public class UserRequestFragment extends Fragment {
                 for (int i = 0; i < posts.size(); ++i) {
                     UserRequests a = posts.get(i);
 
-                    UserReqCard card = new UserReqCard(getActivity().getApplicationContext(), a.item, a.location);
+                    UserReqCard card = new UserReqCard(getActivity().getApplicationContext(), a.location);
                     CardHeader ch = new CardHeader(getActivity().getApplicationContext());
                     ch.setTitle(a.item);
                     card.addCardHeader(ch);
@@ -364,7 +364,7 @@ class UserReqCard extends Card{
 
     private String location_name;
 
-    public UserReqCard(Context context, String item, String location){
+    public UserReqCard(Context context, String location){
         super(context, R.layout.user_request_card);
 
         location_name=location;

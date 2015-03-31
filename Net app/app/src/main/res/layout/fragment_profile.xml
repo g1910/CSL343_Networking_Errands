@@ -37,6 +37,7 @@
                 android:text="name"
                 android:textStyle="bold"
                 android:id="@+id/nameText"
+
                 android:layout_marginBottom="5dp"
                 android:layout_above="@id/emailText"
                 android:layout_centerHorizontal="true" />
