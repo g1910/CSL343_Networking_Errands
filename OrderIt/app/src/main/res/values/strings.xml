@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">OrderIt</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_server_form">serverFormActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_decide_auction">DecideAuctionActivity</string>
+    <string name="title_activity_curr_auction">Running Auctions</string>
+    <string name="title_activity_auction">AuctionActivity</string>
+
+
+</resources>
