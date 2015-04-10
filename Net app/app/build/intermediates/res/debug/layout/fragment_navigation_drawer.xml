@@ -7,4 +7,4 @@
     android:background="#d1ff2f28" tools:context="group2.netapp.NavigationDrawerFragment"
     android:clickable="false"
     android:listSelector="#ffbf2a24" />
-<!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/src/main/res/layout/fragment_navigation_drawer.xml -->
+<!-- From: file:/home/gaurav/6thSem/CSL343/Git/CSL343_Networking_Errands/Net%20app/app/src/main/res/layout/fragment_navigation_drawer.xml -->

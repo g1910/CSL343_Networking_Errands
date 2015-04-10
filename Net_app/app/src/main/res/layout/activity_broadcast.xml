@@ -1,0 +1,192 @@
+
+<ScrollView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context="group2.netapp.Broadcast"
+android:id="@+id/scrollView"
+    >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context="group2.netapp.Broadcast">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Enter Request Details"
+        android:id="@+id/requestdetails"
+        android:paddingLeft="20dp"
+        android:layout_gravity="top" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Item"
+        android:id="@+id/Itemtext"
+        android:layout_gravity="left|top"
+        android:paddingLeft="20dp"
+        android:layout_below="@id/requestdetails"
+
+        android:paddingTop="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Quantity"
+        android:id="@+id/Quantitytext"
+        android:layout_below="@id/Itemtext"
+        android:layout_gravity="left|top"
+        android:paddingTop="10dp"
+
+        android:paddingLeft="20dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Location"
+        android:id="@+id/Locationtext"
+        android:layout_gravity="left|top"
+        android:layout_below="@id/Quantitytext"
+        android:paddingTop="10dp"
+
+        android:paddingLeft="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Cost Price"
+        android:id="@+id/pricetext"
+        android:layout_gravity="left|top"
+        android:layout_below="@id/Locationtext"
+        android:paddingTop="10dp"
+
+        android:paddingLeft="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Expected Time"
+        android:id="@+id/Timetext"
+        android:layout_gravity="left|top"
+
+        android:paddingTop="10dp"
+        android:paddingLeft="20dp"
+        android:layout_below="@+id/pricetext" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Expected Date"
+        android:id="@+id/Datetext"
+        android:layout_gravity="left|top"
+
+        android:paddingTop="10dp"
+        android:paddingLeft="20dp"
+        android:layout_below="@+id/timePicker" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/itemfield"
+        android:layout_gravity="right"
+        android:layout_below="@id/requestdetails"
+
+        android:ems="7"
+        android:layout_alignBaseline="@+id/Itemtext"
+        android:layout_alignTop="@+id/Itemtext"
+        android:layout_alignBottom="@+id/Itemtext"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/quantityfield"
+        android:layout_gravity="right"
+        android:layout_alignBaseline="@+id/Quantitytext"
+        android:layout_alignTop="@+id/Quantitytext"
+        android:layout_alignBottom="@+id/Quantitytext"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"
+        android:layout_below="@+id/itemfield"
+        android:inputType="number"
+        android:ems="7"  />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/locationfield"
+        android:layout_gravity="right"
+
+        android:layout_below="@+id/quantityfield"
+        android:ems="7"
+        android:layout_alignBaseline="@+id/Locationtext"
+        android:layout_alignTop="@+id/Locationtext"
+        android:layout_alignBottom="@+id/Locationtext"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pricefield"
+        android:layout_gravity="right"
+
+        android:layout_below="@+id/locationfield"
+        android:inputType="number"
+        android:ems="7"
+        android:layout_alignBaseline="@+id/pricetext"
+        android:layout_alignTop="@+id/pricetext"
+        android:layout_alignBottom="@+id/pricetext"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/broadcast_request"
+        android:id="@+id/broadcast_button"
+        android:layout_below="@+id/datePicker"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <TimePicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/timePicker"
+        android:layout_below="@+id/Timetext"
+        android:layout_gravity="end"
+        android:layout_alignParentRight="true"/>
+
+    <DatePicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/datePicker"
+        android:layout_below="@+id/Datetext"
+        android:layout_gravity="end"
+        android:layout_alignParentRight="true"
+        android:datePickerMode="spinner"
+        android:spinnersShown="true"
+        android:calendarViewShown="true" />
+
+
+
+
+</RelativeLayout>
+
+</ScrollView>
