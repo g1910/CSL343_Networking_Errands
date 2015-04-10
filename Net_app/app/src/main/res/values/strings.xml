@@ -1,0 +1,28 @@
+<resources>
+
+    <string name="app_name" translatable="false">Net app</string>
+    <string name="logout">Logout</string>
+    <string name="loginText">Login using your Google Account</string>
+    <string name="action_settings">Settings</string>
+    <string name="broadcast_request">Broadcast Request</string>
+    <string name="title_activity_home">Home</string>
+
+    <string name="title_section1">Profile</string>
+    <string name="title_section2">Feedbacks</string>
+    <string name="title_section3">Rate and Review</string>
+    <string name="title_section4">User Requests</string>
+    <string name="title_section5">Logout</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="title_activity_broadcast">Broadcast</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="request_search_hint">Item or Location</string>
+    <string name="title_activity_maps">Map</string>
+</resources>

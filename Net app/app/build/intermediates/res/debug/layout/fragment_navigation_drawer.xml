@@ -1,0 +1,10 @@
+
+
+<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingTop="100dp" android:choiceMode="singleChoice"
+    android:divider="@android:color/transparent" android:dividerHeight="0dp"
+    android:background="#d1ff2f28" tools:context="group2.netapp.NavigationDrawerFragment"
+    android:clickable="false"
+    android:listSelector="#ffbf2a24" />
+<!-- From: file:/home/gaurav/6thSem/CSL343/Git/CSL343_Networking_Errands/Net%20app/app/src/main/res/layout/fragment_navigation_drawer.xml -->

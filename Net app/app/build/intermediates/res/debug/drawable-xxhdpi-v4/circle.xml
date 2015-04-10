@@ -1,0 +1,11 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:innerRadius="0dp"
+    android:shape="ring"
+    android:thicknessRatio="1.9"
+    android:useLevel="false" >
+    <solid android:color="@android:color/transparent" />
+
+    <stroke
+        android:width="1dp"
+        android:color="@android:color/white" />
+</shape><!-- From: file:/home/gaurav/6thSem/CSL343/Git/CSL343_Networking_Errands/Net%20app/app/src/main/res/drawable-xxhdpi/circle.xml -->

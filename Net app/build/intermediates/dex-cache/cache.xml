@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/home/gaurav/6thSem/CSL343/Git/CSL343_Networking_Errands/Net app/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/home/gaurav/6thSem/CSL343/Git/CSL343_Networking_Errands/Net app/app/build/intermediates/pre-dexed/debug/classes-9614b3fc4bb8f37e0d6035aecd8908fbc187f5ff.jar" />
+    </item>
+    <item
+        jar="/home/gaurav/6thSem/CSL343/Git/CSL343_Networking_Errands/Net app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d6467247ced8a5d51f8ff73a6595d517eddba6">
+        <dex dex="/home/gaurav/6thSem/CSL343/Git/CSL343_Networking_Errands/Net app/app/build/intermediates/pre-dexed/debug/classes-e1a71dc745a914963fe198ad123b52290c2f6f97.jar" />
+    </item>
+    <item
+        jar="/home/gaurav/6thSem/CSL343/Git/CSL343_Networking_Errands/Net app/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/home/gaurav/6thSem/CSL343/Git/CSL343_Networking_Errands/Net app/app/build/intermediates/pre-dexed/debug/classes-7e06c09dfefb4e02bdc8885c2fd185e28b30cf3c.jar" />
+    </item>
+    <item
+        jar="/home/gaurav/6thSem/CSL343/Git/CSL343_Networking_Errands/Net app/app/libs/Parse-1.8.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="56dfc827c23c1f0be64eff2ef556633ea95b16ad">
+        <dex dex="/home/gaurav/6thSem/CSL343/Git/CSL343_Networking_Errands/Net app/app/build/intermediates/pre-dexed/debug/Parse-1.8.3-6b35fb1c5e07a48bda89efac097271432b55efc7.jar" />
+    </item>
+    <item
+        jar="/home/gaurav/6thSem/CSL343/Git/CSL343_Networking_Errands/Net app/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/home/gaurav/6thSem/CSL343/Git/CSL343_Networking_Errands/Net app/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-6d9a9089d5e241e35b5ca463b1e9908e2259c31b.jar" />
+    </item>
+    <item
+        jar="/home/gaurav/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3/5fc52c41ef0239d1093a1eb7c3697036183677ce/gson-2.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="5fc52c41ef0239d1093a1eb7c3697036183677ce">
+        <dex dex="/home/gaurav/6thSem/CSL343/Git/CSL343_Networking_Errands/Net app/app/build/intermediates/pre-dexed/debug/gson-2.3-5d6f9c14175c2fc2484dfb061f60a044bbb9df6c.jar" />
+    </item>
+    <item
+        jar="/home/gaurav/6thSem/CSL343/Git/CSL343_Networking_Errands/Net app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="d851788f6c23d14aa5fa8fbfd6d1b17725ad44c5">
+        <dex dex="/home/gaurav/6thSem/CSL343/Git/CSL343_Networking_Errands/Net app/app/build/intermediates/pre-dexed/debug/classes-105d8cb87e160c0bb37e9b35156241cb67251d14.jar" />
+    </item>
+    <item
+        jar="/home/gaurav/6thSem/CSL343/Git/CSL343_Networking_Errands/Net app/app/libs/bolts-android-1.1.4.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="129874135e6081269ace2312092031558865de12">
+        <dex dex="/home/gaurav/6thSem/CSL343/Git/CSL343_Networking_Errands/Net app/app/build/intermediates/pre-dexed/debug/bolts-android-1.1.4-61681fb1218a931b9b0e95a83c22c3f9d661f107.jar" />
+    </item>
+    <item
+        jar="/home/gaurav/6thSem/CSL343/Git/CSL343_Networking_Errands/Net app/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/21.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="7d2525cba8ed61fff102977caed964fc22061e34">
+        <dex dex="/home/gaurav/6thSem/CSL343/Git/CSL343_Networking_Errands/Net app/app/build/intermediates/pre-dexed/debug/classes-087abe281058a967bb150a155d9d46ef8f20af83.jar" />
+    </item>
+    <item
+        jar="/home/gaurav/6thSem/CSL343/Git/CSL343_Networking_Errands/Net app/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="dd9247ea0fabe8ee479638c4b4a23e93752be256">
+        <dex dex="/home/gaurav/6thSem/CSL343/Git/CSL343_Networking_Errands/Net app/app/build/intermediates/pre-dexed/debug/classes-a57f385f4e305f89b4caf18cf71ce8a361baebfb.jar" />
+    </item>
+    <item
+        jar="/home/gaurav/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="/home/gaurav/6thSem/CSL343/Git/CSL343_Networking_Errands/Net app/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-c44a29884461fd8953d0bd751b0fea96b27e4eeb.jar" />
+    </item>
+
+</items>
