@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/home/gabriele/Lavoro/Android/AndroidStudioProjects/wrks/cardslib/library-cards/src/main/res/values-v16/dimens.xml -->
+    <eat-comment/>
+    <dimen name="actions_padding_button">16dp</dimen>
+    <!-- From: file:/home/gabriele/Lavoro/Android/AndroidStudioProjects/wrks/cardslib/library-cards/src/main/res/values-v16/fonts.xml -->
+    <eat-comment/>
+    <string name="card_font_fontFamily_image_text_over">sans-serif</string>
+    <string name="card_native_font_fontFamily_action">sans-serif</string>
+    <!-- From: file:/home/gabriele/Lavoro/Android/AndroidStudioProjects/wrks/cardslib/library-cards/src/main/res/values-v16/styles.xml -->
+    <eat-comment/>
+    <style name="card.native.actions">
+        <item name="android:fontFamily">@string/card_native_font_fontFamily_action</item>
+        <item name="android:textSize">@dimen/actions_textsize</item>
+        <item name="android:padding">@dimen/actions_padding_button</item>
+    </style>
+</resources>
