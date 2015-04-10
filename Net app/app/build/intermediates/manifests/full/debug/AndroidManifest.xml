@@ -22,15 +22,13 @@
         android:protectionLevel="signature" />
 
     <uses-permission android:name="group2.netapp.permission.C2D_MESSAGE" />
-
-    <android:uses-permission
+    <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="21" />
-    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <android:uses-permission
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="21" />
-
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <!--
  The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -110,6 +108,21 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="group2.netapp.HomeActivity" />
+        </activity>
+        <activity
+            android:name="group2.netapp.auction.ServerFormActivity"
+            android:label="@string/title_activity_server_form" >
+        </activity>
+        <activity
+            android:name="group2.netapp.auction.DecideAuctionActivity"
+            android:label="@string/title_activity_decide_auction" >
+        </activity>
+        <activity
+            android:name="group2.netapp.bidding.CurrAuctionActivity"
+            android:label="@string/title_activity_curr_auction" />
+        <activity
+            android:name="group2.netapp.auction.AuctionActivity"
+            android:label="@string/title_activity_auction" >
         </activity>
     </application>
 

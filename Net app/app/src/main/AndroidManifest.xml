@@ -23,11 +23,11 @@
 
     <uses-permission android:name="group2.netapp.permission.C2D_MESSAGE" />
 
-    <android:uses-permission
+    <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="21" />
-    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <android:uses-permission
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="21" />
 
@@ -112,7 +112,23 @@
                 android:value="group2.netapp.HomeActivity" />
         </activity>
 
+        <activity
+            android:name=".auction.ServerFormActivity"
+            android:label="@string/title_activity_server_form" >
+        </activity>
+        <activity
+            android:name=".auction.DecideAuctionActivity"
+            android:label="@string/title_activity_decide_auction" >
+        </activity>
+        <activity
+            android:name=".bidding.CurrAuctionActivity"
+            android:label="@string/title_activity_curr_auction" />
 
+        <activity
+            android:name=".auction.AuctionActivity"
+            android:label="@string/title_activity_auction" >
+
+        </activity>
 
 
     </application>

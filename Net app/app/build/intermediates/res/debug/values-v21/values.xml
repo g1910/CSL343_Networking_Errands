@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/home/gaurav/6thSem/CSL343/Git/CSL343_Networking_Errands/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/res/values-v21/values.xml -->
+    <!-- From: file:/home/gaurav/6thSem/CSL343/CSL343_Networking_Errands/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/res/values-v21/values.xml -->
     <eat-comment/>
     <item name="topcolored_bg" type="drawable">@null</item>
-    <!-- From: file:/home/gaurav/6thSem/CSL343/Git/CSL343_Networking_Errands/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/values-v21/values.xml -->
+    <!-- From: file:/home/gaurav/6thSem/CSL343/CSL343_Networking_Errands/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/values-v21/values.xml -->
     <eat-comment/>
     <string name="card_font_fontFamily_header">sans-serif-condensed</string>
-    <!-- From: file:/home/gaurav/6thSem/CSL343/Git/CSL343_Networking_Errands/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/res/values-v21/values.xml -->
+    <!-- From: file:/home/gaurav/6thSem/CSL343/CSL343_Networking_Errands/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/res/values-v21/values.xml -->
     <eat-comment/>
     <string name="card_font_fontFamily_image_text_over">sans-serif-medium</string>
-    <!-- From: file:/home/gaurav/6thSem/CSL343/Git/CSL343_Networking_Errands/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/values-v21/values.xml -->
+    <!-- From: file:/home/gaurav/6thSem/CSL343/CSL343_Networking_Errands/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/values-v21/values.xml -->
     <eat-comment/>
     <string name="card_font_fontFamily_main_content">sans-serif</string>
-    <!-- From: file:/home/gaurav/6thSem/CSL343/Git/CSL343_Networking_Errands/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/res/values-v21/values.xml -->
+    <!-- From: file:/home/gaurav/6thSem/CSL343/CSL343_Networking_Errands/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/res/values-v21/values.xml -->
     <eat-comment/>
     <string name="card_native_font_fontFamily_action">sans-serif-medium</string>
-    <!-- From: file:/home/gaurav/6thSem/CSL343/Git/CSL343_Networking_Errands/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/values-v21/values.xml -->
+    <!-- From: file:/home/gaurav/6thSem/CSL343/CSL343_Networking_Errands/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/values-v21/values.xml -->
     <eat-comment/>
     <string name="card_native_font_fontFamily_header">sans-serif-medium</string>
     <string name="card_native_font_fontFamily_main_content">sans-serif</string>
-    <!-- From: file:/home/gaurav/6thSem/CSL343/Git/CSL343_Networking_Errands/Net%20app/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values-v21/values.xml -->
+    <!-- From: file:/home/gaurav/6thSem/CSL343/CSL343_Networking_Errands/Net%20app/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values-v21/values.xml -->
     <eat-comment/>
     <style name="Base.TextAppearance.AppCompat" parent="android:TextAppearance.Material"/>
     <style name="Base.TextAppearance.AppCompat.Body1" parent="android:TextAppearance.Material.Body1"/>
@@ -288,7 +288,7 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
     </style>
-    <!-- From: file:/home/gaurav/6thSem/CSL343/Git/CSL343_Networking_Errands/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/values-v21/values.xml -->
+    <!-- From: file:/home/gaurav/6thSem/CSL343/CSL343_Networking_Errands/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/values-v21/values.xml -->
     <eat-comment/>
     <style name="card.header_button_base">
         <item name="android:layout_width">wrap_content</item>

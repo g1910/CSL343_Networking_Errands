@@ -77,17 +77,17 @@ uses-permission#group2.netapp.permission.C2D_MESSAGE
 ADDED from AndroidManifest.xml:24:5
 	android:name
 		ADDED from AndroidManifest.xml:24:22
-android:uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
 ADDED from AndroidManifest.xml:26:5
 	android:maxSdkVersion
 		ADDED from AndroidManifest.xml:28:9
 	android:name
 		ADDED from AndroidManifest.xml:27:9
-android:uses-permission#android.permission.READ_PHONE_STATE
+uses-permission#android.permission.READ_PHONE_STATE
 ADDED from AndroidManifest.xml:29:5
 	android:name
-		ADDED from AndroidManifest.xml:29:30
-android:uses-permission#android.permission.READ_EXTERNAL_STORAGE
+		ADDED from AndroidManifest.xml:29:22
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
 ADDED from AndroidManifest.xml:30:5
 	android:maxSdkVersion
 		ADDED from AndroidManifest.xml:32:9
@@ -236,3 +236,27 @@ ADDED from AndroidManifest.xml:106:9
 		ADDED from AndroidManifest.xml:109:13
 	android:name
 		ADDED from AndroidManifest.xml:107:13
+activity#group2.netapp.auction.ServerFormActivity
+ADDED from AndroidManifest.xml:115:9
+	android:label
+		ADDED from AndroidManifest.xml:117:13
+	android:name
+		ADDED from AndroidManifest.xml:116:13
+activity#group2.netapp.auction.DecideAuctionActivity
+ADDED from AndroidManifest.xml:119:9
+	android:label
+		ADDED from AndroidManifest.xml:121:13
+	android:name
+		ADDED from AndroidManifest.xml:120:13
+activity#group2.netapp.bidding.CurrAuctionActivity
+ADDED from AndroidManifest.xml:123:9
+	android:label
+		ADDED from AndroidManifest.xml:125:13
+	android:name
+		ADDED from AndroidManifest.xml:124:13
+activity#group2.netapp.auction.AuctionActivity
+ADDED from AndroidManifest.xml:127:9
+	android:label
+		ADDED from AndroidManifest.xml:129:13
+	android:name
+		ADDED from AndroidManifest.xml:128:13

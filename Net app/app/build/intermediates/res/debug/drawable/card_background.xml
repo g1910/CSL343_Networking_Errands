@@ -22,4 +22,4 @@
        android:shape="rectangle">
     <solid android:color="@color/card_background"/>
     <corners android:radius="@dimen/card_background_default_radius"/>
-</shape><!-- From: file:/home/gabriele/Lavoro/Android/AndroidStudioProjects/wrks/cardslib/library-core/src/main/res/drawable/card_background.xml --><!-- From: file:/home/gaurav/6thSem/CSL343/Git/CSL343_Networking_Errands/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable/card_background.xml -->
+</shape><!-- From: file:/home/gabriele/Lavoro/Android/AndroidStudioProjects/wrks/cardslib/library-core/src/main/res/drawable/card_background.xml --><!-- From: file:/home/gaurav/6thSem/CSL343/CSL343_Networking_Errands/Net%20app/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable/card_background.xml -->

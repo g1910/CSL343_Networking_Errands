@@ -1,13 +1,20 @@
 package group2.netapp;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import group2.netapp.auction.DecideAuctionActivity;
+import group2.netapp.bidding.CurrAuctionActivity;
 
 
 /**
@@ -18,7 +25,7 @@ import android.widget.TextView;
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements View.OnClickListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -61,12 +68,18 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    Button sp,cs;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        TextView textView = new TextView(getActivity());
-        textView.setText(R.string.hello_blank_fragment);
-        return textView;
+        View v = inflater.inflate(R.layout.fragment_home, container, false);
+        sp = (Button) v.findViewById(R.id.spBtn);
+        cs = (Button) v.findViewById(R.id.csBtn);
+
+        sp.setOnClickListener(this);
+        cs.setOnClickListener(this);
+        return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -92,6 +105,27 @@ public class HomeFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent i;
+        switch(v.getId()){
+            case R.id.spBtn:
+                Context context = getActivity().getApplicationContext();
+                CharSequence text = "Auction Started Successfully";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+
+                i = new Intent(getActivity(), DecideAuctionActivity.class);
+                startActivity(i);
+                break;
+            case R.id.csBtn:
+                i = new Intent(getActivity(), CurrAuctionActivity.class);
+                startActivity(i);
+                break;
+        }
     }
 
     /**

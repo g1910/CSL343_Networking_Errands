@@ -24,5 +24,11 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="request_search_hint">Item or Location</string>
-    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_maps">Map</string>'
+
+    <string name="title_activity_decide_auction">DecideAuctionActivity</string>
+    <string name="title_activity_curr_auction">Running Auctions</string>
+    <string name="title_activity_auction">AuctionActivity</string>
+    <string name="title_activity_server_form">serverFormActivity</string>
+
 </resources>
