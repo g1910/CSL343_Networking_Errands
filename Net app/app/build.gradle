@@ -34,4 +34,5 @@ dependencies {
 
     compile    'com.github.gabrielemariotti.cards:cardslib-cards:2.0.1'
     compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'de.hdodenhof:circleimageview:1.2.2'
 }
