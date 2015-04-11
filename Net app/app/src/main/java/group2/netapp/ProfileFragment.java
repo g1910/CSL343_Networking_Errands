@@ -1,6 +1,9 @@
 package group2.netapp;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,10 +15,14 @@ import android.support.v4.app.Fragment;
 import android.os.Parcel;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -76,7 +83,7 @@ public class ProfileFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
@@ -86,15 +93,57 @@ public class ProfileFragment extends Fragment {
 
         View infh = inflater.inflate(R.layout.fragment_profile, container, false);
 
+
+
         TextView emailText = (TextView)infh.findViewById(R.id.emailText);
         emailText.setText(email);
 
         TextView nameText = (TextView)infh.findViewById(R.id.nameText);
         nameText.setText(name);
 
+        EditText phone = (EditText)infh.findViewById(R.id.editText3);
+        final EditText address = (EditText)infh.findViewById(R.id.editText4);
+        ImageButton editPhone = (ImageButton)infh.findViewById(R.id.editPhone);
+        ImageButton editAddress = (ImageButton)infh.findViewById(R.id.editAddress);
+
         ImageView profileImage=(ImageView)infh.findViewById(R.id.imageView2);
         picurl+="0";
         new LoadProfileImage(profileImage).execute(picurl);
+
+
+
+        editAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View addressDialog = inflater.inflate(R.layout.address_dialog,null);
+                AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+                dialog.setView(addressDialog);
+
+                final EditText addressText = (EditText)addressDialog.findViewById(R.id.AddressText);
+                addressText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(100)});
+                dialog
+                        .setCancelable(false)
+                        .setPositiveButton("Save",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,int id) {
+                                        address.setText(addressText.getText().toString());
+                                        int lines = addressText.getLineCount();
+                                        address.setLines(lines<6 ? lines : 5);
+                                    }
+                                })
+                        .setNegativeButton("Cancel",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                AlertDialog alertDialog = dialog.create();
+                alertDialog.show();
+            }
+        });
+
+
         // Inflate the layout for this fragment
         return infh;
     }

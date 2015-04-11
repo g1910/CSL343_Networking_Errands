@@ -75,10 +75,11 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="phone"
+                android:inputType="phone|textNoSuggestions|none"
+                android:cursorVisible="false"
                 android:ems="10"
                 android:id="@+id/editText3"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
@@ -88,15 +89,19 @@
                 android:layout_alignParentStart="false"
                 android:hint="Phone number"
                 android:shadowColor="@color/black_overlay"
-                android:textAlignment="center"
-                android:textIsSelectable="false" />
+                android:gravity="center_vertical"
+                android:textIsSelectable="false"
+                android:focusable="false"
+                android:textColor="#ffa7a7a7" />
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="textPostalAddress"
+                android:inputType="textNoSuggestions|textMultiLine"
+                android:cursorVisible="false"
+                android:lines="1"
                 android:ems="10"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:id="@+id/editText4"
                 android:layout_below="@id/editText3"
                 android:layout_centerHorizontal="true"
@@ -106,9 +111,9 @@
                 android:layout_alignParentLeft="false"
                 android:layout_alignParentStart="false"
                 android:hint="Address"
-                android:maxLines="5"
-                android:nestedScrollingEnabled="true"
-                android:textAlignment="center" />
+                android:focusable="false"
+                android:textColor="#ffa7a7a7"
+                android:gravity="center_vertical"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -163,7 +168,29 @@
                 android:layout_marginRight="5dp"
                 android:layout_alignParentEnd="true"
                 android:rating="3" />
+
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/editPhone"
+                android:background="@drawable/edit_icon"
+                android:layout_alignTop="@id/editText3"
+                android:layout_alignParentRight="true"
+
+                android:layout_marginRight="10dp" />
+
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/editAddress"
+                android:background="@drawable/edit_icon"
+                android:layout_alignTop="@id/editText4"
+                android:layout_alignParentRight="true"
+
+                android:layout_marginRight="10dp" />
+
         </RelativeLayout>
+
     </LinearLayout>
 
 </FrameLayout><!-- From: file:/home/gaurav/AndroidstudioProjects/Net%20app/app/src/main/res/layout/fragment_profile.xml -->
