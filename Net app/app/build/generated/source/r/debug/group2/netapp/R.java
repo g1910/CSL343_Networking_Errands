@@ -2110,7 +2110,7 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f090042;
         public static final int action_mode_bar_stub=0x7f090041;
         public static final int action_mode_close_button=0x7f090034;
-        public static final int action_settings=0x7f0900be;
+        public static final int action_settings=0x7f0900bf;
         public static final int activity_chooser_view_content=0x7f090035;
         public static final int adjust_height=0x7f090016;
         public static final int adjust_width=0x7f090017;
@@ -2125,7 +2125,7 @@ containing a value of this type.
         public static final int beginning=0x7f090013;
         public static final int book_now=0x7f09002b;
         public static final int broadcast_button=0x7f090061;
-        public static final int broadcast_request=0x7f0900bf;
+        public static final int broadcast_request=0x7f0900c0;
         public static final int buyButton=0x7f090028;
         public static final int buy_now=0x7f09002c;
         public static final int buy_with_google=0x7f09002d;
@@ -2222,7 +2222,8 @@ containing a value of this type.
         public static final int none=0x7f09000e;
         public static final int normal=0x7f09000a;
         public static final int pager=0x7f090053;
-        public static final int pressed=0x7f0900bc;
+        public static final int phoneText=0x7f0900ba;
+        public static final int pressed=0x7f0900bd;
         public static final int pricefield=0x7f090060;
         public static final int pricetext=0x7f090059;
         public static final int production=0x7f090025;
@@ -2236,8 +2237,8 @@ containing a value of this type.
         public static final int ratingBar5=0x7f09009e;
         public static final int ratingBar6=0x7f09009f;
         public static final int realtabcontent=0x7f0900a2;
-        public static final int req_card_image=0x7f0900ba;
-        public static final int req_card_location=0x7f0900bb;
+        public static final int req_card_image=0x7f0900bb;
+        public static final int req_card_location=0x7f0900bc;
         public static final int requestdetails=0x7f090055;
         public static final int sandbox=0x7f090026;
         public static final int satellite=0x7f090019;
@@ -2252,7 +2253,7 @@ containing a value of this type.
         public static final int search_plate=0x7f09004d;
         public static final int search_src_text=0x7f09004e;
         public static final int search_voice_btn=0x7f090052;
-        public static final int selected=0x7f0900bd;
+        public static final int selected=0x7f0900be;
         public static final int selectionDetails=0x7f090029;
         public static final int shortcut=0x7f09003e;
         public static final int showCustom=0x7f09000f;
@@ -2376,8 +2377,9 @@ containing a value of this type.
         public static final int native_material_topcolored_card=0x7f030054;
         public static final int native_material_topcolored_inner_base_main=0x7f030055;
         public static final int native_thumbnail_largematerial=0x7f030056;
-        public static final int support_simple_spinner_dropdown_item=0x7f030057;
-        public static final int user_request_card=0x7f030058;
+        public static final int phone_dialog=0x7f030057;
+        public static final int support_simple_spinner_dropdown_item=0x7f030058;
+        public static final int user_request_card=0x7f030059;
     }
     public static final class menu {
         public static final int global=0x7f0e0000;

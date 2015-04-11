@@ -3,6 +3,7 @@ package group2.netapp;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -11,6 +12,7 @@ import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.os.Parcel;
 import android.preference.PreferenceManager;
@@ -24,10 +26,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.matesnetwork.callverification.Cognalys;
+import com.matesnetwork.interfaces.VerificationListner;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -46,9 +55,10 @@ public class ProfileFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
+    private CountDownTimer countDownTimer;
+    ProgressDialog progress;
+    EditText phone;
     private OnFragmentInteractionListener mListener;
 
     /**
@@ -77,8 +87,6 @@ public class ProfileFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -101,7 +109,7 @@ public class ProfileFragment extends Fragment {
         TextView nameText = (TextView)infh.findViewById(R.id.nameText);
         nameText.setText(name);
 
-        EditText phone = (EditText)infh.findViewById(R.id.editText3);
+        phone = (EditText)infh.findViewById(R.id.editText3);
         final EditText address = (EditText)infh.findViewById(R.id.editText4);
         ImageButton editPhone = (ImageButton)infh.findViewById(R.id.editPhone);
         ImageButton editAddress = (ImageButton)infh.findViewById(R.id.editAddress);
@@ -109,7 +117,6 @@ public class ProfileFragment extends Fragment {
         ImageView profileImage=(ImageView)infh.findViewById(R.id.imageView2);
         picurl+="0";
         new LoadProfileImage(profileImage).execute(picurl);
-
 
 
         editAddress.setOnClickListener(new View.OnClickListener() {
@@ -143,9 +150,117 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        editPhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                View phoneDialog = inflater.inflate(R.layout.phone_dialog,null);
+                AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+                dialog.setView(phoneDialog);
+
+                final EditText phoneText = (EditText)phoneDialog.findViewById(R.id.phoneText);
+                phoneText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(10)});
+                dialog
+                        .setCancelable(false)
+                        .setPositiveButton("Verify",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+
+                                        String enteredNumber = phoneText.getText().toString();
+                                        if (enteredNumber.length() == 10) {
+                                            progress = new ProgressDialog(getActivity());
+                                            progress.setMessage("Verifying");
+                                            progress.setCanceledOnTouchOutside(false);
+                                            progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                                            progress.setIndeterminate(true);
+                                            progress.show();
+                                            final Thread t = new Thread(){
+                                                @Override
+                                                public void run(){
+
+                                                    int jumpTime = 0;
+                                                    while(jumpTime < 100){
+                                                        try {
+                                                            sleep(200);
+                                                            jumpTime += 5;
+                                                            progress.setProgress(jumpTime);
+                                                        } catch (InterruptedException e) {
+                                                            // TODO Auto-generated catch block
+                                                            e.printStackTrace();
+                                                        }
+
+                                                    }
+
+                                                }
+                                            };
+                                            t.start();
+                                            verify(enteredNumber);
+                                        }
+
+                                    }
+                                })
+                        .setNegativeButton("Cancel",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                AlertDialog alertDialog = dialog.create();
+                alertDialog.show();
+
+            }
+        });
         // Inflate the layout for this fragment
         return infh;
+    }
+
+    private void verify(final String number) {
+        countDownTimer = new CountDownTimer(60000, 1000) {
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                //timertv.setText("" + millisUntilFinished / 1000);
+            }
+
+            @Override
+            public void onFinish() {
+                progress.dismiss();
+            }
+
+        };
+        countDownTimer.start();
+        Cognalys.verifyMobileNumber(getActivity(),
+                "6ac9f915d36c3979e6491a47f0157c2d3aba9edb",
+                "ce4e50816fed4e7e89cc176", number, new VerificationListner() {
+
+                    @Override
+                    public void onVerificationStarted() {
+                        // TODO Auto-generated method stub
+
+                    }
+
+                    @Override
+                    public void onVerificationSuccess() {
+                        countDownTimer.cancel();
+                        progress.dismiss();
+                        phone.setText(number);
+                        Toast.makeText(getActivity(), "Number Verified Successfully", Toast.LENGTH_SHORT).show();
+                        SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+                        SharedPreferences.Editor editor=saved_values.edit();
+                        editor.putString("phone",number);
+                        editor.apply();
+                    }
+
+                    @Override
+                    public void onVerificationFailed(ArrayList<String> errorList) {
+                        countDownTimer.cancel();
+                        progress.dismiss();
+                        Toast.makeText(getActivity(), "Number Verification Failed", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -212,5 +327,7 @@ public class ProfileFragment extends Fragment {
             downloadedImage.setImageBitmap(result);
         }
     }
+
+
 
 }

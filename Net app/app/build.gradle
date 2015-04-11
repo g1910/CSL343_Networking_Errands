@@ -21,7 +21,7 @@ android {
 dependencies {
     compile files('libs/bolts-android-1.1.4.jar')
     compile files('libs/Parse-1.8.3.jar')
-
+    compile files('libs/cognalys.jar')
     //Core
     
 

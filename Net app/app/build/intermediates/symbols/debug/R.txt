@@ -704,7 +704,7 @@ int id action_menu_presenter 0x7f090003
 int id action_mode_bar 0x7f090042
 int id action_mode_bar_stub 0x7f090041
 int id action_mode_close_button 0x7f090034
-int id action_settings 0x7f0900be
+int id action_settings 0x7f0900bf
 int id activity_chooser_view_content 0x7f090035
 int id adjust_height 0x7f090016
 int id adjust_width 0x7f090017
@@ -719,7 +719,7 @@ int id auction_location 0x7f090070
 int id beginning 0x7f090013
 int id book_now 0x7f09002b
 int id broadcast_button 0x7f090061
-int id broadcast_request 0x7f0900bf
+int id broadcast_request 0x7f0900c0
 int id buyButton 0x7f090028
 int id buy_now 0x7f09002c
 int id buy_with_google 0x7f09002d
@@ -816,7 +816,8 @@ int id never 0x7f09001e
 int id none 0x7f09000e
 int id normal 0x7f09000a
 int id pager 0x7f090053
-int id pressed 0x7f0900bc
+int id phoneText 0x7f0900ba
+int id pressed 0x7f0900bd
 int id pricefield 0x7f090060
 int id pricetext 0x7f090059
 int id production 0x7f090025
@@ -830,8 +831,8 @@ int id radio 0x7f09003f
 int id ratingBar5 0x7f09009e
 int id ratingBar6 0x7f09009f
 int id realtabcontent 0x7f0900a2
-int id req_card_image 0x7f0900ba
-int id req_card_location 0x7f0900bb
+int id req_card_image 0x7f0900bb
+int id req_card_location 0x7f0900bc
 int id requestdetails 0x7f090055
 int id sandbox 0x7f090026
 int id satellite 0x7f090019
@@ -846,7 +847,7 @@ int id search_mag_icon 0x7f09004c
 int id search_plate 0x7f09004d
 int id search_src_text 0x7f09004e
 int id search_voice_btn 0x7f090052
-int id selected 0x7f0900bd
+int id selected 0x7f0900be
 int id selectionDetails 0x7f090029
 int id shortcut 0x7f09003e
 int id showCustom 0x7f09000f
@@ -966,8 +967,9 @@ int layout native_material_largeimage_text_card 0x7f030053
 int layout native_material_topcolored_card 0x7f030054
 int layout native_material_topcolored_inner_base_main 0x7f030055
 int layout native_thumbnail_largematerial 0x7f030056
-int layout support_simple_spinner_dropdown_item 0x7f030057
-int layout user_request_card 0x7f030058
+int layout phone_dialog 0x7f030057
+int layout support_simple_spinner_dropdown_item 0x7f030058
+int layout user_request_card 0x7f030059
 int menu global 0x7f0e0000
 int menu home 0x7f0e0001
 int menu menu_auction 0x7f0e0002
