@@ -135,7 +135,6 @@ public class HomeActivity extends FragmentActivity
                 break;
             case 2:
                 mTitle = getString(R.string.title_section2);
-
                 break;
             case 3:
                 mTitle = getString(R.string.title_section3);
@@ -183,11 +182,6 @@ public class HomeActivity extends FragmentActivity
         //noinspection SimplifiableIfStatement
         if(id==R.id.action_settings)
         {
-
-                /*Intent logout = new Intent(getApplicationContext(),MainActivity.class);
-                logout.putExtra("loggedout",1);
-                startActivity(logout);
-*/
 
         }
 

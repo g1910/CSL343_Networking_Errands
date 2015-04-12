@@ -164,7 +164,7 @@ public class ServiceRateFragment extends Fragment {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
         }*/
-        ((HomeActivity) activity).onSectionAttached(4);
+        ((HomeActivity) activity).onSectionAttached(3);
     }
 
     @Override
