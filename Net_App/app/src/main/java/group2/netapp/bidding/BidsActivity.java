@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import java.util.ArrayList;
 
@@ -68,7 +69,14 @@ public class BidsActivity extends Activity {
         for(int i = 0; i < 10;++i) {
             Card card = new Card(this);
 
-            card.setTitle("It's a Card!");
+            card.setTitle("It's a Card!"+i);
+
+            card.setOnClickListener(new Card.OnCardClickListener() {
+                @Override
+                public void onClick(Card card, View view) {
+                    
+                }
+            });
 
             cards.add(card);
         }
