@@ -43,4 +43,4 @@
         android:id="@+id/card_main_inner_topcolored_subtitle"
         />
 
-</LinearLayout><!-- From: file:/home/gabriele/Lavoro/Android/AndroidStudioProjects/wrks/cardslib/library-cards/src/main/res/layout/native_material_topcolored_inner_base_main.xml --><!-- From: file:/E:/Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/res/layout/native_material_topcolored_inner_base_main.xml -->
+</LinearLayout><!-- From: file:/home/gabriele/Lavoro/Android/AndroidStudioProjects/wrks/cardslib/library-cards/src/main/res/layout/native_material_topcolored_inner_base_main.xml --><!-- From: file:/home/gaurav/AndroidstudioProjects/Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/res/layout/native_material_topcolored_inner_base_main.xml -->

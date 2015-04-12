@@ -34,20 +34,23 @@ import android.widget.Toast;
 import com.matesnetwork.callverification.Cognalys;
 import com.matesnetwork.interfaces.VerificationListner;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ProfileFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ProfileFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ProfileFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,17 +62,9 @@ public class ProfileFragment extends Fragment {
     private CountDownTimer countDownTimer;
     ProgressDialog progress;
     EditText phone;
+    EditText address;
     private OnFragmentInteractionListener mListener;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ProfileFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static ProfileFragment newInstance(String param1, String param2) {
         ProfileFragment fragment = new ProfileFragment();
         Bundle args = new Bundle();
@@ -98,8 +93,30 @@ public class ProfileFragment extends Fragment {
         String email = saved_values.getString("email",null);
         String picurl = saved_values.getString("picurl",null);
         String name = saved_values.getString("user_name",null);
+        String phone_number = saved_values.getString("phone",null);
+        String address_text = saved_values.getString("address",null);
 
         View infh = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        phone = (EditText)infh.findViewById(R.id.editText3);
+        if(phone_number==null)
+        {
+            new get_phone(email).execute(null,null,null);
+        }
+        else
+        {
+           phone.setText(phone_number);
+        }
+        address = (EditText)infh.findViewById(R.id.editText4);
+
+        if(address_text==null)
+        {
+            new get_address(email).execute(null,null,null);
+        }
+        else
+        {
+            address.setText(address_text);
+        }
 
 
 
@@ -109,8 +126,8 @@ public class ProfileFragment extends Fragment {
         TextView nameText = (TextView)infh.findViewById(R.id.nameText);
         nameText.setText(name);
 
-        phone = (EditText)infh.findViewById(R.id.editText3);
-        final EditText address = (EditText)infh.findViewById(R.id.editText4);
+
+
         ImageButton editPhone = (ImageButton)infh.findViewById(R.id.editPhone);
         ImageButton editAddress = (ImageButton)infh.findViewById(R.id.editAddress);
 
@@ -133,9 +150,14 @@ public class ProfileFragment extends Fragment {
                         .setPositiveButton("Save",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog,int id) {
-                                        address.setText(addressText.getText().toString());
+                                        String addr = addressText.getText().toString();
+                                        address.setText(addr);
                                         int lines = addressText.getLineCount();
                                         address.setLines(lines<6 ? lines : 5);
+                                        SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+                                        SharedPreferences.Editor editor=saved_values.edit();
+                                        editor.putString("address",addr);
+                                        editor.apply();
                                     }
                                 })
                         .setNegativeButton("Cancel",
@@ -181,7 +203,7 @@ public class ProfileFragment extends Fragment {
                                                     int jumpTime = 0;
                                                     while(jumpTime < 100){
                                                         try {
-                                                            sleep(200);
+                                                            sleep(1200000);
                                                             jumpTime += 5;
                                                             progress.setProgress(jumpTime);
                                                         } catch (InterruptedException e) {
@@ -288,16 +310,6 @@ public class ProfileFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
@@ -328,6 +340,104 @@ public class ProfileFragment extends Fragment {
         }
     }
 
+    class get_phone extends AsyncTask<String,String,String>
+    {
+        private String email;
+        private String received_num=null;
+        private String host = "http://netapp.byethost33.com/get_phone.php";
+        public  get_phone(String a)
+        {
+            email=a;
+        }
 
+        @Override
+        protected String doInBackground(String... params) {
+
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppost = new HttpPost(host);
+            httppost.setHeader("Content-Type", "application/x-www-form-urlencoded");
+            try
+            {
+                // Add your data
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
+                nameValuePairs.add(new BasicNameValuePair("email", email));
+                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                // Execute HTTP Post Request
+                HttpResponse response = httpclient.execute(httppost);
+                if(response != null)
+                {
+                    InputStream is = response.getEntity().getContent();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+                    received_num = reader.readLine().replaceAll("\\s+","");
+
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+                // TODO Auto-generated catch block
+            }
+            return null;
+        }
+
+        protected void onPostExecute(String Result) {
+            if(received_num.length()>0)
+            {
+                phone.setText(received_num);
+                SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+                SharedPreferences.Editor editor=saved_values.edit();
+                editor.putString("phone",received_num);
+                editor.apply();
+            }
+            }
+    }
+
+    class get_address extends AsyncTask<String,String,String>
+    {
+        private String email;
+        private String received_addr=null;
+        private String host = "http://netapp.byethost33.com/get_address.php";
+        public  get_address(String a)
+        {
+            email=a;
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppost = new HttpPost(host);
+            httppost.setHeader("Content-Type", "application/x-www-form-urlencoded");
+            try
+            {
+                // Add your data
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
+                nameValuePairs.add(new BasicNameValuePair("email", email));
+                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                // Execute HTTP Post Request
+                HttpResponse response = httpclient.execute(httppost);
+                if(response != null)
+                {
+                    InputStream is = response.getEntity().getContent();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+                    received_addr = reader.readLine().replaceAll("\\s+","");
+
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+                // TODO Auto-generated catch block
+            }
+            return null;
+        }
+
+        protected void onPostExecute(String Result) {
+            if(received_addr.length()>0)
+            {
+                System.out.println("hiii");
+                SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+                SharedPreferences.Editor editor=saved_values.edit();
+                editor.putString("address",received_addr);
+                editor.apply();
+            }
+        }
+    }
 
 }

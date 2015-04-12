@@ -3,18 +3,14 @@ package group2.netapp;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.app.ActionBar.Tab;
 
 /**
- * A simple {@link Fragment} subclass.
+ * A simple {@link android.support.v4.app.Fragment} subclass.
  * Activities that contain this fragment must implement the
  * {@link RateFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.

@@ -21,15 +21,10 @@ $response = array();
 	$result=mysql_fetch_array($res);
 	$result=$result['address'];
 	
-    echo $result;
+    if(isset($result) && trim($result) != '' )
+echo $result;
 }
 
-else
-{
- $result="null";
-  echo $result;
-
-}
 
 
 ?>
