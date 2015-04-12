@@ -3,12 +3,15 @@ package group2.netapp;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
+import android.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.app.ActionBar.Tab;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,10 +27,10 @@ public class RateFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    //private TabsPagerAdapter mAdapter;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
     private FragmentTabHost tabHost;
     private OnFragmentInteractionListener mListener;
 
@@ -65,14 +68,17 @@ public class RateFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View infh = inflater.inflate(R.layout.fragment_rate, container, false);
         tabHost = (FragmentTabHost)infh.findViewById(android.R.id.tabhost);
         tabHost.setup(getActivity(), getChildFragmentManager(), R.id.realtabcontent);
+
         tabHost.addTab(tabHost.newTabSpec("fragmentService").setIndicator("Service Reviews"),
                 ServiceRateFragment.class, null);
         tabHost.addTab(tabHost.newTabSpec("fragmentCustomer").setIndicator("Customer Reviews"),
-                ServiceRateFragment.class, null);
+                CustomerRateFragment.class, null);
+
         return infh;
     }
 

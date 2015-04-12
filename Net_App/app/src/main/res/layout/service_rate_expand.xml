@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:background="#ffc4c4c4">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/serviceratingtext"
+        android:text="Rating"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#ff616161"
+        />
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/serviceratingBar"
+
+        android:layout_alignTop="@id/serviceratingtext"
+        android:layout_alignParentRight="true"
+        style="?android:attr/ratingBarStyleIndicator"
+        android:layout_marginRight="10dp"
+        android:rating="5"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/serviceratingtext"
+        android:id="@+id/servicereviewtext"
+        android:text="Review"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#ff616161"
+        />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/servicereviewedit"
+        android:hint="Add Review..."
+        android:layout_alignTop="@id/servicereviewtext"
+        android:layout_alignLeft="@+id/serviceratingBar"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_below="@+id/serviceratingBar"
+
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/servicereviewsubmit"
+        android:text="Submit"
+        android:layout_below="@id/servicereviewedit"
+        android:layout_alignRight="@id/servicereviewedit"
+        />
+
+</RelativeLayout>

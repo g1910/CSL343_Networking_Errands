@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:background="#FFFFFF">
+
+
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/locationimage"
+        android:src="@drawable/cost"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/servicelocation"
+        android:layout_toRightOf="@+id/locationimage"
+
+        android:layout_marginLeft="10dp"
+        android:layout_alignTop="@+id/locationimage"
+
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#ff616161" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/emailimage"
+        android:src="@drawable/clock1"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/locationimage"
+        android:layout_marginTop="10dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/serviceemail"
+        android:layout_marginLeft="10dp"
+
+        android:layout_alignTop="@+id/emailimage"
+
+        android:layout_toRightOf="@+id/emailimage"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#ff616161" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/timestampimage"
+        android:src="@drawable/calendar1"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/emailimage"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+
+        android:id="@+id/servicetimestamp"
+        android:layout_toRightOf="@id/timestampimage"
+        android:layout_marginLeft="10dp"
+        android:layout_alignTop="@+id/timestampimage"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#ff616161" />
+
+</RelativeLayout>
