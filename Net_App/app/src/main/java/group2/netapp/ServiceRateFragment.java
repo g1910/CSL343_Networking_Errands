@@ -230,7 +230,7 @@ public class ServiceRateFragment extends Fragment {
                 try {
                     JsonParser parser = new JsonParser();
                     JsonObject data = parser.parse(reader).getAsJsonObject();
-                    System.out.println(data);
+
                     GsonBuilder gsonBuilder = new GsonBuilder();
                     Gson gson = gsonBuilder.create();
                     Type listType = new TypeToken<List<ServiceUser>>() {
@@ -242,8 +242,8 @@ public class ServiceRateFragment extends Fragment {
                 }
 
                 cards.clear();
-                if(posts.size() == 0){
-                    Toast.makeText(getActivity().getApplicationContext(),"No Pending Requests",Toast.LENGTH_SHORT).show();;
+                if(posts==null){
+                    Toast.makeText(getActivity().getApplicationContext(),"No pending reviews found",Toast.LENGTH_SHORT).show();;
                 }
                 if (posts != null && running)
                     for (int i = 0; i < posts.size(); ++i) {

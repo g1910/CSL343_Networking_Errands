@@ -153,7 +153,8 @@ public class HomeActivity extends FragmentActivity
 
     public void restoreActionBar() {
         ActionBar actionBar = getActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+        //actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+        actionBar.setDisplayHomeAsUpEnabled(false);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
     }
@@ -257,13 +258,7 @@ public class HomeActivity extends FragmentActivity
             //httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
             try {
 
-                /*JSONObject obj = new JSONObject();
-                obj.put("pname", pname);
-                obj.put("email", email);
-                httppost.setEntity(new StringEntity(obj.toString(), "UTF-8"));
-                HttpResponse response = httpclient.execute(httppost);*/
 
-                // Add your data
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
                 nameValuePairs.add(new BasicNameValuePair("pname", pname));
                 nameValuePairs.add(new BasicNameValuePair("email", email));

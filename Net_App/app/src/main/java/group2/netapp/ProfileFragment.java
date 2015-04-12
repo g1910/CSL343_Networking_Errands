@@ -379,7 +379,7 @@ public class ProfileFragment extends Fragment {
         }
 
         protected void onPostExecute(String Result) {
-            if(received_num.length()>0)
+            if(received_num!=null && received_num.length()>0)
             {
                 phone.setText(received_num);
                 SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
@@ -429,7 +429,7 @@ public class ProfileFragment extends Fragment {
         }
 
         protected void onPostExecute(String Result) {
-            if(received_addr.length()>0)
+            if(received_addr!=null && received_addr.length()>0)
             {
                 System.out.println("hiii");
                 SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
