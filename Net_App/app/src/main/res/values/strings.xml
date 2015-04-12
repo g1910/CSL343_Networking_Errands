@@ -30,5 +30,6 @@
     <string name="title_activity_curr_auction">Running Auctions</string>
     <string name="title_activity_auction">AuctionActivity</string>
     <string name="title_activity_server_form">serverFormActivity</string>
+    <string name="title_activity_bids">BidsActivity</string>
 
 </resources>
