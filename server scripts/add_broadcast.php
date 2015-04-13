@@ -2,25 +2,20 @@
 /*
  * Following code adds a new user broadcast to the database
  */
- // Kunal Yadav
+ 
 // array for JSON response
 $response = array();
  
 // check for required fields
-if (  isset($_POST['item']) && isset($_POST['location'])&& isset($_POST['quantity'])) {
+if (  isset($_POST['item']) && isset($_POST['location'])) {
  
-    
+     $email = $_POST['email'];
     $item = $_POST['item'];
     $location = $_POST['location'];
-    $quantity = $_POST['quantity'];
-    $exprice = $_POST['price'];
+    $description = $_POST['description'];
 	$time=$_POST['time'];
 	$date=$_POST['date'];
-   /* $time_hour = $_POST['time_hour'];
-    $time_minute = $_POST['time_minute'];
-    $date_day = $_POST['date_day'];
-    $date_day = $_POST['date_month'];
-    $date_day = $_POST['date_year']; */
+   
  
     // include db connect class
     require_once __DIR__ . '/db_connect.php';
@@ -31,7 +26,7 @@ if (  isset($_POST['item']) && isset($_POST['location'])&& isset($_POST['quantit
     
     // mysql inserting a new row
     
-	$addquery = mysql_query("INSERT INTO UserRequests( item,location,quantity,exprice,exptime,expdate) VALUES('$item','$location','$quantity','$exprice','$time','$date')");
+	$addquery = mysql_query("INSERT INTO UserRequests( email,item,location,exptime,expdate,description) VALUES('$email','$item','$location','$time','$date', '$description' )");
     
     
  
