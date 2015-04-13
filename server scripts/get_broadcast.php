@@ -50,10 +50,9 @@ if (mysql_num_rows($result) > 0) {
         $UserRequest["email"] = $row["email"];
         $UserRequest["item"] = $row["item"];
         $UserRequest["location"] = $row["location"];
-        $UserRequest["quantity"] = $row["quantity"];
-        $UserRequest["exprice"] = $row["exprice"];
 		$UserRequest["exptime"] = $row["exptime"];
 		$UserRequest["expdate"] = $row["expdate"];
+		$UserRequest["description"] = $row["description"];
  
         // push single request into final response array
         array_push( $response["UserRequests"], $UserRequest);
