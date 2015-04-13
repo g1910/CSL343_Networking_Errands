@@ -1,6 +1,7 @@
 package group2.netapp.auction.bidsTabs;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -22,7 +23,7 @@ import it.gmariotti.cardslib.library.recyclerview.view.CardRecyclerView;
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass.
  */
-public class OtherBids extends Fragment implements Card.OnCardClickListener {
+public class BidRequestsTab extends Fragment implements Card.OnCardClickListener {
 
 
 
@@ -30,16 +31,20 @@ public class OtherBids extends Fragment implements Card.OnCardClickListener {
     CardRecyclerView bidView;
 
 
-    public OtherBids() {
+    public BidRequestsTab() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_other_bids, container, false);
+        View v = inflater.inflate(R.layout.fragment_bid_requests, container, false);
         setUpBidView(v);
 
         return v;
@@ -72,15 +77,15 @@ public class OtherBids extends Fragment implements Card.OnCardClickListener {
 
     @Override
     public void onClick(Card card, View view) {
-        /*BidCard bCard = (BidCard) card;
+        BidCard bCard = (BidCard) card;
         Fragment aBidFrag = new AucBidsFragment();
 
-        FragmentTransaction ft= getFragmentManager().beginTransaction();
-        Fragment oldBidFrag = getFragmentManager().findFragmentByTag("BidFrag");
+        FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
+//        Fragment oldBidFrag = getFragmentManager().findFragmentByTag("BidFrag");
 
-        ft.replace(R.id.auc_dash,aBidFrag,"BidFrag");
+        ft.replace(R.id.auction_frame,aBidFrag,"BidFrag");
         ft.commit();
-        Log.d("Requests", "Fragment Added");*/
+        Log.d("Requests", "Fragment Added");
 
 
     }
