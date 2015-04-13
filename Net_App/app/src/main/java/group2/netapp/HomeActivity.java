@@ -112,6 +112,10 @@ public class HomeActivity extends FragmentActivity
                 fragment=new HomeFragment();
                 break;
             case 5:
+                SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences.Editor editor=saved_values.edit();
+                editor.clear();
+                editor.commit();
                 Intent logout = new Intent(getApplicationContext(),MainActivity.class);
                 logout.putExtra("loggedout",1);
                 startActivity(logout);

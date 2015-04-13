@@ -90,7 +90,7 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-        String email = saved_values.getString("email",null);
+        final String email = saved_values.getString("email",null);
         String picurl = saved_values.getString("picurl",null);
         String name = saved_values.getString("user_name",null);
         String phone_number = saved_values.getString("phone",null);
@@ -151,13 +151,11 @@ public class ProfileFragment extends Fragment {
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog,int id) {
                                         String addr = addressText.getText().toString();
-                                        address.setText(addr);
+                                        new add_address(email, addr).execute(null,null,null);
+                                        //address.setText(addr);
                                         int lines = addressText.getLineCount();
                                         address.setLines(lines<6 ? lines : 5);
-                                        SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-                                        SharedPreferences.Editor editor=saved_values.edit();
-                                        editor.putString("address",addr);
-                                        editor.apply();
+
                                     }
                                 })
                         .setNegativeButton("Cancel",
@@ -216,7 +214,7 @@ public class ProfileFragment extends Fragment {
                                                 }
                                             };
                                             t.start();
-                                            verify(enteredNumber);
+                                            verify(enteredNumber, email);
                                         }
 
                                     }
@@ -237,7 +235,7 @@ public class ProfileFragment extends Fragment {
         return infh;
     }
 
-    private void verify(final String number) {
+    private void verify(final String number, final String email) {
         countDownTimer = new CountDownTimer(60000, 1000) {
 
             @Override
@@ -265,13 +263,9 @@ public class ProfileFragment extends Fragment {
                     @Override
                     public void onVerificationSuccess() {
                         countDownTimer.cancel();
-                        progress.dismiss();
-                        phone.setText(number);
                         Toast.makeText(getActivity(), "Number Verified Successfully", Toast.LENGTH_SHORT).show();
-                        SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-                        SharedPreferences.Editor editor=saved_values.edit();
-                        editor.putString("phone",number);
-                        editor.apply();
+                        new add_phone(email,number).execute(null,null,null);
+                        progress.dismiss();
                     }
 
                     @Override
@@ -431,11 +425,119 @@ public class ProfileFragment extends Fragment {
         protected void onPostExecute(String Result) {
             if(received_addr!=null && received_addr.length()>0)
             {
-                System.out.println("hiii");
+                address.setText(received_addr);
                 SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
                 SharedPreferences.Editor editor=saved_values.edit();
                 editor.putString("address",received_addr);
                 editor.apply();
+            }
+        }
+    }
+
+    class add_address extends AsyncTask<String,String,String>
+    {
+        private String email;
+        private String addr;
+        private String resp=null;
+        private String host = "http://netapp.byethost33.com/add_address.php";
+        public  add_address(String a, String b)
+        {
+            email=a;
+            addr=b;
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppost = new HttpPost(host);
+            httppost.setHeader("Content-Type", "application/x-www-form-urlencoded");
+            try
+            {
+                // Add your data
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+                nameValuePairs.add(new BasicNameValuePair("email", email));
+                nameValuePairs.add(new BasicNameValuePair("address", addr));
+                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                // Execute HTTP Post Request
+                HttpResponse response = httpclient.execute(httppost);
+                if(response != null)
+                {
+                    InputStream is = response.getEntity().getContent();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+                    resp = reader.readLine();
+                    Toast.makeText(getActivity(), resp, Toast.LENGTH_SHORT).show();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+                // TODO Auto-generated catch block
+            }
+            return null;
+        }
+
+        protected void onPostExecute(String Result) {
+            if(resp!=null && resp.length()>0)
+            {
+                SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+                SharedPreferences.Editor editor=saved_values.edit();
+                editor.putString("address",addr);
+                editor.apply();
+                //System.out.println("if ran");
+                address.setText(addr);
+
+            }
+        }
+    }
+
+    class add_phone extends AsyncTask<String,String,String>
+    {
+        private String email;
+        private String phn;
+        String resp = null;
+        private String host = "http://netapp.byethost33.com/add_phone.php";
+        public  add_phone(String a, String b)
+        {
+            email=a;
+            phn = b;
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppost = new HttpPost(host);
+            httppost.setHeader("Content-Type", "application/x-www-form-urlencoded");
+            try
+            {
+                // Add your data
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+                nameValuePairs.add(new BasicNameValuePair("email", email));
+                nameValuePairs.add(new BasicNameValuePair("phone", phn));
+                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                // Execute HTTP Post Request
+                HttpResponse response = httpclient.execute(httppost);
+                if(response != null)
+                {
+                    InputStream is = response.getEntity().getContent();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+                    resp = reader.readLine();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+                // TODO Auto-generated catch block
+            }
+            return null;
+        }
+
+        protected void onPostExecute(String Result) {
+            if(resp!=null && resp.length()>0)
+            {
+                SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+                SharedPreferences.Editor editor=saved_values.edit();
+                editor.putString("phone",phn);
+                editor.apply();
+                phone.setText(phn);
+                //System.out.println("if ran");
             }
         }
     }
