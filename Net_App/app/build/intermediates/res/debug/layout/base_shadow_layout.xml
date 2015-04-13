@@ -24,4 +24,4 @@
         android:id="@+id/card_shadow_view"
         style="@style/card.shadow_image"
         />
-<!-- From: file:/home/gabriele/Lavoro/Android/AndroidStudioProjects/wrks/cardslib/library-core/src/main/res/layout/base_shadow_layout.xml --><!-- From: file:/home/gaurav/AndroidstudioProjects/Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/base_shadow_layout.xml -->
+<!-- From: file:/home/gabriele/Lavoro/Android/AndroidStudioProjects/wrks/cardslib/library-core/src/main/res/layout/base_shadow_layout.xml --><!-- From: file:/F:/Git/CSL343_Networking_Errands/Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/base_shadow_layout.xml -->

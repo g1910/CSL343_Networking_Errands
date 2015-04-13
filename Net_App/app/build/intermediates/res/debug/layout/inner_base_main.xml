@@ -33,4 +33,4 @@
         android:id="@+id/card_main_inner_simple_title"
         style="@style/card.base_simple_title"/>
 
-</LinearLayout><!-- From: file:/home/gabriele/Lavoro/Android/AndroidStudioProjects/wrks/cardslib/library-core/src/main/res/layout/inner_base_main.xml --><!-- From: file:/home/gaurav/AndroidstudioProjects/Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/inner_base_main.xml -->
+</LinearLayout><!-- From: file:/home/gabriele/Lavoro/Android/AndroidStudioProjects/wrks/cardslib/library-core/src/main/res/layout/inner_base_main.xml --><!-- From: file:/F:/Git/CSL343_Networking_Errands/Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/inner_base_main.xml -->

@@ -297,16 +297,18 @@ public class UserRequestFragment extends Fragment {
                     CardHeader ch = new CardHeader(getActivity().getApplicationContext());
                     ch.setTitle(a.item);
                     card.addCardHeader(ch);
-
-                    CustomCardExpand expand = new CustomCardExpand(getActivity().getApplicationContext(), a.quantity, a.exprice, a.exptime, a.expdate);
+                    CustomCardExpand expand = new CustomCardExpand(getActivity().getApplicationContext(), a.description, a.exptime, a.expdate);
                     card.addCardExpand(expand);
 
                     ch.setButtonExpandVisible(true);
+                    card.setClickable(true);
 
                     ViewToClickToExpand viewToClickToExpand = ViewToClickToExpand.builder()
                             .highlightView(true)
                             .setupCardElement(ViewToClickToExpand.CardElementUI.CARD);
                     card.setViewToClickToExpand(viewToClickToExpand);
+
+
 
                     cards.add(card);
                 }
@@ -327,11 +329,10 @@ public class UserRequestFragment extends Fragment {
 class CustomCardExpand extends CardExpand {
 
     //Use your resource ID for your inner layout
-    private String quantity, cost, time, date;
-    public CustomCardExpand(Context context,String q, String c, String t, String d) {
+    private String description, time, date;
+    public CustomCardExpand(Context context,String desc, String t, String d) {
         super(context, R.layout.expand_layout);
-        quantity=q;
-        cost=c;
+        description=desc;
         time=t;
         date=d;
     }
@@ -346,14 +347,12 @@ class CustomCardExpand extends CardExpand {
         if (view == null) return;
 
         //Retrieve TextView elements
-        TextView tx1 = (TextView) view.findViewById(R.id.quantity);
-        TextView tx2 = (TextView) view.findViewById(R.id.cost);
+        TextView tx2 = (TextView) view.findViewById(R.id.description);
         TextView tx3 = (TextView) view.findViewById(R.id.time);
         TextView tx4 = (TextView) view.findViewById(R.id.date);
         //Set value in text views
 //if(tx1!=null)
-        tx1.setText(quantity);
-        tx2.setText(cost);
+        tx2.setText(description);
         tx3.setText(time);
         tx4.setText(date);
 
@@ -379,8 +378,8 @@ class UserReqCard extends Card{
 
         TextView location = (TextView)parent.findViewById(R.id.req_card_location);
 
-
         location.setText(location_name);
+
     }
 }
 
