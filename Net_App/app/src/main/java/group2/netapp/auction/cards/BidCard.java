@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import group2.netapp.R;
-import group2.netapp.auction.bidsTabs.OtherBids;
 import it.gmariotti.cardslib.library.internal.Card;
 
 /**
