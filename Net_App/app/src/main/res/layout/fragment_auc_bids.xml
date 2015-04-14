@@ -1,9 +1,24 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="group2.netapp.auction.AucBidsFragment">
+    android:layout_height="match_parent" tools:context="group2.netapp.auction.AucBidsFragment"
+    android:id="@+id/auc_bidview_layout">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="Hello Bid" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Location:"
+        android:id="@+id/auc_bidview_loc"
+        android:layout_gravity="left|top" />
 
-</FrameLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Order:"
+        android:id="@+id/auc_bidview_order"
+        android:layout_below="@+id/auc_bidview_loc"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>
