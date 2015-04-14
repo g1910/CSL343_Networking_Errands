@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import group2.netapp.auction.AuctionActivity;
 import group2.netapp.auction.DecideAuctionActivity;
 import group2.netapp.bidding.CurrAuctionActivity;
 
@@ -80,7 +81,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
 
-                i = new Intent(getActivity(), DecideAuctionActivity.class);
+                i = new Intent(getActivity(), AuctionActivity.class);
                 startActivity(i);
                 break;
             case R.id.csBtn:
