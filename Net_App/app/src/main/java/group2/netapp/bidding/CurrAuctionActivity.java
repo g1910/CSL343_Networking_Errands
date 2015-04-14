@@ -41,7 +41,7 @@ public class CurrAuctionActivity extends FragmentActivity implements ServerConne
         Fragment aDashFrag = new ProgressFragment();
 
         ft.add(R.id.curr_auction_frame,aDashFrag,"ProgressAuction");
-        ft.addToBackStack(null);
+//        ft.addToBackStack(null);
         ft.commit();
 
         ServerConnect myServer=new ServerConnect(this);
@@ -63,7 +63,7 @@ public class CurrAuctionActivity extends FragmentActivity implements ServerConne
         Fragment aDashFrag = new CurrAuctionFragment();
 
         ft.replace(R.id.curr_auction_frame, aDashFrag, "CurrentAuction");
-        ft.addToBackStack(null);
+//        ft.addToBackStack(null);
         ft.commit();
         Log.d("AuctionActivity", "CurrAuctionOpened");
     }
