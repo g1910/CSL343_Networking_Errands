@@ -8,70 +8,99 @@
 
 
     <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/locationimage"
+        android:src="@drawable/ic_action_place"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="5dp" />
+
+    <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:id="@+id/locationimage"
-        android:src="@drawable/cost"
+        android:id="@+id/starttimeimage"
+
+        android:src="@drawable/start_icon"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp" />
+        android:layout_below="@+id/servicelocation"
+        android:layout_marginTop="5dp"
+        />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/endtimeimage"
+        android:src="@drawable/end_time"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/starttimeimage"
+        android:layout_marginTop="10dp"
+        />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/rateuserimage"
+        android:src="@drawable/ic_action_user"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/endtimeimage"
+
+        android:layout_marginTop="10dp"
+        android:background="#ff2c2c2f" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
+        android:text="Location"
         android:id="@+id/servicelocation"
         android:layout_toRightOf="@+id/locationimage"
 
         android:layout_marginLeft="10dp"
-        android:layout_alignTop="@+id/locationimage"
-
+        android:layout_marginTop="8dp"
+        android:paddingBottom="5dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ff616161" />
 
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:id="@+id/emailimage"
-        android:src="@drawable/clock1"
-        android:layout_marginLeft="10dp"
-        android:layout_below="@+id/locationimage"
-        android:layout_marginTop="10dp"
-        />
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/serviceemail"
-        android:layout_marginLeft="10dp"
+        android:text="Starttime"
+        android:id="@+id/starttime"
+        android:layout_toRightOf="@+id/starttimeimage"
 
-        android:layout_alignTop="@+id/emailimage"
+        android:layout_alignLeft="@id/servicelocation"
+        android:layout_alignBottom="@+id/starttimeimage"
 
-        android:layout_toRightOf="@+id/emailimage"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ff616161" />
 
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:id="@+id/timestampimage"
-        android:src="@drawable/calendar1"
-        android:layout_marginLeft="10dp"
-        android:layout_below="@+id/emailimage"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        />
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
+        android:text="Endtime"
+        android:id="@+id/endtime"
+        android:layout_toRightOf="@+id/endtimeimage"
 
-        android:id="@+id/servicetimestamp"
-        android:layout_toRightOf="@id/timestampimage"
-        android:layout_marginLeft="10dp"
-        android:layout_alignTop="@+id/timestampimage"
+        android:layout_alignLeft="@id/starttime"
+        android:layout_alignBottom="@+id/endtimeimage"
+
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ff616161" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User Name"
+        android:id="@+id/rateuser"
+        android:layout_toRightOf="@+id/endtimeimage"
+
+        android:layout_alignLeft="@id/endtime"
+        android:layout_alignTop="@id/rateuserimage"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#ff616161"
+        android:layout_marginBottom="10dp"/>
 
 </RelativeLayout>

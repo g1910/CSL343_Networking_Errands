@@ -15,11 +15,9 @@ public class UserRequests {
     public String email;
     public String item;
     public String location;
-    public String quantity;
-    public String exprice;
     public String exptime;
     public String expdate;
-
+    public String description;
 }
 
 

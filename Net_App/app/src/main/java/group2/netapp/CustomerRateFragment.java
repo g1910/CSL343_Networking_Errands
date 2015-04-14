@@ -258,10 +258,10 @@ public class CustomerRateFragment extends Fragment {
                     for (int i = 0; i < posts.size(); ++i) {
                         CustomerUser a = posts.get(i);
 
-                        CustomerUserReqCard card = new CustomerUserReqCard(getActivity().getApplicationContext(),a.location,a.emailId,a.timestamp);
+                        CustomerUserReqCard card = new CustomerUserReqCard(getActivity().getApplicationContext(),a.idFeedback,a.location,a.start_time,a.end_time,a.name);
                         CardHeader ch = new CardHeader(getActivity().getApplicationContext());
-                        ch.setTitle(a.item);
-
+                        card.setClickable(true);
+                        ch.setTitle("Auction details");
                         card.addCardHeader(ch);
 
                         CustomerCustomCardExpand expand = new CustomerCustomCardExpand(getActivity().getApplicationContext());
@@ -330,14 +330,15 @@ class CustomerCustomCardExpand extends CardExpand {
 
 class CustomerUserReqCard extends Card {
 
-    private String item, location, timestamp, emailId;
+    private String id, location, end_time, start_time, ratename;
 
-    public CustomerUserReqCard(Context context, String l, String t, String e){
+    public CustomerUserReqCard(Context context, String id, String loc, String st, String et, String name){
         super(context, R.layout.service_rate_card);
-        location = l;
-        emailId = e;
-        timestamp = t;
-
+        id=id;
+        location = loc;
+        start_time = st;
+        end_time = et;
+        ratename = name;
     }
     public CustomerUserReqCard(Context context){
         super(context, R.layout.service_rate_card);
@@ -349,20 +350,23 @@ class CustomerUserReqCard extends Card {
     public void setupInnerViewElements(ViewGroup parent, View view){
 
         //Retrieve TextView elements
-        TextView tx2 = (TextView) view.findViewById(R.id.serviceemail);
-        TextView tx3 = (TextView) view.findViewById(R.id.servicelocation);
-        TextView tx4 = (TextView) view.findViewById(R.id.servicetimestamp);
-        //Set value in text views
-        tx2.setText(emailId);
-        tx3.setText(location);
-        tx4.setText(timestamp);
+        TextView tx1 = (TextView) view.findViewById(R.id.servicelocation);
+        TextView tx2 = (TextView) view.findViewById(R.id.starttime);
+        TextView tx3 = (TextView) view.findViewById(R.id.endtime);
+        TextView tx4 = (TextView) view.findViewById(R.id.rateuser);
+        //Set value in text view
+        tx1.setText(location);
+        tx2.setText(start_time);
+        tx3.setText(end_time);
+        tx4.setText(ratename);
     }
 }
 
 class CustomerUser{
 
-    public String item;
-    public String timestamp;
+    public String idFeedback;
     public String location;
-    public String emailId;
+    public String start_time;
+    public String end_time;
+    public String name;
 }

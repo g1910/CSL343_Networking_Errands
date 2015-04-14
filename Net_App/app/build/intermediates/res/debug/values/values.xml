@@ -368,7 +368,7 @@
     <dimen name="native_recyclerview_card_margin_top">6dp</dimen>
     <!-- From: file:/home/gaurav/AndroidstudioProjects/Net_App/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
-    <dimen name="navigation_drawer_width">240dp</dimen>
+    <dimen name="navigation_drawer_width">200dp</dimen>
     <!-- From: file:/home/gaurav/AndroidstudioProjects/Net_App/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <item name="action_bar_activity_content" type="id"/>

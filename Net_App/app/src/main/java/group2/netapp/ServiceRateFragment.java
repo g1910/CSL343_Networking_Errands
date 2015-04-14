@@ -32,6 +32,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -249,11 +251,12 @@ public class ServiceRateFragment extends Fragment {
                     for (int i = 0; i < posts.size(); ++i) {
                         ServiceUser a = posts.get(i);
 
-                        ServiceUserReqCard card = new ServiceUserReqCard(getActivity().getApplicationContext(),a.location,a.emailId,a.timestamp);
+                        ServiceUserReqCard card = new ServiceUserReqCard(getActivity().getApplicationContext(),a.idFeedback,a.location,a.start_time,a.end_time,a.name);
                         CardHeader ch = new CardHeader(getActivity().getApplicationContext());
-                        ch.setTitle(a.item);
 
                         card.addCardHeader(ch);
+                        card.setClickable(true);
+                        ch.setTitle("Auction details");
 
                         ServiceCustomCardExpand expand = new ServiceCustomCardExpand(getActivity().getApplicationContext());
                         card.addCardExpand(expand);
@@ -310,14 +313,15 @@ class ServiceCustomCardExpand extends CardExpand {
 
 class ServiceUserReqCard extends Card {
 
-    private String item, location, timestamp, emailId;
+    private String id, location, end_time, start_time, ratename;
 
-    public ServiceUserReqCard(Context context, String l, String t, String e){
+    public ServiceUserReqCard(Context context, String id, String loc, String st, String et, String name){
         super(context, R.layout.service_rate_card);
-        location = l;
-        emailId = e;
-        timestamp = t;
-
+        id=id;
+        location = loc;
+        start_time = st;
+        end_time = et;
+        ratename = name;
     }
     public ServiceUserReqCard(Context context){
         super(context, R.layout.service_rate_card);
@@ -329,20 +333,22 @@ class ServiceUserReqCard extends Card {
     public void setupInnerViewElements(ViewGroup parent, View view){
 
         //Retrieve TextView elements
-        TextView tx2 = (TextView) view.findViewById(R.id.serviceemail);
-        TextView tx3 = (TextView) view.findViewById(R.id.servicelocation);
-        TextView tx4 = (TextView) view.findViewById(R.id.servicetimestamp);
+        TextView tx1 = (TextView) view.findViewById(R.id.servicelocation);
+        TextView tx2 = (TextView) view.findViewById(R.id.starttime);
+        TextView tx3 = (TextView) view.findViewById(R.id.endtime);
+        TextView tx4 = (TextView) view.findViewById(R.id.rateuser);
         //Set value in text view
-        tx2.setText(emailId);
-        tx3.setText(location);
-        tx4.setText(timestamp);
+        tx1.setText(location);
+        tx2.setText(start_time);
+        tx3.setText(end_time);
+        tx4.setText(ratename);
     }
 }
 
 class ServiceUser{
-    public String email;
-    public String item;
-    String timestamp;
+    public String idFeedback;
     public String location;
-    public String emailId;
+    public String start_time;
+    public String end_time;
+    public String name;
 }

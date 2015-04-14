@@ -1,96 +1,102 @@
 package group2.netapp;
 
-import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTabHost;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-
+import android.widget.TabHost;
+import android.widget.TabHost.OnTabChangeListener;
+import android.widget.TabHost.TabContentFactory;
 public class RateFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final int TWO_FRAGMENTS = 2;
+    private ViewPager mViewPager;
+    private TabContentFactory mFactory = new TabContentFactory() {
 
-    //private TabsPagerAdapter mAdapter;
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-    private FragmentTabHost tabHost;
-    private OnFragmentInteractionListener mListener;
-
-    // TODO: Rename and change types and number of parameters
-    public static RateFragment newInstance(String param1, String param2) {
-        RateFragment fragment = new RateFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    public RateFragment() {
-        // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+        @Override
+        public View createTabContent(String tag) {
+            View v = new View(getActivity());
+            v.setMinimumHeight(0);
+            return v;
         }
-    }
+    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View fragContent = inflater.inflate(R.layout.tabs_with_viewpager,
+                container, false);
+        mViewPager = (ViewPager) fragContent.findViewById(R.id.pager);
+        mViewPager.setAdapter(new TransactionInnerPagerAdapter(getChildFragmentManager()));
+        final TabHost tabHost = (TabHost) fragContent
+                .findViewById(android.R.id.tabhost);
+        tabHost.setup();
+        tabHost.addTab(tabHost.newTabSpec("Tab1").setIndicator("Rate Service").setContent(mFactory));
+        tabHost.addTab(tabHost.newTabSpec("Tab2").setIndicator("Rate Customer").setContent(mFactory));
+        mViewPager.setOnPageChangeListener(new OnPageChangeListener() {
 
-        // Inflate the layout for this fragment
-        View infh = inflater.inflate(R.layout.fragment_rate, container, false);
-        tabHost = (FragmentTabHost)infh.findViewById(android.R.id.tabhost);
-        tabHost.setup(getActivity(), getChildFragmentManager(), R.id.realtabcontent);
+            @Override
+            public void onPageSelected(int position) {
+                tabHost.setCurrentTab(position);
+            }
 
-        tabHost.addTab(tabHost.newTabSpec("fragmentService").setIndicator("Service Reviews"),
-                ServiceRateFragment.class, null);
-        tabHost.addTab(tabHost.newTabSpec("fragmentCustomer").setIndicator("Customer Reviews"),
-                CustomerRateFragment.class, null);
+            @Override
+            public void onPageScrolled(int arg0, float arg1, int arg2) {
+                // TODO Auto-generated method stub
 
-        return infh;
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int arg0) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+        tabHost.setOnTabChangedListener(new OnTabChangeListener() {
+
+            @Override
+            public void onTabChanged(String tabId) {
+                if (tabId.equals("Tab1")) {
+                    mViewPager.setCurrentItem(0);
+                } else if (tabId.equals("Tab2")) {
+                    mViewPager.setCurrentItem(1);
+                } else if (tabId.equals("Tab3")) {
+                    mViewPager.setCurrentItem(2);
+                }
+            }
+        });
+        return fragContent;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+
+    private class TransactionInnerPagerAdapter extends FragmentPagerAdapter {
+
+        public TransactionInnerPagerAdapter(FragmentManager fm) {
+            super(fm);
         }
-    }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        /*try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }*/
-        ((HomeActivity) activity).onSectionAttached(3);
-    }
+        @Override
+        public android.support.v4.app.Fragment getItem(int position) {
+            if (position == 0) {
+                return new ServiceRateFragment();
+            } else if (position == 1) {
+                return new CustomerRateFragment();
+            }
+            return null;
+        }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
+        @Override
+        public int getCount() {
+            return TWO_FRAGMENTS;
+        }
 
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
     }
-
 }
