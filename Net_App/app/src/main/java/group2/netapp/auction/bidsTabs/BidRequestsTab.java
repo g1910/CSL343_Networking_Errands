@@ -29,6 +29,11 @@ public class BidRequestsTab extends Fragment implements Card.OnCardClickListener
 
     CardArrayRecyclerViewAdapter bidViewAdapter;
     CardRecyclerView bidView;
+    BidRequestsListener bListener;
+
+    public interface BidRequestsListener{
+        public void openBidRequest(String location,String order);
+    }
 
 
     public BidRequestsTab() {
@@ -38,6 +43,7 @@ public class BidRequestsTab extends Fragment implements Card.OnCardClickListener
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        bListener = (BidRequestsListener) activity;
     }
 
     @Override
@@ -78,14 +84,16 @@ public class BidRequestsTab extends Fragment implements Card.OnCardClickListener
     @Override
     public void onClick(Card card, View view) {
         BidCard bCard = (BidCard) card;
-        Fragment aBidFrag = new AucBidsFragment();
+//        Fragment aBidFrag = new AucBidsFragment();
+//
+//        FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
+////        Fragment oldBidFrag = getFragmentManager().findFragmentByTag("BidFrag");
+//
+//        ft.replace(R.id.auction_frame,aBidFrag,"BidFrag");
+//        ft.commit();
 
-        FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
-//        Fragment oldBidFrag = getFragmentManager().findFragmentByTag("BidFrag");
-
-        ft.replace(R.id.auction_frame,aBidFrag,"BidFrag");
-        ft.commit();
         Log.d("Requests", "Fragment Added");
+        bListener.openBidRequest(bCard.getBidLocation(),bCard.getBidOrder());
 
 
     }

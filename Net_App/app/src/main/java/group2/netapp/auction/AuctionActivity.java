@@ -10,9 +10,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import group2.netapp.R;
+import group2.netapp.auction.bidsTabs.BidRequestsTab;
 
 
-public class AuctionActivity extends FragmentActivity{
+public class AuctionActivity extends FragmentActivity implements BidRequestsTab.BidRequestsListener{
 
 
 
@@ -59,4 +60,18 @@ public class AuctionActivity extends FragmentActivity{
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void openBidRequest(String location, String order) {
+        Bundle args = new Bundle();
+        args.putString("location",location);
+        args.putString("order",order);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        Fragment aucBids = new AucBidsFragment();
+        aucBids.setArguments(args);
+        ft.replace(R.id.auction_frame,aucBids,"AuctionBids");
+        ft.addToBackStack(null);
+        ft.commit();
+        Log.d("AuctionActivity", "AucBids");
+    }
 }
