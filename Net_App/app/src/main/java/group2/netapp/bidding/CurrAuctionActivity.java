@@ -105,7 +105,6 @@ public class CurrAuctionActivity extends FragmentActivity implements ServerConne
             Log.e("AuctionActivity", ((JSONObject) j.get(0)).length() + " First " + ((JSONObject) j.get(0)).toString());
             Log.e("AuctionActivity",((JSONObject)j.get(1)).length()+" Second "+((JSONObject)j.get(1)).toString());
             Log.e("AuctionActivity",((JSONObject)j.get(2)).length()+" Third "+((JSONObject)j.get(2)).toString());
-            Log.e("AuctionActivity",((JSONObject)j.get(3)).length()+" Fourth "+((JSONObject)j.get(3)).toString());
 
             Participating =(JSONArray) ((JSONObject)j.get(0)).get("Participating");
             NotParticipating =(JSONArray) ((JSONObject)j.get(1)).get("Not_Participating");
@@ -116,7 +115,6 @@ public class CurrAuctionActivity extends FragmentActivity implements ServerConne
             Log.e("AuctionActivity", ((JSONObject) j.get(0)).length() + " First " + ((JSONObject) j.get(0)).toString());
             Log.e("AuctionActivity",((JSONObject)j.get(1)).length()+" Second "+((JSONObject)j.get(1)).toString());
             Log.e("AuctionActivity",((JSONObject)j.get(2)).length()+" Third "+((JSONObject)j.get(2)).toString());
-            Log.e("AuctionActivity",((JSONObject)j.get(3)).length()+" Fourth "+((JSONObject)j.get(3)).toString());
 
             showCurrAuctions();
         } catch (JSONException e) {
