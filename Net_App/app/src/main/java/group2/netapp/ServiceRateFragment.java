@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -134,7 +135,7 @@ public class ServiceRateFragment extends Fragment {
                 list1.add(new BasicNameValuePair("email",email));
                 if(asynctask.getStatus() == AsyncTask.Status.PENDING || asynctask.getStatus() == AsyncTask.Status.RUNNING)
                     asynctask.cancel(true);
-                asynctask = new get_requests(list1, "http://netapp.byethost33.com/service_rate.php").execute(null, null, null);
+                asynctask = new get_review(list1, "http://netapp.byethost33.com/service_rate.php").execute(null, null, null);
             }
         });
 
@@ -146,7 +147,7 @@ public class ServiceRateFragment extends Fragment {
         nameValuePairs.add(new BasicNameValuePair("counter", String.valueOf(counter)));
         nameValuePairs.add(new BasicNameValuePair("email",email));
 
-        asynctask = new get_requests(nameValuePairs,"http://netapp.byethost33.com/service_rate.php").execute(null,null,null);
+        asynctask = new get_review(nameValuePairs,"http://netapp.byethost33.com/service_rate.php").execute(null,null,null);
         return infh;
     }
 
@@ -180,14 +181,14 @@ public class ServiceRateFragment extends Fragment {
         public void onFragmentInteraction(Uri uri);
     }
 
-    class get_requests extends AsyncTask<String,String,String>
+    class get_review extends AsyncTask<String,String,String>
     {
         public boolean running = true;
         private ArrayList<NameValuePair> list;
         private String host;
         HttpResponse response;
         private InputStream is;
-        public get_requests(ArrayList<NameValuePair> l,String h)
+        public get_review(ArrayList<NameValuePair> l,String h)
         {
             list=l;
             host=h;
@@ -251,22 +252,11 @@ public class ServiceRateFragment extends Fragment {
                     for (int i = 0; i < posts.size(); ++i) {
                         ServiceUser a = posts.get(i);
 
-                        ServiceUserReqCard card = new ServiceUserReqCard(getActivity().getApplicationContext(),a.idFeedback,a.location,a.start_time,a.end_time,a.name);
-                        CardHeader ch = new CardHeader(getActivity().getApplicationContext());
+                        ServiceUserReqCard card = new ServiceUserReqCard(getActivity().getApplicationContext(),a.location,a.start_time,a.end_time,a.name);
 
-                        card.addCardHeader(ch);
-                        card.setClickable(true);
-                        ch.setTitle("Auction details");
+                        ServiceCustomCardExpand expand = new ServiceCustomCardExpand(getActivity().getApplicationContext(),a.idFeedback);
 
-                        ServiceCustomCardExpand expand = new ServiceCustomCardExpand(getActivity().getApplicationContext());
                         card.addCardExpand(expand);
-
-                        ch.setButtonExpandVisible(true);
-
-                        ViewToClickToExpand viewToClickToExpand = ViewToClickToExpand.builder()
-                                .highlightView(true)
-                                .setupCardElement(ViewToClickToExpand.CardElementUI.CARD);
-                        card.setViewToClickToExpand(viewToClickToExpand);
 
                         cards.add(card);
                     }
@@ -282,13 +272,19 @@ public class ServiceRateFragment extends Fragment {
         }
     }
 
+
+
 }
 
 class ServiceCustomCardExpand extends CardExpand {
     //Use your resource ID for your inner layout
-    public ServiceCustomCardExpand(Context context)
+    String idFeedback;
+    Context con;
+    public ServiceCustomCardExpand(Context context,String id)
     {
         super(context, R.layout.service_rate_expand);
+        idFeedback=id;
+        con=context;
     }
 
     @Override
@@ -296,28 +292,104 @@ class ServiceCustomCardExpand extends CardExpand {
 
         if (view == null) return;
 
-        RatingBar rating = (RatingBar) view.findViewById(R.id.serviceratingBar);
+        final RatingBar rating = (RatingBar) view.findViewById(R.id.serviceratingBar);
         final EditText review = (EditText) view.findViewById(R.id.servicereviewedit);
         Button submit = (Button)view.findViewById(R.id.servicereviewsubmit);
+
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //ADD REVIEW SUBMIT BUTTON FUNCTIONALITY HERE
-                Toast.makeText(getContext(),review.getText().toString() + "Review submitted",Toast.LENGTH_SHORT).show();
+                String stars = String.valueOf(rating.getNumStars());
+                String reviewText = review.getText().toString();
+                ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
+                nameValuePairs.add(new BasicNameValuePair("id",idFeedback));
+                nameValuePairs.add(new BasicNameValuePair("star",stars));
+                nameValuePairs.add(new BasicNameValuePair("review",reviewText));
+                new add_review(con,nameValuePairs, rating , review);
+                //Toast.makeText(getContext(),review.getText().toString() + "Review submitted",Toast.LENGTH_SHORT).show();
             }
         });
+
+
+        rating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                System.out.println("gvjhbk");
+                ratingBar.setRating(rating);
+                review.requestFocus();
+            }
+        });
+
+    }
+
+
+}
+
+class add_review extends AsyncTask<String,String,String>
+{
+    private ArrayList<NameValuePair> list;
+    private String host="http://netapp.byethost33.com/add_rate.php";
+    private RatingBar rating;
+    private EditText review;
+    HttpResponse response;
+    private InputStream is;
+    Context con;
+    public add_review(Context context, ArrayList<NameValuePair> l , RatingBar ratingbar , EditText reviewEditText)
+    {
+        list=l;
+        rating=ratingbar;
+        review=reviewEditText;
+        con=context;
+    }
+
+
+    @Override
+    protected String doInBackground(String... params) {
+
+        HttpClient httpclient = new DefaultHttpClient();
+        HttpPost httppost = new HttpPost(host);
+        httppost.setHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        try {
+
+            httppost.setEntity(new UrlEncodedFormEntity(list));
+
+            // Execute HTTP Post Request
+            response = httpclient.execute(httppost);
+            if (response != null) {
+                is = response.getEntity().getContent();
+            }
+
+
+        } catch (Exception e) {
+            System.out.println(e);
+            // TODO Auto-generated catch block
+        }
+        return null;
+    }
+
+    @Override
+    protected void onPostExecute(String Result) {
+
+        if(response!=null)
+        {
+            Toast.makeText(con,"Review submitted",Toast.LENGTH_SHORT).show();
+            rating.setClickable(false);
+            review.setClickable(false);
+
+        }
 
     }
 }
 
 class ServiceUserReqCard extends Card {
 
-    private String id, location, end_time, start_time, ratename;
+    private String  location, end_time, start_time, ratename;
 
-    public ServiceUserReqCard(Context context, String id, String loc, String st, String et, String name){
+    public ServiceUserReqCard(Context context, String loc, String st, String et, String name){
         super(context, R.layout.service_rate_card);
-        id=id;
         location = loc;
         start_time = st;
         end_time = et;
@@ -342,6 +414,9 @@ class ServiceUserReqCard extends Card {
         tx2.setText(start_time);
         tx3.setText(end_time);
         tx4.setText(ratename);
+        ViewToClickToExpand viewToClickToExpand =
+                ViewToClickToExpand.builder().setupView(view);
+        setViewToClickToExpand(viewToClickToExpand);
     }
 }
 

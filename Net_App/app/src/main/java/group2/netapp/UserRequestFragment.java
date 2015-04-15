@@ -14,7 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -288,7 +290,9 @@ public class UserRequestFragment extends Fragment {
             }
 
             cards.clear();
-
+                if(posts==null){
+                    Toast.makeText(getActivity().getApplicationContext(), "No requests found", Toast.LENGTH_SHORT).show();;
+                }
             if (posts != null && running)
                 for (int i = 0; i < posts.size(); ++i) {
                     UserRequests a = posts.get(i);
@@ -299,14 +303,6 @@ public class UserRequestFragment extends Fragment {
                     card.addCardHeader(ch);
                     CustomCardExpand expand = new CustomCardExpand(getActivity().getApplicationContext(), a.description, a.exptime, a.expdate);
                     card.addCardExpand(expand);
-
-                    ch.setButtonExpandVisible(true);
-                    card.setClickable(true);
-
-                    ViewToClickToExpand viewToClickToExpand = ViewToClickToExpand.builder()
-                            .highlightView(true)
-                            .setupCardElement(ViewToClickToExpand.CardElementUI.CARD);
-                    card.setViewToClickToExpand(viewToClickToExpand);
 
                     cards.add(card);
                 }
@@ -375,9 +371,10 @@ class UserReqCard extends Card{
     public void setupInnerViewElements(ViewGroup parent, View view){
 
         TextView location = (TextView)parent.findViewById(R.id.req_card_location);
-
         location.setText(location_name);
-
+        ViewToClickToExpand viewToClickToExpand =
+                ViewToClickToExpand.builder().setupView(view);
+        setViewToClickToExpand(viewToClickToExpand);
     }
 }
 

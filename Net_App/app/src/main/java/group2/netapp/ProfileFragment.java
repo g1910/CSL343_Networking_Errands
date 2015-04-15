@@ -62,6 +62,7 @@ public class ProfileFragment extends Fragment {
     private CountDownTimer countDownTimer;
     ProgressDialog progress;
     EditText phone;
+
     EditText address;
     private OnFragmentInteractionListener mListener;
 
@@ -189,7 +190,7 @@ public class ProfileFragment extends Fragment {
                                         String enteredNumber = phoneText.getText().toString();
                                         if (enteredNumber.length() == 10) {
                                             progress = new ProgressDialog(getActivity());
-                                            progress.setMessage("Verifying");
+                                            progress.setMessage("Verifying...please wait");
                                             progress.setCanceledOnTouchOutside(false);
                                             progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                                             progress.setIndeterminate(true);
@@ -250,6 +251,7 @@ public class ProfileFragment extends Fragment {
 
         };
         countDownTimer.start();
+
         Cognalys.verifyMobileNumber(getActivity(),
                 "6ac9f915d36c3979e6491a47f0157c2d3aba9edb",
                 "ce4e50816fed4e7e89cc176", number, new VerificationListner() {
@@ -289,12 +291,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        /*try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }*/
+
         ((HomeActivity) activity).onSectionAttached(1);
     }
 

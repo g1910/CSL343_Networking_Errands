@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -252,27 +253,15 @@ public class CustomerRateFragment extends Fragment {
 
                 cards.clear();
                 if(posts==null){
-                    Toast.makeText(getActivity().getApplicationContext(),"No pending reviews found",Toast.LENGTH_SHORT).show();;
+                    Toast.makeText(getActivity().getApplicationContext(),"No pending reviews found",Toast.LENGTH_SHORT).show();
                 }
                 if (posts != null && running)
                     for (int i = 0; i < posts.size(); ++i) {
                         CustomerUser a = posts.get(i);
 
                         CustomerUserReqCard card = new CustomerUserReqCard(getActivity().getApplicationContext(),a.idFeedback,a.location,a.start_time,a.end_time,a.name);
-                        CardHeader ch = new CardHeader(getActivity().getApplicationContext());
-                        card.setClickable(true);
-                        ch.setTitle("Auction details");
-                        card.addCardHeader(ch);
-
                         CustomerCustomCardExpand expand = new CustomerCustomCardExpand(getActivity().getApplicationContext());
                         card.addCardExpand(expand);
-
-                        ch.setButtonExpandVisible(true);
-
-                        ViewToClickToExpand viewToClickToExpand = ViewToClickToExpand.builder()
-                                .highlightView(true)
-                                .setupCardElement(ViewToClickToExpand.CardElementUI.CARD);
-                        card.setViewToClickToExpand(viewToClickToExpand);
 
                         cards.add(card);
                     }
@@ -324,7 +313,7 @@ class CustomerCustomCardExpand extends CardExpand {
                 Toast.makeText(getContext(),review.getText().toString() + "Review submitted",Toast.LENGTH_SHORT).show();
             }
         });
-
+        view.setClickable(false);
     }
 }
 
@@ -359,6 +348,9 @@ class CustomerUserReqCard extends Card {
         tx2.setText(start_time);
         tx3.setText(end_time);
         tx4.setText(ratename);
+        ViewToClickToExpand viewToClickToExpand =
+                ViewToClickToExpand.builder().setupView(view);
+        setViewToClickToExpand(viewToClickToExpand);
     }
 }
 

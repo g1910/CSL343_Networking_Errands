@@ -22,7 +22,8 @@
 
         style="?android:attr/ratingBarStyleIndicator"
         android:layout_toRightOf="@+id/serviceratingtext"
-        android:rating="5"
+        android:rating="0"
+        android:stepSize="1.0"
         android:layout_alignTop="@+id/serviceratingtext"
         android:layout_marginLeft="30dp"
          />
@@ -42,7 +43,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/servicereviewedit"
         android:hint="Review the service..."
-        android:inputType="textMultiLine|textCapSentences|textLongMessage"
+        android:inputType="textMultiLine|textCapSentences|textLongMessage|textNoSuggestions"
         android:maxLines="5"
         android:maxLength="140"
         android:layout_alignTop="@id/servicereviewtext"
