@@ -46,7 +46,7 @@ public class CurrAuctionActivity extends FragmentActivity implements ServerConne
 
         ServerConnect myServer=new ServerConnect(this);
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-        myServer.execute("http://10.20.9.85/Networks/CSL343_Networking_Errands/Server/getAllAuctions.php",nameValuePairs);
+        myServer.execute("http://"+R.string.IP+"/Networks/CSL343_Networking_Errands/Server/getAllAuctions.php",nameValuePairs);
 
         Log.e("AuctionActivity","Hi");
 

@@ -31,5 +31,6 @@
     <string name="title_activity_auction">AuctionActivity</string>
     <string name="title_activity_server_form">serverFormActivity</string>
     <string name="title_activity_bids">BidsActivity</string>
+    <string name="IP">10.20.254.16</string>
 
 </resources>
