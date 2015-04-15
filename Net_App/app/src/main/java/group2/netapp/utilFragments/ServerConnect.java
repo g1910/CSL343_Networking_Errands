@@ -86,6 +86,7 @@ public class ServerConnect extends AsyncTask<Object,Void,JSONArray> {
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
             String json = reader.readLine();
+            Log.d("ServerConnect","Response:"+json);
             JSONTokener tokener = new JSONTokener(json);
             JSONArray j = new JSONArray(tokener);
 
