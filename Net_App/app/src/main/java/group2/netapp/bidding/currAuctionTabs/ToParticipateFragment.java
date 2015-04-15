@@ -1,20 +1,22 @@
 package group2.netapp.bidding.currAuctionTabs;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 import group2.netapp.R;
-import group2.netapp.bidding.BidsActivity;
-import it.gmariotti.cardslib.library.cards.material.MaterialLargeImageCard;
+import group2.netapp.bidding.CurrAuctionActivity;
+import group2.netapp.bidding.cards.NotParticipatingCard;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.recyclerview.internal.CardArrayRecyclerViewAdapter;
 import it.gmariotti.cardslib.library.recyclerview.view.CardRecyclerView;
@@ -57,10 +59,17 @@ public class ToParticipateFragment extends Fragment {
     public ArrayList<Card> setDummyBids(){
         ArrayList<Card> cards = new ArrayList<Card>();
 
-        for(int i = 0; i < 10;++i) {
+        JSONArray notParticipating = ((CurrAuctionActivity)getActivity()).getNotParticipating();
+
+        for(int i = 0; i <  notParticipating.length() ;++i) {
       //      Card card = new Card(getActivity());
 
-            auctionCard card = new auctionCard(getActivity());
+            NotParticipatingCard card = null;
+            try {
+                card = new NotParticipatingCard(getActivity(),(JSONObject)notParticipating.get(0));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 //            card.setTitle("It's a Card!"+i);
 
   //          card.setOnClickListener(new Card.OnCardClickListener() {
