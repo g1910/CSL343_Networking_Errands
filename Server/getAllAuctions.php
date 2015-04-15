@@ -1,6 +1,6 @@
 <?php
 	include 'config.php';
-	$user_id=$_GET['id_user'];
+	$user_id=$_POST['id_user'];
 	date_default_timezone_set("Asia/Kolkata");
 	$time=date( 'Y-m-d H:i:s', time());
 //	echo $time;
