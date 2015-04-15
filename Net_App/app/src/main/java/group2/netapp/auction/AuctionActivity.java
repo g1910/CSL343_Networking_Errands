@@ -20,12 +20,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import group2.netapp.R;
+import group2.netapp.auction.bidsTabs.AcceptedBids;
 import group2.netapp.auction.bidsTabs.BidRequestsTab;
 import group2.netapp.utilFragments.ProgressFragment;
 import group2.netapp.utilFragments.ServerConnect;
 
 
-public class AuctionActivity extends FragmentActivity implements BidRequestsTab.BidRequestsListener, ServerConnect.OnResponseListener{
+public class AuctionActivity extends FragmentActivity implements BidRequestsTab.BidRequestsListener, ServerConnect.OnResponseListener, AcceptedBids.BidAcceptListener{
 
     JSONObject auctionDetails;
     JSONArray pendingBids, runningBids;
@@ -66,11 +67,9 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsTab.
                 Log.d("AuctionActivity",auctionDetails.toString());
                 Log.d("AuctionActivity", pendingBids.toString());
                 openDashboard();
+            }else {
+                openServerForm();
             }
-//            else {
-//                Intent i = new Intent(this, ServerFormActivity.class);
-//                startActivity(i);
-//            }
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -84,6 +83,13 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsTab.
 //        ft.addToBackStack(null);
         ft.commit();
         Log.d("AuctionActivity", "DashboardOpened");
+    }
+
+    public void openServerForm(){
+        Intent i = new Intent(this,ServerFormActivity.class);
+        startActivity(i);
+        finish();
+        Log.d("AuctionActivity", "ServerForm");
     }
 
 
@@ -112,7 +118,7 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsTab.
     @Override
     public void openBidRequest(int bidId) {
         Bundle args = new Bundle();
-        args.putInt("id",bidId);
+        args.putInt("id", bidId);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         Fragment aucBids = new AucBidsFragment();
         aucBids.setArguments(args);
@@ -138,5 +144,11 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsTab.
         this.pendingBids = pendingBids;
     }
 
+    public JSONArray getRunningBids() {
+        return runningBids;
+    }
 
+    public void setRunningBids(JSONArray runningBids) {
+        this.runningBids = runningBids;
+    }
 }
