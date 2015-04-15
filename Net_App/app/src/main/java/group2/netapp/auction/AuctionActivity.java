@@ -27,7 +27,8 @@ import group2.netapp.utilFragments.ServerConnect;
 
 public class AuctionActivity extends FragmentActivity implements BidRequestsTab.BidRequestsListener, ServerConnect.OnResponseListener{
 
-
+    JSONObject auctionDetails;
+    JSONArray pendingBids, runningBids;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsTab.
 
         ServerConnect myServer=new ServerConnect(this);
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-        nameValuePairs.add(new BasicNameValuePair("id_user","1"));
+        nameValuePairs.add(new BasicNameValuePair("id_user","13"));
         Log.d("AuctionActivity","http://"+getString(R.string.IP)+"/Networks/CSL343_Networking_Errands/Server/getAuction.php");
         myServer.execute("http://"+getString(R.string.IP)+"/Networks/CSL343_Networking_Errands/Server/getAuction.php",nameValuePairs);
 
@@ -59,6 +60,11 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsTab.
             boolean isRunning=Boolean.valueOf (((JSONObject)j.get(0)).get("isRunning").toString());
             if (isRunning)
             {
+                auctionDetails = j.getJSONObject(1);
+                pendingBids = j.getJSONArray(2);
+                runningBids = j.getJSONArray(3);
+                Log.d("AuctionActivity",auctionDetails.toString());
+                Log.d("AuctionActivity", pendingBids.toString());
                 openDashboard();
             }
 //            else {
@@ -104,18 +110,32 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsTab.
     }
 
     @Override
-    public void openBidRequest(String location, String order) {
+    public void openBidRequest(int bidId) {
         Bundle args = new Bundle();
-        args.putString("location",location);
-        args.putString("order",order);
+        args.putInt("id",bidId);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-
         Fragment aucBids = new AucBidsFragment();
         aucBids.setArguments(args);
         ft.replace(R.id.auction_frame, aucBids, "AuctionBids");
         ft.addToBackStack(null);
         ft.commit();
         Log.d("AuctionActivity", "AucBids");
+    }
+
+    public JSONObject getAuctionDetails() {
+        return auctionDetails;
+    }
+
+    public void setAuctionDetails(JSONObject auctionDetails) {
+        this.auctionDetails = auctionDetails;
+    }
+
+    public JSONArray getPendingBids() {
+        return pendingBids;
+    }
+
+    public void setPendingBids(JSONArray pendingBids) {
+        this.pendingBids = pendingBids;
     }
 
 
