@@ -1,6 +1,7 @@
 package group2.netapp.auction;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -38,12 +39,15 @@ public class ServerFormActivity extends FragmentActivity implements TimePickerFr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_server_form);
+        setUpForm();
+    }
 
+    public void setUpForm(){
         aucDesc = (EditText) findViewById(R.id.auction_desc);
         aucLocation = (EditText) findViewById(R.id.auction_location);
 
         String time = String.format("%02d:%02d",c.get(Calendar.HOUR_OF_DAY),c.get(Calendar.MINUTE));
-        String date = String.format("%04d-%02d-%02d",c.get(Calendar.YEAR),c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH));
+        String date = String.format("%04d-%02d-%02d",c.get(Calendar.YEAR),c.get(Calendar.MONTH) + 1,c.get(Calendar.DAY_OF_MONTH));
         aucEndTime = (TextView) findViewById(R.id.auc_end_time);
         aucEndTime.setText(time);
         aucEndTime.setOnClickListener(showTimePickerDialog);
@@ -62,8 +66,6 @@ public class ServerFormActivity extends FragmentActivity implements TimePickerFr
 
         aucStartBtn = (Button) findViewById(R.id.auc_start_btn);
         aucStartBtn.setOnClickListener(startNewAuction);
-
-
     }
 
 
@@ -147,9 +149,11 @@ public class ServerFormActivity extends FragmentActivity implements TimePickerFr
             nameValuePairs.add(new BasicNameValuePair("endtime",aucEndDate.getText().toString() + " " + aucEndTime.getText().toString()+":00"));
             nameValuePairs.add(new BasicNameValuePair("expected",aucExpDate.getText().toString() + " " + aucExpTime.getText().toString()+":00"));
             nameValuePairs.add(new BasicNameValuePair("description",aucDesc.getText().toString()));
-            nameValuePairs.add(new BasicNameValuePair("id_user","1"));
+            nameValuePairs.add(new BasicNameValuePair("id_user","13"));
             ServerConnect myServer=new ServerConnect(a);
-            myServer.execute("http://10.20.9.85/Networks/CSL343_Networking_Errands/Server/auction.php",nameValuePairs,this);
+
+            Toast.makeText(a, "Starting a New Auction...", Toast.LENGTH_SHORT).show();
+            myServer.execute("http://" + getString(R.string.IP)+ "/Networks/CSL343_Networking_Errands/Server/auction.php",nameValuePairs,this);
         }
     };
 
@@ -165,7 +169,7 @@ public class ServerFormActivity extends FragmentActivity implements TimePickerFr
 
     @Override
     public void onDatePicked(int view,int year, int monthOfYear, int dayOfMonth) {
-        String date = String.format("%04d-%02d-%02d",year,monthOfYear,dayOfMonth);
+        String date = String.format("%04d-%02d-%02d",year,monthOfYear+1,dayOfMonth);
         switch(view){
             case R.id.auc_end_date:aucEndDate.setText(date);break;
             case R.id.auc_exp_date:aucExpDate.setText(date);break;
@@ -177,5 +181,9 @@ public class ServerFormActivity extends FragmentActivity implements TimePickerFr
         Log.d("ResponseListener","onResponseListened");
         Toast toast = Toast.makeText(this, "Auction Started Successfully", Toast.LENGTH_SHORT);
         toast.show();
+
+        Intent i = new Intent(this,AuctionActivity.class);
+        startActivity(i);
+        finish();
     }
 }
