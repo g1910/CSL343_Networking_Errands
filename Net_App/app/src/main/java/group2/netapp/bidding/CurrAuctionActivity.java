@@ -25,6 +25,10 @@ import group2.netapp.utilFragments.ServerConnect;
 
 public class CurrAuctionActivity extends FragmentActivity implements ServerConnect.OnResponseListener {
 
+    JSONArray Participating;
+    JSONArray NotParticipating;
+    JSONArray Bids;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,8 +49,10 @@ public class CurrAuctionActivity extends FragmentActivity implements ServerConne
         ft.commit();
 
         ServerConnect myServer=new ServerConnect(this);
+
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-        myServer.execute("http://"+R.string.IP+"/Networks/CSL343_Networking_Errands/Server/getAllAuctions.php",nameValuePairs);
+        nameValuePairs.add(new BasicNameValuePair("id_user","1"));
+        myServer.execute("http://"+getString(R.string.IP)+"/Networks/CSL343_Networking_Errands/Server/getAllAuctions.php",nameValuePairs);
 
         Log.e("AuctionActivity","Hi");
 
@@ -96,10 +102,49 @@ public class CurrAuctionActivity extends FragmentActivity implements ServerConne
     public void onResponse(JSONArray j) {
         try {
             Log.e("AuctionActivity",(j.length()+" hi "  ));
-            Log.e("AuctionActivity",((JSONObject)j.get(0)).toString());
+            Log.e("AuctionActivity", ((JSONObject) j.get(0)).length() + " First " + ((JSONObject) j.get(0)).toString());
+            Log.e("AuctionActivity",((JSONObject)j.get(1)).length()+" Second "+((JSONObject)j.get(1)).toString());
+            Log.e("AuctionActivity",((JSONObject)j.get(2)).length()+" Third "+((JSONObject)j.get(2)).toString());
+            Log.e("AuctionActivity",((JSONObject)j.get(3)).length()+" Fourth "+((JSONObject)j.get(3)).toString());
+
+            Participating =(JSONArray) ((JSONObject)j.get(0)).get("Participating");
+            NotParticipating =(JSONArray) ((JSONObject)j.get(1)).get("Not_Participating");
+            Bids =(JSONArray) ((JSONObject)j.get(2)).get("Bids");
+
+
+            Log.e("AuctionActivity",(j.length()+" hi "  ));
+            Log.e("AuctionActivity", ((JSONObject) j.get(0)).length() + " First " + ((JSONObject) j.get(0)).toString());
+            Log.e("AuctionActivity",((JSONObject)j.get(1)).length()+" Second "+((JSONObject)j.get(1)).toString());
+            Log.e("AuctionActivity",((JSONObject)j.get(2)).length()+" Third "+((JSONObject)j.get(2)).toString());
+            Log.e("AuctionActivity",((JSONObject)j.get(3)).length()+" Fourth "+((JSONObject)j.get(3)).toString());
+
             showCurrAuctions();
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public JSONArray getParticipating() {
+        return Participating;
+    }
+
+    public void setParticipating(JSONArray participating) {
+        Participating = participating;
+    }
+
+    public JSONArray getNotParticipating() {
+        return NotParticipating;
+    }
+
+    public void setNotParticipating(JSONArray notParticipating) {
+        NotParticipating = notParticipating;
+    }
+
+    public JSONArray getBids() {
+        return Bids;
+    }
+
+    public void setBids(JSONArray bids) {
+        Bids = bids;
     }
 }
