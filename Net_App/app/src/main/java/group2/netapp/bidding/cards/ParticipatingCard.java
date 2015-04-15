@@ -1,11 +1,9 @@
-package group2.netapp.bidding.currAuctionTabs;
+package group2.netapp.bidding.cards;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,15 +12,15 @@ import group2.netapp.R;
 import it.gmariotti.cardslib.library.internal.Card;
 
 /**
- * Created by mohit on 12/4/15.
+ * Created by mohit on 16/4/15.
  */
-public class auctionCard extends Card{
+public class ParticipatingCard extends Card {
 
     String auctionLocation,price,desc,idUser,start_time,end_time,idAuction,expected_time;
 
-    public auctionCard(Context context,JSONObject j) {
-        super(context, R.layout.auction_card);
 
+    public ParticipatingCard(Context context, JSONObject j) {
+        super(context,R.layout.participating_card);
         try {
             this.auctionLocation =j.getString("location");
             this.desc = j.getString("description");
@@ -36,16 +34,15 @@ public class auctionCard extends Card{
             e.printStackTrace();
         }
 
-
     }
 
     @Override
     public void setupInnerViewElements(ViewGroup parent, View view) {
         super.setupInnerViewElements(parent, view);
 
-        TextView auctionLocView = (TextView) parent.findViewById(R.id.location);
-        TextView priceView = (TextView) parent.findViewById(R.id.price);
-        TextView descView = (TextView)parent.findViewById(R.id.desc);
+        TextView auctionLocView = (TextView) parent.findViewById(R.id.participatinglocation);
+        TextView priceView = (TextView) parent.findViewById(R.id.participatingprice);
+        TextView descView = (TextView)parent.findViewById(R.id.participatingdesc);
 
         auctionLocView.setText(auctionLocation);
         priceView.setText(price);
