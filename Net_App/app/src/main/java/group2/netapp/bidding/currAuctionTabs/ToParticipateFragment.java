@@ -1,14 +1,12 @@
 package group2.netapp.bidding.currAuctionTabs;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,9 +15,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import group2.netapp.R;
-import group2.netapp.bidding.BidsActivity;
 import group2.netapp.bidding.CurrAuctionActivity;
-import it.gmariotti.cardslib.library.cards.material.MaterialLargeImageCard;
+import group2.netapp.bidding.cards.NotParticipatingCard;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.recyclerview.internal.CardArrayRecyclerViewAdapter;
 import it.gmariotti.cardslib.library.recyclerview.view.CardRecyclerView;
@@ -62,14 +59,14 @@ public class ToParticipateFragment extends Fragment {
     public ArrayList<Card> setDummyBids(){
         ArrayList<Card> cards = new ArrayList<Card>();
 
-        JSONArray participating = ((CurrAuctionActivity)getActivity()).getParticipating();
+        JSONArray notParticipating = ((CurrAuctionActivity)getActivity()).getNotParticipating();
 
-        for(int i = 0; i <  participating.length() ;++i) {
+        for(int i = 0; i <  notParticipating.length() ;++i) {
       //      Card card = new Card(getActivity());
 
-            auctionCard card = null;
+            NotParticipatingCard card = null;
             try {
-                card = new auctionCard(getActivity(),(JSONObject)participating.get(0));
+                card = new NotParticipatingCard(getActivity(),(JSONObject)notParticipating.get(0));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
