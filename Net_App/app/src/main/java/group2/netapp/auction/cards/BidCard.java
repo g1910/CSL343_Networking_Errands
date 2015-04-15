@@ -14,11 +14,13 @@ import it.gmariotti.cardslib.library.internal.Card;
 public class BidCard extends Card{
 
     String bidLocation, bidOrder;
-    public BidCard(Context context, String bidLocation, String bidOrder) {
+    int bidId;
+    public BidCard(Context context, int bidId, String bidLocation, String bidOrder) {
         super(context, R.layout.card_auction_bid);
 
         this.bidLocation = bidLocation;
         this.bidOrder = bidOrder;
+        this.bidId = bidId;
     }
 
     @Override
@@ -46,5 +48,13 @@ public class BidCard extends Card{
 
     public void setBidOrder(String bidOrder) {
         this.bidOrder = bidOrder;
+    }
+
+    public int getBidId() {
+        return bidId;
+    }
+
+    public void setBidId(int bidId) {
+        this.bidId = bidId;
     }
 }
