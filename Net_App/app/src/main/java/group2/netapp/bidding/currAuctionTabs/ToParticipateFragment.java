@@ -10,10 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 import group2.netapp.R;
 import group2.netapp.bidding.BidsActivity;
+import group2.netapp.bidding.CurrAuctionActivity;
 import it.gmariotti.cardslib.library.cards.material.MaterialLargeImageCard;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.recyclerview.internal.CardArrayRecyclerViewAdapter;
@@ -57,10 +62,17 @@ public class ToParticipateFragment extends Fragment {
     public ArrayList<Card> setDummyBids(){
         ArrayList<Card> cards = new ArrayList<Card>();
 
-        for(int i = 0; i < 10;++i) {
+        JSONArray participating = ((CurrAuctionActivity)getActivity()).getParticipating();
+
+        for(int i = 0; i <  participating.length() ;++i) {
       //      Card card = new Card(getActivity());
 
-            auctionCard card = new auctionCard(getActivity());
+            auctionCard card = null;
+            try {
+                card = new auctionCard(getActivity(),(JSONObject)participating.get(0));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 //            card.setTitle("It's a Card!"+i);
 
   //          card.setOnClickListener(new Card.OnCardClickListener() {
