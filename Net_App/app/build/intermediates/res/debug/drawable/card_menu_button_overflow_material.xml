@@ -27,4 +27,4 @@
           android:state_selected="true"/>
     <item android:drawable="@drawable/ic_more_vert_grey600_24dp"/>
 
-</selector><!-- From: file:/home/gabriele/Lavoro/Android/AndroidStudioProjects/wrks/cardslib/library-core/src/main/res/drawable/card_menu_button_overflow_material.xml --><!-- From: file:/home/gaurav/AndroidstudioProjects/Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable/card_menu_button_overflow_material.xml -->
+</selector><!-- From: file:/home/gabriele/Lavoro/Android/AndroidStudioProjects/wrks/cardslib/library-core/src/main/res/drawable/card_menu_button_overflow_material.xml --><!-- From: file:/F:/Git/CSL343_Networking_Errands/Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable/card_menu_button_overflow_material.xml -->

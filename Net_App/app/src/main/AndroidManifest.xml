@@ -105,6 +105,7 @@
         <activity
             android:name=".Broadcast"
             android:label="@string/title_activity_broadcast"
+            android:windowSoftInputMode="adjustPan"
             android:parentActivityName=".HomeActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

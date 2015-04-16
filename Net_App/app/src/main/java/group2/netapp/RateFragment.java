@@ -64,8 +64,6 @@ public class RateFragment extends Fragment {
                     mViewPager.setCurrentItem(0);
                 } else if (tabId.equals("Tab2")) {
                     mViewPager.setCurrentItem(1);
-                } else if (tabId.equals("Tab3")) {
-                    mViewPager.setCurrentItem(2);
                 }
             }
         });

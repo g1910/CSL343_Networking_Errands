@@ -23,4 +23,4 @@
     <solid android:color="@color/card_foreground_activated_kitkat"/>
     <corners android:radius="@dimen/card_background_default_radius"/>
 </shape>
-<!-- From: file:/home/gabriele/Lavoro/Android/AndroidStudioProjects/wrks/cardslib/library-core/src/main/res/drawable/activated_foreground_kitkat_card.xml --><!-- From: file:/home/gaurav/AndroidstudioProjects/Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable/activated_foreground_kitkat_card.xml -->
+<!-- From: file:/home/gabriele/Lavoro/Android/AndroidStudioProjects/wrks/cardslib/library-core/src/main/res/drawable/activated_foreground_kitkat_card.xml --><!-- From: file:/F:/Git/CSL343_Networking_Errands/Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable/activated_foreground_kitkat_card.xml -->
