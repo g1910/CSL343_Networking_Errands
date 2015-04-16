@@ -303,7 +303,7 @@ public class UserRequestFragment extends Fragment {
                     card.addCardHeader(ch);
                     CustomCardExpand expand = new CustomCardExpand(getActivity().getApplicationContext(), a.description, a.exptime, a.expdate);
                     card.addCardExpand(expand);
-
+                    card.setSwipeable(true);
                     cards.add(card);
                 }
             cardListAdapter.notifyDataSetChanged();

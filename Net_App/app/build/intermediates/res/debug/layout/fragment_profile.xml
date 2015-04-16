@@ -149,7 +149,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="5dp"
                 android:layout_alignParentEnd="true"
-                android:rating="4" />
+                android:rating="4"
+                android:isIndicator="true"/>
 
             <RatingBar
                 android:layout_width="wrap_content"
@@ -160,7 +161,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="5dp"
                 android:layout_alignParentEnd="true"
-                android:rating="3" />
+                android:rating="3"
+                android:isIndicator="true"/>
 
             <ImageButton
                 android:layout_width="30dp"

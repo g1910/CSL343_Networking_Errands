@@ -373,10 +373,18 @@ public class ProfileFragment extends Fragment {
             if(received_num!=null && received_num.length()>0)
             {
                 phone.setText(received_num);
-                SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-                SharedPreferences.Editor editor=saved_values.edit();
-                editor.putString("phone",received_num);
-                editor.apply();
+                try
+                {
+                    SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+                    SharedPreferences.Editor editor=saved_values.edit();
+                    editor.putString("phone",received_num);
+                    editor.apply();
+                }
+                catch(Exception e)
+                {
+                    System.out.println("Phone not saved in shared preferences");
+                }
+
             }
             }
     }

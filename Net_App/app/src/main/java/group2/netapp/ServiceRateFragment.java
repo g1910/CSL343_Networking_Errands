@@ -181,7 +181,7 @@ public class ServiceRateFragment extends Fragment {
         public void onFragmentInteraction(Uri uri);
     }
 
-    class get_review extends AsyncTask<String,String,String>
+    public class get_review extends AsyncTask<String,String,String>
     {
         public boolean running = true;
         private ArrayList<NameValuePair> list;
@@ -257,7 +257,6 @@ public class ServiceRateFragment extends Fragment {
                         ServiceCustomCardExpand expand = new ServiceCustomCardExpand(getActivity().getApplicationContext(),a.idFeedback);
 
                         card.addCardExpand(expand);
-
                         cards.add(card);
                     }
                 cardListAdapter.notifyDataSetChanged();
@@ -275,58 +274,6 @@ public class ServiceRateFragment extends Fragment {
 
 
 }
-
-class ServiceCustomCardExpand extends CardExpand {
-    //Use your resource ID for your inner layout
-    String idFeedback;
-    Context con;
-    public ServiceCustomCardExpand(Context context,String id)
-    {
-        super(context, R.layout.service_rate_expand);
-        idFeedback=id;
-        con=context;
-    }
-
-    @Override
-    public void setupInnerViewElements(ViewGroup parent, final View view) {
-
-        if (view == null) return;
-
-        final RatingBar rating = (RatingBar) view.findViewById(R.id.serviceratingBar);
-        final EditText review = (EditText) view.findViewById(R.id.servicereviewedit);
-        Button submit = (Button)view.findViewById(R.id.servicereviewsubmit);
-
-
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //ADD REVIEW SUBMIT BUTTON FUNCTIONALITY HERE
-                String stars = String.valueOf(rating.getNumStars());
-                String reviewText = review.getText().toString();
-                ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
-                nameValuePairs.add(new BasicNameValuePair("id",idFeedback));
-                nameValuePairs.add(new BasicNameValuePair("star",stars));
-                nameValuePairs.add(new BasicNameValuePair("review",reviewText));
-                new add_review(con,nameValuePairs, rating , review);
-                //Toast.makeText(getContext(),review.getText().toString() + "Review submitted",Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-        rating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                System.out.println("gvjhbk");
-                ratingBar.setRating(rating);
-                review.requestFocus();
-            }
-        });
-
-    }
-
-
-}
-
 class add_review extends AsyncTask<String,String,String>
 {
     private ArrayList<NameValuePair> list;
@@ -334,14 +281,15 @@ class add_review extends AsyncTask<String,String,String>
     private RatingBar rating;
     private EditText review;
     HttpResponse response;
-    private InputStream is;
     Context con;
-    public add_review(Context context, ArrayList<NameValuePair> l , RatingBar ratingbar , EditText reviewEditText)
+    Button button;
+    public add_review(Context context, ArrayList<NameValuePair> l ,Button b, RatingBar ratingbar , EditText reviewEditText)
     {
         list=l;
         rating=ratingbar;
         review=reviewEditText;
         con=context;
+        button =b;
     }
 
 
@@ -351,17 +299,11 @@ class add_review extends AsyncTask<String,String,String>
         HttpClient httpclient = new DefaultHttpClient();
         HttpPost httppost = new HttpPost(host);
         httppost.setHeader("Content-Type", "application/x-www-form-urlencoded");
-
         try {
 
             httppost.setEntity(new UrlEncodedFormEntity(list));
-
             // Execute HTTP Post Request
             response = httpclient.execute(httppost);
-            if (response != null) {
-                is = response.getEntity().getContent();
-            }
-
 
         } catch (Exception e) {
             System.out.println(e);
@@ -378,10 +320,53 @@ class add_review extends AsyncTask<String,String,String>
             Toast.makeText(con,"Review submitted",Toast.LENGTH_SHORT).show();
             rating.setClickable(false);
             review.setClickable(false);
-
+            button.setClickable(false);
         }
+        else
+            System.out.println("Review submission failed");
 
     }
+}
+class ServiceCustomCardExpand extends CardExpand {
+    //Use your resource ID for your inner layout
+    String idFeedback;
+    Context con;
+    public ServiceCustomCardExpand(Context context,String id)
+    {
+        super(context, R.layout.service_rate_expand);
+        idFeedback=id;
+        con=context;
+    }
+
+    @Override
+    public void setupInnerViewElements(final ViewGroup parent, final View view) {
+
+        if (view == null) return;
+
+        final RatingBar rating = (RatingBar) view.findViewById(R.id.serviceratingBar);
+        final EditText review = (EditText) view.findViewById(R.id.servicereviewedit);
+        final Button submit = (Button)view.findViewById(R.id.servicereviewsubmit);
+        
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //ADD REVIEW SUBMIT BUTTON FUNCTIONALITY HERE
+
+                String stars = String.valueOf(Math.round(rating.getRating()));
+                String reviewText = review.getText().toString();
+                ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
+                nameValuePairs.add(new BasicNameValuePair("id",idFeedback));
+                nameValuePairs.add(new BasicNameValuePair("star",stars));
+                nameValuePairs.add(new BasicNameValuePair("review",reviewText));
+                new add_review(con,nameValuePairs,submit, rating , review).execute(null,null,null);
+
+            }
+        });
+
+
+    }
+
+
 }
 
 class ServiceUserReqCard extends Card {
