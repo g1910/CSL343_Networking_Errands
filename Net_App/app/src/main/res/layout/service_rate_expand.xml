@@ -22,7 +22,8 @@
 
         android:layout_toRightOf="@+id/serviceratingtext"
         android:layout_marginLeft="30dp"
-        android:stepSize="1" />
+        android:stepSize="1"
+        android:progressBackgroundTint="#ff00112f" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/servicereviewedit"
-        android:hint="Review the service..."
+        android:hint="Add Review..."
         android:inputType="textMultiLine|textLongMessage|textNoSuggestions"
         android:maxLines="5"
         android:maxLength="140"

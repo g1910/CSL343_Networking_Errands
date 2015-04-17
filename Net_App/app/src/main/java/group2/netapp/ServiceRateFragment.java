@@ -257,6 +257,7 @@ public class ServiceRateFragment extends Fragment {
                         ServiceCustomCardExpand expand = new ServiceCustomCardExpand(getActivity().getApplicationContext(),a.idFeedback);
 
                         card.addCardExpand(expand);
+
                         cards.add(card);
                     }
                 cardListAdapter.notifyDataSetChanged();

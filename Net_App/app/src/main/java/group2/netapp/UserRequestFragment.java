@@ -297,13 +297,13 @@ public class UserRequestFragment extends Fragment {
                 for (int i = 0; i < posts.size(); ++i) {
                     UserRequests a = posts.get(i);
 
-                    UserReqCard card = new UserReqCard(getActivity().getApplicationContext(), a.location);
+                    UserReqCard card = new UserReqCard(getActivity().getApplicationContext(),a.item, a.location);
                     CardHeader ch = new CardHeader(getActivity().getApplicationContext());
-                    ch.setTitle(a.item);
                     card.addCardHeader(ch);
                     CustomCardExpand expand = new CustomCardExpand(getActivity().getApplicationContext(), a.description, a.exptime, a.expdate);
                     card.addCardExpand(expand);
                     card.setSwipeable(true);
+
                     cards.add(card);
                 }
             cardListAdapter.notifyDataSetChanged();
@@ -355,11 +355,11 @@ class CustomCardExpand extends CardExpand {
 
 class UserReqCard extends Card{
 
-    private String location_name;
+    private String location_name, item_name;
 
-    public UserReqCard(Context context, String location){
+    public UserReqCard(Context context, String item,String location){
         super(context, R.layout.user_request_card);
-
+        item_name=item;
         location_name=location;
     }
 
@@ -372,9 +372,13 @@ class UserReqCard extends Card{
 
         TextView location = (TextView)parent.findViewById(R.id.req_card_location);
         location.setText(location_name);
+
+        TextView item = (TextView)parent.findViewById(R.id.itemName);
+        item.setText(item_name);
         ViewToClickToExpand viewToClickToExpand =
                 ViewToClickToExpand.builder().setupView(view);
         setViewToClickToExpand(viewToClickToExpand);
+
     }
 }
 

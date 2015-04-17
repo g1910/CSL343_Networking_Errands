@@ -5,8 +5,6 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-
-
     <!-- <ScrollView
          android:layout_width="fill_parent"
          android:layout_height="fill_parent">-->
@@ -19,4 +17,4 @@
     </it.gmariotti.cardslib.library.view.CardListView>
 
 </LinearLayout>
-<!-- From: file:/F:/Git/CSL343_Networking_Errands/Net_App/app/src/main/res/layout/fragment_feedback.xml -->
+<!-- From: file:/home/gaurav/AndroidstudioProjects/Net_App/app/src/main/res/layout/fragment_feedback.xml -->

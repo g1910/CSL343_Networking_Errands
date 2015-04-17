@@ -2,7 +2,6 @@ package group2.netapp;
 
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -10,7 +9,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
-import android.provider.Browser;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +41,6 @@ import java.util.List;
 
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
-import it.gmariotti.cardslib.library.internal.ViewToClickToExpand;
 import it.gmariotti.cardslib.library.view.CardListView;
 
 
@@ -248,7 +245,7 @@ public class CustomerFeedbackFragment extends Fragment {
 
                 cards.clear();
                 if(posts==null){
-                    Toast.makeText(getActivity().getApplicationContext(), "No pending Feedbacks found", Toast.LENGTH_SHORT).show();;
+                    Toast.makeText(getActivity().getApplicationContext(), "No Feedbacks found", Toast.LENGTH_SHORT).show();;
                 }
                 if (posts != null && running)
                     for (int i = 0; i < posts.size(); ++i) {
@@ -274,13 +271,13 @@ class CustomerFeedbackCard extends Card {
     private String name, description;
 
     public CustomerFeedbackCard(Context context, int star, String desc, String nam){
-        super(context, R.layout.fragment_service_feedback);
+        super(context, R.layout.feedback_card);
         stars = star;
         description = desc;
         name = nam;
     }
     public CustomerFeedbackCard(Context context){
-        super(context, R.layout.fragment_service_feedback);
+        super(context, R.layout.feedback_card);
     }
 
 
