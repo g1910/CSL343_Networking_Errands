@@ -31,6 +31,6 @@
     <string name="title_activity_auction">AuctionActivity</string>
     <string name="title_activity_server_form">serverFormActivity</string>
     <string name="title_activity_bids">BidsActivity</string>
-    <string name="IP">http://10.1.13.27/Networks/CSL343_Networking_Errands/Server/</string>
+    <string name="IP">http://netapp.byethost33.com/Server/</string>
 
 </resources>

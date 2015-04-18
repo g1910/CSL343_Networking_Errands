@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import group2.netapp.R;
 
 /**
@@ -17,7 +20,8 @@ import group2.netapp.R;
 public class AucBidsFragment extends Fragment {
 
     TextView location,order;
-
+    JSONArray orders;
+    int bidId;
     public AucBidsFragment() {
         // Required empty public constructor
     }
@@ -35,11 +39,16 @@ public class AucBidsFragment extends Fragment {
     public void setUpView(View v){
         Bundle b = getArguments();
         if(b!=null){
+            bidId = b.getInt("id",-1);
+
             location = (TextView) v.findViewById(R.id.auc_bidview_loc);
             order = (TextView) v.findViewById(R.id.auc_bidview_order);
 
-            location.setText("Location: "+b.getString("location","No location specified"));
-            order.setText("Order: " + b.getString("order","No order specified"));
+            if(bidId != -1){
+                location.setText("BidId:"+bidId);
+                order.setText("Order: " + b.getString("order","No order specified"));
+            }
+
         }
 
     }
