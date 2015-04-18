@@ -1,0 +1,163 @@
+
+<ScrollView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context="group2.netapp.Broadcast"
+android:id="@+id/scrollView"
+    >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context="group2.netapp.Broadcast">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Enter Request Details"
+        android:id="@+id/requestdetails"
+        android:paddingLeft="20dp"
+        android:layout_gravity="top" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Item"
+        android:id="@+id/Itemtext"
+        android:layout_gravity="left|top"
+        android:paddingLeft="20dp"
+        android:layout_below="@id/requestdetails"
+
+        android:paddingTop="20dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/itemfield"
+        android:layout_gravity="right"
+        android:inputType="textMultiLine|textCapSentences"
+        android:maxLength="50"
+        android:ems="7"
+        android:maxLines="2"
+        android:layout_below="@id/requestdetails"
+        android:paddingTop="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Location"
+        android:id="@+id/Locationtext"
+        android:layout_gravity="left|top"
+        android:layout_below="@id/itemfield"
+        android:paddingTop="10dp"
+
+        android:paddingLeft="20dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/locationfield"
+        android:layout_gravity="right"
+        android:ems="7"
+        android:inputType="textCapSentences"
+        android:maxLength="45"
+        android:layout_alignTop="@id/Locationtext"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Description"
+        android:id="@+id/Descriptiontext"
+        android:layout_gravity="left|top"
+        android:layout_below="@id/locationfield"
+        android:paddingTop="10dp"
+        android:paddingLeft="20dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/descriptionfield"
+        android:layout_gravity="right"
+        android:ems="7"
+        android:inputType="textMultiLine|textLongMessage|textCapSentences"
+        android:maxLength="140"
+        android:minLines="2"
+        android:maxLines="5"
+        android:layout_alignTop="@+id/Descriptiontext"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Expected Time"
+        android:id="@+id/Timetext"
+        android:layout_gravity="left|top"
+
+        android:paddingTop="10dp"
+        android:paddingLeft="20dp"
+        android:layout_below="@id/descriptionfield" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Expected Date"
+        android:id="@+id/Datetext"
+        android:layout_gravity="left|top"
+
+        android:paddingTop="10dp"
+        android:paddingLeft="20dp"
+        android:layout_below="@+id/timePicker" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/broadcast_request"
+        android:id="@+id/broadcast_button"
+        android:layout_below="@+id/datePicker"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <TimePicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/timePicker"
+        android:layout_below="@+id/Timetext"
+        android:layout_gravity="end"
+        android:layout_alignParentRight="true"/>
+
+    <DatePicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/datePicker"
+        android:layout_below="@+id/Datetext"
+        android:layout_gravity="end"
+        android:layout_alignParentRight="true"
+        android:datePickerMode="spinner"
+        android:spinnersShown="true"
+        android:calendarViewShown="false" />
+
+
+
+
+</RelativeLayout>
+
+</ScrollView><!-- From: file:/home/gaurav/6thSem/CSL343/merge/withmaster/CSL343_Networking_Errands/Net_App/app/src/main/res/layout/activity_broadcast.xml -->

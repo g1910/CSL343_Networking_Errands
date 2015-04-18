@@ -14,7 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -288,25 +290,19 @@ public class UserRequestFragment extends Fragment {
             }
 
             cards.clear();
-
+                if(posts==null){
+                    Toast.makeText(getActivity().getApplicationContext(), "No requests found", Toast.LENGTH_SHORT).show();;
+                }
             if (posts != null && running)
                 for (int i = 0; i < posts.size(); ++i) {
                     UserRequests a = posts.get(i);
 
-                    UserReqCard card = new UserReqCard(getActivity().getApplicationContext(), a.location);
+                    UserReqCard card = new UserReqCard(getActivity().getApplicationContext(),a.item, a.location);
                     CardHeader ch = new CardHeader(getActivity().getApplicationContext());
-                    ch.setTitle(a.item);
                     card.addCardHeader(ch);
-
-                    CustomCardExpand expand = new CustomCardExpand(getActivity().getApplicationContext(), a.quantity, a.exprice, a.exptime, a.expdate);
+                    CustomCardExpand expand = new CustomCardExpand(getActivity().getApplicationContext(), a.description, a.exptime, a.expdate);
                     card.addCardExpand(expand);
-
-                    ch.setButtonExpandVisible(true);
-
-                    ViewToClickToExpand viewToClickToExpand = ViewToClickToExpand.builder()
-                            .highlightView(true)
-                            .setupCardElement(ViewToClickToExpand.CardElementUI.CARD);
-                    card.setViewToClickToExpand(viewToClickToExpand);
+                    card.setSwipeable(true);
 
                     cards.add(card);
                 }
@@ -327,11 +323,10 @@ public class UserRequestFragment extends Fragment {
 class CustomCardExpand extends CardExpand {
 
     //Use your resource ID for your inner layout
-    private String quantity, cost, time, date;
-    public CustomCardExpand(Context context,String q, String c, String t, String d) {
+    private String description, time, date;
+    public CustomCardExpand(Context context,String desc, String t, String d) {
         super(context, R.layout.expand_layout);
-        quantity=q;
-        cost=c;
+        description=desc;
         time=t;
         date=d;
     }
@@ -346,14 +341,12 @@ class CustomCardExpand extends CardExpand {
         if (view == null) return;
 
         //Retrieve TextView elements
-        TextView tx1 = (TextView) view.findViewById(R.id.quantity);
-        TextView tx2 = (TextView) view.findViewById(R.id.cost);
+        TextView tx2 = (TextView) view.findViewById(R.id.description);
         TextView tx3 = (TextView) view.findViewById(R.id.time);
         TextView tx4 = (TextView) view.findViewById(R.id.date);
         //Set value in text views
 //if(tx1!=null)
-        tx1.setText(quantity);
-        tx2.setText(cost);
+        tx2.setText(description);
         tx3.setText(time);
         tx4.setText(date);
 
@@ -362,11 +355,11 @@ class CustomCardExpand extends CardExpand {
 
 class UserReqCard extends Card{
 
-    private String location_name;
+    private String location_name, item_name;
 
-    public UserReqCard(Context context, String location){
+    public UserReqCard(Context context, String item,String location){
         super(context, R.layout.user_request_card);
-
+        item_name=item;
         location_name=location;
     }
 
@@ -378,9 +371,14 @@ class UserReqCard extends Card{
     public void setupInnerViewElements(ViewGroup parent, View view){
 
         TextView location = (TextView)parent.findViewById(R.id.req_card_location);
-
-
         location.setText(location_name);
+
+        TextView item = (TextView)parent.findViewById(R.id.itemName);
+        item.setText(item_name);
+        ViewToClickToExpand viewToClickToExpand =
+                ViewToClickToExpand.builder().setupView(view);
+        setViewToClickToExpand(viewToClickToExpand);
+
     }
 }
 

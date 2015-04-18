@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -42,16 +43,29 @@ public class Broadcast extends Activity {
             @Override
             public void onClick(View v) {
                 String item= ((EditText)findViewById(R.id.itemfield)).getText().toString();
-                String quantity= ((EditText)findViewById(R.id.quantityfield)).getText().toString();
+                String description= ((EditText)findViewById(R.id.descriptionfield)).getText().toString();
                 String location= ((EditText)findViewById(R.id.locationfield)).getText().toString();
-                String price= ((EditText)findViewById(R.id.pricefield)).getText().toString();
                 int time_hour=((TimePicker)findViewById(R.id.timePicker)).getCurrentHour();
                 int time_minute=((TimePicker)findViewById(R.id.timePicker)).getCurrentMinute();
                 int date_year= ((DatePicker)findViewById(R.id.datePicker)).getYear();
                 int date_month= ((DatePicker)findViewById(R.id.datePicker)).getMonth();
                 int date_day= ((DatePicker)findViewById(R.id.datePicker)).getDayOfMonth();
 
-                new add_broadcast(item,location,quantity,price,time_hour,time_minute,date_day,date_month,date_year,"http://netapp.byethost33.com/add_broadcast.php").execute(null,null,null);
+                if(item.length()<1 || location.length()< 1)
+                {
+                    if(item.length()<1)
+                    {
+                        Toast.makeText(getApplicationContext(), "Enter the item", Toast.LENGTH_SHORT).show();
+                        ((EditText)findViewById(R.id.itemfield)).requestFocus();
+                    }
+                    else if(location.length()<1)
+                    {
+                        Toast.makeText(getApplicationContext(), "Enter the location", Toast.LENGTH_SHORT).show();
+                        ((EditText)findViewById(R.id.locationfield)).requestFocus();
+                    }
+                }
+                else
+                new add_broadcast(item,location,description,time_hour,time_minute,date_day,date_month,date_year,"http://netapp.byethost33.com/add_broadcast.php").execute(null,null,null);
                 //finish();
             }
         });
@@ -85,15 +99,14 @@ public class Broadcast extends Activity {
 
     class add_broadcast extends AsyncTask<String,String,String>
     {
-        private String item,location,quantity,price,host;
+        private String item,location,description,host;
         private String time_hour,time_minute,date_year,date_day,date_month,time,date;
 
-        public  add_broadcast(String a,String b,String c,String d,int e,int f,int g,int h, int i,String j)
+        public  add_broadcast(String a,String b,String d,int e,int f,int g,int h, int i,String j)
         {
             item=a;
             location=b;
-            quantity=c;
-            price=d;
+            description = d;
             time_hour=String.valueOf(e);
             time_minute=String.valueOf(f);
             date_day=String.valueOf(g);
@@ -116,16 +129,13 @@ public class Broadcast extends Activity {
             try
             {
                 // Add your data
-                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(7);
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(6);
                 SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                //SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 String email = saved_values.getString("email",null);
-                System.out.println(email);
                 nameValuePairs.add(new BasicNameValuePair("email", email));
                 nameValuePairs.add(new BasicNameValuePair("item", item));
                 nameValuePairs.add(new BasicNameValuePair("location", location));
-                nameValuePairs.add(new BasicNameValuePair("quantity", quantity));
-                nameValuePairs.add(new BasicNameValuePair("price", price));
+                nameValuePairs.add(new BasicNameValuePair("description", description));
                 nameValuePairs.add(new BasicNameValuePair("time", time));
                 nameValuePairs.add(new BasicNameValuePair("date", date));
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));

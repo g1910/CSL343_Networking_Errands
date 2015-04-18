@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "group2.netapp"
-        minSdkVersion 14
+        minSdkVersion 15
         targetSdkVersion 21
     }
 
@@ -21,7 +21,7 @@ android {
 dependencies {
     compile files('libs/bolts-android-1.1.4.jar')
     compile files('libs/Parse-1.8.3.jar')
-
+    compile files('libs/cognalys.jar')
     //Core
     
 
@@ -34,4 +34,5 @@ dependencies {
     compile 'com.github.gabrielemariotti.cards:cardslib-recyclerview:2.0.1'
     compile    'com.github.gabrielemariotti.cards:cardslib-cards:2.0.1'
     compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'de.hdodenhof:circleimageview:1.2.2'
 }

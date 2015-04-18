@@ -1,34 +1,10 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.csl343.group2.orderit.bidding.currAuctionTabs.ToParticipateFragment">
 
     <!-- TODO: Update blank fragment layout -->
-
-
-
-        <it.gmariotti.cardslib.library.recyclerview.view.CardRecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/auctioncard_recyclerview"/>
-
-    <!--
-        <it.gmariotti.cardslib.library.recyclerview.view.CardRecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
-            card:list_card_layout_resourceID="@layout/auction_card_layout"
-            android:id="@+id/auctioncard_recyclerview"/>
-
-            <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Choose Bid"
-            android:id="@+id/bid_btn"
-            android:layout_gravity="center"
-            android:onClick="chooseBid" />
-
-    -->
+    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
+        android:text="@string/hello_blank_fragment" />
 
 </FrameLayout>

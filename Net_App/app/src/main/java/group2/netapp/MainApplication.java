@@ -1,5 +1,6 @@
 package group2.netapp;
 
+import com.matesnetwork.callverification.Cognalys;
 import com.parse.Parse;
 import com.parse.ParseInstallation;
 import com.parse.PushService;
@@ -14,6 +15,7 @@ public class MainApplication extends Application {
 
         Parse.initialize(this, "oS5B5on8xGqQFPDHvtR4jgmXsemYbdBq14DfWAzo", "YiJqph6IHfZOIBIQhSVmFtOMgoNABQdem3teoEgA");
         PushService.setDefaultPushCallback(this, MainActivity.class);
+        Cognalys.enableAnalytics(getApplicationContext(), true, true);
         //ParseInstallation.getCurrentInstallation().saveInBackground();
         //PushService.subscribe(this, "Broadcast", MainActivity.class);
     }

@@ -25,6 +25,7 @@ android:id="@+id/scrollView"
         android:paddingLeft="20dp"
         android:layout_gravity="top" />
 
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,17 +38,19 @@ android:id="@+id/scrollView"
 
         android:paddingTop="20dp" />
 
-    <TextView
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Quantity"
-        android:id="@+id/Quantitytext"
-        android:layout_below="@id/Itemtext"
-        android:layout_gravity="left|top"
-        android:paddingTop="10dp"
-
-        android:paddingLeft="20dp"/>
+        android:id="@+id/itemfield"
+        android:layout_gravity="right"
+        android:inputType="textMultiLine|textCapSentences"
+        android:maxLength="50"
+        android:ems="7"
+        android:maxLines="2"
+        android:layout_below="@id/requestdetails"
+        android:paddingTop="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp" />
 
 
     <TextView
@@ -57,22 +60,47 @@ android:id="@+id/scrollView"
         android:text="Location"
         android:id="@+id/Locationtext"
         android:layout_gravity="left|top"
-        android:layout_below="@id/Quantitytext"
+        android:layout_below="@id/itemfield"
         android:paddingTop="10dp"
 
         android:paddingLeft="20dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/locationfield"
+        android:layout_gravity="right"
+        android:ems="7"
+        android:inputType="textCapSentences"
+        android:maxLength="45"
+        android:layout_alignTop="@id/Locationtext"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Cost Price"
-        android:id="@+id/pricetext"
+        android:text="Description"
+        android:id="@+id/Descriptiontext"
         android:layout_gravity="left|top"
-        android:layout_below="@id/Locationtext"
+        android:layout_below="@id/locationfield"
         android:paddingTop="10dp"
-
         android:paddingLeft="20dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/descriptionfield"
+        android:layout_gravity="right"
+        android:ems="7"
+        android:inputType="textMultiLine|textLongMessage|textCapSentences"
+        android:maxLength="140"
+        android:minLines="2"
+        android:maxLines="5"
+        android:layout_alignTop="@+id/Descriptiontext"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -84,7 +112,7 @@ android:id="@+id/scrollView"
 
         android:paddingTop="10dp"
         android:paddingLeft="20dp"
-        android:layout_below="@+id/pricetext" />
+        android:layout_below="@id/descriptionfield" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -97,63 +125,6 @@ android:id="@+id/scrollView"
         android:paddingTop="10dp"
         android:paddingLeft="20dp"
         android:layout_below="@+id/timePicker" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/itemfield"
-        android:layout_gravity="right"
-        android:layout_below="@id/requestdetails"
-
-        android:ems="7"
-        android:layout_alignBaseline="@+id/Itemtext"
-        android:layout_alignTop="@+id/Itemtext"
-        android:layout_alignBottom="@+id/Itemtext"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="30dp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/quantityfield"
-        android:layout_gravity="right"
-        android:layout_alignBaseline="@+id/Quantitytext"
-        android:layout_alignTop="@+id/Quantitytext"
-        android:layout_alignBottom="@+id/Quantitytext"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="30dp"
-        android:layout_below="@+id/itemfield"
-        android:inputType="number"
-        android:ems="7"  />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/locationfield"
-        android:layout_gravity="right"
-
-        android:layout_below="@+id/quantityfield"
-        android:ems="7"
-        android:layout_alignBaseline="@+id/Locationtext"
-        android:layout_alignTop="@+id/Locationtext"
-        android:layout_alignBottom="@+id/Locationtext"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="30dp"/>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/pricefield"
-        android:layout_gravity="right"
-
-        android:layout_below="@+id/locationfield"
-        android:inputType="number"
-        android:ems="7"
-        android:layout_alignBaseline="@+id/pricetext"
-        android:layout_alignTop="@+id/pricetext"
-        android:layout_alignBottom="@+id/pricetext"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="30dp"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -182,7 +153,7 @@ android:id="@+id/scrollView"
         android:layout_alignParentRight="true"
         android:datePickerMode="spinner"
         android:spinnersShown="true"
-        android:calendarViewShown="true" />
+        android:calendarViewShown="false" />
 
 
 

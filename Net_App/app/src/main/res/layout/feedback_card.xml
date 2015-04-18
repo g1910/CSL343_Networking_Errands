@@ -1,0 +1,51 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="wrap_content" tools:context="group2.netapp.ServiceFeedbackFragment"
+    android:orientation="vertical"
+    android:background="@drawable/back3"
+    >
+
+
+
+
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/FeedbackRating"
+
+        style="?android:attr/ratingBarStyle"
+        android:isIndicator="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/FeedbackName"
+        android:layout_below="@id/FeedbackRating"
+        android:layout_alignLeft="@id/FeedbackRating"
+        android:text="NAME"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/ripple_material_light"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/FeedbackDescription"
+        android:hint="Description"
+        android:layout_below="@+id/FeedbackName"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="20dp"
+        android:textColor="@color/cardview_dark_background"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_alignLeft="@+id/FeedbackName"
+        android:minLines="2"
+        />
+
+
+    <!---->
+
+</RelativeLayout>

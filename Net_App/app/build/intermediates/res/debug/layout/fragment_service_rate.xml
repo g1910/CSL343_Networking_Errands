@@ -1,0 +1,8 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:context="group2.netapp.ServiceRateFragment">
+
+
+
+</FrameLayout>
+<!-- From: file:/home/gaurav/6thSem/CSL343/merge/withmaster/CSL343_Networking_Errands/Net_App/app/src/main/res/layout/fragment_service_rate.xml -->

@@ -6,33 +6,22 @@ import android.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
-import org.apache.http.HttpHost;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.conn.params.ConnRoutePNames;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -41,7 +30,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -112,6 +100,10 @@ public class HomeActivity extends FragmentActivity
                 fragment=new HomeFragment();
                 break;
             case 5:
+                SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences.Editor editor=saved_values.edit();
+                editor.clear();
+                editor.apply();
                 Intent logout = new Intent(getApplicationContext(),MainActivity.class);
                 logout.putExtra("loggedout",1);
                 startActivity(logout);
@@ -135,7 +127,6 @@ public class HomeActivity extends FragmentActivity
                 break;
             case 2:
                 mTitle = getString(R.string.title_section2);
-
                 break;
             case 3:
                 mTitle = getString(R.string.title_section3);
@@ -154,6 +145,7 @@ public class HomeActivity extends FragmentActivity
     public void restoreActionBar() {
         ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+        actionBar.setDisplayHomeAsUpEnabled(false);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
     }
@@ -182,11 +174,6 @@ public class HomeActivity extends FragmentActivity
         //noinspection SimplifiableIfStatement
         if(id==R.id.action_settings)
         {
-
-                /*Intent logout = new Intent(getApplicationContext(),MainActivity.class);
-                logout.putExtra("loggedout",1);
-                startActivity(logout);
-*/
 
         }
 
@@ -257,13 +244,7 @@ public class HomeActivity extends FragmentActivity
             //httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
             try {
 
-                /*JSONObject obj = new JSONObject();
-                obj.put("pname", pname);
-                obj.put("email", email);
-                httppost.setEntity(new StringEntity(obj.toString(), "UTF-8"));
-                HttpResponse response = httpclient.execute(httppost);*/
 
-                // Add your data
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
                 nameValuePairs.add(new BasicNameValuePair("pname", pname));
                 nameValuePairs.add(new BasicNameValuePair("email", email));

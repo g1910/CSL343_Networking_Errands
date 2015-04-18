@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffffff">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Item"
+        android:id="@+id/itemName"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="15dp"
+        android:shadowColor="#ffdddddd"
+        android:textColor="#ff5b5b5b" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location"
+        android:layout_below="@id/itemName"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/req_card_location"
+        android:layout_toRightOf="@+id/req_card_image"
+        android:layout_marginLeft="5dp"
+        android:paddingTop="5dp"
+        android:textColor="#ffff2720"
+        android:textStyle="bold" />
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:src="@drawable/ic_action_place"
+        android:id="@+id/req_card_image"
+        android:layout_below="@id/itemName"
+        />
+
+    />
+
+</RelativeLayout><!-- From: file:/home/gaurav/6thSem/CSL343/merge/withmaster/CSL343_Networking_Errands/Net_App/app/src/main/res/layout/user_request_card.xml -->
