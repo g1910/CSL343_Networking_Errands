@@ -153,7 +153,7 @@ public class ServerFormActivity extends FragmentActivity implements TimePickerFr
             ServerConnect myServer=new ServerConnect(a);
 
             Toast.makeText(a, "Starting a New Auction...", Toast.LENGTH_SHORT).show();
-            myServer.execute("http://" + getString(R.string.IP)+ "/Networks/CSL343_Networking_Errands/Server/auction.php",nameValuePairs,this);
+            myServer.execute(getString(R.string.IP)+"auction.php",nameValuePairs,this);
         }
     };
 

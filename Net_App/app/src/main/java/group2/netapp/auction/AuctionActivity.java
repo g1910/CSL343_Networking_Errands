@@ -51,7 +51,7 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsTab.
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
         nameValuePairs.add(new BasicNameValuePair("id_user","13"));
         Log.d("AuctionActivity","http://"+getString(R.string.IP)+"/Networks/CSL343_Networking_Errands/Server/getAuction.php");
-        myServer.execute("http://"+getString(R.string.IP)+"/Networks/CSL343_Networking_Errands/Server/getAuction.php",nameValuePairs);
+        myServer.execute(getString(R.string.IP)+"getAuction.php",nameValuePairs);
 
     }
 
