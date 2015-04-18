@@ -1,100 +1,119 @@
 package group2.netapp;
 
+import android.app.Activity;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.support.v4.app.FragmentTabHost;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TabHost;
-import android.widget.TabHost.OnTabChangeListener;
-import android.widget.TabHost.TabContentFactory;
-public class RateFragment extends Fragment {
-    private static final int TWO_FRAGMENTS = 2;
-    private ViewPager mViewPager;
-    private TabContentFactory mFactory = new TabContentFactory() {
 
-        @Override
-        public View createTabContent(String tag) {
-            View v = new View(getActivity());
-            v.setMinimumHeight(0);
-            return v;
+
+/**
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link RateFragment.OnFragmentInteractionListener} interface
+ * to handle interaction events.
+ * Use the {@link RateFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class RateFragment extends Fragment {
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+
+    private FragmentTabHost tabHost;
+    private OnFragmentInteractionListener mListener;
+
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment RateFragment.
+     */
+    // TODO: Rename and change types and number of parameters
+    public static RateFragment newInstance(String param1, String param2) {
+        RateFragment fragment = new RateFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    public RateFragment() {
+        // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
         }
-    };
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View fragContent = inflater.inflate(R.layout.tabs_with_viewpager,
-                container, false);
-        mViewPager = (ViewPager) fragContent.findViewById(R.id.pager);
-        mViewPager.setAdapter(new TransactionInnerPagerAdapter(getChildFragmentManager()));
-        final TabHost tabHost = (TabHost) fragContent
-                .findViewById(android.R.id.tabhost);
-        tabHost.setup();
-        tabHost.addTab(tabHost.newTabSpec("Tab1").setIndicator("Rate Service").setContent(mFactory));
-        tabHost.addTab(tabHost.newTabSpec("Tab2").setIndicator("Rate Customer").setContent(mFactory));
-        mViewPager.setOnPageChangeListener(new OnPageChangeListener() {
+        // Inflate the layout for this fragment
+        View infh = inflater.inflate(R.layout.fragment_rate, container, false);
+        tabHost = (FragmentTabHost)infh.findViewById(android.R.id.tabhost);
+        tabHost.setup(getActivity(), getChildFragmentManager(), R.id.realtabcontent);
+        tabHost.addTab(tabHost.newTabSpec("fragmentService").setIndicator("Service Reviews"),
+                ServiceRateFragment.class, null);
+        tabHost.addTab(tabHost.newTabSpec("fragmentCustomer").setIndicator("Customer Reviews"),
+                ServiceRateFragment.class, null);
+        return infh;
+    }
 
-            @Override
-            public void onPageSelected(int position) {
-                tabHost.setCurrentTab(position);
-            }
-
-            @Override
-            public void onPageScrolled(int arg0, float arg1, int arg2) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int arg0) {
-                // TODO Auto-generated method stub
-
-            }
-        });
-        tabHost.setOnTabChangedListener(new OnTabChangeListener() {
-
-            @Override
-            public void onTabChanged(String tabId) {
-                if (tabId.equals("Tab1")) {
-                    mViewPager.setCurrentItem(0);
-                } else if (tabId.equals("Tab2")) {
-                    mViewPager.setCurrentItem(1);
-                }
-            }
-        });
-        return fragContent;
+    // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        /*try {
+            mListener = (OnFragmentInteractionListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }*/
+        ((HomeActivity) activity).onSectionAttached(3);
     }
 
-    private class TransactionInnerPagerAdapter extends FragmentPagerAdapter {
-
-        public TransactionInnerPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public android.support.v4.app.Fragment getItem(int position) {
-            if (position == 0) {
-                return new ServiceRateFragment();
-            } else if (position == 1) {
-                return new CustomerRateFragment();
-            }
-            return null;
-        }
-
-        @Override
-        public int getCount() {
-            return TWO_FRAGMENTS;
-        }
-
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
     }
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p/>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        public void onFragmentInteraction(Uri uri);
+    }
+
 }

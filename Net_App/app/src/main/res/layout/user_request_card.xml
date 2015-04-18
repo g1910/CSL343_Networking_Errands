@@ -34,14 +34,14 @@
 
 
     <ImageView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:src="@drawable/ic_action_place"
         android:id="@+id/req_card_image"
         android:layout_below="@id/itemName"
         />
 
-     />
+    />
 
 </RelativeLayout>

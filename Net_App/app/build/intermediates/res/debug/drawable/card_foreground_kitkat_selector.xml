@@ -25,4 +25,4 @@
     <item android:state_pressed="true" android:drawable="@drawable/pressed_background_kitkat_card"/>
     <item android:drawable="@android:color/transparent"/>
 </selector>
-<!-- From: file:/home/gabriele/Lavoro/Android/AndroidStudioProjects/wrks/cardslib/library-core/src/main/res/drawable/card_foreground_kitkat_selector.xml --><!-- From: file:/home/gaurav/AndroidstudioProjects/Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable/card_foreground_kitkat_selector.xml -->
+<!-- From: file:/home/gabriele/Lavoro/Android/AndroidStudioProjects/wrks/cardslib/library-core/src/main/res/drawable/card_foreground_kitkat_selector.xml --><!-- From: file:/home/gaurav/6thSem/CSL343/merge/withmaster/CSL343_Networking_Errands/Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable/card_foreground_kitkat_selector.xml -->

@@ -8,7 +8,9 @@ import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,7 +26,7 @@ import java.util.List;
  * Created by mohit on 15/3/15.
  */
 public class ServerConnect extends AsyncTask<Object,Void,JSONArray> {
-    HttpPost httppost;
+    HttpGet httpget;
     HttpClient httpclient;
     List<NameValuePair> value;
 
@@ -56,11 +58,12 @@ public class ServerConnect extends AsyncTask<Object,Void,JSONArray> {
             //listener = (OnResponseListener) a;
 
             value=(ArrayList<NameValuePair>)params[1];
+            String paramString = URLEncodedUtils.format(value,"utf-8");
+            Log.d("ServerConnect",params[0] + "?" + paramString);
+            httpget= new HttpGet((String)params[0] +"?" + paramString);
+//            httppost.setEntity(new UrlEncodedFormEntity(value));
 
-            httppost= new HttpPost((String)params[0]);
-            httppost.setEntity(new UrlEncodedFormEntity(value));
-
-            HttpResponse response = httpclient.execute(httppost);
+            HttpResponse response = httpclient.execute(httpget);
             Log.d("ServerConnect",response.toString());
             //Log.d("ServerConnect",Integer.toString(response.getEntity().getContent().read()));
 
@@ -86,6 +89,7 @@ public class ServerConnect extends AsyncTask<Object,Void,JSONArray> {
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
             String json = reader.readLine();
+            Log.d("ServerConnect","Response:"+json);
             JSONTokener tokener = new JSONTokener(json);
             JSONArray j = new JSONArray(tokener);
 

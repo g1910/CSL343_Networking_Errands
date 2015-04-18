@@ -1,10 +1,6 @@
 package group2.netapp;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,45 +8,30 @@ import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.os.Parcel;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
-import android.text.InputFilter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.matesnetwork.callverification.Cognalys;
-import com.matesnetwork.interfaces.VerificationListner;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link ProfileFragment.OnFragmentInteractionListener} interface
+ * to handle interaction events.
+ * Use the {@link ProfileFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
 public class ProfileFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,14 +39,20 @@ public class ProfileFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
 
-    private CountDownTimer countDownTimer;
-    ProgressDialog progress;
-    EditText phone;
-
-    EditText address;
     private OnFragmentInteractionListener mListener;
 
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment ProfileFragment.
+     */
+    // TODO: Rename and change types and number of parameters
     public static ProfileFragment newInstance(String param1, String param2) {
         ProfileFragment fragment = new ProfileFragment();
         Bundle args = new Bundle();
@@ -83,43 +70,21 @@ public class ProfileFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
     @Override
-    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-        final String email = saved_values.getString("email",null);
+        String email = saved_values.getString("email",null);
         String picurl = saved_values.getString("picurl",null);
         String name = saved_values.getString("user_name",null);
-        String phone_number = saved_values.getString("phone",null);
-        String address_text = saved_values.getString("address",null);
 
         View infh = inflater.inflate(R.layout.fragment_profile, container, false);
-
-        phone = (EditText)infh.findViewById(R.id.editText3);
-        if(phone_number==null)
-        {
-            new get_phone(email).execute(null,null,null);
-        }
-        else
-        {
-           phone.setText(phone_number);
-        }
-        address = (EditText)infh.findViewById(R.id.editText4);
-
-        if(address_text==null)
-        {
-            new get_address(email).execute(null,null,null);
-        }
-        else
-        {
-            address.setText(address_text);
-        }
-
-
 
         TextView emailText = (TextView)infh.findViewById(R.id.emailText);
         emailText.setText(email);
@@ -127,158 +92,11 @@ public class ProfileFragment extends Fragment {
         TextView nameText = (TextView)infh.findViewById(R.id.nameText);
         nameText.setText(name);
 
-
-
-        ImageButton editPhone = (ImageButton)infh.findViewById(R.id.editPhone);
-        ImageButton editAddress = (ImageButton)infh.findViewById(R.id.editAddress);
-
         ImageView profileImage=(ImageView)infh.findViewById(R.id.imageView2);
         picurl+="0";
         new LoadProfileImage(profileImage).execute(picurl);
-
-
-        editAddress.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                View addressDialog = inflater.inflate(R.layout.address_dialog,null);
-                AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
-                dialog.setView(addressDialog);
-
-                final EditText addressText = (EditText)addressDialog.findViewById(R.id.AddressText);
-                addressText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(100)});
-                dialog
-                        .setCancelable(false)
-                        .setPositiveButton("Save",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,int id) {
-                                        String addr = addressText.getText().toString();
-                                        new add_address(email, addr).execute(null,null,null);
-                                        //address.setText(addr);
-                                        int lines = addressText.getLineCount();
-                                        address.setLines(lines<6 ? lines : 5);
-
-                                    }
-                                })
-                        .setNegativeButton("Cancel",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,int id) {
-                                        dialog.cancel();
-                                    }
-                                });
-
-                AlertDialog alertDialog = dialog.create();
-                alertDialog.show();
-            }
-        });
-
-        editPhone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                View phoneDialog = inflater.inflate(R.layout.phone_dialog,null);
-                AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
-                dialog.setView(phoneDialog);
-
-                final EditText phoneText = (EditText)phoneDialog.findViewById(R.id.phoneText);
-                phoneText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(10)});
-                dialog
-                        .setCancelable(false)
-                        .setPositiveButton("Verify",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-
-                                        String enteredNumber = phoneText.getText().toString();
-                                        if (enteredNumber.length() == 10) {
-                                            progress = new ProgressDialog(getActivity());
-                                            progress.setMessage("Verifying...please wait");
-                                            progress.setCanceledOnTouchOutside(false);
-                                            progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                                            progress.setIndeterminate(true);
-                                            progress.show();
-                                            final Thread t = new Thread(){
-                                                @Override
-                                                public void run(){
-
-                                                    int jumpTime = 0;
-                                                    while(jumpTime < 100){
-                                                        try {
-                                                            sleep(1200000);
-                                                            jumpTime += 5;
-                                                            progress.setProgress(jumpTime);
-                                                        } catch (InterruptedException e) {
-                                                            // TODO Auto-generated catch block
-                                                            e.printStackTrace();
-                                                        }
-
-                                                    }
-
-                                                }
-                                            };
-                                            t.start();
-                                            verify(enteredNumber, email);
-                                        }
-
-                                    }
-                                })
-                        .setNegativeButton("Cancel",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        dialog.cancel();
-                                    }
-                                });
-
-                AlertDialog alertDialog = dialog.create();
-                alertDialog.show();
-
-            }
-        });
         // Inflate the layout for this fragment
         return infh;
-    }
-
-    private void verify(final String number, final String email) {
-        countDownTimer = new CountDownTimer(60000, 1000) {
-
-            @Override
-            public void onTick(long millisUntilFinished) {
-                //timertv.setText("" + millisUntilFinished / 1000);
-            }
-
-            @Override
-            public void onFinish() {
-                progress.dismiss();
-            }
-
-        };
-        countDownTimer.start();
-
-        Cognalys.verifyMobileNumber(getActivity(),
-                "6ac9f915d36c3979e6491a47f0157c2d3aba9edb",
-                "ce4e50816fed4e7e89cc176", number, new VerificationListner() {
-
-                    @Override
-                    public void onVerificationStarted() {
-                        // TODO Auto-generated method stub
-
-                    }
-
-                    @Override
-                    public void onVerificationSuccess() {
-                        countDownTimer.cancel();
-                        Toast.makeText(getActivity(), "Number Verified Successfully", Toast.LENGTH_SHORT).show();
-                        new add_phone(email,number).execute(null,null,null);
-                        progress.dismiss();
-                    }
-
-                    @Override
-                    public void onVerificationFailed(ArrayList<String> errorList) {
-                        countDownTimer.cancel();
-                        progress.dismiss();
-                        Toast.makeText(getActivity(), "Number Verification Failed", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -291,7 +109,12 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-
+        /*try {
+            mListener = (OnFragmentInteractionListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }*/
         ((HomeActivity) activity).onSectionAttached(1);
     }
 
@@ -301,6 +124,16 @@ public class ProfileFragment extends Fragment {
         mListener = null;
     }
 
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p/>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
@@ -328,222 +161,6 @@ public class ProfileFragment extends Fragment {
 
         protected void onPostExecute(Bitmap result) {
             downloadedImage.setImageBitmap(result);
-        }
-    }
-
-    class get_phone extends AsyncTask<String,String,String>
-    {
-        private String email;
-        private String received_num=null;
-        private String host = "http://netapp.byethost33.com/get_phone.php";
-        public  get_phone(String a)
-        {
-            email=a;
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost(host);
-            httppost.setHeader("Content-Type", "application/x-www-form-urlencoded");
-            try
-            {
-                // Add your data
-                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
-                nameValuePairs.add(new BasicNameValuePair("email", email));
-                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-                // Execute HTTP Post Request
-                HttpResponse response = httpclient.execute(httppost);
-                if(response != null)
-                {
-                    InputStream is = response.getEntity().getContent();
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-                    received_num = reader.readLine().replaceAll("\\s+","");
-
-                }
-            } catch (Exception e) {
-                System.out.println(e);
-                // TODO Auto-generated catch block
-            }
-            return null;
-        }
-
-        protected void onPostExecute(String Result) {
-            if(received_num!=null && received_num.length()>0)
-            {
-                phone.setText(received_num);
-                try
-                {
-                    SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-                    SharedPreferences.Editor editor=saved_values.edit();
-                    editor.putString("phone",received_num);
-                    editor.apply();
-                }
-                catch(Exception e)
-                {
-                    System.out.println("Phone not saved in shared preferences");
-                }
-
-            }
-            }
-    }
-
-    class get_address extends AsyncTask<String,String,String>
-    {
-        private String email;
-        private String received_addr=null;
-        private String host = "http://netapp.byethost33.com/get_address.php";
-        public  get_address(String a)
-        {
-            email=a;
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost(host);
-            httppost.setHeader("Content-Type", "application/x-www-form-urlencoded");
-            try
-            {
-                // Add your data
-                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
-                nameValuePairs.add(new BasicNameValuePair("email", email));
-                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-                // Execute HTTP Post Request
-                HttpResponse response = httpclient.execute(httppost);
-                if(response != null)
-                {
-                    InputStream is = response.getEntity().getContent();
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-                    received_addr = reader.readLine().replaceAll("\\s+","");
-
-                }
-            } catch (Exception e) {
-                System.out.println(e);
-                // TODO Auto-generated catch block
-            }
-            return null;
-        }
-
-        protected void onPostExecute(String Result) {
-            if(received_addr!=null && received_addr.length()>0)
-            {
-                address.setText(received_addr);
-                SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-                SharedPreferences.Editor editor=saved_values.edit();
-                editor.putString("address",received_addr);
-                editor.apply();
-            }
-        }
-    }
-
-    class add_address extends AsyncTask<String,String,String>
-    {
-        private String email;
-        private String addr;
-        private String resp=null;
-        private String host = "http://netapp.byethost33.com/add_address.php";
-        public  add_address(String a, String b)
-        {
-            email=a;
-            addr=b;
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost(host);
-            httppost.setHeader("Content-Type", "application/x-www-form-urlencoded");
-            try
-            {
-                // Add your data
-                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-                nameValuePairs.add(new BasicNameValuePair("email", email));
-                nameValuePairs.add(new BasicNameValuePair("address", addr));
-                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-                // Execute HTTP Post Request
-                HttpResponse response = httpclient.execute(httppost);
-                if(response != null)
-                {
-                    InputStream is = response.getEntity().getContent();
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-                    resp = reader.readLine();
-                    Toast.makeText(getActivity(), resp, Toast.LENGTH_SHORT).show();
-                }
-            } catch (Exception e) {
-                System.out.println(e);
-                // TODO Auto-generated catch block
-            }
-            return null;
-        }
-
-        protected void onPostExecute(String Result) {
-            if(resp!=null && resp.length()>0)
-            {
-                SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-                SharedPreferences.Editor editor=saved_values.edit();
-                editor.putString("address",addr);
-                editor.apply();
-                //System.out.println("if ran");
-                address.setText(addr);
-
-            }
-        }
-    }
-
-    class add_phone extends AsyncTask<String,String,String>
-    {
-        private String email;
-        private String phn;
-        String resp = null;
-        private String host = "http://netapp.byethost33.com/add_phone.php";
-        public  add_phone(String a, String b)
-        {
-            email=a;
-            phn = b;
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost(host);
-            httppost.setHeader("Content-Type", "application/x-www-form-urlencoded");
-            try
-            {
-                // Add your data
-                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-                nameValuePairs.add(new BasicNameValuePair("email", email));
-                nameValuePairs.add(new BasicNameValuePair("phone", phn));
-                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-                // Execute HTTP Post Request
-                HttpResponse response = httpclient.execute(httppost);
-                if(response != null)
-                {
-                    InputStream is = response.getEntity().getContent();
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-                    resp = reader.readLine();
-                }
-            } catch (Exception e) {
-                System.out.println(e);
-                // TODO Auto-generated catch block
-            }
-            return null;
-        }
-
-        protected void onPostExecute(String Result) {
-            if(resp!=null && resp.length()>0)
-            {
-                SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-                SharedPreferences.Editor editor=saved_values.edit();
-                editor.putString("phone",phn);
-                editor.apply();
-                phone.setText(phn);
-                //System.out.println("if ran");
-            }
         }
     }
 

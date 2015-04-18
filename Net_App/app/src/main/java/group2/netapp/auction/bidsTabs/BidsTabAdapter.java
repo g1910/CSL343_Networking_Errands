@@ -31,4 +31,14 @@ public class BidsTabAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return 2;
     }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        switch(position){
+            case 0: return "Dashboard";
+
+            case 1: return "Requests";
+        }
+        return super.getPageTitle(position);
+    }
 }

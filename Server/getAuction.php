@@ -1,6 +1,6 @@
 <?php
 	include 'config.php';
-	$user_id=$_POST['id_user'];
+	$user_id=$_GET['id_user'];
 	date_default_timezone_set("Asia/Kolkata");
 	$time=date( 'Y-m-d H:i:s', time());
 //	echo $time;
@@ -23,12 +23,42 @@
 		    "isRunning" => "True", 
 		);
 		$output[]=$arr;
-		while ($row=mysqli_fetch_assoc($result))
+		$row=mysqli_fetch_assoc($result);
+		$output[]=$row;
+		$pBidOutput = [];
+		// echo $row['idAuction'];
+		$pendingBids = mysqli_query($con,"select Bid.* from (Auction natural join Placed) join Bid using(idBid) where status = 'P' and idAuction = ".$row['idAuction']) or die("Error: ".mysqli_error($con));
+		while ($pBids=mysqli_fetch_assoc($pendingBids))
 		{
-			$output[]=$row;
-			$auctionId=$row['idAuction'];
+		 	$orderBids = mysqli_query($con,"select * from `Order` where idBid=".$pBids['idBid']) or die("Error: ".mysqli_error($con));
+		 	$orders = [];
+		 	while($orderow = mysqli_fetch_assoc($orderBids)){
+		 		$orders[] = $orderow;
+		 	}
+		 	$pBids['orders'] = $orders;
+		 	$pBidOutput[] = $pBids;
+		// 	$auctionId=$row['idAuction'];
 		}
-//		echo $auctionId;
+		$output[]=$pBidOutput;
+
+		$currBidOutput = [];
+		// echo $row['idAuction'];
+		$currBids = mysqli_query($con,"select Bid.* from (Auction natural join Placed) join Bid using(idBid) where status <> 'P' and idAuction = ".$row['idAuction']) or die("Error: ".mysqli_error($con));
+		while ($pBids=mysqli_fetch_assoc($currBids))
+		{
+		 	// print(json_encode($pBids));
+		 	$orderBids = mysqli_query($con,"select * from `Order` where idBid=".$pBids['idBid']) or die("Error: ".mysqli_error($con));
+		 	$orders = [];
+		 	while($orderow = mysqli_fetch_assoc($orderBids)){
+		 		// print(json_encode($orderow));
+		 		$orders[] = $orderow;
+		 	}
+		 	$pBids['orders'] = $orders;
+		 	$currBidOutput[] = $pBids;
+		// 	$auctionId=$row['idAuction'];
+		}
+		$output[]=$currBidOutput;
+		// print(json_encode($pBidOutput));
 	}
 
 	print(json_encode($output));

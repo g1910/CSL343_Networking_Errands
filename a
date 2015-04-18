@@ -1,0 +1,952 @@
+On branch profile
+Your branch is up-to-date with 'origin/profile'.
+
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+
+Changes to be committed:
+
+	modified:   Net_App/app/build.gradle
+	modified:   Net_App/app/src/main/java/group2/netapp/HomeFragment.java
+	new file:   Net_App/app/src/main/java/group2/netapp/auction/AucBidsFragment.java
+	new file:   Net_App/app/src/main/java/group2/netapp/auction/AuctionDashboardFragment.java
+	modified:   Net_App/app/src/main/java/group2/netapp/auction/ServerFormActivity.java
+	new file:   Net_App/app/src/main/java/group2/netapp/auction/ServerFormFragment.java
+	new file:   Net_App/app/src/main/java/group2/netapp/auction/bidsTabs/BidRequestsTab.java
+	modified:   Net_App/app/src/main/java/group2/netapp/auction/bidsTabs/BidsTabAdapter.java
+	new file:   Net_App/app/src/main/java/group2/netapp/auction/cards/BidCard.java
+	new file:   Net_App/app/src/main/java/group2/netapp/bidding/BidsActivity.java
+	new file:   Net_App/app/src/main/java/group2/netapp/bidding/CurrAuctionFragment.java
+	new file:   Net_App/app/src/main/java/group2/netapp/bidding/cards/NotParticipatingCard.java
+	new file:   Net_App/app/src/main/java/group2/netapp/bidding/cards/ParticipatingCard.java
+	modified:   Net_App/app/src/main/java/group2/netapp/utilFragments/ServerConnect.java
+	new file:   Net_App/app/src/main/res/drawable-hdpi/sea.jpg
+	modified:   Net_App/app/src/main/res/layout/activity_curr_auction.xml
+	new file:   Net_App/app/src/main/res/layout/card_auction_bid.xml
+	modified:   Net_App/app/src/main/res/layout/fragment_accepted_bids.xml
+	new file:   Net_App/app/src/main/res/layout/fragment_auc_bids.xml
+	new file:   Net_App/app/src/main/res/layout/fragment_auction_dashboard.xml
+	new file:   Net_App/app/src/main/res/layout/fragment_curr_auction.xml
+	modified:   Net_App/app/src/main/res/layout/fragment_curr_participating.xml
+	new file:   Net_App/app/src/main/res/layout/fragment_progress.xml
+	new file:   Net_App/app/src/main/res/layout/fragment_server_form.xml
+	new file:   Net_App/app/src/main/res/layout/not_participating_card.xml
+	new file:   Net_App/app/src/main/res/layout/participating_card.xml
+	new file:   Net_App/app/src/main/res/menu/menu_bids.xml
+	modified:   Net_App/app/src/main/res/values/strings.xml
+	modified:   Net_App/gradlew
+	modified:   Net_App/gradlew.bat
+	modified:   OrderIt/gradlew
+	modified:   OrderIt/gradlew.bat
+	modified:   Server/auction.php
+	modified:   Server/config.php
+	new file:   Server/getAllAuctions.php
+	modified:   Server/getAuction.php
+
+Unmerged paths:
+  (use "git add/rm <file>..." as appropriate to mark resolution)
+
+	both deleted:       Net app/Net app.iml
+	both deleted:       Net app/app/build/intermediates/res/debug/layout/activity_broadcast.xml
+	both deleted:       Net app/app/build/intermediates/res/debug/layout/expand_layout.xml
+	both deleted:       Net app/app/build/intermediates/res/debug/layout/fragment_profile.xml
+	both deleted:       Net app/app/src/main/java/group2/netapp/auction/bidsTabs/OtherBids.java
+	both deleted:       Net app/app/src/main/res/layout/activity_auction.xml
+	both deleted:       Net app/app/src/main/res/layout/activity_broadcast.xml
+	both deleted:       Net app/app/src/main/res/layout/expand_layout.xml
+	both deleted:       Net app/app/src/main/res/layout/fragment_other_bids.xml
+	both deleted:       Net app/app/src/main/res/layout/fragment_profile.xml
+	added by us:        Net_App/.gitignore
+	added by us:        Net_App/.gradle/2.2.1/taskArtifacts/cache.properties
+	added by us:        Net_App/.gradle/2.2.1/taskArtifacts/outputFileStates.bin
+	added by us:        Net_App/.idea/compiler.xml
+	added by us:        Net_App/.idea/copyright/profiles_settings.xml
+	added by us:        Net_App/.idea/encodings.xml
+	added by us:        Net_App/.idea/gradle.xml
+	added by us:        Net_App/.idea/inspectionProfiles/Project_Default.xml
+	added by us:        Net_App/.idea/inspectionProfiles/profiles_settings.xml
+	added by us:        Net_App/.idea/modules.xml
+	added by us:        Net_App/.idea/scopes/scope_settings.xml
+	added by us:        Net_App/.idea/vcs.xml
+	added by us:        Net_App/.idea/workspace.xml
+	added by us:        Net_App/Net app.iml
+	both added:         Net_App/Net_App.iml
+	both modified:      Net_App/app/app.iml
+	added by us:        Net_App/app/build/generated/source/buildConfig/debug/group2/netapp/BuildConfig.java
+	added by us:        Net_App/app/build/generated/source/r/debug/android/support/v7/cardview/R.java
+	added by us:        Net_App/app/build/generated/source/r/debug/com/google/android/gms/R.java
+	added by us:        Net_App/app/build/generated/source/r/debug/group2/netapp/Manifest.java
+	added by us:        Net_App/app/build/generated/source/r/debug/group2/netapp/R.java
+	added by us:        Net_App/app/build/generated/source/r/debug/it/gmariotti/cardslib/library/R.java
+	added by us:        Net_App/app/build/generated/source/r/debug/it/gmariotti/cardslib/library/cards/R.java
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/21.0.0/AndroidManifest.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/21.0.0/R.txt
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/21.0.0/classes.jar
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/21.0.0/res/values/values.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/AndroidManifest.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/aidl/android/support/v4/app/INotificationSideChannel.aidl
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/AndroidManifest.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/R.txt
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/annotations.zip
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/classes.jar
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/res/drawable/topcolored_bg.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/res/layout/native_base_progress.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/res/layout/native_card_thumbnail_layout_progress.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/res/layout/native_material_largeimage_card.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/res/layout/native_material_largeimage_inner_base_main.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/res/layout/native_material_largeimage_text_card.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/res/layout/native_material_topcolored_card.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/res/layout/native_material_topcolored_inner_base_main.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/res/layout/native_thumbnail_largematerial.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/res/values-v16/values.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/res/values-v21/values.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/res/values/values.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/AndroidManifest.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/R.txt
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/annotations.zip
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/classes.jar
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-hdpi-v4/ic_chevron_right_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-hdpi-v4/ic_expand_less_black_24dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-hdpi-v4/ic_expand_less_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-hdpi-v4/ic_expand_more_black_24dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-hdpi-v4/ic_expand_more_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-hdpi-v4/ic_menu_expand_card_dark_normal.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-hdpi-v4/ic_menu_expand_card_dark_pressed.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-hdpi-v4/ic_menu_overflow_card_dark_normal.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-hdpi-v4/ic_menu_overflow_card_dark_pressed.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-hdpi-v4/ic_menu_overflow_card_rounded_dark_normal.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-hdpi-v4/ic_menu_overflow_card_rounded_dark_pressed.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-hdpi-v4/ic_more_vert_black_24dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-hdpi-v4/ic_more_vert_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-mdpi-v4/ic_chevron_right_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-mdpi-v4/ic_expand_less_black_24dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-mdpi-v4/ic_expand_less_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-mdpi-v4/ic_expand_more_black_24dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-mdpi-v4/ic_expand_more_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-mdpi-v4/ic_menu_expand_card_dark_normal.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-mdpi-v4/ic_menu_expand_card_dark_pressed.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-mdpi-v4/ic_menu_overflow_card_dark_normal.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-mdpi-v4/ic_menu_overflow_card_dark_pressed.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-mdpi-v4/ic_menu_overflow_card_rounded_dark_normal.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-mdpi-v4/ic_menu_overflow_card_rounded_dark_pressed.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-mdpi-v4/ic_more_vert_black_24dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-mdpi-v4/ic_more_vert_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-v21/card_foreground_kitkat_selector.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-v21/card_foreground_selector.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-v21/card_kitkat_selector.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-v21/card_menu_button_expand.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-v21/card_menu_button_expand_material.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-v21/card_menu_button_expand_material_animator.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-v21/card_menu_button_overflow_material.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-v21/card_selector.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xhdpi-v4/ic_chevron_right_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xhdpi-v4/ic_expand_less_black_24dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xhdpi-v4/ic_expand_less_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xhdpi-v4/ic_expand_more_black_24dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xhdpi-v4/ic_expand_more_black_36dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xhdpi-v4/ic_expand_more_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xhdpi-v4/ic_expand_more_grey600_36dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xhdpi-v4/ic_menu_expand_card_dark_normal.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xhdpi-v4/ic_menu_expand_card_dark_pressed.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xhdpi-v4/ic_menu_overflow_card_dark_normal.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xhdpi-v4/ic_menu_overflow_card_dark_pressed.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xhdpi-v4/ic_menu_overflow_card_rounded_dark_normal.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xhdpi-v4/ic_menu_overflow_card_rounded_dark_pressed.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xhdpi-v4/ic_more_vert_black_36dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xhdpi-v4/ic_more_vert_grey600_36dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xhdpi-v4/ic_undobar_undo.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xhdpi-v4/undobar.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xhdpi-v4/undobar_button_focused.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xhdpi-v4/undobar_button_pressed.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xhdpi-v4/undobar_divider.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xxhdpi-v4/ic_chevron_right_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xxhdpi-v4/ic_expand_less_black_24dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xxhdpi-v4/ic_expand_less_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xxhdpi-v4/ic_expand_more_black_18dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xxhdpi-v4/ic_expand_more_black_24dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xxhdpi-v4/ic_expand_more_grey600_18dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xxhdpi-v4/ic_expand_more_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xxhdpi-v4/ic_menu_expand_card_dark_normal.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xxhdpi-v4/ic_menu_expand_card_dark_pressed.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xxhdpi-v4/ic_menu_overflow_card.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xxhdpi-v4/ic_menu_overflow_card_dark_normal.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xxhdpi-v4/ic_menu_overflow_card_dark_pressed.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xxhdpi-v4/ic_menu_overflow_card_rounded_dark_normal.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xxhdpi-v4/ic_menu_overflow_card_rounded_dark_pressed.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xxhdpi-v4/ic_more_vert_black_18dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xxhdpi-v4/ic_more_vert_black_24dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xxhdpi-v4/ic_more_vert_grey600_18dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xxhdpi-v4/ic_more_vert_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xxxhdpi-v4/ic_chevron_right_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xxxhdpi-v4/ic_expand_less_black_24dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xxxhdpi-v4/ic_expand_less_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xxxhdpi-v4/ic_expand_more_black_24dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xxxhdpi-v4/ic_expand_more_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xxxhdpi-v4/ic_more_vert_black_24dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable-xxxhdpi-v4/ic_more_vert_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable/activated_background_card.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable/activated_background_kitkat_card.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable/activated_foreground_card.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable/activated_foreground_kitkat_card.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable/card_background.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable/card_foreground_kitkat_selector.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable/card_foreground_selector.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable/card_kitkat_selector.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable/card_menu_button_expand.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable/card_menu_button_expand_material.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable/card_menu_button_expand_material_animator.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable/card_menu_button_overflow.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable/card_menu_button_overflow_material.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable/card_menu_button_rounded_overflow.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable/card_menu_button_rounded_overflow_selector.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable/card_multichoice_selector.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable/card_selector.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable/card_shadow.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable/card_undo.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable/native_card_selector.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable/pressed_background_card.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable/pressed_background_kitkat_card.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/base_header_layout.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/base_list_expandable_children_layout.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/base_section_layout.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/base_shadow_layout.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/base_thumbnail_layout.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/base_withlist_empty.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/base_withlist_progress.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/card_base_layout.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/card_layout.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/card_overlay_layout.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/card_thumbnail_layout.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/card_thumbnail_overlay_layout.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/card_undo_layout.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/inner_base_expand.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/inner_base_header.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/inner_base_main.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/inner_base_main_cardwithlist.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/list_card_layout.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/list_card_thumbnail_layout.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/list_card_undo_material_message.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/list_card_undo_materialmobile_message.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/list_card_undo_message.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/native_base_header_layout.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/native_base_thumbnail_layout.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/native_card_layout.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/native_card_thumbnail_layout.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/native_cardwithlist_layout.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/native_inner_base_expand.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/native_inner_base_header.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/native_inner_base_main.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/native_inner_base_main_cardwithlist.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/native_list_card_layout.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/layout/native_list_card_thumbnail_layout.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/values-de/values.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/values-v16/values.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/values-v21/values.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/values/values.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/AndroidManifest.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/R.txt
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/classes.jar
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/proguard.txt
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/color/common_signin_btn_text_dark.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/color/common_signin_btn_text_light.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/color/wallet_primary_text_holo_light.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/color/wallet_secondary_text_holo_dark.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-hdpi/common_full_open_on_phone.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-hdpi/common_ic_googleplayservices.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-hdpi/common_signin_btn_icon_disabled_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-hdpi/common_signin_btn_icon_disabled_focus_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-hdpi/common_signin_btn_icon_disabled_focus_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-hdpi/common_signin_btn_icon_disabled_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-hdpi/common_signin_btn_icon_focus_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-hdpi/common_signin_btn_icon_focus_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-hdpi/common_signin_btn_icon_normal_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-hdpi/common_signin_btn_icon_normal_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-hdpi/common_signin_btn_icon_pressed_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-hdpi/common_signin_btn_icon_pressed_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-hdpi/common_signin_btn_text_disabled_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-hdpi/common_signin_btn_text_disabled_focus_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-hdpi/common_signin_btn_text_disabled_focus_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-hdpi/common_signin_btn_text_disabled_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-hdpi/common_signin_btn_text_focus_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-hdpi/common_signin_btn_text_focus_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-hdpi/common_signin_btn_text_normal_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-hdpi/common_signin_btn_text_normal_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-hdpi/common_signin_btn_text_pressed_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-hdpi/common_signin_btn_text_pressed_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-hdpi/ic_plusone_medium_off_client.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-hdpi/ic_plusone_small_off_client.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-hdpi/ic_plusone_standard_off_client.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-hdpi/ic_plusone_tall_off_client.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-hdpi/powered_by_google_dark.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-hdpi/powered_by_google_light.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-mdpi/common_signin_btn_icon_disabled_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-mdpi/common_signin_btn_icon_disabled_focus_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-mdpi/common_signin_btn_icon_disabled_focus_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-mdpi/common_signin_btn_icon_disabled_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-mdpi/common_signin_btn_icon_focus_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-mdpi/common_signin_btn_icon_focus_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-mdpi/common_signin_btn_icon_normal_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-mdpi/common_signin_btn_icon_normal_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-mdpi/common_signin_btn_icon_pressed_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-mdpi/common_signin_btn_icon_pressed_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-mdpi/common_signin_btn_text_disabled_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-mdpi/common_signin_btn_text_disabled_focus_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-mdpi/common_signin_btn_text_disabled_focus_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-mdpi/common_signin_btn_text_disabled_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-mdpi/common_signin_btn_text_focus_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-mdpi/common_signin_btn_text_focus_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-mdpi/common_signin_btn_text_normal_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-mdpi/common_signin_btn_text_normal_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-mdpi/common_signin_btn_text_pressed_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-mdpi/common_signin_btn_text_pressed_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-mdpi/ic_plusone_medium_off_client.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-mdpi/ic_plusone_small_off_client.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-mdpi/ic_plusone_standard_off_client.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-mdpi/ic_plusone_tall_off_client.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-mdpi/powered_by_google_dark.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-mdpi/powered_by_google_light.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-tvdpi/ic_plusone_medium_off_client.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-tvdpi/ic_plusone_small_off_client.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-tvdpi/ic_plusone_standard_off_client.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-tvdpi/ic_plusone_tall_off_client.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xhdpi/common_signin_btn_icon_disabled_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xhdpi/common_signin_btn_icon_disabled_focus_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xhdpi/common_signin_btn_icon_disabled_focus_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xhdpi/common_signin_btn_icon_disabled_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xhdpi/common_signin_btn_icon_focus_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xhdpi/common_signin_btn_icon_focus_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xhdpi/common_signin_btn_icon_normal_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xhdpi/common_signin_btn_icon_normal_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xhdpi/common_signin_btn_icon_pressed_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xhdpi/common_signin_btn_icon_pressed_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xhdpi/common_signin_btn_text_disabled_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xhdpi/common_signin_btn_text_disabled_focus_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xhdpi/common_signin_btn_text_disabled_focus_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xhdpi/common_signin_btn_text_disabled_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xhdpi/common_signin_btn_text_focus_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xhdpi/common_signin_btn_text_focus_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xhdpi/common_signin_btn_text_normal_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xhdpi/common_signin_btn_text_normal_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xhdpi/common_signin_btn_text_pressed_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xhdpi/common_signin_btn_text_pressed_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xhdpi/ic_plusone_medium_off_client.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xhdpi/ic_plusone_small_off_client.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xhdpi/ic_plusone_standard_off_client.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xhdpi/ic_plusone_tall_off_client.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xhdpi/powered_by_google_dark.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xhdpi/powered_by_google_light.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xxhdpi/common_signin_btn_icon_disabled_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xxhdpi/common_signin_btn_icon_disabled_focus_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xxhdpi/common_signin_btn_icon_disabled_focus_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xxhdpi/common_signin_btn_icon_disabled_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xxhdpi/common_signin_btn_icon_focus_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xxhdpi/common_signin_btn_icon_focus_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xxhdpi/common_signin_btn_icon_normal_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xxhdpi/common_signin_btn_icon_normal_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xxhdpi/common_signin_btn_icon_pressed_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xxhdpi/common_signin_btn_icon_pressed_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xxhdpi/common_signin_btn_text_disabled_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xxhdpi/common_signin_btn_text_disabled_focus_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xxhdpi/common_signin_btn_text_disabled_focus_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xxhdpi/common_signin_btn_text_disabled_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xxhdpi/common_signin_btn_text_focus_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xxhdpi/common_signin_btn_text_focus_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xxhdpi/common_signin_btn_text_normal_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xxhdpi/common_signin_btn_text_normal_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xxhdpi/common_signin_btn_text_pressed_dark.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xxhdpi/common_signin_btn_text_pressed_light.9.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xxhdpi/ic_plusone_medium_off_client.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xxhdpi/ic_plusone_small_off_client.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xxhdpi/ic_plusone_standard_off_client.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xxhdpi/ic_plusone_tall_off_client.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xxhdpi/powered_by_google_dark.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable-xxhdpi/powered_by_google_light.png
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable/common_signin_btn_icon_dark.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable/common_signin_btn_icon_light.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable/common_signin_btn_text_dark.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/drawable/common_signin_btn_text_light.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/raw/gtm_analytics
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-af/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-am/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-ar/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-bg/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-bn-rBD/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-ca/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-cs/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-da/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-de/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-el/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-en-rGB/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-en-rIN/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-es-rUS/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-es/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-es/wallet_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-et-rEE/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-eu-rES/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-fa/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-fi/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-fr-rCA/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-fr/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-gl-rES/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-hi/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-hr/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-hu/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-hy-rAM/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-in/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-is-rIS/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-it/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-iw/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-ja/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-ka-rGE/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-kk-rKZ/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-km-rKH/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-kn-rIN/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-ko/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-ky-rKG/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-lo-rLA/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-lt/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-lv/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-mk-rMK/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-ml-rIN/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-mn-rMN/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-mr-rIN/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-ms-rMY/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-my-rMM/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-nb/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-ne-rNP/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-nl/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-pl/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-pt-rBR/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-pt-rPT/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-pt/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-ro/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-ru/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-si-rLK/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-sk/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-sl/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-sr/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-sv/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-sw/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-ta-rIN/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-te-rIN/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-th/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-tl/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-tr/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-uk/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-ur-rPK/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-uz-rUZ/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-vi/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-zh-rCN/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-zh-rHK/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-zh-rTW/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values-zu/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values/admob_ads_attrs.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values/admob_iap_style.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values/admob_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values/common_attrs.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values/common_colors.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values/common_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values/maps_attrs.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values/version.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values/wallet_attrs.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values/wallet_colors.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values/wallet_strings.xml
+	added by us:        Net_App/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values/wallet_styles.xml
+	added by us:        Net_App/app/build/intermediates/incremental/aidl/debug/dependency.store
+	added by us:        Net_App/app/build/intermediates/manifests/full/debug/AndroidManifest.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/color/common_signin_btn_text_dark.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/color/common_signin_btn_text_light.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/color/wallet_primary_text_holo_light.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/color/wallet_secondary_text_holo_dark.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/app_logo.jpg
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/auction.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/auction_illustration.jpg
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/bid.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/bid_illustration.jpg
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/common_full_open_on_phone.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/common_ic_googleplayservices.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/common_signin_btn_icon_disabled_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/common_signin_btn_icon_disabled_focus_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/common_signin_btn_icon_disabled_focus_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/common_signin_btn_icon_disabled_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/common_signin_btn_icon_focus_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/common_signin_btn_icon_focus_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/common_signin_btn_icon_normal_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/common_signin_btn_icon_normal_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/common_signin_btn_icon_pressed_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/common_signin_btn_icon_pressed_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/common_signin_btn_text_disabled_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/common_signin_btn_text_disabled_focus_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/common_signin_btn_text_disabled_focus_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/common_signin_btn_text_disabled_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/common_signin_btn_text_focus_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/common_signin_btn_text_focus_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/common_signin_btn_text_normal_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/common_signin_btn_text_normal_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/common_signin_btn_text_pressed_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/common_signin_btn_text_pressed_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/drawer_shadow.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/google_backgrounds.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/ic_chevron_right_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/ic_drawer.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/ic_expand_less_black_24dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/ic_expand_less_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/ic_expand_more_black_24dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/ic_expand_more_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/ic_launcher.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/ic_menu_expand_card_dark_normal.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/ic_menu_expand_card_dark_pressed.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/ic_menu_overflow_card_dark_normal.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/ic_menu_overflow_card_dark_pressed.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/ic_menu_overflow_card_rounded_dark_normal.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/ic_menu_overflow_card_rounded_dark_pressed.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/ic_more_vert_black_24dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/ic_more_vert_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/ic_plusone_medium_off_client.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/ic_plusone_small_off_client.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/ic_plusone_standard_off_client.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/ic_plusone_tall_off_client.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/january.jpg
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/powered_by_google_dark.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/powered_by_google_light.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-hdpi-v4/unnamed.jpg
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-ldpi-v4/app_logo.jpg
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-ldpi-v4/auction.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-ldpi-v4/auction_illustration.jpg
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-ldpi-v4/bid.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-ldpi-v4/bid_illustration.jpg
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-ldpi-v4/google_backgrounds.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-ldpi-v4/january.jpg
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-ldpi-v4/unnamed.jpg
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/app_logo.jpg
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/auction.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/auction_illustration.jpg
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/bid.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/bid_illustration.jpg
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/common_signin_btn_icon_disabled_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/common_signin_btn_icon_disabled_focus_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/common_signin_btn_icon_disabled_focus_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/common_signin_btn_icon_disabled_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/common_signin_btn_icon_focus_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/common_signin_btn_icon_focus_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/common_signin_btn_icon_normal_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/common_signin_btn_icon_normal_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/common_signin_btn_icon_pressed_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/common_signin_btn_icon_pressed_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/common_signin_btn_text_disabled_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/common_signin_btn_text_disabled_focus_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/common_signin_btn_text_disabled_focus_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/common_signin_btn_text_disabled_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/common_signin_btn_text_focus_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/common_signin_btn_text_focus_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/common_signin_btn_text_normal_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/common_signin_btn_text_normal_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/common_signin_btn_text_pressed_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/common_signin_btn_text_pressed_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/drawer_shadow.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/google_backgrounds.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/ic_chevron_right_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/ic_drawer.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/ic_expand_less_black_24dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/ic_expand_less_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/ic_expand_more_black_24dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/ic_expand_more_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/ic_launcher.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/ic_menu_expand_card_dark_normal.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/ic_menu_expand_card_dark_pressed.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/ic_menu_overflow_card_dark_normal.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/ic_menu_overflow_card_dark_pressed.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/ic_menu_overflow_card_rounded_dark_normal.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/ic_menu_overflow_card_rounded_dark_pressed.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/ic_more_vert_black_24dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/ic_more_vert_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/ic_plusone_medium_off_client.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/ic_plusone_small_off_client.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/ic_plusone_standard_off_client.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/ic_plusone_tall_off_client.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/january.jpg
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/powered_by_google_dark.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/powered_by_google_light.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-mdpi-v4/unnamed.jpg
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-tvdpi-v4/ic_plusone_medium_off_client.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-tvdpi-v4/ic_plusone_small_off_client.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-tvdpi-v4/ic_plusone_standard_off_client.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-tvdpi-v4/ic_plusone_tall_off_client.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-v21/card_foreground_kitkat_selector.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-v21/card_foreground_selector.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-v21/card_kitkat_selector.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-v21/card_menu_button_expand.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-v21/card_menu_button_expand_material.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-v21/card_menu_button_expand_material_animator.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-v21/card_menu_button_overflow_material.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-v21/card_selector.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/app_logo.jpg
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/auction.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/auction_illustration.jpg
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/bid.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/bid_illustration.jpg
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/common_signin_btn_icon_disabled_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/common_signin_btn_icon_disabled_focus_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/common_signin_btn_icon_disabled_focus_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/common_signin_btn_icon_disabled_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/common_signin_btn_icon_focus_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/common_signin_btn_icon_focus_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/common_signin_btn_icon_normal_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/common_signin_btn_icon_normal_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/common_signin_btn_icon_pressed_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/common_signin_btn_icon_pressed_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/common_signin_btn_text_disabled_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/common_signin_btn_text_disabled_focus_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/common_signin_btn_text_disabled_focus_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/common_signin_btn_text_disabled_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/common_signin_btn_text_focus_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/common_signin_btn_text_focus_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/common_signin_btn_text_normal_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/common_signin_btn_text_normal_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/common_signin_btn_text_pressed_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/common_signin_btn_text_pressed_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/drawer_shadow.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/google_backgrounds.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/ic_chevron_right_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/ic_drawer.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/ic_expand_less_black_24dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/ic_expand_less_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/ic_expand_more_black_24dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/ic_expand_more_black_36dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/ic_expand_more_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/ic_expand_more_grey600_36dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/ic_launcher.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/ic_menu_expand_card_dark_normal.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/ic_menu_expand_card_dark_pressed.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/ic_menu_overflow_card_dark_normal.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/ic_menu_overflow_card_dark_pressed.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/ic_menu_overflow_card_rounded_dark_normal.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/ic_menu_overflow_card_rounded_dark_pressed.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/ic_more_vert_black_36dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/ic_more_vert_grey600_36dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/ic_plusone_medium_off_client.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/ic_plusone_small_off_client.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/ic_plusone_standard_off_client.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/ic_plusone_tall_off_client.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/ic_undobar_undo.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/january.jpg
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/powered_by_google_dark.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/powered_by_google_light.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/undobar.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/undobar_button_focused.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/undobar_button_pressed.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/undobar_divider.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xhdpi-v4/unnamed.jpg
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/app_logo.jpg
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/auction.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/auction_illustration.jpg
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/back2.jpg
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/back3.jpg
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/bid.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/bid_illustration.jpg
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/calendar.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/calendar1.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/circle.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/clock.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/clock1.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/common_signin_btn_icon_disabled_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/common_signin_btn_icon_disabled_focus_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/common_signin_btn_icon_disabled_focus_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/common_signin_btn_icon_disabled_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/common_signin_btn_icon_focus_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/common_signin_btn_icon_focus_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/common_signin_btn_icon_normal_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/common_signin_btn_icon_normal_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/common_signin_btn_icon_pressed_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/common_signin_btn_icon_pressed_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/common_signin_btn_text_disabled_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/common_signin_btn_text_disabled_focus_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/common_signin_btn_text_disabled_focus_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/common_signin_btn_text_disabled_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/common_signin_btn_text_focus_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/common_signin_btn_text_focus_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/common_signin_btn_text_normal_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/common_signin_btn_text_normal_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/common_signin_btn_text_pressed_dark.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/common_signin_btn_text_pressed_light.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/cost.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/drawer_shadow.9.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/google_backgrounds.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/ic_chevron_right_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/ic_drawer.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/ic_expand_less_black_24dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/ic_expand_less_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/ic_expand_more_black_18dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/ic_expand_more_black_24dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/ic_expand_more_grey600_18dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/ic_expand_more_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/ic_launcher.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/ic_menu_expand_card_dark_normal.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/ic_menu_expand_card_dark_pressed.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/ic_menu_overflow_card.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/ic_menu_overflow_card_dark_normal.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/ic_menu_overflow_card_dark_pressed.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/ic_menu_overflow_card_rounded_dark_normal.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/ic_menu_overflow_card_rounded_dark_pressed.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/ic_more_vert_black_18dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/ic_more_vert_black_24dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/ic_more_vert_grey600_18dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/ic_more_vert_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/ic_plusone_medium_off_client.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/ic_plusone_small_off_client.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/ic_plusone_standard_off_client.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/ic_plusone_tall_off_client.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/img.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/january.jpg
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/powered_by_google_dark.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/powered_by_google_light.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/quantity.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxhdpi-v4/unnamed.jpg
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxxhdpi-v4/ic_chevron_right_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxxhdpi-v4/ic_expand_less_black_24dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxxhdpi-v4/ic_expand_less_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxxhdpi-v4/ic_expand_more_black_24dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxxhdpi-v4/ic_expand_more_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxxhdpi-v4/ic_more_vert_black_24dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable-xxxhdpi-v4/ic_more_vert_grey600_24dp.png
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable/activated_background_card.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable/activated_background_kitkat_card.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable/activated_foreground_card.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable/activated_foreground_kitkat_card.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable/card_background.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable/card_foreground_kitkat_selector.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable/card_foreground_selector.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable/card_kitkat_selector.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable/card_menu_button_expand.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable/card_menu_button_expand_material.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable/card_menu_button_expand_material_animator.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable/card_menu_button_overflow.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable/card_menu_button_overflow_material.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable/card_menu_button_rounded_overflow.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable/card_menu_button_rounded_overflow_selector.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable/card_multichoice_selector.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable/card_selector.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable/card_shadow.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable/card_undo.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable/common_signin_btn_icon_dark.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable/common_signin_btn_icon_light.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable/common_signin_btn_text_dark.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable/common_signin_btn_text_light.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable/native_card_selector.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable/pressed_background_card.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable/pressed_background_kitkat_card.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/drawable/topcolored_bg.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/activity_broadcast.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/activity_main.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/base_header_layout.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/base_list_expandable_children_layout.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/base_section_layout.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/base_shadow_layout.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/base_thumbnail_layout.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/base_withlist_empty.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/base_withlist_progress.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/card_base_layout.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/card_layout.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/card_overlay_layout.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/card_thumbnail_layout.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/card_thumbnail_overlay_layout.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/card_undo_layout.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/expand_layout.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/fragment_customer_rate.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/fragment_home.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/fragment_navigation_drawer.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/fragment_profile.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/fragment_user_request.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/inner_base_expand.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/inner_base_header.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/inner_base_main.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/inner_base_main_cardwithlist.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/list_card_layout.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/list_card_thumbnail_layout.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/list_card_undo_material_message.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/list_card_undo_materialmobile_message.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/list_card_undo_message.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/native_base_header_layout.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/native_base_progress.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/native_base_thumbnail_layout.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/native_card_layout.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/native_card_thumbnail_layout.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/native_card_thumbnail_layout_progress.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/native_cardwithlist_layout.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/native_inner_base_expand.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/native_inner_base_header.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/native_inner_base_main.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/native_inner_base_main_cardwithlist.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/native_list_card_layout.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/native_list_card_thumbnail_layout.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/native_material_largeimage_card.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/native_material_largeimage_inner_base_main.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/native_material_largeimage_text_card.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/native_material_topcolored_card.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/native_material_topcolored_inner_base_main.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/layout/native_thumbnail_largematerial.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/menu/global.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/menu/home.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/raw/gtm_analytics
+	added by us:        Net_App/app/build/intermediates/res/debug/values-af/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-am/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-ar/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-bg/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-bn-rBD/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-ca/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-cs/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-da/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-de/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-el/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-en-rGB/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-en-rIN/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-es-rUS/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-es/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-et-rEE/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-eu-rES/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-fa/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-fi/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-fr-rCA/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-fr/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-gl-rES/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-hi/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-hr/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-hu/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-hy-rAM/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-in/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-is-rIS/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-it/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-iw/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-ja/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-ka-rGE/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-kk-rKZ/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-km-rKH/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-kn-rIN/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-ko/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-ky-rKG/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-lo-rLA/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-lt/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-lv/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-mk-rMK/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-ml-rIN/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-mn-rMN/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-mr-rIN/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-ms-rMY/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-my-rMM/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-nb/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-ne-rNP/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-nl/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-pl/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-pt-rBR/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-pt-rPT/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-pt/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-ro/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-ru/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-si-rLK/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-sk/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-sl/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-sr/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-sv/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-sw/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-ta-rIN/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-te-rIN/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-th/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-tl/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-tr/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-uk/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-ur-rPK/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-uz-rUZ/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-v11/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-v16/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-v21/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-vi/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-zh-rCN/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-zh-rHK/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-zh-rTW/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values-zu/values.xml
+	added by us:        Net_App/app/build/intermediates/res/debug/values/values.xml
+	added by us:        Net_App/app/build/intermediates/resources/resources-debug.ap_
+	added by us:        Net_App/app/build/intermediates/symbols/debug/R.txt
+	added by us:        Net_App/app/build/outputs/logs/manifest-merger-debug-report.txt
+	both modified:      Net_App/app/src/main/AndroidManifest.xml
+	added by them:      Net_App/app/src/main/java/group2/netapp/CustomerRateFragment.java
+	added by them:      Net_App/app/src/main/java/group2/netapp/FeedbackFragment.java
+	added by them:      Net_App/app/src/main/java/group2/netapp/ProfileFragment.java
+	added by them:      Net_App/app/src/main/java/group2/netapp/RateFragment.java
+	added by them:      Net_App/app/src/main/java/group2/netapp/ServiceRateFragment.java
+	added by us:        Net_App/app/src/main/java/group2/netapp/auction/AuctionActivity.java
+	added by us:        Net_App/app/src/main/java/group2/netapp/auction/bidsTabs/AcceptedBids.java
+	added by us:        Net_App/app/src/main/java/group2/netapp/auction/bidsTabs/OtherBids.java
+	added by us:        Net_App/app/src/main/java/group2/netapp/bidding/CurrAuctionActivity.java
+	added by us:        Net_App/app/src/main/java/group2/netapp/bidding/currAuctionTabs/CurrParticipatingFragment.java
+	added by us:        Net_App/app/src/main/java/group2/netapp/bidding/currAuctionTabs/ToParticipateFragment.java
+	added by them:      Net_App/app/src/main/java/group2/netapp/utilFragments/ProgressFragment.java
+	both added:         Net_App/app/src/main/res/drawable-hdpi/app_logo.jpg
+	both added:         Net_App/app/src/main/res/drawable-hdpi/auction_illustration.jpg
+	both added:         Net_App/app/src/main/res/drawable-hdpi/bid_illustration.jpg
+	both added:         Net_App/app/src/main/res/drawable-hdpi/january.jpg
+	both added:         Net_App/app/src/main/res/drawable-hdpi/unnamed.jpg
+	both added:         Net_App/app/src/main/res/drawable-ldpi/app_logo.jpg
+	both added:         Net_App/app/src/main/res/drawable-ldpi/auction_illustration.jpg
+	both added:         Net_App/app/src/main/res/drawable-ldpi/bid_illustration.jpg
+	both added:         Net_App/app/src/main/res/drawable-ldpi/january.jpg
+	both added:         Net_App/app/src/main/res/drawable-ldpi/unnamed.jpg
+	both added:         Net_App/app/src/main/res/drawable-mdpi/app_logo.jpg
+	both added:         Net_App/app/src/main/res/drawable-mdpi/auction_illustration.jpg
+	both added:         Net_App/app/src/main/res/drawable-mdpi/bid_illustration.jpg
+	both added:         Net_App/app/src/main/res/drawable-mdpi/january.jpg
+	both added:         Net_App/app/src/main/res/drawable-mdpi/unnamed.jpg
+	both added:         Net_App/app/src/main/res/drawable-xhdpi/app_logo.jpg
+	both added:         Net_App/app/src/main/res/drawable-xhdpi/auction_illustration.jpg
+	both added:         Net_App/app/src/main/res/drawable-xhdpi/bid_illustration.jpg
+	both added:         Net_App/app/src/main/res/drawable-xhdpi/january.jpg
+	both added:         Net_App/app/src/main/res/drawable-xhdpi/unnamed.jpg
+	both added:         Net_App/app/src/main/res/drawable-xxhdpi/app_logo.jpg
+	both added:         Net_App/app/src/main/res/drawable-xxhdpi/auction_illustration.jpg
+	both added:         Net_App/app/src/main/res/drawable-xxhdpi/back2.jpg
+	both added:         Net_App/app/src/main/res/drawable-xxhdpi/back3.jpg
+	both added:         Net_App/app/src/main/res/drawable-xxhdpi/bid_illustration.jpg
+	both added:         Net_App/app/src/main/res/drawable-xxhdpi/january.jpg
+	added by them:      Net_App/app/src/main/res/drawable-xxhdpi/location.png
+	both added:         Net_App/app/src/main/res/drawable-xxhdpi/unnamed.jpg
+	both added:         Net_App/app/src/main/res/layout/activity_auction.xml
+	added by them:      Net_App/app/src/main/res/layout/activity_bids.xml
+	both added:         Net_App/app/src/main/res/layout/activity_broadcast.xml
+	added by them:      Net_App/app/src/main/res/layout/activity_home.xml
+	both added:         Net_App/app/src/main/res/layout/expand_layout.xml
+	added by them:      Net_App/app/src/main/res/layout/fragment_bid_requests.xml
+	added by them:      Net_App/app/src/main/res/layout/fragment_feedback.xml
+	added by us:        Net_App/app/src/main/res/layout/fragment_other_bids.xml
+	both added:         Net_App/app/src/main/res/layout/fragment_profile.xml
+	added by them:      Net_App/app/src/main/res/layout/fragment_rate.xml
+	added by them:      Net_App/app/src/main/res/layout/fragment_service_rate.xml
+	added by us:        Net_App/app/src/main/res/layout/fragment_to_participate.xml
+	added by them:      Net_App/app/src/main/res/layout/user_request_card.xml
+	added by them:      Net_App/app/src/release/res/values/google_maps_api.xml
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   Net_App/.gradle/2.2.1/taskArtifacts/cache.properties.lock
+	modified:   Net_App/.gradle/2.2.1/taskArtifacts/fileHashes.bin
+	modified:   Net_App/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin
+	modified:   Net_App/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin
+	modified:   Net_App/app/build/intermediates/incremental/mergeAssets/debug/merger.xml
+	modified:   Net_App/app/build/intermediates/incremental/mergeResources/debug/merger.xml
+	modified:   Net_App/app/build/intermediates/res/debug/layout/activity_home.xml
+	modified:   Net_App/app/build/intermediates/res/debug/layout/fragment_feedback.xml
+	modified:   Net_App/app/build/intermediates/res/debug/layout/fragment_service_rate.xml
+	modified:   Net_App/app/build/intermediates/res/debug/layout/user_request_card.xml
+	modified:   Net_App/app/build/intermediates/res/debug/values-w820dp-v13/values.xml
+	deleted:    Net_App/app/src/main/java/group2/netapp/auction/bidsTabs/BidRequestsTab.java
+	modified:   Net_App/app/src/main/java/group2/netapp/auction/bidsTabs/BidsTabAdapter.java
+	deleted:    Net_App/build/intermediates/model_data.bin
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	a
+
