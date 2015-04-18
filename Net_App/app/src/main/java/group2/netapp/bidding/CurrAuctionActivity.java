@@ -1,41 +1,77 @@
 package group2.netapp.bidding;
 
 import android.app.ActionBar;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewPager;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import group2.netapp.R;
-import group2.netapp.bidding.currAuctionTabs.CurrAuctionTabsAdapter;
+import group2.netapp.auction.AuctionDashboardFragment;
+import group2.netapp.utilFragments.ProgressFragment;
+import group2.netapp.utilFragments.ServerConnect;
 
-public class CurrAuctionActivity extends FragmentActivity implements ActionBar.TabListener {
+public class CurrAuctionActivity extends FragmentActivity implements ServerConnect.OnResponseListener {
 
-    private ViewPager viewPager;
-    private CurrAuctionTabsAdapter mAdapter;
-    private ActionBar actionBar;
+    JSONArray Participating;
+    JSONArray NotParticipating;
+    JSONArray Bids;
 
-    private String[] tabs = { "To Participate", "Participating"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_curr_auction);
 
-        viewPager = (ViewPager) findViewById(R.id.curr_auc_pager);
-        actionBar = getActionBar();
-        mAdapter = new CurrAuctionTabsAdapter(getSupportFragmentManager());
+        loadData();
 
-        viewPager.setAdapter(mAdapter);
-        actionBar.setHomeButtonEnabled(false);
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+    }
 
-        for (String tabName : tabs){
-            actionBar.addTab(actionBar.newTab().setText(tabName).setTabListener(this));
-        }
+    private void loadData() {
 
-        viewPager.setOnPageChangeListener(onTabChanged);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        Fragment aDashFrag = new ProgressFragment();
+
+        ft.add(R.id.curr_auction_frame,aDashFrag,"ProgressAuction");
+//        ft.addToBackStack(null);
+        ft.commit();
+
+        ServerConnect myServer=new ServerConnect(this);
+
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+        nameValuePairs.add(new BasicNameValuePair("id_user","1"));
+        myServer.execute(getString(R.string.IP)+"getAllAuctions.php",nameValuePairs);
+
+        Log.e("AuctionActivity","Hi");
+
+        Log.d("AuctionActivity", "ProgressAuctionOpened");
+
+    }
+
+    private void showCurrAuctions() {
+
+
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        Fragment aDashFrag = new CurrAuctionFragment();
+
+        ft.replace(R.id.curr_auction_frame, aDashFrag, "CurrentAuction");
+//        ft.addToBackStack(null);
+        ft.commit();
+        Log.d("AuctionActivity", "CurrAuctionOpened");
     }
 
 
@@ -61,35 +97,52 @@ public class CurrAuctionActivity extends FragmentActivity implements ActionBar.T
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-        viewPager.setCurrentItem(tab.getPosition());
-    }
 
     @Override
-    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+    public void onResponse(JSONArray j) {
+        try {
+            Log.e("AuctionActivity",(j.length()+" hi "  ));
+            Log.e("AuctionActivity", ((JSONObject) j.get(0)).length() + " First " + ((JSONObject) j.get(0)).toString());
+            Log.e("AuctionActivity",((JSONObject)j.get(1)).length()+" Second "+((JSONObject)j.get(1)).toString());
+            Log.e("AuctionActivity",((JSONObject)j.get(2)).length()+" Third "+((JSONObject)j.get(2)).toString());
 
+            Participating =(JSONArray) ((JSONObject)j.get(0)).get("Participating");
+            NotParticipating =(JSONArray) ((JSONObject)j.get(1)).get("Not_Participating");
+            Bids =(JSONArray) ((JSONObject)j.get(2)).get("Bids");
+
+
+            Log.e("AuctionActivity",(j.length()+" hi "  ));
+            Log.e("AuctionActivity", ((JSONObject) j.get(0)).length() + " First " + ((JSONObject) j.get(0)).toString());
+            Log.e("AuctionActivity",((JSONObject)j.get(1)).length()+" Second "+((JSONObject)j.get(1)).toString());
+            Log.e("AuctionActivity",((JSONObject)j.get(2)).length()+" Third "+((JSONObject)j.get(2)).toString());
+
+            showCurrAuctions();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
-    @Override
-    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-
+    public JSONArray getParticipating() {
+        return Participating;
     }
 
-    ViewPager.OnPageChangeListener onTabChanged = new ViewPager.OnPageChangeListener() {
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+    public void setParticipating(JSONArray participating) {
+        Participating = participating;
+    }
 
-        }
+    public JSONArray getNotParticipating() {
+        return NotParticipating;
+    }
 
-        @Override
-        public void onPageSelected(int position) {
-            actionBar.setSelectedNavigationItem(position);
-        }
+    public void setNotParticipating(JSONArray notParticipating) {
+        NotParticipating = notParticipating;
+    }
 
-        @Override
-        public void onPageScrollStateChanged(int state) {
+    public JSONArray getBids() {
+        return Bids;
+    }
 
-        }
-    };
+    public void setBids(JSONArray bids) {
+        Bids = bids;
+    }
 }
