@@ -2,9 +2,7 @@ package group2.netapp.bidding;
 
 
 import android.app.ActionBar;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -15,9 +13,9 @@ import group2.netapp.R;
 import group2.netapp.bidding.currAuctionTabs.CurrAuctionTabsAdapter;
 
 /**
- * A simple {@link Fragment} subclass.
+ * A simple {@link android.support.v4.app.Fragment} subclass.
  */
-public class CurrAuctionFragment extends Fragment{
+public class CurrAuctionFragment extends Fragment {
 
     private ViewPager viewPager;
     private CurrAuctionTabsAdapter mAdapter;

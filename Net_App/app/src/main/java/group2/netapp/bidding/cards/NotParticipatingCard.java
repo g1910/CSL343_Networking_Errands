@@ -14,7 +14,7 @@ import it.gmariotti.cardslib.library.internal.Card;
 /**
  * Created by mohit on 12/4/15.
  */
-public class NotParticipatingCard extends Card{
+public class NotParticipatingCard extends Card {
 
     String auctionLocation,price,desc,idUser,start_time,end_time,idAuction,expected_time;
 

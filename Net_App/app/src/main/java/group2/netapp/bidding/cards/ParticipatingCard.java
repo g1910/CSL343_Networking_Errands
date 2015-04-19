@@ -20,7 +20,7 @@ public class ParticipatingCard extends Card {
 
 
     public ParticipatingCard(Context context, JSONObject j) {
-        super(context,R.layout.participating_card);
+        super(context, R.layout.participating_card);
         try {
             this.auctionLocation =j.getString("location");
             this.desc = j.getString("description");

@@ -11,7 +11,7 @@ import it.gmariotti.cardslib.library.internal.Card;
 /**
  * Created by gaurav on 12/4/15.
  */
-public class BidCard extends Card{
+public class BidCard extends Card {
 
     String bidLocation, bidOrder;
     int bidId;

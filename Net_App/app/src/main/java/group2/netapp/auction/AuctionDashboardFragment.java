@@ -5,7 +5,6 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.view.ViewPager;
@@ -18,7 +17,7 @@ import group2.netapp.R;
 import group2.netapp.auction.bidsTabs.BidsTabAdapter;
 
 /**
- * A simple {@link Fragment} subclass.
+ * A simple {@link android.support.v4.app.Fragment} subclass.
  */
 public class AuctionDashboardFragment extends Fragment implements ActionBar.TabListener{
 

@@ -14,12 +14,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-import group2.netapp.R;
-import group2.netapp.utilFragments.DatePickerFragment;
-import group2.netapp.utilFragments.ServerConnect;
-import group2.netapp.utilFragments.TimePickerFragment;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
@@ -27,6 +21,11 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import group2.netapp.R;
+import group2.netapp.utilFragments.DatePickerFragment;
+import group2.netapp.utilFragments.ServerConnect;
+import group2.netapp.utilFragments.TimePickerFragment;
 
 public class ServerFormActivity extends FragmentActivity implements TimePickerFragment.OnTimeSetListener, DatePickerFragment.OnDateSetListener, ServerConnect.OnResponseListener{
 
@@ -95,7 +94,7 @@ public class ServerFormActivity extends FragmentActivity implements TimePickerFr
         @Override
         public void onClick(View v) {
             String tag;
-            if(v.getId()==R.id.auc_end_time){
+            if(v.getId()== R.id.auc_end_time){
                 tag = "endtimepicker";
             }else{
                 tag = "exptimepicker";
@@ -120,7 +119,7 @@ public class ServerFormActivity extends FragmentActivity implements TimePickerFr
         @Override
         public void onClick(View v) {
             String tag;
-            if(v.getId()==R.id.auc_end_time){
+            if(v.getId()== R.id.auc_end_time){
                 tag = "enddatepicker";
             }else{
                 tag = "expdatepicker";

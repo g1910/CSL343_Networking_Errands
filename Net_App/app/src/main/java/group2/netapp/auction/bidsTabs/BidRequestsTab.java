@@ -26,41 +26,44 @@ import it.gmariotti.cardslib.library.recyclerview.view.CardRecyclerView;
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass.
  */
-public class AcceptedBids extends Fragment implements Card.OnCardClickListener{
+public class BidRequestsTab extends Fragment implements Card.OnCardClickListener {
+
+
 
     CardArrayRecyclerViewAdapter bidViewAdapter;
     CardRecyclerView bidView;
-    BidAcceptListener bListener;
+    BidRequestsListener bListener;
 
-    JSONArray acceptedBids;
+    JSONArray pendingBids;
 
-    public interface BidAcceptListener{
+    public interface BidRequestsListener{
         public void openBidRequest(int bidId);
     }
 
-    public AcceptedBids() {
+
+    public BidRequestsTab() {
         // Required empty public constructor
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        bListener = (BidAcceptListener) activity;
+        bListener = (BidRequestsListener) activity;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_accepted_bids, container, false);
+        View v = inflater.inflate(R.layout.fragment_bid_requests, container, false);
         setUpBidView(v);
 
         return v;
     }
 
     public void setUpBidView(View v){
-        acceptedBids = ((AuctionActivity) getActivity()).getRunningBids();
-        bidView = (CardRecyclerView) v.findViewById(R.id.auc_acc_bids_recyclerview);
+        pendingBids = ((AuctionActivity) getActivity()).getPendingBids();
+        bidView = (CardRecyclerView) v.findViewById(R.id.auc_bids_recyclerview);
         bidView.setHasFixedSize(false);
 
         bidViewAdapter = new CardArrayRecyclerViewAdapter(getActivity(), setBids());
@@ -75,9 +78,9 @@ public class AcceptedBids extends Fragment implements Card.OnCardClickListener{
         ArrayList<Card> cards = new ArrayList<Card>();
         JSONObject bid;
         try {
-            for(int i = 0; i< acceptedBids.length(); ++i) {
-                bid = acceptedBids.getJSONObject(i);
-                Log.d("BidRequestsTab", "Location:" + bid.getString("location") + " Order:" + bid.getJSONArray("orders").length() + " items ordered");
+            for(int i = 0; i< pendingBids.length(); ++i) {
+                bid = pendingBids.getJSONObject(i);
+                Log.d("BidRequestsTab","Location:"+bid.getString("location")+" Order:"+ bid.getJSONArray("orders").length()+" items ordered");
                 BidCard card = new BidCard(getActivity(),bid.getInt("idBid"),"Location:"+bid.getString("location"),"Order:"+ bid.getJSONArray("orders").length()+" items ordered");
                 card.setOnClickListener(this);
                 cards.add(card);
@@ -86,9 +89,9 @@ public class AcceptedBids extends Fragment implements Card.OnCardClickListener{
             e.printStackTrace();
         }
 
-
         return cards;
     }
+
 
     @Override
     public void onClick(Card card, View view) {
@@ -106,6 +109,5 @@ public class AcceptedBids extends Fragment implements Card.OnCardClickListener{
 
 
     }
-
 
 }

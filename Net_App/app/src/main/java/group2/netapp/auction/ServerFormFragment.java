@@ -3,7 +3,6 @@ package group2.netapp.auction;
 
 import android.app.Activity;
 import android.os.Bundle;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -29,7 +28,7 @@ import group2.netapp.utilFragments.ServerConnect;
 import group2.netapp.utilFragments.TimePickerFragment;
 
 /**
- * A simple {@link Fragment} subclass.
+ * A simple {@link android.support.v4.app.Fragment} subclass.
  */
 public class ServerFormFragment extends Fragment implements TimePickerFragment.OnTimeSetListener, DatePickerFragment.OnDateSetListener, ServerConnect.OnResponseListener{
 
@@ -83,7 +82,7 @@ public class ServerFormFragment extends Fragment implements TimePickerFragment.O
         @Override
         public void onClick(View v) {
             String tag;
-            if(v.getId()==R.id.auc_end_time){
+            if(v.getId()== R.id.auc_end_time){
                 tag = "endtimepicker";
             }else{
                 tag = "exptimepicker";
@@ -108,7 +107,7 @@ public class ServerFormFragment extends Fragment implements TimePickerFragment.O
         @Override
         public void onClick(View v) {
             String tag;
-            if(v.getId()==R.id.auc_end_time){
+            if(v.getId()== R.id.auc_end_time){
                 tag = "enddatepicker";
             }else{
                 tag = "expdatepicker";

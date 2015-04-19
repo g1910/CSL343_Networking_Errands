@@ -8,9 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ProgressBar;
 
-import group2.netapp.R;
-import group2.netapp.utilFragments.ServerConnect;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
@@ -19,6 +16,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import group2.netapp.R;
+import group2.netapp.utilFragments.ServerConnect;
 
 
 public class DecideAuctionActivity extends Activity implements ServerConnect.OnResponseListener{

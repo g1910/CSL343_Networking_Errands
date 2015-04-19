@@ -1,59 +1,94 @@
 package group2.netapp.auction;
 
-import android.app.ActionBar;
-import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewPager;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import group2.netapp.R;
-import group2.netapp.auction.bidsTabs.BidsTabAdapter;
+import group2.netapp.auction.bidsTabs.AcceptedBids;
+import group2.netapp.auction.bidsTabs.BidRequestsTab;
+import group2.netapp.utilFragments.ProgressFragment;
+import group2.netapp.utilFragments.ServerConnect;
 
-public class AuctionActivity extends FragmentActivity implements ActionBar.TabListener {
 
-    private ViewPager viewPager;
-    private BidsTabAdapter mAdapter;
-    private ActionBar actionBar;
-    // Tab titles
-    private String[] tabs = { "Other", "Accepted"};
+public class AuctionActivity extends FragmentActivity implements BidRequestsTab.BidRequestsListener, ServerConnect.OnResponseListener, AcceptedBids.BidAcceptListener{
+
+    JSONObject auctionDetails;
+    JSONArray pendingBids, runningBids;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auction);
 
-        viewPager = (ViewPager) findViewById(R.id.pager);
-        actionBar = getActionBar();
-        mAdapter = new BidsTabAdapter(getSupportFragmentManager());
+        loadData();
+//        openDashboard();
 
-        viewPager.setAdapter(mAdapter);
-        actionBar.setHomeButtonEnabled(false);
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+    }
 
-        // Adding Tabs
-        for (String tab_name : tabs) {
-            actionBar.addTab(actionBar.newTab().setText(tab_name)
-                    .setTabListener(this));
+    public void loadData(){
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        Fragment progressFrag = new ProgressFragment();
+        ft.add(R.id.auction_frame,progressFrag,"Progress");
+        ft.commit();
+
+        ServerConnect myServer=new ServerConnect(this);
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+        nameValuePairs.add(new BasicNameValuePair("id_user","13"));
+        Log.d("AuctionActivity","http://"+getString(R.string.IP)+"/Networks/CSL343_Networking_Errands/Server/getAuction.php");
+        myServer.execute(getString(R.string.IP)+"getAuction.php",nameValuePairs);
+
+    }
+
+    @Override
+    public void onResponse(JSONArray j) {
+        try {
+            boolean isRunning=Boolean.valueOf (((JSONObject)j.get(0)).get("isRunning").toString());
+            if (isRunning)
+            {
+                auctionDetails = j.getJSONObject(1);
+                pendingBids = j.getJSONArray(2);
+                runningBids = j.getJSONArray(3);
+                Log.d("AuctionActivity",auctionDetails.toString());
+                Log.d("AuctionActivity", pendingBids.toString());
+                openDashboard();
+            }else {
+                openServerForm();
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+    }
 
-            @Override
-            public void onPageSelected(int position) {
-                // on changing the page
-                // make respected tab selected
-                actionBar.setSelectedNavigationItem(position);
-            }
+    public void openDashboard(){
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        Fragment aDashFrag = new AuctionDashboardFragment();
+        ft.replace(R.id.auction_frame,aDashFrag,"AuctionDashboard");
+//        ft.addToBackStack(null);
+        ft.commit();
+        Log.d("AuctionActivity", "DashboardOpened");
+    }
 
-            @Override
-            public void onPageScrolled(int arg0, float arg1, int arg2) {
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int arg0) {
-            }
-        });
+    public void openServerForm(){
+        Intent i = new Intent(this,ServerFormActivity.class);
+        startActivity(i);
+        finish();
+        Log.d("AuctionActivity", "ServerForm");
     }
 
 
@@ -80,17 +115,39 @@ public class AuctionActivity extends FragmentActivity implements ActionBar.TabLi
     }
 
     @Override
-    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-        viewPager.setCurrentItem(tab.getPosition());
+    public void openBidRequest(int bidId) {
+        Bundle args = new Bundle();
+        args.putInt("id", bidId);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        Fragment aucBids = new AucBidsFragment();
+        aucBids.setArguments(args);
+        ft.replace(R.id.auction_frame, aucBids, "AuctionBids");
+        ft.addToBackStack(null);
+        ft.commit();
+        Log.d("AuctionActivity", "AucBids");
     }
 
-    @Override
-    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
-
+    public JSONObject getAuctionDetails() {
+        return auctionDetails;
     }
 
-    @Override
-    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+    public void setAuctionDetails(JSONObject auctionDetails) {
+        this.auctionDetails = auctionDetails;
+    }
 
+    public JSONArray getPendingBids() {
+        return pendingBids;
+    }
+
+    public void setPendingBids(JSONArray pendingBids) {
+        this.pendingBids = pendingBids;
+    }
+
+    public JSONArray getRunningBids() {
+        return runningBids;
+    }
+
+    public void setRunningBids(JSONArray runningBids) {
+        this.runningBids = runningBids;
     }
 }

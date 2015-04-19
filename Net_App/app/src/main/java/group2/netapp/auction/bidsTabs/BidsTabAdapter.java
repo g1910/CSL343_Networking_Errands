@@ -21,7 +21,7 @@ public class BidsTabAdapter extends FragmentPagerAdapter {
             case 0:
                 return new AcceptedBids();
             case 1:
-                return new OtherBids();
+                return new BidRequestsTab();
 
         }
         return null;
