@@ -1,46 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
-    <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/notparticipatingratings"
+        android:layout_alignParentLeft="true"
+        android:isIndicator="true"
+        style="?android:attr/ratingBarStyleSmall" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/map"
-            android:src="@drawable/sea"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="rated by : 0 users"
+        android:id="@+id/notparticipatingnumRated"
+        android:layout_alignParentTop="true"
+        android:paddingLeft="15dp"
+        android:layout_toRightOf="@+id/notparticipatingratings"
+        android:layout_toEndOf="@+id/notparticipatingratings" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Price"
-            android:id="@+id/price"
-            android:layout_gravity="center_vertical" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location"
+        android:textStyle="bold"
+        android:textColor="#00dd00"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/notparticipatinglocation"
+        android:layout_gravity="center_vertical"
+        android:layout_below="@+id/notparticipatingratings"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/map"
-            android:text="Location"
-            android:id="@+id/location"
-            android:layout_gravity="center_vertical" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Here is the desc"
-            android:id="@+id/desc"
-            android:layout_below="@+id/map"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="5dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Here is the desc"
+        android:id="@+id/notparticipatingdesc"
+        android:layout_below="@+id/notparticipatingprice"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
-    </RelativeLayout>
 
-</LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Expected Delivery : "
+        android:id="@+id/notparticipatingexpected_time"
+        android:layout_below="@+id/notparticipatinglocation"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bidding Ends at : "
+        android:id="@+id/notparticipatingend_time"
+        android:layout_below="@+id/notparticipatingexpected_time"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Price"
+        android:textStyle="bold"
+        android:textColor="#00dd00"
+        android:id="@+id/notparticipatingprice"
+        android:layout_gravity="center_vertical"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_alignBaseline="@+id/notparticipatingend_time"
+        android:layout_alignBottom="@+id/notparticipatingend_time"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="23dp"
+        android:layout_marginEnd="23dp" />
+
+
+</RelativeLayout>
+
