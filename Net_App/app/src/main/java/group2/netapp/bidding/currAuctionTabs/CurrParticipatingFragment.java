@@ -70,7 +70,7 @@ public class CurrParticipatingFragment extends Fragment {
 
             ParticipatingCard card = null;
             try {
-                card = new ParticipatingCard(getActivity(),(JSONObject)Participating.get(0));
+                card = new ParticipatingCard(getActivity(),(JSONObject)Participating.get(i));
             } catch (JSONException e) {
                 e.printStackTrace();
             }

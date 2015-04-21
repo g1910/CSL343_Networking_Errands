@@ -70,15 +70,13 @@
         android:text="Price"
         android:textStyle="bold"
         android:textColor="#00dd00"
+        android:paddingRight="10dp"
         android:id="@+id/participatingprice"
         android:layout_gravity="center_vertical"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_alignBaseline="@+id/participatingend_time"
         android:layout_alignBottom="@+id/participatingend_time"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="23dp"
-        android:layout_marginEnd="23dp" />
+        android:layout_alignParentEnd="true" />
 
 
 </RelativeLayout>

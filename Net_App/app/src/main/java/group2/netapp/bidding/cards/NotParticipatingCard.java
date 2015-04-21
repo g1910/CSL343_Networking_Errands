@@ -54,7 +54,7 @@ public class NotParticipatingCard extends Card {
         TextView expected_timeView = (TextView)parent.findViewById(R.id.notparticipatingexpected_time);
 
         auctionLocView.setText(auctionLocation);
-        priceView.setText(price);
+        priceView.setText("₹" + price);
         descView.setText(desc);
         ratingsView.setRating(Float.parseFloat(ratings));
         numRatedView.setText("rated by : "+numRated+" users");

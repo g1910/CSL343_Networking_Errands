@@ -66,7 +66,7 @@ public class ToParticipateFragment extends Fragment {
 
             NotParticipatingCard card = null;
             try {
-                card = new NotParticipatingCard(getActivity(),(JSONObject)notParticipating.get(0));
+                card = new NotParticipatingCard(getActivity(),(JSONObject)notParticipating.get(i));
             } catch (JSONException e) {
                 e.printStackTrace();
             }

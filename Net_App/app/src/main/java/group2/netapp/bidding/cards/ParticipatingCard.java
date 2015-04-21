@@ -31,7 +31,7 @@ public class ParticipatingCard extends Card {
             this.end_time = j.getString("end_time");
             this.idAuction = j.getString("idAuction");
             this.expected_time = j.getString("expctd_time");
-            this.price = "0";
+            this.price = j.getString("Price");
             this.ratings=j.getString("rating");
             this.numRated=j.getString("numRated");
         } catch (JSONException e) {
@@ -53,7 +53,7 @@ public class ParticipatingCard extends Card {
         TextView expected_timeView = (TextView)parent.findViewById(R.id.participatingexpected_time);
 
         auctionLocView.setText(auctionLocation);
-        priceView.setText(price);
+        priceView.setText("₹" + price);
         descView.setText(desc);
         ratingsView.setRating(Float.parseFloat(ratings));
         numRatedView.setText("rated by : "+numRated+" users");
