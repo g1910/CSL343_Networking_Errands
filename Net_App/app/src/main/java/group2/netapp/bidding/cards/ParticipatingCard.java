@@ -3,6 +3,7 @@ package group2.netapp.bidding.cards;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -17,6 +18,7 @@ import it.gmariotti.cardslib.library.internal.Card;
 public class ParticipatingCard extends Card {
 
     String auctionLocation,price,desc,idUser,start_time,end_time,idAuction,expected_time;
+    String ratings,numRated;
 
 
     public ParticipatingCard(Context context, JSONObject j) {
@@ -30,6 +32,8 @@ public class ParticipatingCard extends Card {
             this.idAuction = j.getString("idAuction");
             this.expected_time = j.getString("expctd_time");
             this.price = "0";
+            this.ratings=j.getString("rating");
+            this.numRated=j.getString("numRated");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -43,10 +47,19 @@ public class ParticipatingCard extends Card {
         TextView auctionLocView = (TextView) parent.findViewById(R.id.participatinglocation);
         TextView priceView = (TextView) parent.findViewById(R.id.participatingprice);
         TextView descView = (TextView)parent.findViewById(R.id.participatingdesc);
+        RatingBar ratingsView = (RatingBar)parent.findViewById(R.id.ratings);
+        TextView numRatedView = (TextView)parent.findViewById(R.id.numRated);
+        TextView end_timeView = (TextView)parent.findViewById(R.id.end_time);
+        TextView expected_timeView = (TextView)parent.findViewById(R.id.expected_time);
 
         auctionLocView.setText(auctionLocation);
         priceView.setText(price);
         descView.setText(desc);
+        ratingsView.setRating(Float.parseFloat(ratings));
+        numRatedView.setText("rated by : "+numRated+" users");
+        end_timeView.setText("Bidding Ends in : "+end_time);
+        expected_timeView.setText("Expected Delivery : "+expected_time);
+
     }
 
     public String getAuctionLocation() {
