@@ -1,6 +1,7 @@
 <?php
 	include 'config.php';
-	$user_id=$_POST['id_user'];
+	include 'getRating.php';
+	$user_id=$_GET['id_user'];
 	date_default_timezone_set("Asia/Kolkata");
 	$time=date( 'Y-m-d H:i:s', time());
 //	echo $time;
@@ -13,6 +14,10 @@
 
 	while ($row=mysqli_fetch_assoc($result))
 	{
+		$rating=getRating($row['idUser']);
+	//	print json_encode($rating);
+		$row['rating']=$rating[0]['rating'];
+		$row['numRated']=$rating[0]['numRated'];
 		$tout[]=$row;
 	}
 	$arr = array(
@@ -28,6 +33,10 @@
 
 	while ($row=mysqli_fetch_assoc($result))
 	{
+		$rating=getRating($row['idUser']);
+	//	print json_encode($rating);
+		$row['rating']=$rating[0]['rating'];
+		$row['numRated']=$rating[0]['numRated'];
 		$tout[]=$row;
 	}
 	$arr = array(
