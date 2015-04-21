@@ -18,10 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import group2.netapp.R;
+import group2.netapp.bidding.currAuctionTabs.ToParticipateFragment;
 import group2.netapp.utilFragments.ProgressFragment;
 import group2.netapp.utilFragments.ServerConnect;
 
-public class CurrAuctionActivity extends FragmentActivity implements ServerConnect.OnResponseListener {
+public class CurrAuctionActivity extends FragmentActivity implements ToParticipateFragment.BidInActivityListener,ServerConnect.OnResponseListener {
 
     JSONArray Participating;
     JSONArray NotParticipating;
@@ -97,6 +98,22 @@ public class CurrAuctionActivity extends FragmentActivity implements ServerConne
 
 
     @Override
+    public void openBidRequest(int bidId) {
+        Log.d("Requests","Hello asdsad");
+        Bundle args = new Bundle();
+        args.putInt("id", bidId);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        Fragment BidinAuction = new BidInAuction();
+        Log.d("Requests","Hello asdsad");
+        BidinAuction.setArguments(args);
+        ft.replace(R.id.curr_auction_frame, BidinAuction, "BidInAuction");
+        ft.addToBackStack(null);
+        Log.d("Requests","Hello asdsad");
+        ft.commit();
+        Log.d("AuctionActivity", "BidInAuction");
+    }
+
+    @Override
     public void onResponse(JSONArray j) {
         try {
             Log.e("AuctionActivity",(j.length()+" hi "  ));
@@ -119,6 +136,7 @@ public class CurrAuctionActivity extends FragmentActivity implements ServerConne
             e.printStackTrace();
         }
     }
+
 
     public JSONArray getParticipating() {
         return Participating;
@@ -143,4 +161,5 @@ public class CurrAuctionActivity extends FragmentActivity implements ServerConne
     public void setBids(JSONArray bids) {
         Bids = bids;
     }
+
 }
