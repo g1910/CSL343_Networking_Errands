@@ -47,10 +47,10 @@ public class ParticipatingCard extends Card {
         TextView auctionLocView = (TextView) parent.findViewById(R.id.participatinglocation);
         TextView priceView = (TextView) parent.findViewById(R.id.participatingprice);
         TextView descView = (TextView)parent.findViewById(R.id.participatingdesc);
-        RatingBar ratingsView = (RatingBar)parent.findViewById(R.id.ratings);
-        TextView numRatedView = (TextView)parent.findViewById(R.id.numRated);
-        TextView end_timeView = (TextView)parent.findViewById(R.id.end_time);
-        TextView expected_timeView = (TextView)parent.findViewById(R.id.expected_time);
+        RatingBar ratingsView = (RatingBar)parent.findViewById(R.id.participatingratings);
+        TextView numRatedView = (TextView)parent.findViewById(R.id.participatingnumRated);
+        TextView end_timeView = (TextView)parent.findViewById(R.id.participatingend_time);
+        TextView expected_timeView = (TextView)parent.findViewById(R.id.participatingexpected_time);
 
         auctionLocView.setText(auctionLocation);
         priceView.setText(price);
