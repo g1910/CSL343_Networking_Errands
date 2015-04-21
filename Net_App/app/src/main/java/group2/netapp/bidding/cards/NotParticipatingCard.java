@@ -17,7 +17,8 @@ import it.gmariotti.cardslib.library.internal.Card;
  */
 public class NotParticipatingCard extends Card {
 
-    String auctionLocation,price,desc,idUser,start_time,end_time,idAuction,expected_time;
+    String auctionLocation,price,desc,idUser,start_time,end_time,expected_time;
+    int idAuction;
     String ratings,numRated;
 
     public NotParticipatingCard(Context context, JSONObject j) {
@@ -29,7 +30,7 @@ public class NotParticipatingCard extends Card {
             this.idUser = j.getString("idUser");
             this.start_time = j.getString("start_time");
             this.end_time = j.getString("end_time");
-            this.idAuction = j.getString("idAuction");
+            this.idAuction = j.getInt("idAuction");
             this.expected_time = j.getString("expctd_time");
             this.price = "0";
             this.ratings=j.getString("rating");
@@ -110,11 +111,11 @@ public class NotParticipatingCard extends Card {
         this.end_time = end_time;
     }
 
-    public String getIdAuction() {
+    public int getIdAuction() {
         return idAuction;
     }
 
-    public void setIdAuction(String idAuction) {
+    public void setIdAuction(int idAuction) {
         this.idAuction = idAuction;
     }
 
