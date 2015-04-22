@@ -19,11 +19,13 @@ public class ParticipatingCard extends Card {
 
     String auctionLocation,price,desc,idUser,start_time,end_time,idAuction,expected_time;
     String ratings,numRated;
+    int index;
 
 
-    public ParticipatingCard(Context context, JSONObject j) {
+    public ParticipatingCard(Context context, JSONObject j,int i) {
         super(context, R.layout.participating_card);
         try {
+            this.index=i;
             this.auctionLocation =j.getString("location");
             this.desc = j.getString("description");
             this.idUser = j.getString("idUser");
@@ -124,5 +126,29 @@ public class ParticipatingCard extends Card {
 
     public void setExpected_time(String expected_time) {
         this.expected_time = expected_time;
+    }
+
+    public String getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(String ratings) {
+        this.ratings = ratings;
+    }
+
+    public String getNumRated() {
+        return numRated;
+    }
+
+    public void setNumRated(String numRated) {
+        this.numRated = numRated;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 }
