@@ -18,13 +18,14 @@ import it.gmariotti.cardslib.library.internal.Card;
 public class NotParticipatingCard extends Card {
 
     String auctionLocation,price,desc,idUser,start_time,end_time,expected_time;
-    int idAuction;
+    int idAuction,index;
     String ratings,numRated;
 
-    public NotParticipatingCard(Context context, JSONObject j) {
+    public NotParticipatingCard(Context context, JSONObject j,int i) {
         super(context, R.layout.not_participating_card);
 
         try {
+            this.index=i;
             this.auctionLocation =j.getString("location");
             this.desc = j.getString("description");
             this.idUser = j.getString("idUser");
@@ -125,5 +126,29 @@ public class NotParticipatingCard extends Card {
 
     public void setExpected_time(String expected_time) {
         this.expected_time = expected_time;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    public String getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(String ratings) {
+        this.ratings = ratings;
+    }
+
+    public String getNumRated() {
+        return numRated;
+    }
+
+    public void setNumRated(String numRated) {
+        this.numRated = numRated;
     }
 }
