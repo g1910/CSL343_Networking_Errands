@@ -1,9 +1,11 @@
 package group2.netapp.bidding.currAuctionTabs;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,15 +27,25 @@ import it.gmariotti.cardslib.library.recyclerview.view.CardRecyclerView;
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass.
  */
-public class CurrParticipatingFragment extends Fragment {
+public class CurrParticipatingFragment extends Fragment implements Card.OnCardClickListener {
 
     CardArrayRecyclerViewAdapter auctionViewAdapter;
     CardRecyclerView auctionView;
+    ParticipatingBidListener blistener;
+
+    public interface ParticipatingBidListener {
+        public void openParticipatingBid(int index);
+    }
 
     public CurrParticipatingFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        blistener = (ParticipatingBidListener) activity;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,7 +82,8 @@ public class CurrParticipatingFragment extends Fragment {
 
             ParticipatingCard card = null;
             try {
-                card = new ParticipatingCard(getActivity(),(JSONObject)Participating.get(i));
+                card = new ParticipatingCard(getActivity(),(JSONObject)Participating.get(i),i);
+                card.setOnClickListener(this);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -82,4 +95,11 @@ public class CurrParticipatingFragment extends Fragment {
     }
 
 
+    @Override
+    public void onClick(Card card, View view) {
+        ParticipatingCard c=(ParticipatingCard)card;
+        Log.d("Requests", "COPEY Added");
+        blistener.openParticipatingBid(c.getIndex());
+
+    }
 }
