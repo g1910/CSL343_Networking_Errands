@@ -166,7 +166,7 @@ public class ServiceFeedbackFragment extends Fragment {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
         }*/
-        ((HomeActivity) activity).onSectionAttached(3);
+        ((HomeActivity) activity).onSectionAttached(2);
     }
 
     @Override

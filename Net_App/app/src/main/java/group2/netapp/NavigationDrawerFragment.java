@@ -3,6 +3,8 @@ package group2.netapp;
 
 import android.app.Activity;
 import android.app.ActionBar;
+import android.content.Context;
+import android.media.Image;
 import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -20,7 +22,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -98,7 +102,7 @@ public class NavigationDrawerFragment extends Fragment {
                 selectItem(position);
             }
         });
-        mDrawerListView.setAdapter(new ArrayAdapter<String>(
+        /*mDrawerListView.setAdapter(new ArrayAdapter<String>(
                 getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_1,
                 android.R.id.text1,
@@ -109,7 +113,18 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.title_section3),
                         getString(R.string.title_section4),
                         getString(R.string.title_section5),
-                }));
+                }));*/
+        NavigationItemAdapter adapter = new NavigationItemAdapter(getActivity());
+
+
+        adapter.add(new NavigationItem("Home",R.drawable.home_flat));
+        adapter.add(new NavigationItem("Profile",R.drawable.person_flat));
+        adapter.add(new NavigationItem("Feedbacks",R.drawable.message_flat));
+        adapter.add(new NavigationItem("Rate and Review",R.drawable.heart_flat));
+        adapter.add(new NavigationItem("User Requests",R.drawable.signal_flat));
+        adapter.add(new NavigationItem("Logout",R.drawable.logout_flat));
+
+        mDrawerListView.setAdapter(adapter);
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
     }
@@ -285,4 +300,36 @@ public class NavigationDrawerFragment extends Fragment {
          */
         void onNavigationDrawerItemSelected(int position);
     }
+}
+class NavigationItem {
+    public String tag;
+    public int iconRes;
+
+    public NavigationItem(String tag, int iconRes) {
+        this.tag = tag;
+        this.iconRes = iconRes;
+    }
+}
+
+class NavigationItemAdapter extends ArrayAdapter<NavigationItem> {
+
+    public NavigationItemAdapter(Context context) {
+        super(context, 0);
+    }
+
+    public View getView(int position, View convertView, ViewGroup parent) {
+        if (convertView == null) {
+            convertView = LayoutInflater.from(getContext()).inflate(
+                    R.layout.navigationrow, null);
+        }
+        ImageView icon = (ImageView) convertView
+                .findViewById(R.id.navigation_icon);
+        icon.setImageResource(getItem(position).iconRes);
+        TextView title = (TextView) convertView
+                .findViewById(R.id.navigation_text);
+        title.setText(getItem(position).tag);
+
+        return convertView;
+    }
+
 }

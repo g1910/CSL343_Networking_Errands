@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "group2.netapp"
-        minSdkVersion 15
+        minSdkVersion 14
         targetSdkVersion 21
     }
 

@@ -98,6 +98,9 @@ public class HomeActivity extends FragmentActivity
                 break;
             case 0:
                 fragment=new HomeFragment();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, fragment,"home")
+                        .commit();
                 break;
             case 5:
                 SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -111,9 +114,9 @@ public class HomeActivity extends FragmentActivity
                 break;
 
         }
-        if(position!=5)
+        if(position!=5 && position!=0)
         fragmentManager.beginTransaction()
-                .replace(R.id.container, fragment)
+                .replace(R.id.container, fragment,"other")
                 .commit();
     }
 
@@ -165,6 +168,22 @@ public class HomeActivity extends FragmentActivity
     }
 
     @Override
+    public void onBackPressed() {
+        Fragment fragment;
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        fragment = fragmentManager.findFragmentByTag("other");
+        if(fragment != null && fragment.isVisible()){
+            Fragment homefragment=new HomeFragment();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, homefragment,"home")
+                    .commit();
+        }
+        else
+        super.onBackPressed();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -176,6 +195,7 @@ public class HomeActivity extends FragmentActivity
         {
 
         }
+
 
         return super.onOptionsItemSelected(item);
     }

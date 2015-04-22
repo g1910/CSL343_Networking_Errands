@@ -87,6 +87,16 @@
                 android:focusable="false"
                 android:textColor="#ffa7a7a7" />
 
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/phone_flat"
+                android:id="@+id/phoneicon"
+
+                android:layout_alignTop="@id/editText3"
+                android:layout_toLeftOf="@id/editText3"
+                />
+
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -107,6 +117,16 @@
                 android:focusable="false"
                 android:textColor="#ffa7a7a7"
                 android:gravity="center_vertical"/>
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/location_flat"
+                android:id="@+id/locationicon"
+                android:layout_below="@id/phoneicon"
+                android:layout_alignTop="@id/editText4"
+                android:layout_toLeftOf="@id/editText4"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
