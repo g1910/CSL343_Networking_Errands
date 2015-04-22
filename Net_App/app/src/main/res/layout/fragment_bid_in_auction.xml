@@ -1,13 +1,101 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" tools:context="group2.netapp.bidding.BidInAuction">
+
+
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bidinauctionratings"
+        android:layout_alignParentLeft="true"
+        android:isIndicator="true"
+        style="?android:attr/ratingBarStyleSmall" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="rated by : 0 users"
+        android:id="@+id/bidinauctionnumRated"
+        android:layout_alignParentTop="true"
+        android:paddingLeft="15dp"
+        android:layout_toRightOf="@+id/bidinauctionratings"
+        android:layout_toEndOf="@+id/bidinauctionratings" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location"
+        android:textStyle="bold"
+        android:textColor="#00dd00"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/bidinauctionlocation"
+        android:layout_gravity="center_vertical"
+        android:layout_below="@+id/bidinauctionratings"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Here is the desc"
+        android:id="@+id/bidinauctiondesc"
+        android:layout_below="@+id/bidinauctionprice"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/auction_location"
-        android:layout_gravity="center_horizontal|top" />
+        android:text="Expected Delivery : "
+        android:id="@+id/bidinauctionexpected_time"
+        android:layout_below="@+id/bidinauctionlocation"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
-</FrameLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bidding Ends at : "
+        android:id="@+id/bidinauctionend_time"
+        android:layout_below="@+id/bidinauctionexpected_time"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Price"
+        android:textStyle="bold"
+        android:textColor="#00dd00"
+        android:paddingRight="10dp"
+        android:id="@+id/bidinauctionprice"
+        android:layout_gravity="center_vertical"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_alignBottom="@+id/bidinauctionend_time"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Bid"
+        android:id="@+id/bidinauctionnewbid"
+        android:layout_below="@+id/bidinauctiondesc"
+        android:layout_alignRight="@+id/bidinauctionnumRated"
+        android:layout_alignEnd="@+id/bidinauctionnumRated"
+        android:layout_marginRight="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="49dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Old Bid"
+        android:id="@+id/bidinauctionoldbid"
+        android:layout_alignTop="@+id/bidinauctionnewbid"
+        android:layout_toLeftOf="@+id/bidinauctionprice"
+        android:layout_toStartOf="@+id/bidinauctionprice" />
+
+</RelativeLayout>

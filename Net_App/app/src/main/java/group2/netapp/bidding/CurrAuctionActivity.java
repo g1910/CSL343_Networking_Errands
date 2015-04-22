@@ -98,19 +98,21 @@ public class CurrAuctionActivity extends FragmentActivity implements ToParticipa
 
 
     @Override
-    public void openBidRequest(int bidId) {
-        Log.d("Requests","Hello asdsad");
+    public void openBidRequest(int index) {
         Bundle args = new Bundle();
-        args.putInt("id", bidId);
+        args.putInt("index", index);
+      //  args.putString("auctionLocation",auctionLocation);
+
+       // ,price,desc,idUser,start_time,end_time,expected_time;
+     //   int idAuction;
+     //   String ratings,numRated;
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         Fragment BidinAuction = new BidInAuction();
-        Log.d("Requests","Hello asdsad");
+
         BidinAuction.setArguments(args);
         ft.replace(R.id.curr_auction_frame, BidinAuction, "BidInAuction");
         ft.addToBackStack(null);
-        Log.d("Requests","Hello asdsad");
         ft.commit();
-        Log.d("AuctionActivity", "BidInAuction");
     }
 
     @Override
