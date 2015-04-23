@@ -5,6 +5,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import group2.netapp.R;
 import it.gmariotti.cardslib.library.internal.Card;
 
@@ -15,12 +18,16 @@ public class RunningBidCard extends Card {
 
     String bidLocation, bidOrder;
     int bidId;
-    public RunningBidCard(Context context, int bidId, String bidLocation, String bidOrder) {
-        super(context, R.layout.card_auction_bid);
+    public RunningBidCard(Context context, JSONObject j,int i) {
+        super(context, R.layout.running_bid_card);
 
-        this.bidLocation = bidLocation;
-        this.bidOrder = bidOrder;
-        this.bidId = bidId;
+        try {
+            this.bidLocation = j.getString("location");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        //      this.bidOrder = bidOrder;
+    //    this.bidId = bidId;
     }
 
     @Override
@@ -28,10 +35,10 @@ public class RunningBidCard extends Card {
         super.setupInnerViewElements(parent, view);
 
         TextView bidLocationView = (TextView) parent.findViewById(R.id.auc_bid_location);
-        TextView bidOrderView = (TextView) parent.findViewById(R.id.auc_bid_order_summary);
+//        TextView bidOrderView = (TextView) parent.findViewById(R.id.auc_bid_order_summary);
 
         bidLocationView.setText(bidLocation);
-        bidOrderView.setText(bidOrder);
+  //      bidOrderView.setText(bidOrder);
     }
 
     public String getBidLocation() {

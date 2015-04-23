@@ -3,16 +3,25 @@ package group2.netapp.bidding;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 import group2.netapp.R;
+import group2.netapp.auction.cards.RunningBidCard;
+import group2.netapp.bidding.cards.NotParticipatingCard;
+import it.gmariotti.cardslib.library.internal.Card;
+import it.gmariotti.cardslib.library.recyclerview.internal.CardArrayRecyclerViewAdapter;
+import it.gmariotti.cardslib.library.recyclerview.view.CardRecyclerView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,11 +29,13 @@ import group2.netapp.R;
 public class BidInAuction extends Fragment {
 
     int index;
-    String auctionLocation,price,desc,idUser,start_time,end_time,expected_time;
-    int idAuction;
-    String ratings,numRated;
+    CardArrayRecyclerViewAdapter auctionViewAdapter;
+    CardRecyclerView auctionView;
+//    String auctionLocation,price,desc,idUser,start_time,end_time,expected_time;
+  //  int idAuction;
+    //String ratings,numRated;
 
-    JSONObject j;
+//    JSONObject j;
 
     public BidInAuction() {
         // Required empty public constructor
@@ -48,6 +59,18 @@ public class BidInAuction extends Fragment {
 
             if(index != -1){
 
+                auctionView = (CardRecyclerView) v.findViewById(R.id.runningbids_recyclerview);
+                auctionView.setHasFixedSize(false);
+
+                auctionViewAdapter = new CardArrayRecyclerViewAdapter(getActivity(), setDummyBids());
+                auctionView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+                if(auctionView != null){
+                    auctionView.setAdapter(auctionViewAdapter);
+                }
+
+
+/*
                 try {
                     j=(JSONObject)((CurrAuctionActivity)getActivity()).getNotParticipating().get(index);
                     this.auctionLocation =j.getString("location");
@@ -81,13 +104,35 @@ public class BidInAuction extends Fragment {
                 end_timeView.setText("Bidding Ends in : "+end_time);
                 expected_timeView.setText("Expected Delivery : "+expected_time);
 
-
+*/
 
          //       order.setText("Order: " + b.getString("order","No order specified"));
             }
 
         }
 
+    }
+
+    public ArrayList<Card> setDummyBids(){
+        ArrayList<Card> cards = new ArrayList<Card>();
+
+        JSONArray bids = ((CurrAuctionActivity)getActivity()).getBids();
+
+        for(int i = 0; i <  bids.length() ;++i) {
+            //      Card card = new Card(getActivity());
+
+            RunningBidCard card = null;
+            try {
+                card = new RunningBidCard(getActivity(),(JSONObject)bids.get(i),i);
+//                card.setOnClickListener(this);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            cards.add(card);
+
+        }
+
+        return cards;
     }
 
 }
