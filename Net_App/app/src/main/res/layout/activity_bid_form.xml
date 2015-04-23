@@ -1,0 +1,147 @@
+
+<ScrollView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context="group2.netapp.bidding.BidFormActivity"
+    android:id="@+id/BidFormScrollView"
+    >
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin" tools:context="group2.netapp.bidding.BidFormActivity">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Enter Bid Details"
+            android:id="@+id/Biddetails"
+            android:paddingLeft="20dp"
+            android:layout_gravity="top" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Location"
+            android:id="@+id/Locationtext"
+            android:layout_gravity="left|top"
+            android:paddingLeft="20dp"
+            android:layout_below="@id/Biddetails"
+
+            android:paddingTop="20dp"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/locationfield"
+            android:layout_gravity="right"
+            android:ems="7"
+            android:inputType="textCapSentences"
+            android:maxLength="45"
+            android:layout_below="@id/Biddetails"
+            android:paddingTop="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Description"
+            android:id="@+id/Descriptiontext"
+            android:layout_gravity="left|top"
+            android:layout_below="@id/locationfield"
+            android:paddingTop="10dp"
+            android:paddingLeft="20dp"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/descriptionfield"
+            android:layout_gravity="right"
+            android:ems="7"
+            android:inputType="textMultiLine|textLongMessage|textCapSentences"
+            android:maxLength="140"
+            android:minLines="2"
+            android:maxLines="5"
+            android:layout_alignTop="@+id/Descriptiontext"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30dp"/>
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/cart_flat"
+            android:id="@+id/cartIcon"
+            android:layout_below="@id/descriptionfield"
+            android:layout_marginLeft="5dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/cartIcon"
+            android:layout_alignTop="@id/cartIcon"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:text="Orders"/>
+
+        <it.gmariotti.cardslib.library.view.CardListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cartIcon"
+            android:id="@+id/BidFormCardList">
+
+        </it.gmariotti.cardslib.library.view.CardListView>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Bid amount"
+            android:id="@+id/BidAmounttext"
+            android:layout_gravity="left|top"
+
+            android:paddingTop="10dp"
+            android:paddingLeft="20dp"
+            android:layout_below="@id/BidFormCardList" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/BidAmountfield"
+            android:layout_gravity="right"
+            android:ems="7"
+            android:inputType="numberDecimal"
+            android:layout_alignTop="@+id/BidAmounttext"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30dp" />
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Place Bid"
+            android:id="@+id/PlaceBid_button"
+            android:layout_below="@id/BidAmountfield"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            />
+
+
+
+
+
+    </RelativeLayout>
+
+</ScrollView>
