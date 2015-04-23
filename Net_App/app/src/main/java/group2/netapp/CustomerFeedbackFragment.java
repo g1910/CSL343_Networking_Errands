@@ -2,6 +2,7 @@ package group2.netapp;
 
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -55,7 +56,7 @@ public class CustomerFeedbackFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private ProgressDialog progressdialoglistview;
     private static int counter = 1;
     private CardListView listView;
     ArrayList<Card> cards;
@@ -114,7 +115,11 @@ public class CustomerFeedbackFragment extends Fragment {
         if (listView != null) {
             listView.setAdapter(cardListAdapter);
         }
-
+        progressdialoglistview = new ProgressDialog(getActivity());
+        progressdialoglistview.setMessage("Loading");
+        progressdialoglistview.setCanceledOnTouchOutside(true);
+        progressdialoglistview.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressdialoglistview.setIndeterminate(true);
         Button LoadMore = new Button(getActivity().getApplicationContext());
         LoadMore.setText("Load More");
 
@@ -173,6 +178,8 @@ public class CustomerFeedbackFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        if(asynctask.getStatus() == AsyncTask.Status.PENDING || asynctask.getStatus() == AsyncTask.Status.RUNNING)
+            asynctask.cancel(true);
     }
 
     public interface OnFragmentInteractionListener {
@@ -196,6 +203,12 @@ public class CustomerFeedbackFragment extends Fragment {
         @Override
         protected void onCancelled() {
             running = false;
+        }
+
+        @Override
+        protected  void onPreExecute()
+        {
+            progressdialoglistview.show();
         }
 
         @Override
@@ -232,7 +245,6 @@ public class CustomerFeedbackFragment extends Fragment {
                 try {
                     JsonParser parser = new JsonParser();
                     JsonObject data = parser.parse(reader).getAsJsonObject();
-                    System.out.println("DARNN" + data);
                     GsonBuilder gsonBuilder = new GsonBuilder();
                     Gson gson = gsonBuilder.create();
                     Type listType = new TypeToken<List<FeedbackData>>() {
@@ -245,7 +257,7 @@ public class CustomerFeedbackFragment extends Fragment {
 
                 cards.clear();
                 if(posts==null){
-                    Toast.makeText(getActivity().getApplicationContext(), "No Feedbacks found", Toast.LENGTH_SHORT).show();;
+                    Toast.makeText(getActivity().getApplicationContext(), "No Customer Feedbacks found", Toast.LENGTH_SHORT).show();;
                 }
                 if (posts != null && running)
                     for (int i = 0; i < posts.size(); ++i) {
@@ -254,7 +266,8 @@ public class CustomerFeedbackFragment extends Fragment {
                         cards.add(card);
                     }
                 cardListAdapter.notifyDataSetChanged();
-
+                if(progressdialoglistview.isShowing())
+                    progressdialoglistview.dismiss();
                 try {
                     reader.close();
                     is.close();

@@ -1,6 +1,7 @@
 package group2.netapp;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -61,7 +62,7 @@ public class CustomerRateFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private ProgressDialog progressdialoglistview;
     private static int counter = 1;
     private CardListView listView;
     ArrayList<Card> cards;
@@ -112,6 +113,12 @@ public class CustomerRateFragment extends Fragment {
         if (listView != null) {
             listView.setAdapter(cardListAdapter);
         }
+
+        progressdialoglistview = new ProgressDialog(getActivity());
+        progressdialoglistview.setMessage("Loading");
+        progressdialoglistview.setCanceledOnTouchOutside(true);
+        progressdialoglistview.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressdialoglistview.setIndeterminate(true);
 
         Button LoadMore = new Button(getActivity().getApplicationContext());
         LoadMore.setText("Load More");
@@ -171,6 +178,8 @@ public class CustomerRateFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        if(asynctask.getStatus() == AsyncTask.Status.PENDING || asynctask.getStatus() == AsyncTask.Status.RUNNING)
+            asynctask.cancel(true);
     }
 
     /**
@@ -199,6 +208,12 @@ public class CustomerRateFragment extends Fragment {
         {
             list=l;
             host=h;
+        }
+
+        @Override
+        protected  void onPreExecute()
+        {
+                progressdialoglistview.show();
         }
 
         @Override
@@ -254,7 +269,7 @@ public class CustomerRateFragment extends Fragment {
 
                 cards.clear();
                 if(posts==null){
-                    Toast.makeText(getActivity().getApplicationContext(),"No pending reviews found",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplicationContext(),"No pending customer reviews found",Toast.LENGTH_SHORT).show();
                 }
                 if (posts != null && running)
                     for (int i = 0; i < posts.size(); ++i) {
@@ -267,7 +282,8 @@ public class CustomerRateFragment extends Fragment {
                         cards.add(card);
                     }
                 cardListAdapter.notifyDataSetChanged();
-
+                if(progressdialoglistview.isShowing())
+                    progressdialoglistview.dismiss();
                 try {
                     reader.close();
                     is.close();
