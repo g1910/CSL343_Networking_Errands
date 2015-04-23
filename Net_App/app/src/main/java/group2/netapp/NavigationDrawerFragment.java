@@ -4,7 +4,10 @@ package group2.netapp;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
+import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -14,6 +17,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -26,6 +30,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.InputStream;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -94,8 +102,9 @@ public class NavigationDrawerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mDrawerListView = (ListView) inflater.inflate(
+        View rootView = inflater.inflate(
                 R.layout.fragment_navigation_drawer, container, false);
+        mDrawerListView = (ListView) rootView.findViewById(R.id.drawer_list);
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -124,9 +133,20 @@ public class NavigationDrawerFragment extends Fragment {
         adapter.add(new NavigationItem("User Requests",R.drawable.signal_flat));
         adapter.add(new NavigationItem("Logout",R.drawable.logout_flat));
 
+        TextView drawerProfileName = (TextView)rootView.findViewById(R.id.drawerProfilename);
+        ImageView drawerProfileImage = (ImageView)rootView.findViewById(R.id.drawerProfileImage);
+        SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+        String picurl = saved_values.getString("picurl",null);
+        String name = saved_values.getString("user_name",null);
+
+        drawerProfileName.setText(name);
+        picurl+="0";
+        new LoadProfileImage(drawerProfileImage).execute(picurl);
+
+
         mDrawerListView.setAdapter(adapter);
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
-        return mDrawerListView;
+        return rootView;
     }
 
     public boolean isDrawerOpen() {
@@ -217,6 +237,31 @@ public class NavigationDrawerFragment extends Fragment {
         }
         if (mCallbacks != null) {
             mCallbacks.onNavigationDrawerItemSelected(position);
+        }
+    }
+
+    private class LoadProfileImage extends AsyncTask<String, Void, Bitmap> {
+        ImageView downloadedImage;
+
+        public LoadProfileImage(ImageView image) {
+            this.downloadedImage = image;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String url = urls[0];
+            Bitmap icon = null;
+            try {
+                InputStream in = new java.net.URL(url).openStream();
+                icon = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return icon;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            downloadedImage.setImageBitmap(result);
         }
     }
 

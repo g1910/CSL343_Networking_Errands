@@ -1,9 +1,45 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical">
 
 
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingTop="100dp" android:choiceMode="singleChoice"
-    android:divider="@android:color/transparent" android:dividerHeight="0dp"
-    android:background="#343434" tools:context="group2.netapp.NavigationDrawerFragment"
-    android:clickable="false"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:orientation="vertical"
+        android:background="@drawable/back2">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/drawerProfileImage"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:border_width="2dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            app:border_color="#FF000000"
+            android:layout_marginBottom="10dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/drawerProfilename"
+            android:textStyle="bold"
+            android:text="afcfadavdsv"/>
+
+        </LinearLayout>
+
+    <ListView
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_height="match_parent"  android:choiceMode="singleChoice"
+        android:divider="@android:color/transparent" android:dividerHeight="0dp"
+        android:background="#343434" tools:context="group2.netapp.NavigationDrawerFragment"
+        android:clickable="false"
+        android:id="@+id/drawer_list"/>
+
+    </LinearLayout>
+
 
