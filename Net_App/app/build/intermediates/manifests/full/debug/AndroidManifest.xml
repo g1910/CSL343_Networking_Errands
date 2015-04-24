@@ -133,6 +133,10 @@
             android:label="@string/title_activity_bids" >
         </activity>
         <activity
+            android:name="group2.netapp.bidding.BidFormActivity"
+            android:label="@string/title_activity_bid_form" >
+        </activity>
+        <activity
             android:name="android.support.v7.widget.TestActivity"
             android:label="RecyclerViewTestActivity" />
     </application>

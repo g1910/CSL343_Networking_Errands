@@ -20,4 +20,4 @@
     <item android:drawable="@drawable/undobar_button_pressed" android:state_pressed="true" />
     <item android:drawable="@drawable/undobar_button_focused" android:state_focused="true" />
     <item android:drawable="@android:color/transparent" />
-</selector><!-- From: file:/home/gabriele/Lavoro/Android/AndroidStudioProjects/wrks/cardslib/library-core/src/main/res/drawable/card_undo.xml --><!-- From: file:/home/gaurav/AndroidstudioProjects/Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable/card_undo.xml -->
+</selector><!-- From: file:/home/gabriele/Lavoro/Android/AndroidStudioProjects/wrks/cardslib/library-core/src/main/res/drawable/card_undo.xml --><!-- From: file:/D:/Git/CSL343_Networking_Errands/Net_App/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/res/drawable/card_undo.xml -->
