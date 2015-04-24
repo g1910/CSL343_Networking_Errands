@@ -65,6 +65,7 @@
             </intent-filter>
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
             android:parentActivityName=".MainActivity" >
@@ -108,6 +109,7 @@
         -->
 
         <activity
+            android:screenOrientation="portrait"
             android:name=".Broadcast"
             android:label="@string/title_activity_broadcast"
             android:windowSoftInputMode="adjustPan"
@@ -117,21 +119,26 @@
                 android:value="group2.netapp.HomeActivity" />
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".auction.ServerFormActivity"
             android:label="@string/title_activity_server_form" >
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".auction.DecideAuctionActivity"
             android:label="@string/title_activity_decide_auction" >
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".bidding.CurrAuctionActivity"
             android:label="@string/title_activity_curr_auction" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".auction.AuctionActivity"
             android:label="@string/title_activity_auction" >
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".bidding.BidsActivity"
             android:label="@string/title_activity_bids" >
         </activity>
