@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="15"
+        android:minSdkVersion="14"
         android:targetSdkVersion="21" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -131,6 +131,10 @@
         <activity
             android:name="group2.netapp.bidding.BidsActivity"
             android:label="@string/title_activity_bids" >
+        </activity>
+        <activity
+            android:name="group2.netapp.bidding.BidFormActivity"
+            android:label="@string/title_activity_bid_form" >
         </activity>
         <activity
             android:name="android.support.v7.widget.TestActivity"

@@ -499,6 +499,7 @@
     <!-- From: file:/D:/Git/CSL343_Networking_Errands/Net_App/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="title_activity_auction">AuctionActivity</string>
+    <string name="title_activity_bid_form">BidFormActivity</string>
     <string name="title_activity_bids">BidsActivity</string>
     <string name="title_activity_broadcast">Broadcast</string>
     <string name="title_activity_curr_auction">Running Auctions</string>

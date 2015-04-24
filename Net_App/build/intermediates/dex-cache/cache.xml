@@ -2,20 +2,6 @@
 <items version="2" >
 
     <item
-        jar="D:\Git\CSL343_Networking_Errands\Net_App\app\build\intermediates\exploded-aar\com.github.gabrielemariotti.cards\cardslib-core\2.0.1\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="81d6467247ced8a5d51f8ff73a6595d517eddba6">
-        <dex dex="D:\Git\CSL343_Networking_Errands\Net_App\app\build\intermediates\pre-dexed\debug\classes-0f52997d2996ec94a7f725b0a6bfe6e92e63edf3.jar" />
-    </item>
-    <item
-        jar="D:\Git\CSL343_Networking_Errands\Net_App\app\build\intermediates\exploded-aar\com.github.gabrielemariotti.cards\cardslib-recyclerview\2.0.1\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="15d2052aed6aa62f341d22e1ba6177697c7dc552">
-        <dex dex="D:\Git\CSL343_Networking_Errands\Net_App\app\build\intermediates\pre-dexed\debug\classes-93cc3dc8b0fbbc1e79c04ae7fe17200b65a68804.jar" />
-    </item>
-    <item
         jar="D:\Git\CSL343_Networking_Errands\Net_App\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -44,6 +30,13 @@
         <dex dex="D:\Git\CSL343_Networking_Errands\Net_App\app\build\intermediates\pre-dexed\debug\classes-22dfa6a143560196c03b11852fe91b3d42555be5.jar" />
     </item>
     <item
+        jar="D:\Git\CSL343_Networking_Errands\Net_App\app\build\intermediates\exploded-aar\com.github.gabrielemariotti.cards\cardslib-core\2.0.1\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d6467247ced8a5d51f8ff73a6595d517eddba6">
+        <dex dex="D:\Git\CSL343_Networking_Errands\Net_App\app\build\intermediates\pre-dexed\debug\classes-0f52997d2996ec94a7f725b0a6bfe6e92e63edf3.jar" />
+    </item>
+    <item
         jar="D:\Git\CSL343_Networking_Errands\Net_App\app\build\intermediates\exploded-aar\com.google.android.gms\play-services\6.5.87\classes.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -70,6 +63,13 @@
         revision="21.1.2"
         sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
         <dex dex="D:\Git\CSL343_Networking_Errands\Net_App\app\build\intermediates\pre-dexed\debug\classes-62997d560ddcf4e83938c244bd48911d04478f86.jar" />
+    </item>
+    <item
+        jar="D:\Git\CSL343_Networking_Errands\Net_App\app\build\intermediates\exploded-aar\com.github.gabrielemariotti.cards\cardslib-recyclerview\2.0.1\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="15d2052aed6aa62f341d22e1ba6177697c7dc552">
+        <dex dex="D:\Git\CSL343_Networking_Errands\Net_App\app\build\intermediates\pre-dexed\debug\classes-93cc3dc8b0fbbc1e79c04ae7fe17200b65a68804.jar" />
     </item>
     <item
         jar="D:\Git\CSL343_Networking_Errands\Net_App\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\21.0.0\classes.jar"

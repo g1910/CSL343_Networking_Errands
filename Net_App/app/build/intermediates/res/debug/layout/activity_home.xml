@@ -57,7 +57,8 @@
     <fragment android:id="@+id/navigation_drawer"
         android:layout_width="@dimen/navigation_drawer_width" android:layout_height="match_parent"
         android:layout_gravity="start" android:name="group2.netapp.NavigationDrawerFragment"
-        tools:layout="@layout/fragment_navigation_drawer" />
+        tools:layout="@layout/fragment_navigation_drawer"
+        />
 
 </android.support.v4.widget.DrawerLayout>
 <!-- From: file:/D:/Git/CSL343_Networking_Errands/Net_App/app/src/main/res/layout/activity_home.xml -->

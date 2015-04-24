@@ -1,16 +1,29 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="wrap_content" tools:context="group2.netapp.UserRequestFragment"
     android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
-
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/search_flat"
+        android:id="@+id/searchicon"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/SearchText"
         android:layout_gravity="top"
         android:hint="Search"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_alignTop="@id/searchicon"
+        android:layout_toRightOf="@id/searchicon"
         android:inputType="textVisiblePassword"/>
 
    <!-- <ScrollView
@@ -22,6 +35,8 @@
 
 
                 android:layout_width="match_parent"
+                android:layout_below="@id/SearchText"
+                android:layout_marginTop="5dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/ReqCardList">
             </it.gmariotti.cardslib.library.view.CardListView>
@@ -30,6 +45,6 @@
 
     <!---->
 
-</LinearLayout>
+</RelativeLayout>
 
 <!-- From: file:/D:/Git/CSL343_Networking_Errands/Net_App/app/src/main/res/layout/fragment_user_request.xml -->

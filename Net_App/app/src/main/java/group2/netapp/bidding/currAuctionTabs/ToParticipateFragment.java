@@ -33,7 +33,7 @@ public class ToParticipateFragment extends Fragment implements Card.OnCardClickL
     BidInActivityListener blistener;
 
     public interface BidInActivityListener {
-        public void openBidRequest(int bidId);
+        public void openBidRequest(int index);
     }
 
     public ToParticipateFragment() {
@@ -78,7 +78,7 @@ public class ToParticipateFragment extends Fragment implements Card.OnCardClickL
 
             NotParticipatingCard card = null;
             try {
-                card = new NotParticipatingCard(getActivity(),(JSONObject)notParticipating.get(i));
+                card = new NotParticipatingCard(getActivity(),(JSONObject)notParticipating.get(i),i);
                 card.setOnClickListener(this);
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -132,7 +132,7 @@ public class ToParticipateFragment extends Fragment implements Card.OnCardClickL
     public void onClick(Card card, View view) {
         NotParticipatingCard c=(NotParticipatingCard)card;
         Log.d("Requests", "COPEY Added");
-        blistener.openBidRequest(c.getIdAuction());
+        blistener.openBidRequest(c.getIndex());
 
     }
 

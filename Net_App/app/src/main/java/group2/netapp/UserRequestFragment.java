@@ -1,6 +1,7 @@
 package group2.netapp;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -9,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.os.StrictMode;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,7 +65,7 @@ public class UserRequestFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private ProgressDialog progressdialoglistview;
     private static int counter=1;
     private CardListView listView;
     ArrayList<Card> cards;
@@ -122,6 +124,12 @@ public class UserRequestFragment extends Fragment {
             listView.setAdapter(cardListAdapter);
         }
 
+        progressdialoglistview = new ProgressDialog(getActivity());
+        progressdialoglistview.setMessage("Loading");
+        progressdialoglistview.setCanceledOnTouchOutside(true);
+        progressdialoglistview.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressdialoglistview.setIndeterminate(true);
+
         Button LoadMore = new Button(getActivity().getApplicationContext());
         LoadMore.setText("Load More");
 
@@ -138,7 +146,7 @@ public class UserRequestFragment extends Fragment {
                 list1.add(new BasicNameValuePair("query", String.valueOf(counter)));
                 if(asynctask.getStatus() == AsyncTask.Status.PENDING || asynctask.getStatus() == AsyncTask.Status.RUNNING)
                     asynctask.cancel(true);
-                asynctask = new get_requests(list1, "http://netapp.byethost33.com/get_broadcast.php").execute(null, null, null);
+                asynctask = new get_requests(list1, "http://netapp.byethost33.com/get_broadcast.php",1).execute(null, null, null);
             }
         });
 
@@ -158,17 +166,19 @@ public class UserRequestFragment extends Fragment {
                     list1.add(new BasicNameValuePair("query", s.toString()));
                     if(asynctask.getStatus() == AsyncTask.Status.PENDING || asynctask.getStatus() == AsyncTask.Status.RUNNING)
                         asynctask.cancel(true);
-                    asynctask = new get_requests(list1, "http://netapp.byethost33.com/get_broadcast.php").execute(null, null, null);
+                    asynctask = new get_requests(list1, "http://netapp.byethost33.com/get_broadcast.php",0).execute(null, null, null);
                 }
                 else
                 {
                     counter=1;
+                    if(progressdialoglistview.isShowing())
+                        progressdialoglistview.dismiss();
                     ArrayList<NameValuePair> list1 = new ArrayList<NameValuePair>();
                     list1.add(new BasicNameValuePair("tag", "1"));
                     list1.add(new BasicNameValuePair("query", String.valueOf(counter)));
                     if(asynctask.getStatus() == AsyncTask.Status.PENDING || asynctask.getStatus() == AsyncTask.Status.RUNNING)
                         asynctask.cancel(true);
-                    asynctask = new get_requests(list1, "http://netapp.byethost33.com/get_broadcast.php").execute(null, null, null);
+                    asynctask = new get_requests(list1, "http://netapp.byethost33.com/get_broadcast.php",1).execute(null, null, null);
                 }
             }
 
@@ -182,7 +192,7 @@ public class UserRequestFragment extends Fragment {
         nameValuePairs.add(new BasicNameValuePair("tag","1"));
         nameValuePairs.add(new BasicNameValuePair("query", String.valueOf(1)));
 
-        asynctask = new get_requests(nameValuePairs,"http://netapp.byethost33.com/get_broadcast.php").execute(null,null,null);
+        asynctask = new get_requests(nameValuePairs,"http://netapp.byethost33.com/get_broadcast.php",1).execute(null,null,null);
         return infh;
     }
 
@@ -209,6 +219,8 @@ public class UserRequestFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        if(asynctask.getStatus() == AsyncTask.Status.PENDING || asynctask.getStatus() == AsyncTask.Status.RUNNING)
+            asynctask.cancel(true);
     }
 
     /**
@@ -232,16 +244,25 @@ public class UserRequestFragment extends Fragment {
         private ArrayList<NameValuePair> list;
         private String host;
         HttpResponse response;
+        private int purpose;
         private InputStream is;
-        public get_requests(ArrayList<NameValuePair> l,String h)
+        public get_requests(ArrayList<NameValuePair> l,String h,int purp)
         {
             list=l;
             host=h;
+            purpose=purp;
         }
 
         @Override
         protected void onCancelled() {
             running = false;
+        }
+
+        @Override
+        protected  void onPreExecute()
+        {
+            if(purpose==1)
+            progressdialoglistview.show();
         }
 
         @Override
@@ -307,7 +328,8 @@ public class UserRequestFragment extends Fragment {
                     cards.add(card);
                 }
             cardListAdapter.notifyDataSetChanged();
-
+            if(progressdialoglistview.isShowing())
+            progressdialoglistview.dismiss();
             try {
                 reader.close();
                 is.close();
