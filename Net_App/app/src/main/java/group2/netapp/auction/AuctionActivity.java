@@ -1,5 +1,6 @@
 package group2.netapp.auction;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -34,7 +35,6 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsTab.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auction);
-
         loadData();
 //        openDashboard();
 
@@ -49,7 +49,7 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsTab.
         ServerConnect myServer=new ServerConnect(this);
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
         nameValuePairs.add(new BasicNameValuePair("id_user","13"));
-        Log.d("AuctionActivity","http://"+getString(R.string.IP)+"/Networks/CSL343_Networking_Errands/Server/getAuction.php");
+        Log.d("AuctionActivity",getString(R.string.IP)+"getAuction.php");
         myServer.execute(getString(R.string.IP)+"getAuction.php",nameValuePairs);
 
     }
@@ -65,6 +65,7 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsTab.
                 runningBids = j.getJSONArray(3);
                 Log.d("AuctionActivity",auctionDetails.toString());
                 Log.d("AuctionActivity", pendingBids.toString());
+                Log.d("AuctionActivity", runningBids.toString());
                 openDashboard();
             }else {
                 openServerForm();
@@ -115,9 +116,12 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsTab.
     }
 
     @Override
-    public void openBidRequest(int bidId) {
+    public void openBidRequest(int bidId, boolean isRequest) {
         Bundle args = new Bundle();
         args.putInt("id", bidId);
+        if(isRequest){
+            args.putBoolean("isRequest",true);
+        }
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         Fragment aucBids = new AucBidsFragment();
         aucBids.setArguments(args);
@@ -150,4 +154,24 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsTab.
     public void setRunningBids(JSONArray runningBids) {
         this.runningBids = runningBids;
     }
+
+    public JSONObject getRunningBidAt(int i){
+        try {
+            return runningBids.getJSONObject(i);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public JSONObject getPendingBidAt(int i){
+        try {
+            return pendingBids.getJSONObject(i);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 }

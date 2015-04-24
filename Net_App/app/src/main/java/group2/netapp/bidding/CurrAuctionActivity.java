@@ -51,7 +51,7 @@ public class CurrAuctionActivity extends FragmentActivity implements ServerConne
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
         nameValuePairs.add(new BasicNameValuePair("id_user","1"));
         myServer.execute(getString(R.string.IP)+"getAllAuctions.php",nameValuePairs);
-
+        Log.d("CurrAucActivity",getString(R.string.IP)+"getAllAuctions.php");
         Log.e("AuctionActivity","Hi");
 
         Log.d("AuctionActivity", "ProgressAuctionOpened");
