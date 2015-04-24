@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/participatingratings"
+        android:layout_alignParentLeft="true"
+        android:isIndicator="true"
+        style="?android:attr/ratingBarStyleSmall" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="rated by : 0 users"
+        android:id="@+id/participatingnumRated"
+        android:layout_alignParentTop="true"
+        android:paddingLeft="15dp"
+        android:layout_toRightOf="@+id/participatingratings"
+        android:layout_toEndOf="@+id/participatingratings" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location"
+        android:textStyle="bold"
+        android:textColor="#00dd00"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/participatinglocation"
+        android:layout_gravity="center_vertical"
+        android:layout_below="@+id/participatingratings"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Here is the desc"
+        android:id="@+id/participatingdesc"
+        android:layout_below="@+id/participatingprice"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Expected Delivery : "
+        android:id="@+id/participatingexpected_time"
+        android:layout_below="@+id/participatinglocation"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bidding Ends at : "
+        android:id="@+id/participatingend_time"
+        android:layout_below="@+id/participatingexpected_time"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Price"
+        android:textStyle="bold"
+        android:textColor="#00dd00"
+        android:paddingRight="10dp"
+        android:id="@+id/participatingprice"
+        android:layout_gravity="center_vertical"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_alignBottom="@+id/participatingend_time"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Increase Bid"
+        android:id="@+id/bid_increase"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+
+</RelativeLayout>
+

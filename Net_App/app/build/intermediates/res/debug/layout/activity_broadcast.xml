@@ -136,15 +136,26 @@ android:id="@+id/scrollView"
         android:layout_centerHorizontal="true"
         />
 
-    <TimePicker
+    <!--TimePicker
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/timePicker"
         android:layout_below="@+id/Timetext"
         android:layout_gravity="end"
-        android:layout_alignParentRight="true"/>
+        android:layout_alignParentRight="true"/-->
 
-    <DatePicker
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/timePicker"
+        android:onClick="showTimePickerDialog"
+        android:layout_below="@+id/Timetext"
+        android:layout_alignRight="@+id/Datetext"
+        android:layout_alignEnd="@+id/Datetext" />
+
+    <!--DatePicker
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/datePicker"
@@ -153,11 +164,22 @@ android:id="@+id/scrollView"
         android:layout_alignParentRight="true"
         android:datePickerMode="spinner"
         android:spinnersShown="true"
-        android:calendarViewShown="false" />
+        android:calendarViewShown="false" /-->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/datePicker"
+        android:onClick="showDatePickerDialog"
+        android:layout_below="@+id/Datetext"
+        android:layout_alignRight="@+id/Datetext"
+        android:layout_alignEnd="@+id/Datetext" />
 
 
 
 
 </RelativeLayout>
 
-</ScrollView><!-- From: file:/home/gaurav/6thSem/CSL343/merge/withmaster/CSL343_Networking_Errands/Net_App/app/src/main/res/layout/activity_broadcast.xml -->
+</ScrollView><!-- From: file:/D:/Git/CSL343_Networking_Errands/Net_App/app/src/main/res/layout/activity_broadcast.xml -->

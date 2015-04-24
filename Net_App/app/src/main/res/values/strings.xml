@@ -32,5 +32,6 @@
     <string name="title_activity_server_form">serverFormActivity</string>
     <string name="title_activity_bids">BidsActivity</string>
     <string name="IP">http://netapp.byethost33.com/Server/</string>
+    <string name="title_activity_bid_form">BidFormActivity</string>
 
 </resources>

@@ -5,12 +5,15 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -27,15 +30,25 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
+import group2.netapp.utilFragments.DatePickerFragment;
+import group2.netapp.utilFragments.TimePickerFragment;
 
-public class Broadcast extends Activity {
+
+public class Broadcast extends FragmentActivity implements TimePickerFragment.OnTimeSetListener,DatePickerFragment.OnDateSetListener {
+
+    //--------------new------------------
+    TextView expectTime,expectDate;
+    Calendar c = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_broadcast);
+        //--------------new------------------
+        setUpForm();
 
         Button broadcast_button =  (Button)findViewById(R.id.broadcast_button);
 
@@ -45,11 +58,29 @@ public class Broadcast extends Activity {
                 String item= ((EditText)findViewById(R.id.itemfield)).getText().toString();
                 String description= ((EditText)findViewById(R.id.descriptionfield)).getText().toString();
                 String location= ((EditText)findViewById(R.id.locationfield)).getText().toString();
-                int time_hour=((TimePicker)findViewById(R.id.timePicker)).getCurrentHour();
-                int time_minute=((TimePicker)findViewById(R.id.timePicker)).getCurrentMinute();
-                int date_year= ((DatePicker)findViewById(R.id.datePicker)).getYear();
-                int date_month= ((DatePicker)findViewById(R.id.datePicker)).getMonth();
-                int date_day= ((DatePicker)findViewById(R.id.datePicker)).getDayOfMonth();
+
+                //int time_hour=((TimePicker)findViewById(R.id.timePicker)).getCurrentHour();
+                //int time_minute=((TimePicker)findViewById(R.id.timePicker)).getCurrentMinute();
+                //String time = String.format("%02d:%02d",c.get(Calendar.HOUR_OF_DAY),c.get(Calendar.MINUTE));
+                //expectTime = (TextView) findViewById(R.id.timePicker);
+
+                String time = ((TextView)findViewById(R.id.timePicker)).getText().toString();
+                //expectTime.setOnClickListener(showTimePickerDialog);
+
+                //int time_hour = c.get(Calendar.HOUR_OF_DAY);
+                //int time_minute = c.get(Calendar.MINUTE);
+
+                //int date_year= ((DatePicker)findViewById(R.id.datePicker)).getYear();
+                //int date_month= ((DatePicker)findViewById(R.id.datePicker)).getMonth();
+                //int date_day= ((DatePicker)findViewById(R.id.datePicker)).getDayOfMonth();
+                //String date = String.format("%04d-%02d-%02d",c.get(Calendar.YEAR),c.get(Calendar.MONTH) + 1,c.get(Calendar.DAY_OF_MONTH));
+                expectDate = (TextView) findViewById(R.id.datePicker);
+                String date = ((TextView)findViewById(R.id.datePicker)).getText().toString();
+                //expectDate.setOnClickListener(showDatePickerDialog);
+
+                /*int date_year = c.get(Calendar.YEAR);
+                int date_month = c.get(Calendar.MONTH);
+                int date_day = c.get(Calendar.DAY_OF_MONTH);*/
 
                 if(item.length()<1 || location.length()< 1)
                 {
@@ -65,12 +96,26 @@ public class Broadcast extends Activity {
                     }
                 }
                 else
-                new add_broadcast(item,location,description,time_hour,time_minute,date_day,date_month,date_year,"http://netapp.byethost33.com/add_broadcast.php").execute(null,null,null);
+                //new add_broadcast(item,location,description,time_hour,time_minute,date_day,date_month,date_year,"http://netapp.byethost33.com/add_broadcast.php").execute(null,null,null);
+                    new add_broadcast(item,location,description,time,date,"http://netapp.byethost33.com/add_broadcast.php").execute(null,null,null);
                 //finish();
             }
         });
     }
 
+    //--------------new-----------------------
+    public void setUpForm(){
+        String time = String.format("%02d:%02d",c.get(Calendar.HOUR_OF_DAY),c.get(Calendar.MINUTE));
+        String date = String.format("%04d-%02d-%02d",c.get(Calendar.YEAR),c.get(Calendar.MONTH) + 1,c.get(Calendar.DAY_OF_MONTH));
+
+        expectTime = (TextView) findViewById(R.id.timePicker);
+        expectTime.setText(time);
+        expectTime.setOnClickListener(showTimePickerDialog);
+
+        expectDate = (TextView) findViewById(R.id.datePicker);
+        expectDate.setText(date) ;
+        expectDate.setOnClickListener(showDatePickerDialog);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -94,27 +139,97 @@ public class Broadcast extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    //-----------------------------------new--------------------------------
+    View.OnClickListener showTimePickerDialog = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            String tag;
+            if(v.getId()== R.id.timePicker){
+                tag = "endtimepicker";
+            }else{
+                tag = "exptimepicker";
+            }
+            TimePickerFragment time = (TimePickerFragment) getSupportFragmentManager().findFragmentByTag(tag);
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            if(time==null) {
+                time = new TimePickerFragment();
+                Bundle b = new Bundle();
+                b.putInt("view",v.getId());
+                time.setArguments(b);
+                ft.add(time,tag);
+            }
 
+            ft.show(time);
+            ft.commit();
+        }
+    };
 
+    //-----------------------------------new--------------------------------
+    View.OnClickListener showDatePickerDialog = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            String tag;
+            if(v.getId()== R.id.datePicker){
+                tag = "enddatepicker";
+            }else{
+                tag = "expdatepicker";
+            }
+            DatePickerFragment date = (DatePickerFragment) getSupportFragmentManager().findFragmentByTag(tag);
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            if (date == null) {
+                date = new DatePickerFragment();
+                Bundle b = new Bundle();
+                b.putInt("view",v.getId());
+                date.setArguments(b);
+                ft.add(date, tag);
+            }
+
+            ft.show(date);
+            ft.commit();
+        }
+    };
+    //-----------------------------------new--------------------------------
+    @Override
+    public void onTimePicked(int view,int hourOfDay, int minute) {
+        String time = String.format("%02d:%02d",hourOfDay,minute);
+        switch(view){
+            case R.id.timePicker:expectTime.setText(time);break;
+            //case R.id.datePicker:expectDate.setText(time);break;
+        }
+
+    }
+
+    @Override
+    public void onDatePicked(int view,int year, int monthOfYear, int dayOfMonth) {
+        String date = String.format("%04d-%02d-%02d",year,monthOfYear+1,dayOfMonth);
+        switch(view){
+            case R.id.datePicker:expectDate.setText(date);break;
+            //case R.id.auc_exp_date:aucExpDate.setText(date);break;
+        }
+    }
 
     class add_broadcast extends AsyncTask<String,String,String>
     {
         private String item,location,description,host;
         private String time_hour,time_minute,date_year,date_day,date_month,time,date;
 
-        public  add_broadcast(String a,String b,String d,int e,int f,int g,int h, int i,String j)
+        //public  add_broadcast(String a,String b,String d,int e,int f,int g,int h, int i,String j)
+        public  add_broadcast(String a,String b,String d,String e,String f,String j)
         {
             item=a;
             location=b;
             description = d;
-            time_hour=String.valueOf(e);
+            /*time_hour=String.valueOf(e);
             time_minute=String.valueOf(f);
             date_day=String.valueOf(g);
             date_month=String.valueOf(h);
-            date_year=String.valueOf(i);
+            date_year=String.valueOf(i);*/
             host=j;
-            time=time_hour+":"+time_minute+":00";
-            date=date_year+"-"+date_month+"-"+date_day;
+            /*time=time_hour+":"+time_minute+":00";
+            date=date_year+"-"+date_month+"-"+date_day;*/
+            time = e;
+            date = f;
         }
 
 

@@ -27,7 +27,7 @@
         android:layout_alignLeft="@id/FeedbackRating"
         android:text="NAME"
         android:layout_marginLeft="10dp"
-        android:textColor="@color/ripple_material_light"
+        android:textColor="@color/accent_material_light"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         />
 
@@ -43,6 +43,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:layout_alignLeft="@+id/FeedbackName"
         android:minLines="2"
+        android:layout_marginBottom="10dp"
         />
 
 

@@ -3,6 +3,7 @@ package group2.netapp.bidding.cards;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -16,20 +17,25 @@ import it.gmariotti.cardslib.library.internal.Card;
  */
 public class NotParticipatingCard extends Card {
 
-    String auctionLocation,price,desc,idUser,start_time,end_time,idAuction,expected_time;
+    String auctionLocation,price,desc,idUser,start_time,end_time,expected_time;
+    int idAuction,index;
+    String ratings,numRated;
 
-    public NotParticipatingCard(Context context, JSONObject j) {
+    public NotParticipatingCard(Context context, JSONObject j,int i) {
         super(context, R.layout.not_participating_card);
 
         try {
+            this.index=i;
             this.auctionLocation =j.getString("location");
             this.desc = j.getString("description");
             this.idUser = j.getString("idUser");
             this.start_time = j.getString("start_time");
             this.end_time = j.getString("end_time");
-            this.idAuction = j.getString("idAuction");
+            this.idAuction = j.getInt("idAuction");
             this.expected_time = j.getString("expctd_time");
             this.price = "0";
+            this.ratings=j.getString("rating");
+            this.numRated=j.getString("numRated");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -41,13 +47,21 @@ public class NotParticipatingCard extends Card {
     public void setupInnerViewElements(ViewGroup parent, View view) {
         super.setupInnerViewElements(parent, view);
 
-        TextView auctionLocView = (TextView) parent.findViewById(R.id.location);
-        TextView priceView = (TextView) parent.findViewById(R.id.price);
-        TextView descView = (TextView)parent.findViewById(R.id.desc);
+        TextView auctionLocView = (TextView) parent.findViewById(R.id.notparticipatinglocation);
+        TextView priceView = (TextView) parent.findViewById(R.id.notparticipatingprice);
+        TextView descView = (TextView)parent.findViewById(R.id.notparticipatingdesc);
+        RatingBar ratingsView = (RatingBar)parent.findViewById(R.id.notparticipatingratings);
+        TextView numRatedView = (TextView)parent.findViewById(R.id.notparticipatingnumRated);
+        TextView end_timeView = (TextView)parent.findViewById(R.id.notparticipatingend_time);
+        TextView expected_timeView = (TextView)parent.findViewById(R.id.notparticipatingexpected_time);
 
         auctionLocView.setText(auctionLocation);
-        priceView.setText(price);
+        priceView.setText("₹" + price);
         descView.setText(desc);
+        ratingsView.setRating(Float.parseFloat(ratings));
+        numRatedView.setText("rated by : "+numRated+" users");
+        end_timeView.setText("Bidding Ends in : "+end_time);
+        expected_timeView.setText("Expected Delivery : "+expected_time);
     }
 
     public String getAuctionLocation() {
@@ -98,11 +112,11 @@ public class NotParticipatingCard extends Card {
         this.end_time = end_time;
     }
 
-    public String getIdAuction() {
+    public int getIdAuction() {
         return idAuction;
     }
 
-    public void setIdAuction(String idAuction) {
+    public void setIdAuction(int idAuction) {
         this.idAuction = idAuction;
     }
 
@@ -112,5 +126,29 @@ public class NotParticipatingCard extends Card {
 
     public void setExpected_time(String expected_time) {
         this.expected_time = expected_time;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    public String getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(String ratings) {
+        this.ratings = ratings;
+    }
+
+    public String getNumRated() {
+        return numRated;
+    }
+
+    public void setNumRated(String numRated) {
+        this.numRated = numRated;
     }
 }

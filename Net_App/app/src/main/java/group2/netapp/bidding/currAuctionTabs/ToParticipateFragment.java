@@ -1,9 +1,11 @@
 package group2.netapp.bidding.currAuctionTabs;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,15 +26,25 @@ import it.gmariotti.cardslib.library.recyclerview.view.CardRecyclerView;
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass.
  */
-public class ToParticipateFragment extends Fragment {
+public class ToParticipateFragment extends Fragment implements Card.OnCardClickListener{
 
     CardArrayRecyclerViewAdapter auctionViewAdapter;
     CardRecyclerView auctionView;
+    BidInActivityListener blistener;
+
+    public interface BidInActivityListener {
+        public void openBidRequest(int index);
+    }
 
     public ToParticipateFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        blistener = (BidInActivityListener) activity;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,7 +78,8 @@ public class ToParticipateFragment extends Fragment {
 
             NotParticipatingCard card = null;
             try {
-                card = new NotParticipatingCard(getActivity(),(JSONObject)notParticipating.get(0));
+                card = new NotParticipatingCard(getActivity(),(JSONObject)notParticipating.get(i),i);
+                card.setOnClickListener(this);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -114,5 +127,14 @@ public class ToParticipateFragment extends Fragment {
 
         return cards;
     }
+
+    @Override
+    public void onClick(Card card, View view) {
+        NotParticipatingCard c=(NotParticipatingCard)card;
+        Log.d("Requests", "COPEY Added");
+        blistener.openBidRequest(c.getIndex());
+
+    }
+
 
 }

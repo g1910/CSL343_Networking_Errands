@@ -1,18 +1,23 @@
 <?php
 	include 'config.php';
-	$user_id=$_POST['id_user'];
+	include 'getRating.php';
+	$user_id=$_GET['id_user'];
 	date_default_timezone_set("Asia/Kolkata");
 	$time=date( 'Y-m-d H:i:s', time());
 //	echo $time;
 	$con=mysqli_connect($IP,$user,$pass,$db);
 //	echo "select `idAuction`, `location`, `start_time`, `expctd_time`, `description` from `Auction` where `idUser`=\"$user_id\" and `end_time`>=\"$time\"";
-//	echo "select Auction.* from ( (( SELECT * FROM `Bid` Natural Join `Placed`) as Temp), `Auction`) where Temp.`idAuction` = Auction.`idAuction` and Temp.`idUser`=\"$user_id\" and `end_time`>=\"$time\"";
-	$result=mysqli_query($con,"select Auction.* from ( (( SELECT * FROM `Bid` Natural Join `Placed`) as Temp), `Auction`) where Temp.`idAuction` = Auction.`idAuction` and Temp.`idUser`=\"$user_id\" and `end_time`>=\"$time\"") or die("Error: ".mysqli_error($con));
+//	echo "select Auction.*,Temp.Price  from ( (( SELECT * FROM `Bid` Natural Join `Placed`) as Temp), `Auction`) where Temp.`idAuction` = Auction.`idAuction` and Temp.`idUser`=\"$user_id\" and `end_time`>=\"$time\"";
+	$result=mysqli_query($con,"select Auction.*,Temp.Price  from ( (( SELECT * FROM `Bid` Natural Join `Placed`) as Temp), `Auction`) where Temp.`idAuction` = Auction.`idAuction` and Temp.`idUser`=\"$user_id\" and `end_time`>=\"$time\"") or die("Error: ".mysqli_error($con));
 	
 	$num=mysqli_num_rows($result);
 
 	while ($row=mysqli_fetch_assoc($result))
 	{
+		$rating=getRating($row['idUser']);
+	//	print json_encode($rating);
+		$row['rating']=$rating[0]['rating'];
+		$row['numRated']=$rating[0]['numRated'];
 		$tout[]=$row;
 	}
 	$arr = array(
@@ -28,6 +33,10 @@
 
 	while ($row=mysqli_fetch_assoc($result))
 	{
+		$rating=getRating($row['idUser']);
+	//	print json_encode($rating);
+		$row['rating']=$rating[0]['rating'];
+		$row['numRated']=$rating[0]['numRated'];
 		$tout[]=$row;
 	}
 	$arr = array(
@@ -35,8 +44,8 @@
 		);
 	$output[]=$arr;
 
-//	echo "select Temp.* from ( (( SELECT * FROM `Bid` Natural Join `Placed`) as Temp), `Auction`) where Temp.`idAuction` = Auction.`idAuction` and Temp.`idUser`=\"$user_id\" and `end_time`>=\"$time\"";
-	$result=mysqli_query($con,"select Temp.* from ( (( SELECT * FROM `Bid` Natural Join `Placed`) as Temp), `Auction`) where Temp.`idAuction` = Auction.`idAuction` and Temp.`idUser`=\"$user_id\" and `end_time`>=\"$time\"") or die("Error: ".mysqli_error($con));
+//	echo "select distinct (Temp.`idBid`),Temp.`location`,Temp.`idUser` from ( (( SELECT * FROM `Bid` Natural Join `Placed`) as Temp), `Auction`) where Temp.`idAuction` = Auction.`idAuction` and Temp.`idUser`=\"$user_id\" and `end_time`>=\"$time\"";
+	$result=mysqli_query($con,"select distinct (Temp.`idBid`),Temp.`location`,Temp.`idUser` from ( (( SELECT * FROM `Bid` Natural Join `Placed`) as Temp), `Auction`) where Temp.`idAuction` = Auction.`idAuction` and Temp.`idUser`=\"$user_id\" and `end_time`>=\"$time\"") or die("Error: ".mysqli_error($con));
 	
 	$num=mysqli_num_rows($result);
 	$tout=[];
