@@ -35,7 +35,7 @@ public class AcceptedBids extends Fragment implements Card.OnCardClickListener{
     JSONArray acceptedBids;
 
     public interface BidAcceptListener{
-        public void openBidRequest(int bidId);
+        public void openBidRequest(int bidId, boolean isRequest);
     }
 
     public AcceptedBids() {
@@ -77,8 +77,8 @@ public class AcceptedBids extends Fragment implements Card.OnCardClickListener{
         try {
             for(int i = 0; i< acceptedBids.length(); ++i) {
                 bid = acceptedBids.getJSONObject(i);
-                Log.d("BidRequestsTab", "Location:" + bid.getString("location") + " Order:" + bid.getJSONArray("orders").length() + " items ordered");
-                BidCard card = new BidCard(getActivity(),bid.getInt("idBid"),"Location:"+bid.getString("location"),"Order:"+ bid.getJSONArray("orders").length()+" items ordered");
+                Log.d("AcceptedTab", "Location:" + bid.getString("location") + " Order:" + bid.getJSONArray("orders").length() + " items ordered");
+                BidCard card = new BidCard(getActivity(),i,"Location:"+bid.getString("location"),"Order:"+ bid.getJSONArray("orders").length()+" items ordered");
                 card.setOnClickListener(this);
                 cards.add(card);
             }
@@ -102,7 +102,7 @@ public class AcceptedBids extends Fragment implements Card.OnCardClickListener{
 //        ft.commit();
 
         Log.d("Requests", "Fragment Added");
-        bListener.openBidRequest(bCard.getBidId());
+        bListener.openBidRequest(bCard.getBidId(), false);
 
 
     }
