@@ -88,6 +88,15 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsFrag
                 }
                 finish();
                 startActivity(getIntent());
+            }else if(tag.equals("bid_new_category")){
+                boolean status = ((JSONObject)j.get(1)).getBoolean("status");
+                if(status){
+                    Toast.makeText(this, "Bid Request Accepted in new Category!", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(this, "Bid Request can't be Accepted!", Toast.LENGTH_SHORT).show();
+                }
+                finish();
+                startActivity(getIntent());
             }
 
         } catch (JSONException e) {
