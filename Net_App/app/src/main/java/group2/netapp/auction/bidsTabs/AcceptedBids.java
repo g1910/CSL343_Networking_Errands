@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.util.ArrayList;
 
@@ -32,10 +33,11 @@ public class AcceptedBids extends Fragment implements Card.OnCardClickListener{
     CardRecyclerView bidView;
     BidAcceptListener bListener;
 
-    JSONArray acceptedBids;
+    JSONObject auc_category;
+    JSONArray  acceptedBids;
 
     public interface BidAcceptListener{
-        public void openBidRequest(int bidId, boolean isRequest);
+        public void openBidRequest(JSONObject bid, boolean isRequest);
     }
 
     public AcceptedBids() {
@@ -53,13 +55,24 @@ public class AcceptedBids extends Fragment implements Card.OnCardClickListener{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_accepted_bids, container, false);
-        setUpBidView(v);
+
+        Bundle args = getArguments();
+        try {
+            auc_category = new JSONObject(new JSONTokener(args.getString("auction_category","")));
+            setUpBidView(v);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
 
         return v;
     }
 
-    public void setUpBidView(View v){
-        acceptedBids = ((AuctionActivity) getActivity()).getRunningBids();
+    public void setUpBidView(View v) throws JSONException {
+        if(auc_category!=null){
+            acceptedBids = auc_category.getJSONArray("bids");
+        }
         bidView = (CardRecyclerView) v.findViewById(R.id.auc_acc_bids_recyclerview);
         bidView.setHasFixedSize(false);
 
@@ -78,7 +91,7 @@ public class AcceptedBids extends Fragment implements Card.OnCardClickListener{
             for(int i = 0; i< acceptedBids.length(); ++i) {
                 bid = acceptedBids.getJSONObject(i);
                 Log.d("AcceptedTab", "Location:" + bid.getString("location") + " Order:" + bid.getJSONArray("orders").length() + " items ordered");
-                BidCard card = new BidCard(getActivity(),i,"Location:"+bid.getString("location"),"Order:"+ bid.getJSONArray("orders").length()+" items ordered");
+                BidCard card = new BidCard(getActivity(),bid);
                 card.setOnClickListener(this);
                 cards.add(card);
             }
@@ -102,7 +115,7 @@ public class AcceptedBids extends Fragment implements Card.OnCardClickListener{
 //        ft.commit();
 
         Log.d("Requests", "Fragment Added");
-        bListener.openBidRequest(bCard.getBidId(), false);
+        bListener.openBidRequest(bCard.getBid(), false);
 
 
     }

@@ -18,6 +18,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,6 @@ public class AucBidsFragment extends Fragment {
 
     TextView location,order;
     JSONObject bid;
-    int bidId;
     boolean isRequest;
     public AucBidsFragment() {
         // Required empty public constructor
@@ -58,27 +58,21 @@ public class AucBidsFragment extends Fragment {
     }
 
     public void setUpView(View v){
-        Bundle b = getArguments();
-        bidId = b.getInt("id",-1);
-        isRequest = b.getBoolean("isRequest",false);
-        setHasOptionsMenu(true);
-        if(isRequest){
-            bid = ((AuctionActivity)getActivity()).getPendingBidAt(bidId);
-
-        }else{
-            bid = ((AuctionActivity)getActivity()).getRunningBidAt(bidId);
-        }
-
         location = (TextView) v.findViewById(R.id.auc_bidview_loc);
         order = (TextView) v.findViewById(R.id.auc_bidview_order);
+
+        Bundle b = getArguments();
+        isRequest = b.getBoolean("isRequest",false);
+        if(isRequest) setHasOptionsMenu(true);
+
         try {
-            location.setText("BidId:"+bid.getString("location"));
+            bid = new JSONObject(new JSONTokener(b.getString("bid","")));
+            location.setText("BidId: "+bid.getString("location"));
             order.setText("Order: " + bid.getJSONArray("orders").length()+" orders");
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-    }
+     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
