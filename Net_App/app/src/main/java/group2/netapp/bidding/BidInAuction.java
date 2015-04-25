@@ -1,9 +1,11 @@
 package group2.netapp.bidding;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -43,11 +45,28 @@ public class BidInAuction extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.new_bid:
-   //             newBid();
+                newBid();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void newBid() {
+
+        Intent i=new Intent(getActivity(),BidFormActivity.class);
+        Bundle b=new Bundle();
+        JSONArray topar = ((CurrAuctionActivity)getActivity()).getNotParticipating();
+        try {
+            b.putInt("idAuction",((JSONObject)topar.get(index)).getInt("idAuction"));
+            Log.d("BidInAuction",((JSONObject)topar.get(index)).toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        i.putExtras(b);
+        startActivity(i);
+        //    b.putInt("");
     }
 
     CardArrayRecyclerViewAdapter auctionViewAdapter;
@@ -69,6 +88,7 @@ public class BidInAuction extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_bid_in_auction, container, false);
         setUpView(v);
+        setHasOptionsMenu(true);
         return v;
     }
 
