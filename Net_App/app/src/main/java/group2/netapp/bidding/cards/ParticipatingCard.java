@@ -17,9 +17,9 @@ import it.gmariotti.cardslib.library.internal.Card;
  */
 public class ParticipatingCard extends Card {
 
-    String auctionLocation,price,desc,idUser,start_time,end_time,idAuction,expected_time;
+    String auctionLocation,desc,idUser,start_time,end_time,expected_time;
     String ratings,numRated;
-    int index;
+    int index,idAuction,price,rank;
 
 
     public ParticipatingCard(Context context, JSONObject j,int i) {
@@ -31,11 +31,12 @@ public class ParticipatingCard extends Card {
             this.idUser = j.getString("idUser");
             this.start_time = j.getString("start_time");
             this.end_time = j.getString("end_time");
-            this.idAuction = j.getString("idAuction");
+            this.idAuction = j.getInt("idAuction");
             this.expected_time = j.getString("expctd_time");
-            this.price = j.getString("Price");
+            this.price = j.getInt("Price");
             this.ratings=j.getString("rating");
             this.numRated=j.getString("numRated");
+            this.rank=j.getInt("rank");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -53,6 +54,7 @@ public class ParticipatingCard extends Card {
         TextView numRatedView = (TextView)parent.findViewById(R.id.participatingnumRated);
         TextView end_timeView = (TextView)parent.findViewById(R.id.participatingend_time);
         TextView expected_timeView = (TextView)parent.findViewById(R.id.participatingexpected_time);
+        TextView rankView=(TextView)parent.findViewById(R.id.participatingrank);
 
         auctionLocView.setText(auctionLocation);
         priceView.setText("₹" + price);
@@ -61,6 +63,7 @@ public class ParticipatingCard extends Card {
         numRatedView.setText("rated by : "+numRated+" users");
         end_timeView.setText("Bidding Ends in : "+end_time);
         expected_timeView.setText("Expected Delivery : "+expected_time);
+        rankView.setText(rank+" ");
 
     }
 
@@ -72,11 +75,11 @@ public class ParticipatingCard extends Card {
         this.auctionLocation = auctionLocation;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -112,11 +115,11 @@ public class ParticipatingCard extends Card {
         this.end_time = end_time;
     }
 
-    public String getIdAuction() {
+    public int getIdAuction() {
         return idAuction;
     }
 
-    public void setIdAuction(String idAuction) {
+    public void setIdAuction(int idAuction) {
         this.idAuction = idAuction;
     }
 
