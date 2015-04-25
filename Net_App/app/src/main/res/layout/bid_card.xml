@@ -13,73 +13,55 @@
         android:hint="Item"
         android:id="@+id/itemName"
         android:textStyle="bold"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="10dp"
         android:maxLength="50"
-        android:gravity="center_vertical|center_horizontal"
-        android:layout_alignParentLeft="true"
-        android:layout_toLeftOf="@+id/numberPicker"
+        android:layout_marginRight="5dp"
+        android:layout_toLeftOf="@+id/multiplyicon"
+        android:layout_centerVertical="true"
         android:inputType="textMultiLine|textNoSuggestions"
-        android:minLines="3"
-        android:background="@color/background_floating_material_light"
-        android:textColor="#ff5b5b5b"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="5dp"
+        android:minLines="1"
+        android:maxLines="3"
+        android:ems="7"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
 
         />
 
-    <!--<ImageButton-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentTop="true"-->
-        <!--android:id="@+id/quantityminus"-->
-        <!--android:layout_alignRight="@id/quantitynumber"-->
-        <!--android:src="@drawable/ic_expand_more_black_24dp"-->
-        <!--/>-->
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:hint="Per item price"
+        android:id="@+id/Priceperitem"
+        android:textStyle="bold"
+        android:maxLength="50"
+        android:inputType="number"
+        android:ems="7"
+        android:layout_marginRight="5dp"
+        android:layout_toLeftOf="@+id/multiplyicon"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/itemName"
+        android:layout_alignBottom="@+id/numberPicker"
 
-    <!--<EditText-->
-        <!--android:layout_width="50dp"-->
-        <!--android:layout_height="30dp"-->
-        <!--android:singleLine="true"-->
-        <!--android:inputType="number"-->
-        <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
-        <!--android:id="@+id/quantitynumber"-->
-        <!--android:text="1"-->
-        <!--android:gravity="center_vertical|center_horizontal"-->
-        <!--android:background="@color/background_floating_material_light"-->
-        <!--android:layout_below="@id/quantityminus"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_marginRight="10dp"-->
-        <!--android:layout_marginTop="5dp"-->
-        <!--android:layout_marginBottom="5dp"-->
-        <!--android:textColor="@color/accent_material_light"-->
-        <!--android:textStyle="bold"-->
-         <!--/>-->
+        />
 
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/multiply2"
+        android:id="@+id/multiplyicon"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/numberPicker"/>
 
-
-
-    <!--<ImageButton-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@id/quantitynumber"-->
-        <!--android:id="@+id/quantityplus"-->
-        <!--android:layout_alignRight="@id/quantitynumber"-->
-        <!--android:src="@drawable/ic_expand_less_black_24dp"-->
-        <!--/>-->
 
     <NumberPicker
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/numberPicker"
         android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
         android:layout_marginRight="10dp"
 
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-         />
+        android:layout_alignParentRight="true" />
 
 
 </RelativeLayout>
