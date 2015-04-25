@@ -61,8 +61,8 @@ public class ParticipatingCard extends Card {
         descView.setText(desc);
         ratingsView.setRating(Float.parseFloat(ratings));
         numRatedView.setText("rated by : "+numRated+" users");
-        end_timeView.setText("Bidding Ends in : "+end_time);
-        expected_timeView.setText("Expected Delivery : "+expected_time);
+        end_timeView.setText(end_time);
+        expected_timeView.setText(expected_time);
         rankView.setText(rank+" ");
 
     }
