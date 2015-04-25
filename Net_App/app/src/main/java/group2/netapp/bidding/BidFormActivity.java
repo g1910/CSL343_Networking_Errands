@@ -2,6 +2,7 @@ package group2.netapp.bidding;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -18,28 +19,37 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import group2.netapp.R;
+import group2.netapp.utilFragments.ServerConnect;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
 import it.gmariotti.cardslib.library.internal.ViewToClickToExpand;
 import it.gmariotti.cardslib.library.view.CardListView;
 
-public class BidFormActivity extends Activity {
+public class BidFormActivity extends Activity implements ServerConnect.OnResponseListener{
 
     CardListView listView;
     ArrayList<Card> cards;
     CardArrayAdapter cardListAdapter;
+    int idAuction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bid_form);
+        Bundle b=getIntent().getExtras();
+        idAuction = b.getInt("idAuction");
+
+
         listView = (CardListView)findViewById(R.id.BidFormCardList);
         cards = new ArrayList<Card>();
         cardListAdapter = new CardArrayAdapter(getApplicationContext(),cards);
@@ -110,8 +120,22 @@ public class BidFormActivity extends Activity {
                     order.put(temp);
 
                 }
-                
+
                 Log.d("BidFormActivity",order.toString());
+
+                ServerConnect myServer=new ServerConnect(BidFormActivity.this);
+
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                nameValuePairs.add(new BasicNameValuePair("id_user", "1"));
+                nameValuePairs.add(new BasicNameValuePair("idAuction",String.valueOf(idAuction)));
+                nameValuePairs.add(new BasicNameValuePair("location",String.valueOf(bidlocation)));
+                nameValuePairs.add(new BasicNameValuePair("desc",String.valueOf(des)));
+                nameValuePairs.add(new BasicNameValuePair("order",order.toString()));
+
+                Log.d("ParticipatingFragment",getString(R.string.IP) + "addBid.php");
+
+                myServer.execute(getString(R.string.IP) + "addBid.php", nameValuePairs);
+
 
             }
         });
@@ -139,6 +163,16 @@ public class BidFormActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onResponse(JSONArray j) {
+
+        Intent i=new Intent(this,CurrAuctionActivity.class);
+        finish();
+        startActivity(i);
+
+
     }
 }
 
