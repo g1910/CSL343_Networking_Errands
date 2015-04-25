@@ -10,6 +10,11 @@
 	
 	$num=mysqli_num_rows($result);
 
+	$load = array(
+		    "tag" => "loading", 
+		);
+		$output[]=$load;
+
 	if ($num==0)
 	{
 		$arr = array(
@@ -41,23 +46,50 @@
 		}
 		$output[]=$pBidOutput;
 
-		$currBidOutput = [];
-		// echo $row['idAuction'];
-		$currBids = mysqli_query($con,"select Bid.* from (Auction natural join Placed) join Bid using(idBid) where status <> 'P' and idAuction = ".$row['idAuction']) or die("Error: ".mysqli_error($con));
-		while ($pBids=mysqli_fetch_assoc($currBids))
-		{
-		 	// print(json_encode($pBids));
-		 	$orderBids = mysqli_query($con,"select * from `Order` where idBid=".$pBids['idBid']) or die("Error: ".mysqli_error($con));
-		 	$orders = [];
-		 	while($orderow = mysqli_fetch_assoc($orderBids)){
-		 		// print(json_encode($orderow));
-		 		$orders[] = $orderow;
-		 	}
-		 	$pBids['orders'] = $orders;
-		 	$currBidOutput[] = $pBids;
-		// 	$auctionId=$row['idAuction'];
+		$catCurrBidOutput = [];
+		$catAuc = mysqli_query($con,"select * from Auction_Categories where idAuction=".$row['idAuction']) or die("Error: ".mysqli_error($con));
+		while($cat = mysqli_fetch_assoc($catAuc)){
+			$currBidOutput = [];
+
+			$currBids = mysqli_query($con,"select Bid.* from Placed  natural join Bid where idCategory = ".$cat['idCategory']) or die("Error: ".mysqli_error($con));
+
+			while ($pBids=mysqli_fetch_assoc($currBids))
+			{
+			 	// print(json_encode($pBids));
+			 	$orderBids = mysqli_query($con,"select * from `Order` where idBid=".$pBids['idBid']) or die("Error: ".mysqli_error($con));
+			 	$orders = [];
+			 	while($orderow = mysqli_fetch_assoc($orderBids)){
+			 		// print(json_encode($orderow));
+			 		$orders[] = $orderow;
+			 	}
+			 	$pBids['orders'] = $orders;
+			 	$currBidOutput[] = $pBids;
+			// 	$auctionId=$row['idAuction'];
+			}
+
+			$cat['bids'] = $currBidOutput;
+			$catCurrBidOutput[] = $cat;
+
 		}
-		$output[]=$currBidOutput;
+
+
+		// $currBidOutput = [];
+		// // echo $row['idAuction'];
+		// $currBids = mysqli_query($con,"select Bid.* from (Auction natural join Placed) join Bid using(idBid) where status = 'A' and idAuction = ".$row['idAuction']) or die("Error: ".mysqli_error($con));
+		// while ($pBids=mysqli_fetch_assoc($currBids))
+		// {
+		//  	// print(json_encode($pBids));
+		//  	$orderBids = mysqli_query($con,"select * from `Order` where idBid=".$pBids['idBid']) or die("Error: ".mysqli_error($con));
+		//  	$orders = [];
+		//  	while($orderow = mysqli_fetch_assoc($orderBids)){
+		//  		// print(json_encode($orderow));
+		//  		$orders[] = $orderow;
+		//  	}
+		//  	$pBids['orders'] = $orders;
+		//  	$currBidOutput[] = $pBids;
+		// // 	$auctionId=$row['idAuction'];
+		// }
+		$output[]=$catCurrBidOutput;
 		// print(json_encode($pBidOutput));
 	}
 

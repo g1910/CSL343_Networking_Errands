@@ -7,7 +7,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/rankValue"
+        android:id="@+id/participatingrank"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
         android:text="rank"
@@ -21,7 +21,7 @@
         android:src="@drawable/rank_flat"
         android:layout_marginTop="5dp"
         android:id="@+id/rankicon"
-        android:layout_toLeftOf="@id/rankValue"
+        android:layout_toLeftOf="@id/participatingrank"
         android:layout_marginRight="5dp"/>
 
 

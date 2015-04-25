@@ -1,6 +1,5 @@
 package group2.netapp.auction;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -21,12 +21,11 @@ import java.util.List;
 
 import group2.netapp.R;
 import group2.netapp.auction.bidsTabs.AcceptedBids;
-import group2.netapp.auction.bidsTabs.BidRequestsTab;
 import group2.netapp.utilFragments.ProgressFragment;
 import group2.netapp.utilFragments.ServerConnect;
 
 
-public class AuctionActivity extends FragmentActivity implements BidRequestsTab.BidRequestsListener, ServerConnect.OnResponseListener, AcceptedBids.BidAcceptListener{
+public class AuctionActivity extends FragmentActivity implements BidRequestsFragment.BidRequestsListener, ServerConnect.OnResponseListener, AcceptedBids.BidAcceptListener, AuctionDashboardFragment.AuctionDashboardListener{
 
     JSONObject auctionDetails;
     JSONArray pendingBids, runningBids;
@@ -59,18 +58,38 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsTab.
     @Override
     public void onResponse(JSONArray j) {
         try {
-            boolean isRunning=Boolean.valueOf (((JSONObject)j.get(0)).get("isRunning").toString());
-            if (isRunning)
-            {
-                auctionDetails = j.getJSONObject(1);
-                pendingBids = j.getJSONArray(2);
-                runningBids = j.getJSONArray(3);
-                Log.d("AuctionActivity",auctionDetails.toString());
-                Log.d("AuctionActivity", pendingBids.toString());
-                Log.d("AuctionActivity", runningBids.toString());
-                openDashboard();
-            }else {
-                openServerForm();
+            String tag = ((JSONObject)j.get(0)).getString("tag");
+            if(tag.equals("loading")) {
+                boolean isRunning = Boolean.valueOf(((JSONObject) j.get(1)).get("isRunning").toString());
+                if (isRunning) {
+                    auctionDetails = j.getJSONObject(2);
+                    pendingBids = j.getJSONArray(3);
+                    runningBids = j.getJSONArray(4);
+                    Log.d("AuctionActivity", auctionDetails.toString());
+                    Log.d("AuctionActivity", pendingBids.toString());
+                    Log.d("AuctionActivity", runningBids.toString());
+                    openDashboard();
+                } else {
+                    openServerForm();
+                }
+            }else if(tag.equals("bid_request")){
+                boolean status = ((JSONObject)j.get(1)).getBoolean("status");
+                if(status){
+                    Toast.makeText(this, "Bid Request Accepted!", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(this, "Bid Request can't be Accepted!", Toast.LENGTH_SHORT).show();
+                }
+                finish();
+                startActivity(getIntent());
+            }else if(tag.equals("bid_reject")){
+                boolean status = ((JSONObject)j.get(1)).getBoolean("status");
+                if(status){
+                    Toast.makeText(this, "Bid Request Rejected!", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(this, "Bid Request can't be Rejected!", Toast.LENGTH_SHORT).show();
+                }
+                finish();
+                startActivity(getIntent());
             }
 
         } catch (JSONException e) {
@@ -110,17 +129,28 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsTab.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+//        if (id == R.id.action_requests) {
+//            openBidRequestFragment();
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }
 
     @Override
-    public void openBidRequest(int bidId, boolean isRequest) {
+    public void openBidRequestFragment(){
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        Fragment bReqFrag = new BidRequestsFragment();
+        ft.replace(R.id.auction_frame,bReqFrag,"BidRequests");
+        ft.addToBackStack(null);
+        ft.commit();
+        Log.d("AuctionActivity", "BidRequests Opened");
+    }
+
+    @Override
+    public void openBidRequest(JSONObject bid, boolean isRequest) {
         Bundle args = new Bundle();
-        args.putInt("id", bidId);
+        args.putString("bid", bid.toString());
         if(isRequest){
             args.putBoolean("isRequest",true);
         }

@@ -150,6 +150,7 @@ public class ServerFormActivity extends FragmentActivity implements TimePickerFr
             nameValuePairs.add(new BasicNameValuePair("expected",aucExpDate.getText().toString() + " " + aucExpTime.getText().toString()+":00"));
             nameValuePairs.add(new BasicNameValuePair("description",aucDesc.getText().toString()));
             nameValuePairs.add(new BasicNameValuePair("id_user","13"));
+            nameValuePairs.add(new BasicNameValuePair("min_price","40"));
             ServerConnect myServer=new ServerConnect(a);
 
             Toast.makeText(a, "Starting a New Auction...", Toast.LENGTH_SHORT).show();

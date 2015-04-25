@@ -18,6 +18,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +33,8 @@ public class AucBidsFragment extends Fragment {
 
     TextView location,order;
     JSONObject bid;
-    int bidId;
     boolean isRequest;
+    JSONArray aucCategories;
     public AucBidsFragment() {
         // Required empty public constructor
     }
@@ -58,26 +59,22 @@ public class AucBidsFragment extends Fragment {
     }
 
     public void setUpView(View v){
-        Bundle b = getArguments();
-        bidId = b.getInt("id",-1);
-        isRequest = b.getBoolean("isRequest",false);
-        if(isRequest){
-            bid = ((AuctionActivity)getActivity()).getPendingBidAt(bidId);
-            setHasOptionsMenu(true);
-        }else{
-            bid = ((AuctionActivity)getActivity()).getRunningBidAt(bidId);
-        }
-
+        aucCategories = ((AuctionActivity)getActivity()).getRunningBids();
         location = (TextView) v.findViewById(R.id.auc_bidview_loc);
         order = (TextView) v.findViewById(R.id.auc_bidview_order);
+
+        Bundle b = getArguments();
+        isRequest = b.getBoolean("isRequest",false);
+        if(isRequest) setHasOptionsMenu(true);
+
         try {
-            location.setText("BidId:"+bid.getString("location"));
+            bid = new JSONObject(new JSONTokener(b.getString("bid","")));
+            location.setText("BidId: "+bid.getString("location"));
             order.setText("Order: " + bid.getJSONArray("orders").length()+" orders");
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-    }
+     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -89,7 +86,8 @@ public class AucBidsFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case R.id.accept_bid: acceptBid();
-                Toast.makeText(getActivity(),"Accepting the bid....",Toast.LENGTH_LONG).show();
+                break;
+            case R.id.reject_bid: rejectBid();
                 break;
             default: break;
         }
@@ -97,6 +95,7 @@ public class AucBidsFragment extends Fragment {
     }
 
     public void acceptBid(){
+
         try {
             int auctionId = ((AuctionActivity)getActivity()).getAuctionDetails().getInt("idAuction");
             int bidId = bid.getInt("idBid");
@@ -104,9 +103,23 @@ public class AucBidsFragment extends Fragment {
             List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
             nameValuePairs.add(new BasicNameValuePair("id_auc",auctionId+""));
             nameValuePairs.add(new BasicNameValuePair("id_bid",bidId+""));
-            nameValuePairs.add(new BasicNameValuePair("id_user","13"));
-            Log.d("AuctionActivity",getString(R.string.IP)+"acceptBid.php");
-            myServer.execute(getString(R.string.IP)+"acceptBid.php",nameValuePairs);
+            Log.d("AuctionActivity",getString(R.string.IP)+"accept_bid.php");
+            myServer.execute(getString(R.string.IP)+"accept_bid.php",nameValuePairs);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void rejectBid(){
+        try {
+            int auctionId = ((AuctionActivity)getActivity()).getAuctionDetails().getInt("idAuction");
+            int bidId = bid.getInt("idBid");
+            ServerConnect myServer=new ServerConnect(getActivity());
+            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+            nameValuePairs.add(new BasicNameValuePair("id_auc",auctionId+""));
+            nameValuePairs.add(new BasicNameValuePair("id_bid",bidId+""));
+            Log.d("AuctionActivity",getString(R.string.IP)+"reject_bid.php");
+            myServer.execute(getString(R.string.IP)+"reject_bid.php",nameValuePairs);
         } catch (JSONException e) {
             e.printStackTrace();
         }

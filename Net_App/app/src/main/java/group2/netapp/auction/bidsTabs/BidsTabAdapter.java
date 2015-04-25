@@ -1,44 +1,62 @@
 package group2.netapp.auction.bidsTabs;
 
+import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import group2.netapp.R;
+import group2.netapp.auction.BidRequestsFragment;
 
 /**
  * Created by mohit on 16/3/15.
  */
 public class BidsTabAdapter extends FragmentPagerAdapter {
 
-    public BidsTabAdapter(FragmentManager fm) {
+    JSONArray acceptedBids;
+
+    public BidsTabAdapter(FragmentManager fm, JSONArray acceptedBids) {
         super(fm);
+        this.acceptedBids = acceptedBids;
+        Log.d("BidTabsAdapter", acceptedBids.toString());
     }
 
 
     @Override
     public Fragment getItem(int position) {
 
-        switch (position) {
-            case 0:
-                return new AcceptedBids();
-            case 1:
-                return new BidRequestsTab();
-
+        Fragment f = new AcceptedBids();
+        Bundle args = new Bundle();
+        try {
+            args.putString("auction_category",acceptedBids.getJSONObject(position).toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        return null;
+        f.setArguments(args);
+        return f;
     }
 
     @Override
     public int getCount() {
-        return 2;
+        return acceptedBids.length();
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        switch(position){
-            case 0: return "Dashboard";
-
-            case 1: return "Requests";
+        try {
+            Log.d("BidTabsAdapter",acceptedBids.length()+" "+position);
+            Log.d("BidTabsAdapter",acceptedBids.getJSONObject(position).getInt("minPrice")+"");
+            String title = "Dashboard - \u20B9 " + acceptedBids.getJSONObject(position).getInt("minPrice");
+            Log.d("BidTabsAdapter",title);
+            return title;
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        return super.getPageTitle(position);
+        return "Dashboard " + position;
     }
 }

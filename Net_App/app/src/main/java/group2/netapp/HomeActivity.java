@@ -17,6 +17,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -26,6 +33,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +42,9 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONObject;
+
+import it.gmariotti.cardslib.library.internal.CardHeader;
 
 
 public class HomeActivity extends FragmentActivity
@@ -49,6 +61,7 @@ public class HomeActivity extends FragmentActivity
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,15 +76,15 @@ public class HomeActivity extends FragmentActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
-        pname=getIntent().getStringExtra("pname");
-        picurl=getIntent().getStringExtra("picurl");
-        email=getIntent().getStringExtra("email");
-        new adduser(pname,email,"http://netapp.byethost33.com/add_user.php").execute(null,null,null);
+        pname = getIntent().getStringExtra("pname");
+        picurl = getIntent().getStringExtra("picurl");
+        email = getIntent().getStringExtra("email");
+        new adduser(pname, email, "http://netapp.byethost33.com/add_user.php").execute(null, null, null);
         SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        SharedPreferences.Editor editor=saved_values.edit();
-        editor.putString("user_name",pname);
-        editor.putString("email",email);
-        editor.putString("picurl",picurl);
+        SharedPreferences.Editor editor = saved_values.edit();
+        editor.putString("user_name", pname);
+        editor.putString("email", email);
+        editor.putString("picurl", picurl);
         editor.apply();
 
     }
@@ -79,36 +92,35 @@ public class HomeActivity extends FragmentActivity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
-        Fragment fragment=null;
+        Fragment fragment = null;
         FragmentManager fragmentManager = getSupportFragmentManager();
 
-        switch (position)
-        {
+        switch (position) {
             case 1:
-                fragment=new ProfileFragment();
+                fragment = new ProfileFragment();
                 break;
             case 4:
-                fragment=new UserRequestFragment();
+                fragment = new UserRequestFragment();
                 break;
             case 2:
-                fragment=new FeedbackFragment();
+                fragment = new FeedbackFragment();
                 break;
             case 3:
-                fragment=new RateFragment();
+                fragment = new RateFragment();
                 break;
             case 0:
-                fragment=new HomeFragment();
+                fragment = new HomeFragment();
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, fragment,"home")
+                        .replace(R.id.container, fragment, "home")
                         .commit();
                 break;
             case 5:
                 SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                SharedPreferences.Editor editor=saved_values.edit();
+                SharedPreferences.Editor editor = saved_values.edit();
                 editor.clear();
                 editor.apply();
-                Intent logout = new Intent(getApplicationContext(),MainActivity.class);
-                logout.putExtra("loggedout",1);
+                Intent logout = new Intent(getApplicationContext(), MainActivity.class);
+                logout.putExtra("loggedout", 1);
                 startActivity(logout);
                 finish();
                 break;
@@ -118,15 +130,17 @@ public class HomeActivity extends FragmentActivity
         fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in,R.anim.slide_out)
                 .replace(R.id.container, fragment,"other")
                 .commit();
+
+
     }
 
     public void onSectionAttached(int number) {
         switch (number) {
             case 0:
-                mTitle=getString(R.string.title_activity_home);
+                mTitle = getString(R.string.title_activity_home);
                 break;
             case 1:
-               mTitle = getString(R.string.title_section1);
+                mTitle = getString(R.string.title_section1);
                 break;
             case 2:
                 mTitle = getString(R.string.title_section2);
@@ -177,10 +191,9 @@ public class HomeActivity extends FragmentActivity
             Fragment homefragment=new HomeFragment();
             fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in,R.anim.slide_out)
                     .replace(R.id.container, homefragment,"home")
-                    .commit();
-        }
-        else
-        super.onBackPressed();
+                   .commit();
+        } else
+            super.onBackPressed();
     }
 
     @Override
@@ -191,8 +204,7 @@ public class HomeActivity extends FragmentActivity
         int id = item.getItemId();
         //System.out.println(item);
         //noinspection SimplifiableIfStatement
-        if(id==R.id.action_settings)
-        {
+        if (id == R.id.action_settings) {
 
         }
 
@@ -241,16 +253,15 @@ public class HomeActivity extends FragmentActivity
     }
 
 
+    class adduser extends AsyncTask<String, String, String> {
+        private String pname, email, host;
 
-    class adduser extends AsyncTask<String,String,String>
-    {
-        private String pname,email,host;
-        public adduser(String a, String b, String c)
-        {
-            pname=a;
-            email=b;
-            host=c;
+        public adduser(String a, String b, String c) {
+            pname = a;
+            email = b;
+            host = c;
         }
+
         @Override
         protected String doInBackground(String[] params) {
 
@@ -259,7 +270,6 @@ public class HomeActivity extends FragmentActivity
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost(host);
             httppost.setHeader("Content-Type", "application/x-www-form-urlencoded");
-            String text;
             //HttpHost proxy = new HttpHost("10.1.201.4", 3128);
             //httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
             try {
@@ -293,8 +303,19 @@ public class HomeActivity extends FragmentActivity
                             e.printStackTrace();
                         }
                     }
-                    text = sb.toString();
-                    System.out.println(text);
+                    String id = sb.toString().trim();
+                    if(id.length()==1)
+                    {
+                        System.out.println("User added or already present with id: "+id);
+                        SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                        SharedPreferences.Editor editor=saved_values.edit();
+                        editor.putString("id",id);
+                        editor.apply();
+                    }
+                    else
+                    {
+                        System.out.println("Failed to add user");
+                    }
                 }
 
             } catch (Exception e) {
@@ -303,8 +324,11 @@ public class HomeActivity extends FragmentActivity
             }
             return null;
         }
-    }
 
+
+    }
 }
+
+
 
 
