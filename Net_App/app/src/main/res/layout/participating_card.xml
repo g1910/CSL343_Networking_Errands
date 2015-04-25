@@ -1,15 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-        <RatingBar
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/participatingrank"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:text="rank"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:layout_marginTop="10dp"
+        android:textColor="#ff616161"/>
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/rank_flat"
+        android:layout_marginTop="5dp"
+        android:id="@+id/rankicon"
+        android:layout_toLeftOf="@id/participatingrank"
+        android:layout_marginRight="5dp"/>
+
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/locationpic"
+        android:layout_below="@id/rankicon"
+        android:src="@drawable/location_flat"
+        android:layout_marginLeft="10dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location:"
+        android:id="@+id/locationtext"
+        android:layout_marginTop="5dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_alignTop="@id/locationpic"
+        android:layout_toRightOf="@id/locationpic"
+        android:layout_marginLeft="10dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location"
+        android:layout_toRightOf="@id/locationtext"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_alignTop="@id/locationtext"
+        android:layout_alignLeft="@+id/participatingprice"
+        android:id="@+id/participatinglocation"
+         />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/endtimepic"
+        android:layout_below="@id/locationpic"
+        android:src="@drawable/red_clock_flat"
+        android:layout_marginTop="5dp"
+        android:layout_alignLeft="@id/locationpic"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ends at:"
+        android:layout_marginTop="5dp"
+        android:id="@+id/endtimetext"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_alignTop="@id/endtimepic"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/endtimepic"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="endtime"
+        android:layout_toRightOf="@id/endtimetext"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_alignTop="@id/endtimetext"
+        android:layout_alignLeft="@+id/participatingprice"
+        android:id="@+id/participatingend_time"
+        />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/deliverytimepic"
+        android:layout_below="@id/endtimepic"
+        android:src="@drawable/clock_flat"
+        android:layout_marginTop="5dp"
+        android:layout_alignLeft="@id/endtimepic"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delivery by:"
+        android:layout_marginTop="5dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_alignTop="@id/deliverytimepic"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/deliverytimepic"
+        android:id="@+id/deliverytimetext"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="expectedtime"
+        android:layout_toRightOf="@id/deliverytimetext"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_alignTop="@id/deliverytimetext"
+        android:layout_alignLeft="@+id/participatingprice"
+        android:id="@+id/participatingexpected_time"
+        />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignLeft="@id/deliverytimepic"
+        android:src="@drawable/price_flat"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/deliverytimepic"
+        android:id="@+id/pricepic"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Min. price:"
+        android:layout_marginTop="5dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_alignTop="@id/pricepic"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/pricepic"
+        android:id="@+id/pricetext"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="price"
+        android:layout_toRightOf="@id/pricetext"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_alignTop="@id/pricetext"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/participatingprice"
+        />
+
+
+
+
+    <RatingBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/participatingratings"
-            android:layout_alignParentLeft="true"
             android:isIndicator="true"
+            android:layout_below="@id/pricepic"
+            android:layout_marginTop="5dp"
+            android:layout_alignLeft="@id/deliverytimepic"
             style="?android:attr/ratingBarStyleSmall" />
 
     <TextView
@@ -17,66 +174,25 @@
         android:layout_height="wrap_content"
         android:text="rated by : 0 users"
         android:id="@+id/participatingnumRated"
-        android:layout_alignParentTop="true"
+        android:layout_alignTop="@id/participatingratings"
+        android:layout_toRightOf="@id/participatingratings"
         android:paddingLeft="15dp"
-        android:layout_toRightOf="@+id/participatingratings"
-        android:layout_toEndOf="@+id/participatingratings" />
+        />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Location"
-            android:textStyle="bold"
-            android:textColor="#00dd00"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/participatinglocation"
-            android:layout_gravity="center_vertical"
-            android:layout_below="@+id/participatingratings"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Here is the desc"
-            android:id="@+id/participatingdesc"
-            android:layout_below="@+id/participatingprice"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
 
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Expected Delivery : "
-        android:id="@+id/participatingexpected_time"
-        android:layout_below="@+id/participatinglocation"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Bidding Ends at : "
-        android:id="@+id/participatingend_time"
-        android:layout_below="@+id/participatingexpected_time"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Price"
-        android:textStyle="bold"
-        android:textColor="#00dd00"
-        android:paddingRight="10dp"
-        android:id="@+id/participatingprice"
-        android:layout_gravity="center_vertical"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_alignBottom="@+id/participatingend_time"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:text="Description"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp"
+        android:id="@+id/participatingdesc"
+        android:layout_below="@id/participatingratings"
+        android:layout_alignLeft="@id/participatingratings"
+        android:layout_marginTop="5dp"
+        />
 
 
 </RelativeLayout>

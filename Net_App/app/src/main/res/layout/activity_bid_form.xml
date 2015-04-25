@@ -25,17 +25,28 @@
             android:paddingLeft="20dp"
             android:layout_gravity="top" />
 
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/location_flat"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/Biddetails"
+            android:id="@+id/locationicon"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="5dp"
+            />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Location"
             android:id="@+id/Locationtext"
-            android:layout_gravity="left|top"
-            android:paddingLeft="20dp"
-            android:layout_below="@id/Biddetails"
+            android:layout_toRightOf="@id/locationicon"
+            android:layout_alignTop="@id/locationicon"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"/>
 
-            android:paddingTop="20dp"/>
 
         <EditText
             android:layout_width="wrap_content"
@@ -50,16 +61,27 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="30dp"/>
 
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/message_flat"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/locationfield"
+            android:id="@+id/descriptionicon"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Description"
             android:id="@+id/Descriptiontext"
-            android:layout_gravity="left|top"
-            android:layout_below="@id/locationfield"
-            android:paddingTop="10dp"
-            android:paddingLeft="20dp"/>
+            android:layout_alignTop="@id/descriptionicon"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/descriptionicon"/>
 
         <EditText
             android:layout_width="wrap_content"
@@ -69,17 +91,18 @@
             android:ems="7"
             android:inputType="textMultiLine|textLongMessage|textCapSentences"
             android:maxLength="140"
-            android:minLines="2"
+            android:minLines="1"
             android:maxLines="5"
             android:layout_alignTop="@+id/Descriptiontext"
             android:layout_alignParentRight="true"
             android:layout_marginRight="30dp"/>
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:src="@drawable/cart_flat"
             android:id="@+id/cartIcon"
+            android:layout_marginTop="20dp"
             android:layout_below="@id/descriptionfield"
             android:layout_marginLeft="5dp"/>
 
@@ -104,36 +127,13 @@
 
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Bid amount"
-            android:id="@+id/BidAmounttext"
-            android:layout_gravity="left|top"
-
-            android:paddingTop="10dp"
-            android:paddingLeft="20dp"
-            android:layout_below="@id/BidFormCardList" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/BidAmountfield"
-            android:layout_gravity="right"
-            android:ems="7"
-            android:inputType="numberDecimal"
-            android:layout_alignTop="@+id/BidAmounttext"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="30dp" />
-
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Place Bid"
             android:id="@+id/PlaceBid_button"
-            android:layout_below="@id/BidAmountfield"
+            android:layout_below="@id/BidFormCardList"
             android:layout_marginTop="20dp"
             android:layout_centerHorizontal="true"
             />

@@ -13,7 +13,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -50,12 +52,23 @@ public class BidFormActivity extends Activity {
         AddItem.setText("Add item");
         listView.addFooterView(AddItem);
 
+        View item = cardListAdapter.getView(0,null,listView);
+        item.measure(0,0);
+        final int itemMeasuredHeight = item.getMeasuredHeight();
+        final int dividerHeight = listView.getDividerHeight();
+        final ViewGroup.LayoutParams params = listView.getLayoutParams();
+        listView.setSelection(listView.getCount()-1);
         AddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 OrderCard a = new OrderCard(getApplicationContext());
                 cards.add(a);
+                int count = cardListAdapter.getCount();
+                params.height = itemMeasuredHeight*count + dividerHeight*(count-1);
+                listView.setLayoutParams(params);
+                listView.requestLayout();
                 cardListAdapter.notifyDataSetChanged();
+                listView.requestFocus();
             }
         });
 
@@ -132,7 +145,7 @@ class OrderCard extends Card{
 
         np.setMinValue(1);
         np.setMaxValue(20);
-        np.setWrapSelectorWheel(true);
+        np.setWrapSelectorWheel(false);
         np.setDisplayedValues(nums);
         np.setValue(1);
         np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {

@@ -26,9 +26,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:id="@+id/drawerProfilename"
             android:textStyle="bold"
-            android:text="afcfadavdsv"/>
+            android:text="Your Name"/>
 
         </LinearLayout>
 
@@ -43,4 +44,4 @@
     </LinearLayout>
 
 
-<!-- From: file:/D:/Git/CSL343_Networking_Errands/Net_App/app/src/main/res/layout/fragment_navigation_drawer.xml -->
+<!-- From: file:/home/gaurav/AndroidstudioProjects/Net_App/app/src/main/res/layout/fragment_navigation_drawer.xml -->
