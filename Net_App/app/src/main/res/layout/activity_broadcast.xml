@@ -124,13 +124,13 @@ android:id="@+id/scrollView"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Expected Date"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_toRightOf="@+id/Dateicon"
         android:layout_marginLeft="5dp"
         android:id="@+id/Datetext"
         android:layout_gravity="left|top"
 
-        android:paddingTop="10dp"
+
 
         android:layout_below="@+id/timePicker" />
 
@@ -170,7 +170,7 @@ android:id="@+id/scrollView"
         android:textColor="#000000"
         android:onClick="showDatePickerDialog"
         android:layout_alignLeft="@id/timePicker"
-        android:layout_alignBottom="@id/Datetext"
+        android:layout_alignTop="@id/Datetext"
         android:layout_toRightOf="@id/Datetext"/>
 
     <ImageView

@@ -6,16 +6,39 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.csl343.group2.orderit.auction.ServerFormActivity">
 
+
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/message_flat"
+        android:id="@+id/Descriptionicon"
+        />
+
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/auction_desc"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignTop="@id/Descriptionicon"
+        android:layout_toRightOf="@id/Descriptionicon"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
         android:hint="Enter Description" />
+
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/location_flat"
+        android:id="@+id/Locationicon"
+        android:layout_below="@id/auction_desc"
+
+        />
 
     <EditText
         android:layout_width="wrap_content"
@@ -24,12 +47,35 @@
         android:ems="10"
         android:id="@+id/auction_location"
         android:layout_below="@+id/auction_desc"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_alignLeft="@id/auction_desc"
         android:layout_alignRight="@+id/auction_desc"
-        android:layout_alignEnd="@+id/auction_desc"
+        android:layout_alignTop="@id/locationicon"
+        android:layout_marginTop="10dp"
         android:hint="Enter Location" />
 
+
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/red_clock_flat"
+        android:layout_alignLeft="@id/locationicon"
+        android:layout_below="@id/auction_location"
+        android:id="@+id/endtimeicon"
+        android:layout_marginTop="10dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="End Time"
+        android:id="@+id/textView2"
+        android:layout_toRightOf="@id/endtimeicon"
+        android:layout_marginLeft="5dp"
+        android:layout_alignTop="@id/endtimeicon"
+        android:layout_below="@+id/auction_location"
+        android:layout_marginTop="10dp"
+    />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,20 +83,10 @@
         android:text="Large Text"
         android:id="@+id/auc_end_time"
         android:layout_below="@+id/textView2"
+        android:layout_marginTop="10dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:onClick="showTimePickerDialog" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="End Time"
-        android:id="@+id/textView2"
-        android:layout_below="@+id/auction_location"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -61,15 +97,26 @@
         android:layout_alignLeft="@+id/auc_exp_date"
         android:layout_alignStart="@+id/auc_exp_date" />
 
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/clock_flat"
+        android:layout_alignLeft="@id/locationicon"
+        android:layout_below="@id/auc_end_time"
+        android:id="@+id/expectedtimeicon"
+        android:layout_marginTop="10dp"
+        />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Expected Time"
         android:id="@+id/textView"
         android:layout_below="@+id/auc_end_date"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignTop="@id/expectedtimeicon"
+        android:layout_toRightOf="@id/expectedtimeicon"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -78,6 +125,7 @@
         android:text="Large Text"
         android:id="@+id/auc_exp_time"
         android:layout_below="@+id/textView"
+        android:layout_marginTop="10dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -90,13 +138,45 @@
         android:layout_alignTop="@+id/auc_exp_time"
         android:layout_alignRight="@+id/auction_location"
         android:layout_alignEnd="@+id/auction_location" />
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/price_flat"
+        android:id="@+id/priceicon"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/auc_exp_time"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pricetext"
+        android:text="Min. Bid Amount"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_marginTop="10dp"
+        android:layout_alignTop="@id/priceicon"
+        android:layout_toRightOf="@id/priceicon"
+        android:layout_marginLeft="5dp"
+
+        />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/auc_exp_time"
+        android:id="@+id/auc_min_price"
+        android:ems="4"
+        android:layout_toRightOf="@+id/pricetext"
+        android:layout_marginLeft="5dp"
+        android:layout_alignTop="@id/pricetext"
+        android:inputType="number"
+        />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Start Button"
         android:id="@+id/auc_start_btn"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/auc_min_price"
         android:layout_centerHorizontal="true" />
 
 

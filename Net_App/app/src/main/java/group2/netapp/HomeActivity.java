@@ -115,7 +115,7 @@ public class HomeActivity extends FragmentActivity
 
         }
         if(position!=5 && position!=0)
-        fragmentManager.beginTransaction()
+        fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in,R.anim.slide_out)
                 .replace(R.id.container, fragment,"other")
                 .commit();
     }
@@ -175,7 +175,7 @@ public class HomeActivity extends FragmentActivity
         fragment = fragmentManager.findFragmentByTag("other");
         if(fragment != null && fragment.isVisible()){
             Fragment homefragment=new HomeFragment();
-            fragmentManager.beginTransaction()
+            fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in,R.anim.slide_out)
                     .replace(R.id.container, homefragment,"home")
                     .commit();
         }
