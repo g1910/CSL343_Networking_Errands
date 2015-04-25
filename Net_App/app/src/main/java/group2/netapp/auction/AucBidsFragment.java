@@ -34,6 +34,7 @@ public class AucBidsFragment extends Fragment {
     TextView location,order;
     JSONObject bid;
     boolean isRequest;
+    JSONArray aucCategories;
     public AucBidsFragment() {
         // Required empty public constructor
     }
@@ -58,6 +59,7 @@ public class AucBidsFragment extends Fragment {
     }
 
     public void setUpView(View v){
+        aucCategories = ((AuctionActivity)getActivity()).getRunningBids();
         location = (TextView) v.findViewById(R.id.auc_bidview_loc);
         order = (TextView) v.findViewById(R.id.auc_bidview_order);
 
@@ -93,6 +95,7 @@ public class AucBidsFragment extends Fragment {
     }
 
     public void acceptBid(){
+
         try {
             int auctionId = ((AuctionActivity)getActivity()).getAuctionDetails().getInt("idAuction");
             int bidId = bid.getInt("idBid");
