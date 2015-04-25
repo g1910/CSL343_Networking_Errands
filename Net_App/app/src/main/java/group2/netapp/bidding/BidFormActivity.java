@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +17,10 @@ import android.widget.NumberPicker;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -77,6 +82,37 @@ public class BidFormActivity extends Activity {
             @Override
             public void onClick(View v) {
 
+                EditText locationView=(EditText) findViewById(R.id.locationfield);
+                EditText desView = (EditText) findViewById(R.id.descriptionfield);
+
+                String bidlocation = locationView.getText().toString();
+                String des = desView.getText().toString();
+
+                Log.d("BidFormActivity",bidlocation);
+                Log.d("BidFormActivity",des);
+
+                JSONArray order=new JSONArray();
+
+                for (int i=0;i<cards.size();i++)
+                {
+                    JSONObject temp=new JSONObject();
+                    OrderCard c=(OrderCard)cards.get(i);
+                    try {
+                        temp.put("item",c.getItemView().getText().toString()) ;
+                        temp.put("price_per_item",c.getPriceView().getText().toString());
+                        temp.put("quantity",c.getQuantityView().getText().toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    Log.d("BidFormActivity",temp.toString());
+
+                    order.put(temp);
+
+                }
+                
+                Log.d("BidFormActivity",order.toString());
+
             }
         });
 
@@ -108,8 +144,10 @@ public class BidFormActivity extends Activity {
 
 class OrderCard extends Card{
 
-    private int quantity;
+    private int quantity,price;
     private String item_name;
+
+    private EditText itemView,priceView,quantityView;
 
     public OrderCard(Context context){
         super(context, R.layout.bid_card);
@@ -118,9 +156,11 @@ class OrderCard extends Card{
     @Override
     public void setupInnerViewElements(ViewGroup parent, View view){
 
-        EditText item = (EditText)parent.findViewById(R.id.itemName);
+        itemView = (EditText)parent.findViewById(R.id.itemName);
+        priceView = (EditText) parent.findViewById(R.id.Priceperitem);
+        quantityView = (EditText) parent.findViewById(R.id.numberPicker);
 
-        item.addTextChangedListener(new TextWatcher() {
+/*        item.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -137,7 +177,24 @@ class OrderCard extends Card{
             }
         });
 
-        NumberPicker np = (NumberPicker)parent.findViewById(R.id.numberPicker);
+        priceView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                price = Integer.parseInt(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+       NumberPicker np = (NumberPicker)parent.findViewById(R.id.numberPicker);
 
         String[] nums = new String[20];
         for(int i=0; i<nums.length; i++)
@@ -153,7 +210,55 @@ class OrderCard extends Card{
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
                 quantity = newVal;
             }
-        });
+        });*/
 
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getItem_name() {
+        return item_name;
+    }
+
+    public void setItem_name(String item_name) {
+        this.item_name = item_name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public EditText getItemView() {
+        return itemView;
+    }
+
+    public void setItemView(EditText itemView) {
+        this.itemView = itemView;
+    }
+
+    public EditText getPriceView() {
+        return priceView;
+    }
+
+    public void setPriceView(EditText priceView) {
+        this.priceView = priceView;
+    }
+
+    public EditText getQuantityView() {
+        return quantityView;
+    }
+
+    public void setQuantityView(EditText quantityView) {
+        this.quantityView = quantityView;
     }
 }
