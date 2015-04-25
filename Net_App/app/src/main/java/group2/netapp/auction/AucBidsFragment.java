@@ -91,6 +91,8 @@ public class AucBidsFragment extends Fragment {
         switch(item.getItemId()){
             case R.id.accept_bid: acceptBid();
                 break;
+            case R.id.reject_bid: rejectBid();
+                break;
             default: break;
         }
         return super.onOptionsItemSelected(item);
@@ -106,6 +108,21 @@ public class AucBidsFragment extends Fragment {
             nameValuePairs.add(new BasicNameValuePair("id_bid",bidId+""));
             Log.d("AuctionActivity",getString(R.string.IP)+"accept_bid.php");
             myServer.execute(getString(R.string.IP)+"accept_bid.php",nameValuePairs);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void rejectBid(){
+        try {
+            int auctionId = ((AuctionActivity)getActivity()).getAuctionDetails().getInt("idAuction");
+            int bidId = bid.getInt("idBid");
+            ServerConnect myServer=new ServerConnect(getActivity());
+            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+            nameValuePairs.add(new BasicNameValuePair("id_auc",auctionId+""));
+            nameValuePairs.add(new BasicNameValuePair("id_bid",bidId+""));
+            Log.d("AuctionActivity",getString(R.string.IP)+"reject_bid.php");
+            myServer.execute(getString(R.string.IP)+"reject_bid.php",nameValuePairs);
         } catch (JSONException e) {
             e.printStackTrace();
         }

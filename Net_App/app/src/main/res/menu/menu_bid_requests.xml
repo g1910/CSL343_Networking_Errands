@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-<item android:id="@+id/accept_bid" android:title="Accept"
-    android:showAsAction="withText|ifRoom" />
+    <item android:id="@+id/accept_bid" android:title="Accept"
+        android:showAsAction="withText|ifRoom" />
+    <item android:id="@+id/reject_bid" android:title="Reject"
+        android:showAsAction="withText|ifRoom" />
 
 </menu>

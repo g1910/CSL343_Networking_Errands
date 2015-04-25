@@ -81,6 +81,15 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsTab.
                 }
                 finish();
                 startActivity(getIntent());
+            }else if(tag.equals("bid_reject")){
+                boolean status = ((JSONObject)j.get(1)).getBoolean("status");
+                if(status){
+                    Toast.makeText(this, "Bid Request Rejected!", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(this, "Bid Request can't be Rejected!", Toast.LENGTH_SHORT).show();
+                }
+                finish();
+                startActivity(getIntent());
             }
 
         } catch (JSONException e) {
