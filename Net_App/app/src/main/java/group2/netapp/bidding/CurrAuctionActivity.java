@@ -34,7 +34,7 @@ public class CurrAuctionActivity extends FragmentActivity implements ToParticipa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_curr_auction);
-
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         loadData();
 
     }
