@@ -126,10 +126,12 @@ public class HomeActivity extends FragmentActivity
                 break;
 
         }
-        if (position != 5 && position != 0)
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container, fragment, "other")
-                    .commit();
+        if(position!=5 && position!=0)
+        fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in,R.anim.slide_out)
+                .replace(R.id.container, fragment,"other")
+                .commit();
+
+
     }
 
     public void onSectionAttached(int number) {
@@ -185,11 +187,11 @@ public class HomeActivity extends FragmentActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         fragment = fragmentManager.findFragmentByTag("other");
-        if (fragment != null && fragment.isVisible()) {
-            Fragment homefragment = new HomeFragment();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container, homefragment, "home")
-                    .commit();
+        if(fragment != null && fragment.isVisible()){
+            Fragment homefragment=new HomeFragment();
+            fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in,R.anim.slide_out)
+                    .replace(R.id.container, homefragment,"home")
+                   .commit();
         } else
             super.onBackPressed();
     }

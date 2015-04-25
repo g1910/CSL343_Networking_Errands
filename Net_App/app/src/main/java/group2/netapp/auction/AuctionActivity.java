@@ -33,7 +33,9 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsFrag
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_auction);
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         loadData();
 //        openDashboard();
 
