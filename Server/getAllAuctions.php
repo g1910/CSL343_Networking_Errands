@@ -6,6 +6,12 @@
 	date_default_timezone_set("Asia/Kolkata");
 	$time=date( 'Y-m-d H:i:s', time());
 //	echo $time;
+
+	$arr = array(
+		    "Tag" => "Start", 
+		);
+	$output[]=$arr;
+	
 	$con=mysqli_connect($IP,$user,$pass,$db);
 //	echo "select `idAuction`, `location`, `start_time`, `expctd_time`, `description` from `Auction` where `idUser`=\"$user_id\" and `end_time`>=\"$time\"";
 //	echo "select Auction.*,Temp.Price,idBid  from ( (( SELECT * FROM `Bid` Natural Join `Placed`) as Temp), `Auction`) where Temp.`idAuction` = Auction.`idAuction` and Temp.`idUser`=\"$user_id\" and `end_time`>=\"$time\"";
@@ -90,6 +96,8 @@
 		);
 	$output[]=$arr;
 */
+
+	
 
 //	print(json_encode($arr));
 	print(json_encode($output));
