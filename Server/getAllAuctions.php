@@ -1,21 +1,30 @@
 <?php
 	include 'config.php';
 	include 'getRating.php';
+	include 'getRank.php';
 	$user_id=$_GET['id_user'];
 	date_default_timezone_set("Asia/Kolkata");
 	$time=date( 'Y-m-d H:i:s', time());
 //	echo $time;
+
+	$arr = array(
+		    "Tag" => "Start", 
+		);
+	$output[]=$arr;
+	
 	$con=mysqli_connect($IP,$user,$pass,$db);
 //	echo "select `idAuction`, `location`, `start_time`, `expctd_time`, `description` from `Auction` where `idUser`=\"$user_id\" and `end_time`>=\"$time\"";
-//	echo "select Auction.*,Temp.Price  from ( (( SELECT * FROM `Bid` Natural Join `Placed`) as Temp), `Auction`) where Temp.`idAuction` = Auction.`idAuction` and Temp.`idUser`=\"$user_id\" and `end_time`>=\"$time\"";
-	$result=mysqli_query($con,"select Auction.*,Temp.Price  from ( (( SELECT * FROM `Bid` Natural Join `Placed`) as Temp), `Auction`) where Temp.`idAuction` = Auction.`idAuction` and Temp.`idUser`=\"$user_id\" and `end_time`>=\"$time\"") or die("Error: ".mysqli_error($con));
+//	echo "select Auction.*,Temp.Price,idBid  from ( (( SELECT * FROM `Bid` Natural Join `Placed`) as Temp), `Auction`) where Temp.`idAuction` = Auction.`idAuction` and Temp.`idUser`=\"$user_id\" and `end_time`>=\"$time\"";
+	$result=mysqli_query($con,"select Auction.*,Temp.Price,idBid  from ( (( SELECT * FROM `Bid` Natural Join `Placed`) as Temp), `Auction`) where Temp.`idAuction` = Auction.`idAuction` and Temp.`idUser`=\"$user_id\" and `end_time`>=\"$time\"") or die("Error: ".mysqli_error($con));
 	
 	$num=mysqli_num_rows($result);
 
 	while ($row=mysqli_fetch_assoc($result))
 	{
 		$rating=getRating($row['idUser']);
+		$rank=getRank($row['idAuction'],$row['Price']);
 	//	print json_encode($rating);
+		$row['rank']=$rank;
 		$row['rating']=$rating[0]['rating'];
 		$row['numRated']=$rating[0]['numRated'];
 		$tout[]=$row;
@@ -87,6 +96,8 @@
 		);
 	$output[]=$arr;
 */
+
+	
 
 //	print(json_encode($arr));
 	print(json_encode($output));

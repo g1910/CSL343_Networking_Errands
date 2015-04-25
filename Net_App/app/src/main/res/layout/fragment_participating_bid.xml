@@ -78,6 +78,20 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rank"
+        android:textStyle="bold"
+        android:textColor="#00dd00"
+        android:paddingRight="10dp"
+        android:id="@+id/participatingrank"
+        android:layout_gravity="center_vertical"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_below="@+id/participatingdesc"
+        android:layout_alignLeft="@+id/participatingprice"
+        android:layout_alignStart="@+id/participatingprice" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

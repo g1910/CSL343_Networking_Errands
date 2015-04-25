@@ -1,5 +1,6 @@
 package group2.netapp.bidding;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -137,22 +138,35 @@ public class CurrAuctionActivity extends FragmentActivity implements ToParticipa
     @Override
     public void onResponse(JSONArray j) {
         try {
-            Log.e("AuctionActivity",(j.length()+" hi "  ));
-            Log.e("AuctionActivity", ((JSONObject) j.get(0)).length() + " First " + ((JSONObject) j.get(0)).toString());
-            Log.e("AuctionActivity",((JSONObject)j.get(1)).length()+" Second "+((JSONObject)j.get(1)).toString());
-            Log.e("AuctionActivity",((JSONObject)j.get(2)).length()+" Third "+((JSONObject)j.get(2)).toString());
 
-            Participating =(JSONArray) ((JSONObject)j.get(0)).get("Participating");
-            NotParticipating =(JSONArray) ((JSONObject)j.get(1)).get("Not_Participating");
-            Bids =(JSONArray) ((JSONObject)j.get(2)).get("Bids");
+            Log.e("AuctionActivity",j.get(0).toString());
+            JSONObject tag=(JSONObject)j.get(0);
+
+            if (  tag.get("Tag").equals("Start") )
+            {
+                Log.e("AuctionActivity",(j.length()+" hi "  ));
+                Log.e("AuctionActivity", ((JSONObject) j.get(1)).length() + " First " + ((JSONObject) j.get(0)).toString());
+                Log.e("AuctionActivity",((JSONObject)j.get(2)).length()+" Second "+((JSONObject)j.get(1)).toString());
+                Log.e("AuctionActivity",((JSONObject)j.get(3)).length()+" Third "+((JSONObject)j.get(2)).toString());
+
+                Participating =(JSONArray) ((JSONObject)j.get(1)).get("Participating");
+                NotParticipating =(JSONArray) ((JSONObject)j.get(2)).get("Not_Participating");
+                Bids =(JSONArray) ((JSONObject)j.get(3)).get("Bids");
 
 
-            Log.e("AuctionActivity",(j.length()+" hi "  ));
-            Log.e("AuctionActivity", ((JSONObject) j.get(0)).length() + " First " + ((JSONObject) j.get(0)).toString());
-            Log.e("AuctionActivity",((JSONObject)j.get(1)).length()+" Second "+((JSONObject)j.get(1)).toString());
-            Log.e("AuctionActivity",((JSONObject)j.get(2)).length()+" Third "+((JSONObject)j.get(2)).toString());
+                Log.e("AuctionActivity",(j.length()+" hi "  ));
+                Log.e("AuctionActivity", ((JSONObject) j.get(1)).length() + " First " + ((JSONObject) j.get(0)).toString());
+                Log.e("AuctionActivity",((JSONObject)j.get(2)).length()+" Second "+((JSONObject)j.get(1)).toString());
+                Log.e("AuctionActivity",((JSONObject)j.get(3)).length()+" Third "+((JSONObject)j.get(2)).toString());
 
-            showCurrAuctions();
+                showCurrAuctions();
+            }
+            else if ( tag.get("Tag").equals("Update"))
+            {
+                Intent i=getIntent();
+                finish();
+                startActivity(i);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
