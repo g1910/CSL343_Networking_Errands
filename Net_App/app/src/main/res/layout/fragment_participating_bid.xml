@@ -92,13 +92,6 @@
         android:layout_alignLeft="@+id/participatingprice"
         android:layout_alignStart="@+id/participatingprice" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Increase Bid"
-        android:id="@+id/bid_increase"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
