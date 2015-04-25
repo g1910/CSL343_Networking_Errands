@@ -61,9 +61,10 @@ public class AucBidsFragment extends Fragment {
         Bundle b = getArguments();
         bidId = b.getInt("id",-1);
         isRequest = b.getBoolean("isRequest",false);
+        setHasOptionsMenu(true);
         if(isRequest){
             bid = ((AuctionActivity)getActivity()).getPendingBidAt(bidId);
-            setHasOptionsMenu(true);
+
         }else{
             bid = ((AuctionActivity)getActivity()).getRunningBidAt(bidId);
         }
@@ -89,7 +90,6 @@ public class AucBidsFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case R.id.accept_bid: acceptBid();
-                Toast.makeText(getActivity(),"Accepting the bid....",Toast.LENGTH_LONG).show();
                 break;
             default: break;
         }
@@ -104,9 +104,8 @@ public class AucBidsFragment extends Fragment {
             List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
             nameValuePairs.add(new BasicNameValuePair("id_auc",auctionId+""));
             nameValuePairs.add(new BasicNameValuePair("id_bid",bidId+""));
-            nameValuePairs.add(new BasicNameValuePair("id_user","13"));
-            Log.d("AuctionActivity",getString(R.string.IP)+"acceptBid.php");
-            myServer.execute(getString(R.string.IP)+"acceptBid.php",nameValuePairs);
+            Log.d("AuctionActivity",getString(R.string.IP)+"accept_bid.php");
+            myServer.execute(getString(R.string.IP)+"accept_bid.php",nameValuePairs);
         } catch (JSONException e) {
             e.printStackTrace();
         }
