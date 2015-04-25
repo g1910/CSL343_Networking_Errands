@@ -1,4 +1,4 @@
-package group2.netapp.auction.bidsTabs;
+package group2.netapp.auction;
 
 
 import android.app.Activity;
@@ -26,7 +26,7 @@ import it.gmariotti.cardslib.library.recyclerview.view.CardRecyclerView;
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass.
  */
-public class BidRequestsTab extends Fragment implements Card.OnCardClickListener {
+public class BidRequestsFragment extends Fragment implements Card.OnCardClickListener {
 
 
 
@@ -37,11 +37,11 @@ public class BidRequestsTab extends Fragment implements Card.OnCardClickListener
     JSONArray pendingBids;
 
     public interface BidRequestsListener{
-        public void openBidRequest(int bidId, boolean isRequest);
+        public void openBidRequest(JSONObject bid, boolean isRequest);
     }
 
 
-    public BidRequestsTab() {
+    public BidRequestsFragment() {
         // Required empty public constructor
     }
 
@@ -81,7 +81,7 @@ public class BidRequestsTab extends Fragment implements Card.OnCardClickListener
             for(int i = 0; i< pendingBids.length(); ++i) {
                 bid = pendingBids.getJSONObject(i);
                 Log.d("BidRequestsTab","Location:"+bid.getString("location")+" Order:"+ bid.getJSONArray("orders").length()+" items ordered");
-                BidCard card = new BidCard(getActivity(),i,"Location:"+bid.getString("location"),"Order:"+ bid.getJSONArray("orders").length()+" items ordered");
+                BidCard card = new BidCard(getActivity(),bid);
                 card.setOnClickListener(this);
                 cards.add(card);
             }
@@ -105,7 +105,7 @@ public class BidRequestsTab extends Fragment implements Card.OnCardClickListener
 //        ft.commit();
 
         Log.d("Requests", "Fragment Added");
-        bListener.openBidRequest(bCard.getBidId(), true);
+        bListener.openBidRequest(bCard.getBid(), true);
 
 
     }
