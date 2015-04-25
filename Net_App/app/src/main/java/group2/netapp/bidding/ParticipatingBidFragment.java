@@ -1,11 +1,17 @@
 package group2.netapp.bidding;
 
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -77,6 +83,51 @@ public class ParticipatingBidFragment extends Fragment {
                 numRatedView.setText("rated by : "+numRated+" users");
                 end_timeView.setText("Bidding Ends in : "+end_time);
                 expected_timeView.setText("Expected Delivery : "+expected_time);
+
+                Button increase= (Button) v.findViewById(R.id.bid_increase);
+
+                increase.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        // Get the layout inflater
+                        final LayoutInflater inflater = LayoutInflater.from(getActivity().getApplicationContext());
+
+                        // Inflate and set the layout for the dialog
+                        // Pass null as the parent view because its going in the dialog layout
+                        builder.setView(inflater.inflate(R.layout.dialog_increase_bid, null))
+                                .setTitle("Increase Bid")
+                                // Add action buttons
+                                .setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int id) {
+
+                                        Log.e("Dialog", "HI");
+                                        Dialog f = (Dialog) dialog;
+                                        EditText e= (EditText) f.findViewById(R.id.increase_bid);
+                                        String text=e.getText().toString();
+                                        Log.e("Dialog",text);
+                                        // sign in the user ...
+                                    }
+                                })
+                                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+
+                                        Dialog f = (Dialog) dialog;
+                                        f.cancel();
+                                    }
+                                });
+
+                        AlertDialog alert =  builder.create();
+                        alert.show();
+
+
+
+
+                    }
+                });
+
 
             }
 
