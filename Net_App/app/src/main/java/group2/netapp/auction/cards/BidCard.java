@@ -5,6 +5,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import group2.netapp.R;
 import it.gmariotti.cardslib.library.internal.Card;
 
@@ -13,14 +16,12 @@ import it.gmariotti.cardslib.library.internal.Card;
  */
 public class BidCard extends Card {
 
-    String bidLocation, bidOrder;
-    int bidId;
-    public BidCard(Context context, int bidId, String bidLocation, String bidOrder) {
+    JSONObject bid;
+    public BidCard(Context context, JSONObject bid) {
         super(context, R.layout.card_auction_bid);
 
-        this.bidLocation = bidLocation;
-        this.bidOrder = bidOrder;
-        this.bidId = bidId;
+      this.bid = bid;
+
     }
 
     @Override
@@ -30,31 +31,19 @@ public class BidCard extends Card {
         TextView bidLocationView = (TextView) parent.findViewById(R.id.auc_bid_location);
         TextView bidOrderView = (TextView) parent.findViewById(R.id.auc_bid_order_summary);
 
-        bidLocationView.setText(bidLocation);
-        bidOrderView.setText(bidOrder);
+        try {
+            bidLocationView.setText(bid.getString("location"));
+            bidOrderView.setText(bid.getJSONArray("orders").length() + " orders");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
-    public String getBidLocation() {
-        return bidLocation;
+    public JSONObject getBid() {
+        return bid;
     }
 
-    public void setBidLocation(String bidLocation) {
-        this.bidLocation = bidLocation;
-    }
-
-    public String getBidOrder() {
-        return bidOrder;
-    }
-
-    public void setBidOrder(String bidOrder) {
-        this.bidOrder = bidOrder;
-    }
-
-    public int getBidId() {
-        return bidId;
-    }
-
-    public void setBidId(int bidId) {
-        this.bidId = bidId;
+    public void setBid(JSONObject bid) {
+        this.bid = bid;
     }
 }
