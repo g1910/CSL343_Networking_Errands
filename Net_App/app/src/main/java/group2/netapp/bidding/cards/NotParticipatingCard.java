@@ -1,6 +1,7 @@
 package group2.netapp.bidding.cards;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RatingBar;
@@ -58,7 +59,13 @@ public class NotParticipatingCard extends Card {
         auctionLocView.setText(auctionLocation);
         priceView.setText("₹" + price);
         descView.setText(desc);
+        if(ratings.equals("null"))
+        {
+            ratings="0";
+            numRated="0";
+        }
         ratingsView.setRating(Float.parseFloat(ratings));
+        numRatedView.setPaintFlags(numRatedView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         numRatedView.setText("rated by : "+numRated+" users");
         end_timeView.setText(String.valueOf(end_time));
         expected_timeView.setText(String.valueOf(expected_time));

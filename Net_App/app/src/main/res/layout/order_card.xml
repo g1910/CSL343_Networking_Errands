@@ -25,23 +25,25 @@
         android:layout_toRightOf="@id/cartIcon"
         android:layout_marginLeft="10dp"
         android:layout_toLeftOf="@+id/multiply"
+        android:textColor="#ff6c6b6f"
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="quantity"
-        android:paddingTop="5dp"
         android:layout_alignParentRight="true"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:layout_alignTop="@id/cartIcon"
         android:id="@+id/orderquantity"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
+        android:textColor="#ff6c6b6f"
         />
 
     <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:id="@+id/multiply"
         android:src="@drawable/multiply"
         android:layout_alignTop="@id/orderquantity"
@@ -71,6 +73,7 @@
         android:layout_marginLeft="10dp"
         android:layout_toRightOf="@id/rupeeicon"
         android:id="@+id/ppiText"
+        android:textColor="#ff6c6b6f"
         />
 
 
