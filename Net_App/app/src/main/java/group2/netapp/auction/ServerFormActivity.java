@@ -17,6 +17,8 @@ import android.widget.Toast;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -180,11 +182,21 @@ public class ServerFormActivity extends FragmentActivity implements TimePickerFr
     @Override
     public void onResponse(JSONArray j) {
         Log.d("ResponseListener","onResponseListened");
-        Toast toast = Toast.makeText(this, "Auction Started Successfully", Toast.LENGTH_SHORT);
-        toast.show();
-
-        Intent i = new Intent(this,AuctionActivity.class);
-        startActivity(i);
-        finish();
+        try {
+            String tag = ((JSONObject)j.get(0)).getString("tag");
+            if(tag.equals("createAuction")){
+                boolean status = ((JSONObject)j.get(1)).getBoolean("status");
+                if(status){
+                    Toast.makeText(this, "Auction started successfully!", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(this,AuctionActivity.class);
+                    startActivity(i);
+                    finish();
+                }else{
+                    Toast.makeText(this, "Auction can't be started!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
