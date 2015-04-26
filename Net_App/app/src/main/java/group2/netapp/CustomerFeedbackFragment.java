@@ -88,6 +88,7 @@ public class CustomerFeedbackFragment extends Fragment {
 
     public CustomerFeedbackFragment() {
         // Required empty public constructor
+        this.setArguments(new Bundle());
     }
 
     @Override
@@ -131,25 +132,22 @@ public class CustomerFeedbackFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 counter++;
-                SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-                String email = saved_values.getString("email", null);
+                String id = getArguments().getString("id",null);
                 ArrayList<NameValuePair> list1 = new ArrayList<NameValuePair>();
                 list1.add(new BasicNameValuePair("tag", "2"));          //tag = 1 for customer rates
                 list1.add(new BasicNameValuePair("counter", String.valueOf(counter)));
-                list1.add(new BasicNameValuePair("email", email));
+                list1.add(new BasicNameValuePair("id", id));
                 if (asynctask.getStatus() == AsyncTask.Status.PENDING || asynctask.getStatus() == AsyncTask.Status.RUNNING)
                     asynctask.cancel(true);
                 asynctask = new get_feedback(list1, "http://netapp.byethost33.com/get_feedback.php").execute(null, null, null);
             }
         });
 
-
-        SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-        String email = saved_values.getString("email", null);
+        String id = getArguments().getString("id",null);
         ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
         nameValuePairs.add(new BasicNameValuePair("tag", "2"));
         nameValuePairs.add(new BasicNameValuePair("counter", String.valueOf(counter)));
-        nameValuePairs.add(new BasicNameValuePair("email", email));
+        nameValuePairs.add(new BasicNameValuePair("id", id));
 
         asynctask = new get_feedback(nameValuePairs, "http://netapp.byethost33.com/get_feedback.php").execute(null, null, null);
         return infh;
