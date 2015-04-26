@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.os.Parcel;
 import android.preference.PreferenceManager;
@@ -43,6 +44,9 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -92,7 +96,7 @@ public class ProfileFragment extends Fragment {
 
         SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
         final String email = saved_values.getString("email",null);
-        String picurl = saved_values.getString("picurl",null);
+        String picpath = saved_values.getString("picpath",null);
         String name = saved_values.getString("user_name",null);
         String phone_number = saved_values.getString("phone",null);
         String address_text = saved_values.getString("address",null);
@@ -133,8 +137,21 @@ public class ProfileFragment extends Fragment {
         ImageButton editAddress = (ImageButton)infh.findViewById(R.id.editAddress);
 
         ImageView profileImage=(ImageView)infh.findViewById(R.id.imageView2);
-        picurl+="0";
-        new LoadProfileImage(profileImage).execute(picurl);
+        if(picpath != null) {
+            Bitmap bitmap = null;
+            File file = new File(picpath, "ProfilePic.jpg");
+            FileInputStream streamIn = null;
+            try {
+                streamIn = new FileInputStream(file);
+                bitmap = BitmapFactory.decodeStream(streamIn);
+                streamIn.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            profileImage.setImageBitmap(bitmap);
+        }
 
 
         editAddress.setOnClickListener(new View.OnClickListener() {
@@ -306,33 +323,8 @@ public class ProfileFragment extends Fragment {
         public void onFragmentInteraction(Uri uri);
     }
 
-    private class LoadProfileImage extends AsyncTask<String, Void, Bitmap> {
-        ImageView downloadedImage;
 
-        public LoadProfileImage(ImageView image) {
-            this.downloadedImage = image;
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-            String url = urls[0];
-            Bitmap icon = null;
-            try {
-                InputStream in = new java.net.URL(url).openStream();
-                icon = BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-            return icon;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            downloadedImage.setImageBitmap(result);
-        }
-    }
-
-    class get_phone extends AsyncTask<String,String,String>
-    {
+    class get_phone extends AsyncTask<String,String,String> {
         private String email;
         private String received_num=null;
         private String host = "http://netapp.byethost33.com/get_phone.php";

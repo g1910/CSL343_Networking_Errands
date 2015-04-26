@@ -20,9 +20,18 @@ while ($row=mysqli_fetch_assoc($result))
 	$idBid=$row['idBid'];
 }
 
-echo "INSERT INTO `Placed`(`idBid`, `idAuction`, `status`) VALUES ($idBid,$idAuction,'P')";
+//echo "INSERT INTO `Placed`(`idBid`, `idAuction`, `status`) VALUES ($idBid,$idAuction,'P')";
 mysqli_query($con,"INSERT INTO `Placed`(`idBid`, `idAuction`, `status`) VALUES ($idBid,$idAuction,'P')")  or die(mysqli_error($con));
 
+for ($i=0;$i<count($order);$i++)
+{
+	$temp=$order[$i];
+	$item= $temp->item;
+	$price_per_item = $temp->price_per_item;
+	$quantity = $temp->quantity;
+//	echo "INSERT INTO `Order`(`item`, `quantity`, `price_per_item`, `idBid`) VALUES (\"$item\",$quantity,$price_per_item,$idBid)";
+	mysqli_query($con,"INSERT INTO `Order`(`item`, `quantity`, `price_per_item`, `idBid`) VALUES (\"$item\",$quantity,$price_per_item,$idBid)") or die(mysqli_error($con));
+}
 
 //echo $idBid;
 

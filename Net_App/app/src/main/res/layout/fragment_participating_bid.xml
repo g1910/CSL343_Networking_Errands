@@ -4,7 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RatingBar
+    <it.gmariotti.cardslib.library.recyclerview.view.CardRecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/participating_bid_recyclerview"/>
+
+<!--    <RatingBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/participatingratings"
@@ -93,6 +98,6 @@
         android:layout_alignStart="@+id/participatingprice" />
 
 
-
+-->
 </RelativeLayout>
 

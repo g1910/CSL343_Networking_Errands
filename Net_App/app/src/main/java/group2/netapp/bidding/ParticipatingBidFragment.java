@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -30,12 +31,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import group2.netapp.R;
+import group2.netapp.auction.cards.RunningBidCard;
+import group2.netapp.bidding.cards.Order_Card;
+import group2.netapp.bidding.cards.ParticipatingCard;
 import group2.netapp.utilFragments.ServerConnect;
+import it.gmariotti.cardslib.library.internal.Card;
+import it.gmariotti.cardslib.library.recyclerview.internal.CardArrayRecyclerViewAdapter;
+import it.gmariotti.cardslib.library.recyclerview.view.CardRecyclerView;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class ParticipatingBidFragment extends Fragment {
+
+    CardArrayRecyclerViewAdapter auctionViewAdapter;
+    CardRecyclerView auctionView;
 
     String auctionLocation,desc,idUser,start_time,end_time,expected_time;
     String ratings,numRated;
@@ -43,6 +53,7 @@ public class ParticipatingBidFragment extends Fragment {
     int bidId,price,rank;
     String bidLocation;
     JSONArray order;
+    JSONObject auction_details,bid_details;
 
     public ParticipatingBidFragment() {
         // Required empty public constructor
@@ -155,6 +166,7 @@ public class ParticipatingBidFragment extends Fragment {
             {
                 try {
                     JSONObject j=(JSONObject)((CurrAuctionActivity)getActivity()).getParticipating().get(index);
+                    auction_details=j;
                     this.auctionLocation =j.getString("location");
                     this.desc = j.getString("description");
                     this.idUser = j.getString("idUser");
@@ -176,6 +188,7 @@ public class ParticipatingBidFragment extends Fragment {
                         JSONObject temp=(JSONObject)jr.get(i);
                         if (temp.getInt("idBid")==bidId)
                         {
+                            bid_details=temp;
                             bidLocation=temp.getString("location");
                             order=(JSONArray)temp.get("order");
                             Log.d("Here",bidLocation);
@@ -188,7 +201,17 @@ public class ParticipatingBidFragment extends Fragment {
                     e.printStackTrace();
                 }
 
-                TextView auctionLocView = (TextView) v.findViewById(R.id.participatinglocation);
+                auctionView = (CardRecyclerView) v.findViewById(R.id.participating_bid_recyclerview);
+                auctionView.setHasFixedSize(false);
+
+                auctionViewAdapter = new CardArrayRecyclerViewAdapter(getActivity(), setDummyBids());
+                auctionView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+                if(auctionView != null){
+                    auctionView.setAdapter(auctionViewAdapter);
+                }
+
+/*                TextView auctionLocView = (TextView) v.findViewById(R.id.participatinglocation);
                 TextView priceView = (TextView) v.findViewById(R.id.participatingprice);
                 TextView descView = (TextView)v.findViewById(R.id.participatingdesc);
                 RatingBar ratingsView = (RatingBar)v.findViewById(R.id.participatingratings);
@@ -205,7 +228,7 @@ public class ParticipatingBidFragment extends Fragment {
                 end_timeView.setText("Bidding Ends in : "+end_time);
                 expected_timeView.setText("Expected Delivery : "+expected_time);
                 rankView.setText(rank+" ");
-
+*/
 /*                Button increase= (Button) v.findViewById(R.id.bid_increase);
 
                 increase.setOnClickListener(new View.OnClickListener() {
@@ -285,6 +308,51 @@ public class ParticipatingBidFragment extends Fragment {
 
         }
 
+    }
+
+    private List<Card> setDummyBids() {
+
+        ArrayList<Card> cards = new ArrayList<Card>();
+
+        ParticipatingCard card=null;
+        card=new ParticipatingCard(getActivity(),auction_details,-1);
+        cards.add(card);
+
+        RunningBidCard card_run=null;
+        card_run=new RunningBidCard(getActivity(),bid_details,-1);
+        cards.add(card_run);
+
+        Log.d("OrderCard",order.toString());
+
+        for (int i=0;i<order.length();i++)
+        {
+//            Card orderCard = new OrderCard(getActivity());
+            Order_Card orderCard=null;
+            try {
+                Log.d("OrderCard",order.get(i).toString());
+                orderCard= new Order_Card(getActivity(),(JSONObject)order.get(i),i);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            cards.add(orderCard);
+        }
+
+
+
+//        for(int i = 0; i <  Participating.length() ;++i) {
+            //      Card card = new Card(getActivity());
+
+  //          ParticipatingCard card = null;
+    //        try {
+      //          card = new ParticipatingCard(getActivity(),(JSONObject)Participating.get(i),i);
+        //    } catch (JSONException e) {
+       //         e.printStackTrace();
+         //   }
+  //          cards.add(card);
+
+//        }
+
+        return cards;
     }
 
 

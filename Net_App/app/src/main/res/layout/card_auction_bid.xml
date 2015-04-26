@@ -2,22 +2,46 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/location_flat"
+        android:id="@+id/bidlocationpic"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Bid Location"
         android:id="@+id/auc_bid_location"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignTop="@id/bidlocationpic"
+        android:layout_toRightOf="@id/bidlocationpic"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/message_flat"
+        android:id="@+id/bidsummarypic"
+        android:layout_below="@id/auc_bid_location"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Order Summary"
         android:id="@+id/auc_bid_order_summary"
-        android:layout_below="@+id/auc_bid_location"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignTop="@id/bidsummarypic"
+        android:layout_toRightOf="@id/bidsummarypic"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        />
 </RelativeLayout>
