@@ -1,6 +1,8 @@
 package group2.netapp;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -83,10 +85,21 @@ public class FeedbackFragment extends Fragment {
 
         @Override
         public android.support.v4.app.Fragment getItem(int position) {
+            SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+            String id = saved_values.getString("id",null);
+
             if (position == 0) {
-                return new ServiceFeedbackFragment();
+                ServiceFeedbackFragment frag = new ServiceFeedbackFragment();
+                Bundle b = new Bundle();
+                b.putString("id",id);
+                frag.setArguments(b);
+                return frag;
             } else if (position == 1) {
-                return new CustomerFeedbackFragment();
+                CustomerRateFragment frag = new CustomerRateFragment();
+                Bundle b = new Bundle();
+                b.putString("id",id);
+                frag.setArguments(b);
+                return frag;
             }
             return null;
         }
