@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/participatingrank"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:text="rank"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:layout_marginTop="10dp"
+        android:textColor="#ff616161"/>
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/rank_flat"
+        android:layout_marginTop="5dp"
+        android:id="@+id/rankicon"
+        android:layout_toLeftOf="@id/participatingrank"
+        android:layout_marginRight="5dp"/>
+
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/locationpic"
+        android:src="@drawable/location_flat"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location"
+        android:id="@+id/locationtext"
+        android:layout_marginTop="5dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_alignTop="@id/locationpic"
+        android:layout_toRightOf="@id/locationpic"
+        android:layout_marginLeft="10dp"
+        />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/info_flat"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/statusicon"
+        android:layout_below="@id/locationtext"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/status"
+        android:layout_alignTop="@id/statusicon"
+        android:layout_marginTop="5dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:text="PENDING"
+        android:textStyle="bold"
+        android:layout_toRightOf="@id/statusicon"
+        android:layout_marginLeft="10dp"
+        android:textColor="#ff4789af"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_alignTop="@id/status"
+        android:id="@+id/pricetext"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:text="1234"/>
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/price_flat"
+        android:layout_alignTop="@id/statusicon"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@id/pricetext"/>
+</RelativeLayout>
