@@ -8,6 +8,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:id="@+id/locationpic"
+        android:layout_marginTop="5dp"
         android:src="@drawable/location_flat"
         android:layout_marginLeft="10dp"
         />
@@ -15,31 +16,23 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Location:"
-        android:id="@+id/locationtext"
+        android:text="Location"
+        android:id="@+id/notparticipatinglocation"
         android:layout_marginTop="5dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:layout_alignTop="@id/locationpic"
         android:layout_toRightOf="@id/locationpic"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="5dp"
+        android:textColor="#ff6c6b6f"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Location"
-        android:layout_toRightOf="@id/locationtext"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:layout_alignTop="@id/locationtext"
-        android:layout_alignLeft="@+id/notparticipatingprice"
-        android:id="@+id/notparticipatinglocation"
-        />
+
 
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:id="@+id/endtimepic"
-        android:layout_below="@id/locationpic"
+        android:layout_below="@id/notparticipatinglocation"
         android:src="@drawable/red_clock_flat"
         android:layout_marginTop="5dp"
         android:layout_alignLeft="@id/locationpic"
@@ -53,8 +46,9 @@
         android:id="@+id/endtimetext"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:layout_alignTop="@id/endtimepic"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="5dp"
         android:layout_toRightOf="@id/endtimepic"
+        android:textColor="#ff6c6b6f"
         />
 
     <TextView
@@ -66,6 +60,7 @@
         android:layout_alignTop="@id/endtimetext"
         android:layout_alignLeft="@+id/notparticipatingprice"
         android:id="@+id/notparticipatingend_time"
+        android:textColor="#ff6c6b6f"
         />
 
     <ImageView
@@ -85,7 +80,8 @@
         android:layout_marginTop="5dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:layout_alignTop="@id/deliverytimepic"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="5dp"
+        android:textColor="#ff6c6b6f"
         android:layout_toRightOf="@id/deliverytimepic"
         android:id="@+id/deliverytimetext"
         />
@@ -94,6 +90,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="expectedtime"
+        android:textColor="#ff6c6b6f"
         android:layout_toRightOf="@id/deliverytimetext"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:layout_alignTop="@id/deliverytimetext"
@@ -116,9 +113,10 @@
         android:layout_height="wrap_content"
         android:text="Min. price:"
         android:layout_marginTop="5dp"
+        android:textColor="#ff6c6b6f"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:layout_alignTop="@id/pricepic"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="5dp"
         android:layout_toRightOf="@id/pricepic"
         android:id="@+id/pricetext"
         />
@@ -131,6 +129,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:layout_alignTop="@id/pricetext"
         android:layout_marginLeft="10dp"
+        android:textColor="#ff6c6b6f"
         android:id="@+id/notparticipatingprice"
         />
 
@@ -155,7 +154,8 @@
         android:layout_alignTop="@id/notparticipatingratings"
         android:layout_toRightOf="@id/notparticipatingratings"
         android:paddingLeft="15dp"
-        />
+
+        android:textColor="#ff561bff" />
 
 
 
@@ -170,6 +170,7 @@
         android:layout_below="@id/notparticipatingratings"
         android:layout_alignLeft="@id/notparticipatingratings"
         android:layout_marginTop="5dp"
+        android:textColor="#ff6666ad"
         />
 
 

@@ -38,24 +38,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Location:"
-        android:id="@+id/locationtext"
+        android:id="@+id/participatinglocation"
         android:layout_marginTop="5dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:layout_alignTop="@id/locationpic"
         android:layout_toRightOf="@id/locationpic"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="5dp"
+        android:textColor="#ff6c6b6f"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Location"
-        android:layout_toRightOf="@id/locationtext"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:layout_alignTop="@id/locationtext"
-        android:layout_alignLeft="@+id/participatingprice"
-        android:id="@+id/participatinglocation"
-         />
+
 
     <ImageView
         android:layout_width="30dp"
@@ -75,8 +67,9 @@
         android:id="@+id/endtimetext"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:layout_alignTop="@id/endtimepic"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="5dp"
         android:layout_toRightOf="@id/endtimepic"
+        android:textColor="#ff6c6b6f"
         />
 
     <TextView
@@ -88,6 +81,7 @@
         android:layout_alignTop="@id/endtimetext"
         android:layout_alignLeft="@+id/participatingprice"
         android:id="@+id/participatingend_time"
+        android:textColor="#ff6c6b6f"
         />
 
     <ImageView
@@ -107,9 +101,10 @@
         android:layout_marginTop="5dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:layout_alignTop="@id/deliverytimepic"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="5dp"
         android:layout_toRightOf="@id/deliverytimepic"
         android:id="@+id/deliverytimetext"
+        android:textColor="#ff6c6b6f"
         />
 
     <TextView
@@ -121,6 +116,7 @@
         android:layout_alignTop="@id/deliverytimetext"
         android:layout_alignLeft="@+id/participatingprice"
         android:id="@+id/participatingexpected_time"
+        android:textColor="#ff6c6b6f"
         />
 
     <ImageView
@@ -140,9 +136,10 @@
         android:layout_marginTop="5dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:layout_alignTop="@id/pricepic"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="5dp"
         android:layout_toRightOf="@id/pricepic"
         android:id="@+id/pricetext"
+        android:textColor="#ff6c6b6f"
         />
 
     <TextView
@@ -154,6 +151,7 @@
         android:layout_alignTop="@id/pricetext"
         android:layout_marginLeft="10dp"
         android:id="@+id/participatingprice"
+        android:textColor="#ff6c6b6f"
         />
 
 
@@ -177,6 +175,7 @@
         android:layout_alignTop="@id/participatingratings"
         android:layout_toRightOf="@id/participatingratings"
         android:paddingLeft="15dp"
+        android:textColor="#ff561bff"
         />
 
 
@@ -192,6 +191,7 @@
         android:layout_below="@id/participatingratings"
         android:layout_alignLeft="@id/participatingratings"
         android:layout_marginTop="5dp"
+        android:textColor="#ff6666ad"
         />
 
 

@@ -93,6 +93,7 @@
             android:maxLength="140"
             android:minLines="1"
             android:maxLines="5"
+            android:layout_toRightOf="@id/Descriptiontext"
             android:layout_alignTop="@+id/Descriptiontext"
             android:layout_alignParentRight="true"
             android:layout_marginRight="30dp"/>
@@ -113,14 +114,15 @@
             android:layout_alignTop="@id/cartIcon"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textStyle="bold"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginLeft="5dp"
-            android:text="Orders"/>
+            android:text="Add orders"/>
 
         <it.gmariotti.cardslib.library.view.CardListView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
             android:layout_below="@id/cartIcon"
+            android:layout_marginTop="10dp"
             android:id="@+id/BidFormCardList">
 
         </it.gmariotti.cardslib.library.view.CardListView>
