@@ -2,7 +2,9 @@ package group2.netapp.auction;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -17,6 +19,8 @@ import android.widget.Toast;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -30,13 +34,19 @@ import group2.netapp.utilFragments.TimePickerFragment;
 public class ServerFormActivity extends FragmentActivity implements TimePickerFragment.OnTimeSetListener, DatePickerFragment.OnDateSetListener, ServerConnect.OnResponseListener{
 
     TextView aucEndTime,aucEndDate,aucExpTime,aucExpDate;
-    EditText aucDesc, aucLocation;
+    EditText aucDesc, aucLocation, minPrice;
     Button aucStartBtn;
     Activity a = this;
     Calendar c = Calendar.getInstance();
+
+    String idUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        idUser = sp.getString("id", "");
+
         setContentView(R.layout.activity_server_form);
         setUpForm();
     }
@@ -44,6 +54,7 @@ public class ServerFormActivity extends FragmentActivity implements TimePickerFr
     public void setUpForm(){
         aucDesc = (EditText) findViewById(R.id.auction_desc);
         aucLocation = (EditText) findViewById(R.id.auction_location);
+        minPrice = (EditText) findViewById(R.id.auc_min_price);
 
         String time = String.format("%02d:%02d",c.get(Calendar.HOUR_OF_DAY),c.get(Calendar.MINUTE));
         String date = String.format("%04d-%02d-%02d",c.get(Calendar.YEAR),c.get(Calendar.MONTH) + 1,c.get(Calendar.DAY_OF_MONTH));
@@ -149,8 +160,8 @@ public class ServerFormActivity extends FragmentActivity implements TimePickerFr
             nameValuePairs.add(new BasicNameValuePair("endtime",aucEndDate.getText().toString() + " " + aucEndTime.getText().toString()+":00"));
             nameValuePairs.add(new BasicNameValuePair("expected",aucExpDate.getText().toString() + " " + aucExpTime.getText().toString()+":00"));
             nameValuePairs.add(new BasicNameValuePair("description",aucDesc.getText().toString()));
-            nameValuePairs.add(new BasicNameValuePair("id_user","13"));
-            nameValuePairs.add(new BasicNameValuePair("min_price","40"));
+            nameValuePairs.add(new BasicNameValuePair("id_user",idUser));
+            nameValuePairs.add(new BasicNameValuePair("min_price",minPrice.getText().toString()));
             ServerConnect myServer=new ServerConnect(a);
 
             Toast.makeText(a, "Starting a New Auction...", Toast.LENGTH_SHORT).show();
@@ -180,11 +191,21 @@ public class ServerFormActivity extends FragmentActivity implements TimePickerFr
     @Override
     public void onResponse(JSONArray j) {
         Log.d("ResponseListener","onResponseListened");
-        Toast toast = Toast.makeText(this, "Auction Started Successfully", Toast.LENGTH_SHORT);
-        toast.show();
-
-        Intent i = new Intent(this,AuctionActivity.class);
-        startActivity(i);
-        finish();
+        try {
+            String tag = ((JSONObject)j.get(0)).getString("tag");
+            if(tag.equals("createAuction")){
+                boolean status = ((JSONObject)j.get(1)).getBoolean("status");
+                if(status){
+                    Toast.makeText(this, "Auction started successfully!", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(this,AuctionActivity.class);
+                    startActivity(i);
+                    finish();
+                }else{
+                    Toast.makeText(this, "Auction can't be started!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
