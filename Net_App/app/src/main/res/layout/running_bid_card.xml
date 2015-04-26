@@ -30,7 +30,7 @@
         android:id="@+id/descicon"
         android:layout_below="@id/auc_bid_location"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="5dp"/>
 
     <TextView
         android:layout_width="wrap_content"
