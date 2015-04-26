@@ -1,6 +1,8 @@
 package group2.netapp.auction;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -10,6 +12,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,21 +39,12 @@ public class AucBidsFragment extends Fragment {
 
     TextView location,order;
     JSONObject bid;
-    boolean isRequest;
+    boolean isRequest, setNew;
     JSONArray aucCategories;
+    RadioGroup rG;
     public AucBidsFragment() {
         // Required empty public constructor
     }
-
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        if(getArguments().getBoolean("isRequest",false)){
-//            setHasOptionsMenu(true);
-//
-//            Log.d("AucBidFrag", "OnCreate Menu inflated");
-//        }
-//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,6 +59,7 @@ public class AucBidsFragment extends Fragment {
         aucCategories = ((AuctionActivity)getActivity()).getRunningBids();
         location = (TextView) v.findViewById(R.id.auc_bidview_loc);
         order = (TextView) v.findViewById(R.id.auc_bidview_order);
+
 
         Bundle b = getArguments();
         isRequest = b.getBoolean("isRequest",false);
@@ -94,22 +92,6 @@ public class AucBidsFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-    public void acceptBid(){
-
-        try {
-            int auctionId = ((AuctionActivity)getActivity()).getAuctionDetails().getInt("idAuction");
-            int bidId = bid.getInt("idBid");
-            ServerConnect myServer=new ServerConnect(getActivity());
-            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-            nameValuePairs.add(new BasicNameValuePair("id_auc",auctionId+""));
-            nameValuePairs.add(new BasicNameValuePair("id_bid",bidId+""));
-            Log.d("AuctionActivity",getString(R.string.IP)+"accept_bid.php");
-            myServer.execute(getString(R.string.IP)+"accept_bid.php",nameValuePairs);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void rejectBid(){
         try {
             int auctionId = ((AuctionActivity)getActivity()).getAuctionDetails().getInt("idAuction");
@@ -124,5 +106,121 @@ public class AucBidsFragment extends Fragment {
             e.printStackTrace();
         }
     }
+
+    public void acceptBid(){
+
+        final LayoutInflater inflater = getActivity().getLayoutInflater();
+        View vi = inflater.inflate(R.layout.dialog_auc_category,null);
+        rG = (RadioGroup) vi.findViewById(R.id.auc_category_rg);
+        populateRadioButtons();
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Select Auction Category")
+                .setView(vi)
+                .setPositiveButton("Accept",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        try {
+                            int auctionId = ((AuctionActivity)getActivity()).getAuctionDetails().getInt("idAuction");
+                            int bidId = bid.getInt("idBid");
+                            int catId = aucCategories.getJSONObject(rG.getCheckedRadioButtonId()%100).getInt("idCategory");
+                            ServerConnect myServer=new ServerConnect(getActivity());
+                            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                            nameValuePairs.add(new BasicNameValuePair("id_auc",auctionId+""));
+                            nameValuePairs.add(new BasicNameValuePair("id_bid",bidId+""));
+                            nameValuePairs.add(new BasicNameValuePair("id_cat",catId+""));
+                            Log.d("AuctionActivity",getString(R.string.IP)+"accept_bid.php");
+                            myServer.execute(getString(R.string.IP)+"accept_bid.php",nameValuePairs);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+        if(aucCategories.length()<2) {
+            builder.setNeutralButton("New", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    View vN = inflater.inflate(R.layout.dialog_new_category, null);
+                    final int max = findMaxBaseBid();
+                    final EditText base = (EditText) vN.findViewById(R.id.auc_new_cat_base);
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setTitle("Add to New Category")
+                            .setView(vN)
+                            .setPositiveButton("Create", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    try {
+                                        String curr = base.getText().toString();
+                                        if (curr.isEmpty()) {
+                                            Toast.makeText(getActivity(), "No base bid specified...Nothing done!", Toast.LENGTH_SHORT).show();
+                                        } else if (Integer.valueOf(curr) <= max) {
+                                            Toast.makeText(getActivity(), "Base bid should be higher than previous base bids...Nothing done!", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            int auctionId = ((AuctionActivity) getActivity()).getAuctionDetails().getInt("idAuction");
+                                            int bidId = bid.getInt("idBid");
+                                            ServerConnect myServer = new ServerConnect(getActivity());
+                                            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                                            nameValuePairs.add(new BasicNameValuePair("id_auc", auctionId + ""));
+                                            nameValuePairs.add(new BasicNameValuePair("id_bid", bidId + ""));
+                                            nameValuePairs.add(new BasicNameValuePair("min_price", curr + ""));
+                                            Log.d("AuctionActivity", getString(R.string.IP) + "create_accept_bid.php");
+                                            myServer.execute(getString(R.string.IP) + "create_accept_bid.php", nameValuePairs);
+                                        }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            })
+                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            }).show();
+                }
+            });
+        }
+
+        builder.show();
+     }
+
+    public void populateRadioButtons(){
+        for(int i = 0;i<aucCategories.length();++i){
+            RadioButton btn = new RadioButton(getActivity());
+            btn.setId(100+i);
+            try {
+                btn.setText("Base Bid: \u20B9 "+aucCategories.getJSONObject(i).getInt("minPrice"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            rG.addView(btn);
+
+        }
+        ((RadioButton)rG.getChildAt(0)).setChecked(true);
+    }
+
+    public int findMaxBaseBid(){
+        int max = 0, curr;
+        for(int i = 0;i<aucCategories.length();++i){
+            try {
+                curr = aucCategories.getJSONObject(i).getInt("minPrice");
+               if(max < curr){
+                   max = curr;
+               }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return max;
+    }
+
+
 }
 

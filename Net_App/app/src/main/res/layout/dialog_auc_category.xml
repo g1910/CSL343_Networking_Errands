@@ -10,4 +10,13 @@
         android:layout_gravity="center_horizontal"
         android:id="@+id/auc_category_rg">
     </RadioGroup>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Note: Cannot create more than 2 categories!"
+        android:id="@+id/textView4"
+        android:gravity="center_vertical|center_horizontal"
+        android:padding="6dp" />
+
 </LinearLayout>
