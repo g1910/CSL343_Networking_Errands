@@ -73,6 +73,7 @@ public class BidFormActivity extends Activity implements ServerConnect.OnRespons
         final int dividerHeight = listView.getDividerHeight();
         final ViewGroup.LayoutParams params = listView.getLayoutParams();
         listView.setSelection(listView.getCount()-1);
+
         AddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,6 +85,7 @@ public class BidFormActivity extends Activity implements ServerConnect.OnRespons
                 listView.requestLayout();
                 cardListAdapter.notifyDataSetChanged();
                 listView.requestFocus();
+                listView.setSelection(listView.getFooterViewsCount());
             }
         });
 
