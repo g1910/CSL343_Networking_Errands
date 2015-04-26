@@ -1,7 +1,9 @@
 package group2.netapp.auction;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -29,11 +31,15 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsFrag
 
     JSONObject auctionDetails;
     JSONArray pendingBids, runningBids;
+    String idUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        idUser = sp.getString("id", "");
+        Log.d("AuctionActivity","id user:"+idUser);
         setContentView(R.layout.activity_auction);
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         loadData();
@@ -49,7 +55,7 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsFrag
 
         ServerConnect myServer=new ServerConnect(this);
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-        nameValuePairs.add(new BasicNameValuePair("id_user","13"));
+        nameValuePairs.add(new BasicNameValuePair("id_user",idUser));
         Log.d("AuctionActivity",getString(R.string.IP)+"getAuction.php");
         myServer.execute(getString(R.string.IP)+"getAuction.php",nameValuePairs);
 

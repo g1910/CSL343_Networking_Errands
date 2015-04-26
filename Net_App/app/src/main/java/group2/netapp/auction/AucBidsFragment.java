@@ -3,7 +3,9 @@ package group2.netapp.auction;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,9 +41,10 @@ public class AucBidsFragment extends Fragment {
 
     TextView location,order;
     JSONObject bid;
-    boolean isRequest, setNew;
+    boolean isRequest;
     JSONArray aucCategories;
     RadioGroup rG;
+
     public AucBidsFragment() {
         // Required empty public constructor
     }
@@ -50,6 +53,7 @@ public class AucBidsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         View v = inflater.inflate(R.layout.fragment_auc_bids, container, false);
         setUpView(v);
         return v;
@@ -153,7 +157,7 @@ public class AucBidsFragment extends Fragment {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     builder.setTitle("Add to New Category")
                             .setView(vN)
-                            .setPositiveButton("Create", new DialogInterface.OnClickListener() {
+                            .setPositiveButton("Create and Accept", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     try {

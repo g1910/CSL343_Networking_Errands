@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -79,9 +80,16 @@ public class HomeActivity extends FragmentActivity
         pname = getIntent().getStringExtra("pname");
         picurl = getIntent().getStringExtra("picurl");
         email = getIntent().getStringExtra("email");
-        new adduser(pname, email, "http://netapp.byethost33.com/add_user.php").execute(null, null, null);
+
         SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = saved_values.edit();
+
+        String id = saved_values.getString("id","");
+        Log.d("HomeActivity","id : " + id);
+
+        if(id.equals("")) {
+            new adduser(pname, email, "http://netapp.byethost33.com/add_user.php").execute(null, null, null);
+        }
         editor.putString("user_name", pname);
         editor.putString("email", email);
         editor.putString("picurl", picurl);
@@ -304,13 +312,15 @@ public class HomeActivity extends FragmentActivity
                         }
                     }
                     String id = sb.toString().trim();
-                    if(id.length()==1)
+                    if(id.length()>0)
                     {
                         System.out.println("User added or already present with id: "+id);
                         SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                         SharedPreferences.Editor editor=saved_values.edit();
                         editor.putString("id",id);
+                        Log.d("HomeActivity", id);
                         editor.apply();
+
                     }
                     else
                     {
