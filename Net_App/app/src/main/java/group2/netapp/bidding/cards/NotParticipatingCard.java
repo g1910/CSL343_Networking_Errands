@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -67,6 +68,12 @@ public class NotParticipatingCard extends Card {
         ratingsView.setRating(Float.parseFloat(ratings));
         numRatedView.setPaintFlags(numRatedView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         numRatedView.setText("rated by : "+numRated+" users");
+        numRatedView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Button clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
         end_timeView.setText(String.valueOf(end_time));
         expected_timeView.setText(String.valueOf(expected_time));
     }

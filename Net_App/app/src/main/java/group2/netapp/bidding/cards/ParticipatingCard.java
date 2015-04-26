@@ -1,21 +1,24 @@
 package group2.netapp.bidding.cards;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import group2.netapp.FeedbackFragment;
+import group2.netapp.HomeActivity;
 import group2.netapp.R;
 import it.gmariotti.cardslib.library.internal.Card;
 
-/**
- * Created by mohit on 16/4/15.
- */
 public class ParticipatingCard extends Card {
 
     String auctionLocation,desc,idUser,start_time,end_time,expected_time;
@@ -67,7 +70,13 @@ public class ParticipatingCard extends Card {
         }
         ratingsView.setRating(Float.parseFloat(ratings));
         numRatedView.setPaintFlags(numRatedView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        numRatedView.setText("rated by : "+numRated+" users");
+        numRatedView.setText("rated by : " + numRated + " users");
+        numRatedView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(),"Button clicked",Toast.LENGTH_SHORT).show();
+            }
+        });
         end_timeView.setText(end_time);
         expected_timeView.setText(expected_time);
         rankView.setText(rank+" ");

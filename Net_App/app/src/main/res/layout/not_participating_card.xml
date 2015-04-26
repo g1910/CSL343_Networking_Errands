@@ -132,17 +132,45 @@
         android:textColor="#ff6c6b6f"
         android:id="@+id/notparticipatingprice"
         />
-
-
-
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/notparticipatingprice"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/rank_flat"
+        android:id="@+id/limitpic"
+        android:layout_alignLeft="@id/pricepic"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Order Limit:"
+        android:layout_alignTop="@id/limitpic"
+        android:layout_marginTop="5dp"
+        android:id="@+id/orderlimittext"
+        android:textColor="#ff6c6b6f"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_alignLeft="@id/pricetext"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="5"
+        android:layout_alignTop="@id/orderlimittext"
+        android:layout_toRightOf="@id/orderlimittext"
+        android:textColor="#ff6c6b6f"
+        android:id="@+id/participatingorderlimit"
+        android:layout_marginLeft="10dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        />
 
     <RatingBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/notparticipatingratings"
         android:isIndicator="true"
-        android:layout_below="@id/pricepic"
-        android:layout_marginTop="5dp"
+        android:layout_below="@id/limitpic"
+        android:layout_marginTop="10dp"
         android:layout_alignLeft="@id/deliverytimepic"
         style="?android:attr/ratingBarStyleSmall" />
 
