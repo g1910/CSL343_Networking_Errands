@@ -34,7 +34,7 @@
         android:id="@+id/endtimepic"
         android:layout_below="@id/notparticipatinglocation"
         android:src="@drawable/red_clock_flat"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:layout_alignLeft="@id/locationpic"
         />
 
@@ -67,9 +67,9 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:id="@+id/deliverytimepic"
-        android:layout_below="@id/endtimepic"
+        android:layout_below="@id/notparticipatingend_time"
         android:src="@drawable/clock_flat"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:layout_alignLeft="@id/endtimepic"
         />
 
@@ -103,8 +103,8 @@
         android:layout_height="30dp"
         android:layout_alignLeft="@id/deliverytimepic"
         android:src="@drawable/price_flat"
-        android:layout_marginTop="5dp"
-        android:layout_below="@id/deliverytimepic"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/notparticipatingexpected_time"
         android:id="@+id/pricepic"
         />
 
