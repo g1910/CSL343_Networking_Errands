@@ -5,7 +5,9 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
@@ -123,15 +125,17 @@ public class ParticipatingBidFragment extends Fragment {
                             ServerConnect myServer = new ServerConnect(getActivity());
 
                             List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-                            nameValuePairs.add(new BasicNameValuePair("id_user", "1"));
-                            nameValuePairs.add(new BasicNameValuePair("idAuction",String.valueOf(idAuction)));
+                            SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+                            final String fid = saved_values.getString("id",null);
+                            nameValuePairs.add(new BasicNameValuePair("id_user",fid));
+                                                                                                                             nameValuePairs.add(new BasicNameValuePair("idAuction",String.valueOf(idAuction)));
                             nameValuePairs.add(new BasicNameValuePair("idBid",String.valueOf(bidId)));
                             nameValuePairs.add(new BasicNameValuePair("price",String.valueOf(newVal)));
                             Log.d("ParticipatingFragment",getString(R.string.IP) + "updatePrice.php");
 
                             myServer.execute(getString(R.string.IP) + "updatePrice.php", nameValuePairs);
                             Log.d("ParticipatingFragment", getString(R.string.IP) + "getAllAuctions.php");
-                            Log.e("ParticipatingFragment", "Hi");
+                            Log.e("Partici                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          patingFragment", "Hi");
 
                             Log.d("ParticipatingFragment", "ProgressAuctionOpened");
 

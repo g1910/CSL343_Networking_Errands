@@ -3,6 +3,8 @@ package group2.netapp.bidding;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -100,6 +102,7 @@ public class BidFormActivity extends Activity implements ServerConnect.OnRespons
                 String bidlocation = locationView.getText().toString();
                 String des = desView.getText().toString();
 
+                Log.d("BidFormActivity",idAuction+" ");
                 Log.d("BidFormActivity",bidlocation);
                 Log.d("BidFormActivity",des);
 
@@ -128,7 +131,9 @@ public class BidFormActivity extends Activity implements ServerConnect.OnRespons
                 ServerConnect myServer=new ServerConnect(BidFormActivity.this);
 
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-                nameValuePairs.add(new BasicNameValuePair("id_user", "1"));
+                SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                final String id = saved_values.getString("id",null);
+                nameValuePairs.add(new BasicNameValuePair("id_user", id));
                 nameValuePairs.add(new BasicNameValuePair("idAuction",String.valueOf(idAuction)));
                 nameValuePairs.add(new BasicNameValuePair("location",String.valueOf(bidlocation)));
                 nameValuePairs.add(new BasicNameValuePair("desc",String.valueOf(des)));
