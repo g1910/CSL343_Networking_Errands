@@ -2,6 +2,4 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.csl343.group2.orderit.auction.AuctionActivity">
-    <item android:id="@+id/action_requests" android:title="Confirm"
-        android:showAsAction="ifRoom" />
 </menu>
