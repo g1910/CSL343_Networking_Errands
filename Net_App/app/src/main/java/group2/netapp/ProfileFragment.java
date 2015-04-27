@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.os.Parcel;
 import android.preference.PreferenceManager;
@@ -43,6 +44,9 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -77,6 +81,8 @@ public class ProfileFragment extends Fragment {
 
     public ProfileFragment() {
         // Required empty public constructor
+
+        this.setArguments(new Bundle());
     }
 
     @Override
@@ -89,151 +95,171 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-        final String email = saved_values.getString("email",null);
-        String picurl = saved_values.getString("picurl",null);
-        String name = saved_values.getString("user_name",null);
-        String phone_number = saved_values.getString("phone",null);
-        String address_text = saved_values.getString("address",null);
-
+        int ishome = getArguments().getInt("ishome",-1);
         View infh = inflater.inflate(R.layout.fragment_profile, container, false);
-
-        phone = (EditText)infh.findViewById(R.id.editText3);
-        if(phone_number==null)
-        {
-            new get_phone(email).execute(null,null,null);
+        if(ishome==0){
+            String id = getArguments().getString("id",null);
         }
         else
         {
-            phone.setText(phone_number);
-        }
-        address = (EditText)infh.findViewById(R.id.editText4);
 
-        if(address_text==null)
-        {
-            new get_address(email).execute(null,null,null);
-        }
-        else
-        {
-            address.setText(address_text);
-        }
+            SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+            final String email = saved_values.getString("email",null);
+            String picpath = saved_values.getString("picpath",null);
+            String name = saved_values.getString("user_name",null);
+            String phone_number = saved_values.getString("phone",null);
+            String address_text = saved_values.getString("address",null);
 
 
-
-        TextView emailText = (TextView)infh.findViewById(R.id.emailText);
-        emailText.setText(email);
-
-        TextView nameText = (TextView)infh.findViewById(R.id.nameText);
-        nameText.setText(name);
-
-
-
-        ImageButton editPhone = (ImageButton)infh.findViewById(R.id.editPhone);
-        ImageButton editAddress = (ImageButton)infh.findViewById(R.id.editAddress);
-
-        ImageView profileImage=(ImageView)infh.findViewById(R.id.imageView2);
-        picurl+="0";
-        new LoadProfileImage(profileImage).execute(picurl);
-
-
-        editAddress.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                View addressDialog = inflater.inflate(R.layout.address_dialog,null);
-                AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
-                dialog.setView(addressDialog);
-
-                final EditText addressText = (EditText)addressDialog.findViewById(R.id.AddressText);
-                addressText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(100)});
-                dialog
-                        .setCancelable(false)
-                        .setPositiveButton("Save",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,int id) {
-                                        String addr = addressText.getText().toString();
-                                        new add_address(email, addr).execute(null,null,null);
-                                        //address.setText(addr);
-                                        int lines = addressText.getLineCount();
-                                        address.setLines(lines<6 ? lines : 5);
-
-                                    }
-                                })
-                        .setNegativeButton("Cancel",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,int id) {
-                                        dialog.cancel();
-                                    }
-                                });
-
-                AlertDialog alertDialog = dialog.create();
-                alertDialog.show();
+            phone = (EditText)infh.findViewById(R.id.editText3);
+            if(phone_number==null)
+            {
+                new get_phone(email).execute(null,null,null);
             }
-        });
+            else
+            {
+                phone.setText(phone_number);
+            }
+            address = (EditText)infh.findViewById(R.id.editText4);
 
-        editPhone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            if(address_text==null)
+            {
+                new get_address(email).execute(null,null,null);
+            }
+            else
+            {
+                address.setText(address_text);
+            }
 
-                View phoneDialog = inflater.inflate(R.layout.phone_dialog,null);
-                AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
-                dialog.setView(phoneDialog);
 
-                final EditText phoneText = (EditText)phoneDialog.findViewById(R.id.phoneText);
-                phoneText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(10)});
-                dialog
-                        .setCancelable(false)
-                        .setPositiveButton("Verify",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
 
-                                        String enteredNumber = phoneText.getText().toString();
-                                        if (enteredNumber.length() == 10) {
-                                            progress = new ProgressDialog(getActivity());
-                                            progress.setMessage("Verifying...please wait");
-                                            progress.setCanceledOnTouchOutside(false);
-                                            progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                                            progress.setIndeterminate(true);
-                                            progress.show();
-                                            final Thread t = new Thread(){
-                                                @Override
-                                                public void run(){
+            TextView emailText = (TextView)infh.findViewById(R.id.emailText);
+            emailText.setText(email);
 
-                                                    int jumpTime = 0;
-                                                    while(jumpTime < 100){
-                                                        try {
-                                                            sleep(1200000);
-                                                            jumpTime += 5;
-                                                            progress.setProgress(jumpTime);
-                                                        } catch (InterruptedException e) {
-                                                            // TODO Auto-generated catch block
-                                                            e.printStackTrace();
+            TextView nameText = (TextView)infh.findViewById(R.id.nameText);
+            nameText.setText(name);
+
+
+
+            ImageButton editPhone = (ImageButton)infh.findViewById(R.id.editPhone);
+            ImageButton editAddress = (ImageButton)infh.findViewById(R.id.editAddress);
+
+            ImageView profileImage=(ImageView)infh.findViewById(R.id.imageView2);
+            if(picpath != null) {
+                Bitmap bitmap = null;
+                File file = new File(picpath, "ProfilePic.jpg");
+                FileInputStream streamIn = null;
+                try {
+                    streamIn = new FileInputStream(file);
+                    bitmap = BitmapFactory.decodeStream(streamIn);
+                    streamIn.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                profileImage.setImageBitmap(bitmap);
+            }
+
+
+            editAddress.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    View addressDialog = inflater.inflate(R.layout.address_dialog,null);
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+                    dialog.setView(addressDialog);
+
+                    final EditText addressText = (EditText)addressDialog.findViewById(R.id.AddressText);
+                    addressText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(100)});
+                    dialog
+                            .setCancelable(false)
+                            .setPositiveButton("Save",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog,int id) {
+                                            String addr = addressText.getText().toString();
+                                            new add_address(email, addr).execute(null,null,null);
+                                            //address.setText(addr);
+                                            int lines = addressText.getLineCount();
+                                            address.setLines(lines<6 ? lines : 5);
+
+                                        }
+                                    })
+                            .setNegativeButton("Cancel",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog,int id) {
+                                            dialog.cancel();
+                                        }
+                                    });
+
+                    AlertDialog alertDialog = dialog.create();
+                    alertDialog.show();
+                }
+            });
+
+            editPhone.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    View phoneDialog = inflater.inflate(R.layout.phone_dialog,null);
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+                    dialog.setView(phoneDialog);
+
+                    final EditText phoneText = (EditText)phoneDialog.findViewById(R.id.phoneText);
+                    phoneText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(10)});
+                    dialog
+                            .setCancelable(false)
+                            .setPositiveButton("Verify",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+
+                                            String enteredNumber = phoneText.getText().toString();
+                                            if (enteredNumber.length() == 10) {
+                                                progress = new ProgressDialog(getActivity());
+                                                progress.setMessage("Verifying...please wait");
+                                                progress.setCanceledOnTouchOutside(false);
+                                                progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                                                progress.setIndeterminate(true);
+                                                progress.show();
+                                                final Thread t = new Thread(){
+                                                    @Override
+                                                    public void run(){
+
+                                                        int jumpTime = 0;
+                                                        while(jumpTime < 100){
+                                                            try {
+                                                                sleep(1200000);
+                                                                jumpTime += 5;
+                                                                progress.setProgress(jumpTime);
+                                                            } catch (InterruptedException e) {
+                                                                // TODO Auto-generated catch block
+                                                                e.printStackTrace();
+                                                            }
+
                                                         }
 
                                                     }
+                                                };
+                                                t.start();
+                                                verify(enteredNumber, email);
+                                            }
 
-                                                }
-                                            };
-                                            t.start();
-                                            verify(enteredNumber, email);
                                         }
+                                    })
+                            .setNegativeButton("Cancel",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                        }
+                                    });
 
-                                    }
-                                })
-                        .setNegativeButton("Cancel",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        dialog.cancel();
-                                    }
-                                });
+                    AlertDialog alertDialog = dialog.create();
+                    alertDialog.show();
 
-                AlertDialog alertDialog = dialog.create();
-                alertDialog.show();
-
-            }
-        });
-        // Inflate the layout for this fragment
-        return infh;
+                }
+            });
+            // Inflate the layout for this fragment
+        }
+            return infh;
     }
 
     private void verify(final String number, final String email) {
@@ -306,33 +332,8 @@ public class ProfileFragment extends Fragment {
         public void onFragmentInteraction(Uri uri);
     }
 
-    private class LoadProfileImage extends AsyncTask<String, Void, Bitmap> {
-        ImageView downloadedImage;
 
-        public LoadProfileImage(ImageView image) {
-            this.downloadedImage = image;
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-            String url = urls[0];
-            Bitmap icon = null;
-            try {
-                InputStream in = new java.net.URL(url).openStream();
-                icon = BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-            return icon;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            downloadedImage.setImageBitmap(result);
-        }
-    }
-
-    class get_phone extends AsyncTask<String,String,String>
-    {
+    class get_phone extends AsyncTask<String,String,String> {
         private String email;
         private String received_num=null;
         private String host = "http://netapp.byethost33.com/get_phone.php";

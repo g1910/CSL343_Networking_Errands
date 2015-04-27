@@ -18,7 +18,7 @@ public class BidCard extends Card {
 
     JSONObject bid;
     public BidCard(Context context, JSONObject bid) {
-        super(context, R.layout.card_auction_bid);
+        super(context, R.layout.running_bid_card);
 
       this.bid = bid;
 
@@ -33,7 +33,7 @@ public class BidCard extends Card {
 
         try {
             bidLocationView.setText(bid.getString("location"));
-            bidOrderView.setText(bid.getJSONArray("orders").length() + " orders");
+            bidOrderView.setText(bid.getJSONArray("orders").length() + " Items Ordered\n"+bid.getString("bid_description"));
         } catch (JSONException e) {
             e.printStackTrace();
         }

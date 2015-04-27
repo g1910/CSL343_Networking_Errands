@@ -19,8 +19,9 @@
         android:id="@+id/auc_bid_location"
         android:layout_alignTop="@id/locationicon"
         android:layout_toRightOf="@id/locationicon"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"/>
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:textColor="#ff6c6b6f" />
 
     <ImageView
         android:layout_width="30dp"
@@ -29,7 +30,7 @@
         android:id="@+id/descicon"
         android:layout_below="@id/auc_bid_location"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="5dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -37,10 +38,11 @@
         android:text="Order Summary"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/auc_bid_order_summary"
-        android:layout_below="@+id/auc_bid_location"
+        android:layout_below="@id/auc_bid_location"
         android:layout_alignTop="@id/descicon"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@id/descicon"
+        android:textColor="#ff6c6b6f"
         />
 </RelativeLayout>

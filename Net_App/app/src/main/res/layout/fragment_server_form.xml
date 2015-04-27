@@ -91,6 +91,7 @@
         android:layout_alignRight="@+id/auction_location"
         android:layout_alignEnd="@+id/auction_location" />
 
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

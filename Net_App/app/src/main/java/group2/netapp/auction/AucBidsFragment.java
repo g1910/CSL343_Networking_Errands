@@ -3,8 +3,11 @@ package group2.netapp.auction;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -30,7 +33,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import group2.netapp.R;
+import group2.netapp.auction.cards.BidCard;
+import group2.netapp.bidding.cards.Order_Card;
 import group2.netapp.utilFragments.ServerConnect;
+import it.gmariotti.cardslib.library.internal.Card;
+import it.gmariotti.cardslib.library.recyclerview.internal.CardArrayRecyclerViewAdapter;
+import it.gmariotti.cardslib.library.recyclerview.view.CardRecyclerView;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass.
@@ -39,9 +47,13 @@ public class AucBidsFragment extends Fragment {
 
     TextView location,order;
     JSONObject bid;
-    boolean isRequest, setNew;
+    boolean isRequest;
     JSONArray aucCategories;
     RadioGroup rG;
+
+    CardArrayRecyclerViewAdapter bidViewAdapter;
+    CardRecyclerView bidView;
+
     public AucBidsFragment() {
         // Required empty public constructor
     }
@@ -50,29 +62,70 @@ public class AucBidsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         View v = inflater.inflate(R.layout.fragment_auc_bids, container, false);
         setUpView(v);
         return v;
     }
 
     public void setUpView(View v){
-        aucCategories = ((AuctionActivity)getActivity()).getRunningBids();
-        location = (TextView) v.findViewById(R.id.auc_bidview_loc);
-        order = (TextView) v.findViewById(R.id.auc_bidview_order);
-
-
         Bundle b = getArguments();
         isRequest = b.getBoolean("isRequest",false);
         if(isRequest) setHasOptionsMenu(true);
-
+        aucCategories = ((AuctionActivity)getActivity()).getRunningBids();
         try {
             bid = new JSONObject(new JSONTokener(b.getString("bid","")));
-            location.setText("BidId: "+bid.getString("location"));
-            order.setText("Order: " + bid.getJSONArray("orders").length()+" orders");
+            bidView = (CardRecyclerView) v.findViewById(R.id.frag_auc_bid_recyclerview);
+            bidView.setHasFixedSize(false);
+
+            bidViewAdapter = new CardArrayRecyclerViewAdapter(getActivity(), setUpCards());
+            bidView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+            if(bidView != null){
+                bidView.setAdapter(bidViewAdapter);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
+//        location = (TextView) v.findViewById(R.id.auc_bidview_loc);
+//        order = (TextView) v.findViewById(R.id.auc_bidview_order);
+
+
+
+
+
+
+//        try {
+//            setUpCards();
+//            bid = new JSONObject(new JSONTokener(b.getString("bid","")));
+//            location.setText("BidId: "+bid.getString("location"));
+//            order.setText("Order: " + bid.getJSONArray("orders").length()+" orders");
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
      }
+
+    public ArrayList setUpCards() throws JSONException{
+        ArrayList<Card> cards = new ArrayList<>();
+
+        BidCard card = new BidCard(getActivity(),bid);
+        cards.add(card);
+        JSONArray orders = bid.getJSONArray("orders");
+        Order_Card orderCard;
+        for (int i=0;i<orders.length();i++)
+        {
+            try {
+                Log.d("OrderCard",orders.get(i).toString());
+                orderCard= new Order_Card(getActivity(),orders.getJSONObject(i),i);
+                cards.add(orderCard);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return cards;
+
+    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -153,7 +206,7 @@ public class AucBidsFragment extends Fragment {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     builder.setTitle("Add to New Category")
                             .setView(vN)
-                            .setPositiveButton("Create", new DialogInterface.OnClickListener() {
+                            .setPositiveButton("Create and Accept", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     try {

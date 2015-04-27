@@ -2,7 +2,9 @@ package group2.netapp.auction;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -17,7 +19,11 @@ import android.widget.Toast;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -30,13 +36,19 @@ import group2.netapp.utilFragments.TimePickerFragment;
 public class ServerFormActivity extends FragmentActivity implements TimePickerFragment.OnTimeSetListener, DatePickerFragment.OnDateSetListener, ServerConnect.OnResponseListener{
 
     TextView aucEndTime,aucEndDate,aucExpTime,aucExpDate;
-    EditText aucDesc, aucLocation;
+    EditText aucDesc, aucLocation, minPrice;
     Button aucStartBtn;
     Activity a = this;
     Calendar c = Calendar.getInstance();
+
+    String idUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        idUser = sp.getString("id", "");
+
         setContentView(R.layout.activity_server_form);
         setUpForm();
     }
@@ -44,6 +56,7 @@ public class ServerFormActivity extends FragmentActivity implements TimePickerFr
     public void setUpForm(){
         aucDesc = (EditText) findViewById(R.id.auction_desc);
         aucLocation = (EditText) findViewById(R.id.auction_location);
+        minPrice = (EditText) findViewById(R.id.auc_min_price);
 
         String time = String.format("%02d:%02d",c.get(Calendar.HOUR_OF_DAY),c.get(Calendar.MINUTE));
         String date = String.format("%04d-%02d-%02d",c.get(Calendar.YEAR),c.get(Calendar.MONTH) + 1,c.get(Calendar.DAY_OF_MONTH));
@@ -143,20 +156,68 @@ public class ServerFormActivity extends FragmentActivity implements TimePickerFr
     View.OnClickListener startNewAuction = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-            nameValuePairs.add(new BasicNameValuePair("location", aucLocation.getText().toString()));
-            Log.e("OrderIt",aucEndDate.getText().toString() + " " + aucEndTime.getText().toString()+":00");
-            nameValuePairs.add(new BasicNameValuePair("endtime",aucEndDate.getText().toString() + " " + aucEndTime.getText().toString()+":00"));
-            nameValuePairs.add(new BasicNameValuePair("expected",aucExpDate.getText().toString() + " " + aucExpTime.getText().toString()+":00"));
-            nameValuePairs.add(new BasicNameValuePair("description",aucDesc.getText().toString()));
-            nameValuePairs.add(new BasicNameValuePair("id_user","13"));
-            nameValuePairs.add(new BasicNameValuePair("min_price","40"));
-            ServerConnect myServer=new ServerConnect(a);
+            if(validate()) {
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                nameValuePairs.add(new BasicNameValuePair("location", aucLocation.getText().toString()));
+                Log.e("OrderIt", aucEndDate.getText().toString() + " " + aucEndTime.getText().toString() + ":00");
+                nameValuePairs.add(new BasicNameValuePair("endtime", aucEndDate.getText().toString() + " " + aucEndTime.getText().toString() + ":00"));
+                nameValuePairs.add(new BasicNameValuePair("expected", aucExpDate.getText().toString() + " " + aucExpTime.getText().toString() + ":00"));
+                nameValuePairs.add(new BasicNameValuePair("description", aucDesc.getText().toString()));
+                nameValuePairs.add(new BasicNameValuePair("id_user", idUser));
+                nameValuePairs.add(new BasicNameValuePair("min_price", minPrice.getText().toString()));
+                ServerConnect myServer = new ServerConnect(a);
 
-            Toast.makeText(a, "Starting a New Auction...", Toast.LENGTH_SHORT).show();
-            myServer.execute(getString(R.string.IP)+"auction.php",nameValuePairs,this);
+                Toast.makeText(a, "Starting a New Auction...", Toast.LENGTH_SHORT).show();
+                myServer.execute(getString(R.string.IP) + "auction.php", nameValuePairs, this);
+            }
         }
     };
+
+    public boolean validate(){
+        Timestamp currentTime, endTime, expectedTime,maxEnTime,maxExTime;
+
+        Calendar maxEndDate,maxExpDate;
+        maxEndDate = Calendar.getInstance();
+        maxEndDate.add(Calendar.DAY_OF_MONTH,3);
+        maxExpDate = Calendar.getInstance();
+        maxExpDate.add(Calendar.DAY_OF_MONTH,4);
+
+        currentTime = new Timestamp(Calendar.getInstance().getTime().getTime());
+        maxEnTime = new Timestamp(maxEndDate.getTime().getTime());
+        maxExTime = new Timestamp(maxExpDate.getTime().getTime());
+
+        endTime = Timestamp.valueOf(aucEndDate.getText().toString()+ " "+aucEndTime.getText().toString()+":00.0");
+        expectedTime = Timestamp.valueOf(aucExpDate.getText().toString()+ " "+aucExpTime.getText().toString()+":00.0");
+
+        if(endTime.before(currentTime) || expectedTime.before(currentTime)){
+            Toast.makeText(this,"End Time and Expected Time should be sometime in future!",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(endTime.after(maxEnTime)){
+            Toast.makeText(this,"Max duration of Auction can be 3 days!",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(expectedTime.before(endTime) || expectedTime.after(maxExTime)){
+            Toast.makeText(this,"Expected time of Auction can be within 1 day of the end of Auction!",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(minPrice.getText().toString().isEmpty()){
+            Toast.makeText(this,"Please enter the minimum Bid Amount!",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(Integer.valueOf(minPrice.getText().toString())<10){
+            Toast.makeText(this,"Minimum Bid Amount should be atleast ₹ 10 !",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(aucLocation.getText().toString().isEmpty()){
+            Toast.makeText(this,"Please enter the Location!",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        Log.d("ServerFormActivity",currentTime.toString()+" "+endTime.toString()+" "+expectedTime.toString());
+
+        return true;
+    }
 
     @Override
     public void onTimePicked(int view,int hourOfDay, int minute) {
@@ -180,11 +241,21 @@ public class ServerFormActivity extends FragmentActivity implements TimePickerFr
     @Override
     public void onResponse(JSONArray j) {
         Log.d("ResponseListener","onResponseListened");
-        Toast toast = Toast.makeText(this, "Auction Started Successfully", Toast.LENGTH_SHORT);
-        toast.show();
-
-        Intent i = new Intent(this,AuctionActivity.class);
-        startActivity(i);
-        finish();
+        try {
+            String tag = ((JSONObject)j.get(0)).getString("tag");
+            if(tag.equals("createAuction")){
+                boolean status = ((JSONObject)j.get(1)).getBoolean("status");
+                if(status){
+                    Toast.makeText(this, "Auction started successfully!", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(this,AuctionActivity.class);
+                    startActivity(i);
+                    finish();
+                }else{
+                    Toast.makeText(this, "Auction can't be started!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

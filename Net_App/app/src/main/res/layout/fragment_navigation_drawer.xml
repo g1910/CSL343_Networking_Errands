@@ -29,6 +29,7 @@
             android:layout_marginLeft="10dp"
             android:id="@+id/drawerProfilename"
             android:textStyle="bold"
+            android:textColor="#FFFFFF"
             android:text="Your Name"/>
 
         </LinearLayout>

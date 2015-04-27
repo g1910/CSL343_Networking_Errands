@@ -2,7 +2,9 @@ package group2.netapp.auction;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,14 +27,18 @@ public class DecideAuctionActivity extends Activity implements ServerConnect.OnR
 
 
     private boolean isRunning;
+    String idUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        idUser = sp.getString("id", "");
+
         setContentView(R.layout.activity_decide_auction);
         ProgressBar bar=(ProgressBar) findViewById(R.id.decideBar);
         ServerConnect myServer=new ServerConnect(this);
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-        nameValuePairs.add(new BasicNameValuePair("id_user","1"));
+        nameValuePairs.add(new BasicNameValuePair("id_user",idUser));
         myServer.execute("http://10.20.9.85/Networks/CSL343_Networking_Errands/Server/getAuction.php",nameValuePairs);
 
         Log.e("OrderIt","Hi");

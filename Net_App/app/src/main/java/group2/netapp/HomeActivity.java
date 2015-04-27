@@ -3,6 +3,9 @@ package group2.netapp;
 import android.app.Activity;
 
 import android.app.ActionBar;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -11,12 +14,14 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -30,6 +35,10 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.message.BasicNameValuePair;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -77,15 +86,28 @@ public class HomeActivity extends FragmentActivity
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
         pname = getIntent().getStringExtra("pname");
-        picurl = getIntent().getStringExtra("picurl");
         email = getIntent().getStringExtra("email");
-        new adduser(pname, email, "http://netapp.byethost33.com/add_user.php").execute(null, null, null);
+
         SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = saved_values.edit();
+
+        String id = saved_values.getString("id","");
+        Log.d("HomeActivity","id : " + id);
+
+        if(id.equals("")) {
+            new adduser(pname, email, "http://netapp.byethost33.com/add_user.php").execute(null, null, null);
+        }
         editor.putString("user_name", pname);
         editor.putString("email", email);
-        editor.putString("picurl", picurl);
+        //editor.putString("picurl", picurl);
         editor.apply();
+
+        String picpath = saved_values.getString("picpath",null);
+        if(picpath == null){
+            picurl = getIntent().getStringExtra("picurl");
+            picurl+="0";
+            new LoadProfileImage().execute(picurl);
+        }
 
     }
 
@@ -196,6 +218,53 @@ public class HomeActivity extends FragmentActivity
             super.onBackPressed();
     }
 
+
+    private class LoadProfileImage extends AsyncTask<String, Void, Bitmap> {
+
+
+        protected Bitmap doInBackground(String... urls) {
+
+            String url = urls[0];
+            Bitmap icon = null;
+            try {
+                InputStream in = new java.net.URL(url).openStream();
+                icon = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return icon;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+
+            String root = Environment.getExternalStorageDirectory().toString();
+            File myDir = new File(root + "/NetApp_Data");
+            myDir.mkdirs();
+            String fname = "ProfilePic.jpg";
+            File file = new File (myDir, fname);
+
+            if (file.exists ())
+                file.delete ();
+            try {
+                FileOutputStream out = new FileOutputStream(file);
+                result.compress(Bitmap.CompressFormat.JPEG, 100, out);
+                SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences.Editor editor = saved_values.edit();
+                editor.putString("picpath", myDir.getAbsolutePath()+"/");
+                editor.apply();
+
+                out.flush();
+                out.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+        }
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -278,6 +347,7 @@ public class HomeActivity extends FragmentActivity
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
                 nameValuePairs.add(new BasicNameValuePair("pname", pname));
                 nameValuePairs.add(new BasicNameValuePair("email", email));
+                nameValuePairs.add(new BasicNameValuePair("picurl", picurl));
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
                 // Execute HTTP Post Request
@@ -304,13 +374,15 @@ public class HomeActivity extends FragmentActivity
                         }
                     }
                     String id = sb.toString().trim();
-                    if(id.length()==1)
+                    if(id.length()>0)
                     {
                         System.out.println("User added or already present with id: "+id);
                         SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                         SharedPreferences.Editor editor=saved_values.edit();
                         editor.putString("id",id);
+                        Log.d("HomeActivity", id);
                         editor.apply();
+
                     }
                     else
                     {

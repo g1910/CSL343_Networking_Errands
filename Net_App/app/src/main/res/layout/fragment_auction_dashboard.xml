@@ -5,20 +5,32 @@
     android:orientation="vertical"
     tools:context="group2.netapp.auction.AuctionDashboardFragment">
 
+
+
+    <it.gmariotti.cardslib.library.view.CardViewNative
+        android:id="@+id/auc_details_cardview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
     <android.support.v4.view.ViewPager
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/auc_pager"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/auc_pager"
+        android:layout_width="match_parent"
+        android:layout_height="405dp">
         <android.support.v4.view.PagerTabStrip
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
             android:id="@+id/auc_pagerTab"
-             />
+            />
 
 
     </android.support.v4.view.ViewPager>
+
+
+
+
 
 </LinearLayout>
 

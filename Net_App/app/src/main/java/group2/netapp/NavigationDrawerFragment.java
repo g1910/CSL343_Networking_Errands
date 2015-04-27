@@ -31,6 +31,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -136,12 +140,25 @@ public class NavigationDrawerFragment extends Fragment {
         TextView drawerProfileName = (TextView)rootView.findViewById(R.id.drawerProfilename);
         ImageView drawerProfileImage = (ImageView)rootView.findViewById(R.id.drawerProfileImage);
         SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-        String picurl = saved_values.getString("picurl",null);
+        String picpath = saved_values.getString("picpath",null);
         String name = saved_values.getString("user_name",null);
 
         drawerProfileName.setText(name);
-        picurl+="0";
-        new LoadProfileImage(drawerProfileImage).execute(picurl);
+        if(picpath != null) {
+            Bitmap bitmap = null;
+            File file = new File(picpath, "ProfilePic.jpg");
+            FileInputStream streamIn = null;
+            try {
+                streamIn = new FileInputStream(file);
+                bitmap = BitmapFactory.decodeStream(streamIn);
+                streamIn.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            drawerProfileImage.setImageBitmap(bitmap);
+        }
 
 
         mDrawerListView.setAdapter(adapter);
@@ -240,30 +257,6 @@ public class NavigationDrawerFragment extends Fragment {
         }
     }
 
-    private class LoadProfileImage extends AsyncTask<String, Void, Bitmap> {
-        ImageView downloadedImage;
-
-        public LoadProfileImage(ImageView image) {
-            this.downloadedImage = image;
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-            String url = urls[0];
-            Bitmap icon = null;
-            try {
-                InputStream in = new java.net.URL(url).openStream();
-                icon = BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-            return icon;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            downloadedImage.setImageBitmap(result);
-        }
-    }
 
     @Override
     public void onAttach(Activity activity) {

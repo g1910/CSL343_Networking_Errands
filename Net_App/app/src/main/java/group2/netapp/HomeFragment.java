@@ -76,11 +76,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         switch(v.getId()){
             case R.id.spBtn:
                 Context context = getActivity().getApplicationContext();
-                CharSequence text = "Auction Started Successfully";
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
-
                 i = new Intent(getActivity(), AuctionActivity.class);
                 startActivity(i);
                 break;

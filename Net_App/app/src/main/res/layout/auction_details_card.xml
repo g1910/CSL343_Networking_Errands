@@ -101,57 +101,24 @@
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_alignLeft="@id/deliverytimepic"
-        android:src="@drawable/price_flat"
-        android:layout_marginTop="10dp"
         android:layout_below="@id/notparticipatingexpected_time"
-        android:id="@+id/pricepic"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Min. price:"
-        android:layout_marginTop="5dp"
-        android:textColor="#ff6c6b6f"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:layout_alignTop="@id/pricepic"
-        android:layout_marginLeft="5dp"
-        android:layout_toRightOf="@id/pricepic"
-        android:id="@+id/pricetext"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="price"
-        android:layout_toRightOf="@id/pricetext"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:layout_alignTop="@id/pricetext"
-        android:layout_marginLeft="10dp"
-        android:textColor="#ff6c6b6f"
-        android:id="@+id/notparticipatingprice"
-        />
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_below="@id/notparticipatingprice"
         android:layout_marginTop="10dp"
         android:src="@drawable/rank_flat"
         android:id="@+id/limitpic"
-        android:layout_alignLeft="@id/pricepic"
+        android:layout_alignLeft="@id/deliverytimepic"
         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Order Limit ~ "
-        android:layout_alignTop="@id/limitpic"
-        android:layout_marginTop="5dp"
+        android:text="Order Limit ~"
         android:id="@+id/orderlimittext"
         android:textColor="#ff6c6b6f"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:layout_alignLeft="@id/pricetext"
-        />
+        android:layout_alignLeft="@+id/deliverytimetext"
+        android:layout_alignStart="@+id/deliverytimetext"
+        android:layout_alignBottom="@+id/limitpic"
+        android:layout_alignTop="@+id/limitpic" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -164,29 +131,6 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         />
 
-    <RatingBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/notparticipatingratings"
-        android:isIndicator="true"
-        android:layout_below="@id/limitpic"
-        android:layout_marginTop="10dp"
-        android:layout_alignLeft="@id/deliverytimepic"
-        style="?android:attr/ratingBarStyleSmall" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="rated by : 0 users"
-        android:id="@+id/notparticipatingnumRated"
-        android:layout_alignTop="@id/notparticipatingratings"
-        android:layout_toRightOf="@id/notparticipatingratings"
-        android:paddingLeft="15dp"
-
-        android:textColor="#ff561bff" />
-
-
-
 
     <TextView
         android:layout_width="wrap_content"
@@ -195,11 +139,10 @@
         android:layout_marginRight="10dp"
         android:layout_marginBottom="5dp"
         android:id="@+id/notparticipatingdesc"
-        android:layout_below="@id/notparticipatingratings"
-        android:layout_alignLeft="@id/notparticipatingratings"
         android:layout_marginTop="5dp"
         android:textColor="#ff6666ad"
-        />
+        android:layout_below="@id/limitpic"
+        android:layout_alignLeft="@id/deliverytimepic" />
 
 
 </RelativeLayout>
