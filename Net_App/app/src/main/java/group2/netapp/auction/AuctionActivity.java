@@ -23,15 +23,20 @@ import java.util.List;
 
 import group2.netapp.R;
 import group2.netapp.auction.bidsTabs.AcceptedBids;
+import group2.netapp.auction.bidsTabs.PostAcceptedBids;
 import group2.netapp.utilFragments.ProgressFragment;
 import group2.netapp.utilFragments.ServerConnect;
+import it.gmariotti.cardslib.library.internal.Card;
 
 
-public class AuctionActivity extends FragmentActivity implements BidRequestsFragment.BidRequestsListener, ServerConnect.OnResponseListener, AcceptedBids.BidAcceptListener, AuctionDashboardFragment.AuctionDashboardListener{
+public class AuctionActivity extends FragmentActivity implements BidRequestsFragment.BidRequestsListener, ServerConnect.OnResponseListener, AcceptedBids.BidAcceptListener, PostAcceptedBids.BidAcceptListener, AuctionDashboardFragment.AuctionDashboardListener, PostAuctionDashboardFragment.PostAuctionDashboardListener{
 
     JSONObject auctionDetails;
     JSONArray pendingBids, runningBids;
     String idUser;
+    int isRunning;
+
+    ArrayList<ArrayList<Card>> postAuctionBids;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,17 +71,26 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsFrag
         try {
             String tag = ((JSONObject)j.get(0)).getString("tag");
             if(tag.equals("loading")) {
-                boolean isRunning = Boolean.valueOf(((JSONObject) j.get(1)).get("isRunning").toString());
-                if (isRunning) {
+                isRunning = j.getJSONObject(1).getInt("isRunning");
+                if (isRunning == 0){
+                    openServerForm();
+                    invalidateOptionsMenu();
+                } else {
                     auctionDetails = j.getJSONObject(2);
                     pendingBids = j.getJSONArray(3);
                     runningBids = j.getJSONArray(4);
                     Log.d("AuctionActivity", auctionDetails.toString());
                     Log.d("AuctionActivity", pendingBids.toString());
-                    Log.d("AuctionActivity", runningBids.toString());
-                    openDashboard();
-                } else {
-                    openServerForm();
+                    Log.d("AuctionActivity", runningBids.toString()+" "+runningBids.length());
+                    if (isRunning == 1) {
+                        openDashboard();
+                        invalidateOptionsMenu();
+                    } else if (isRunning == 2) {
+                        postAuctionBids = new ArrayList<>(runningBids.length());
+                        Log.d("AuctionActivity","postAuctionBid length:"+postAuctionBids.size());
+                        openPostAuction();
+
+                    }
                 }
             }else if(tag.equals("bid_request")){
                 boolean status = ((JSONObject)j.get(1)).getBoolean("status");
@@ -119,6 +133,18 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsFrag
         Fragment aDashFrag = new AuctionDashboardFragment();
         aDashFrag.setArguments(args);
         ft.replace(R.id.auction_frame,aDashFrag,"AuctionDashboard");
+//        ft.addToBackStack(null);
+        ft.commit();
+        Log.d("AuctionActivity", "DashboardOpened");
+    }
+
+    public void openPostAuction(){
+        Bundle args = new Bundle();
+        args.putString("auction", auctionDetails.toString());
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        Fragment aPostDashFrag = new PostAuctionDashboardFragment();
+        aPostDashFrag.setArguments(args);
+        ft.replace(R.id.auction_frame,aPostDashFrag,"AuctionDashboard");
 //        ft.addToBackStack(null);
         ft.commit();
         Log.d("AuctionActivity", "DashboardOpened");
@@ -223,5 +249,24 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsFrag
         return null;
     }
 
+    public int getIsRunning() {
+        return isRunning;
+    }
 
+    public void setIsRunning(int isRunning) {
+        this.isRunning = isRunning;
+    }
+
+    public ArrayList<ArrayList<Card>> getPostAuctionBids() {
+        return postAuctionBids;
+    }
+
+    public ArrayList<Card> obtainArrayBids(int tabPosition) {
+        if(tabPosition >= 0){
+            ArrayList<Card> c = postAuctionBids.get(tabPosition);
+            c.clear();
+            return c;
+        }
+        return null;
+    }
 }

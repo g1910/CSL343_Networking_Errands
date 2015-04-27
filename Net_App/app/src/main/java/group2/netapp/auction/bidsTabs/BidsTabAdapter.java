@@ -10,8 +10,11 @@ import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.util.ArrayList;
+
 import group2.netapp.R;
 import group2.netapp.auction.BidRequestsFragment;
+import it.gmariotti.cardslib.library.internal.Card;
 
 /**
  * Created by mohit on 16/3/15.
@@ -19,21 +22,29 @@ import group2.netapp.auction.BidRequestsFragment;
 public class BidsTabAdapter extends FragmentPagerAdapter {
 
     JSONArray acceptedBids;
+    int isRunning;
 
-    public BidsTabAdapter(FragmentManager fm, JSONArray acceptedBids) {
+    public BidsTabAdapter(FragmentManager fm, JSONArray acceptedBids, int isRunning) {
         super(fm);
         this.acceptedBids = acceptedBids;
+        this.isRunning = isRunning;
         Log.d("BidTabsAdapter", acceptedBids.toString());
     }
 
 
     @Override
     public Fragment getItem(int position) {
+        Fragment f;
+        if(isRunning == 1) {
+            f = new AcceptedBids();
+        }else{
 
-        Fragment f = new AcceptedBids();
+            f = new PostAcceptedBids();
+        }
         Bundle args = new Bundle();
         try {
             args.putString("auction_category",acceptedBids.getJSONObject(position).toString());
+            args.putInt("tab",position);
         } catch (JSONException e) {
             e.printStackTrace();
         }

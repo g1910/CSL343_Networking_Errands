@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirm"
+        android:id="@+id/bid_checkbox"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="#ff6c6b6f"
+         />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/location_flat"
+        android:layout_below="@id/bid_checkbox"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/locationicon"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Bid Location"
+        android:id="@+id/auc_bid_location"
+        android:layout_toRightOf="@id/locationicon"
+        android:layout_marginLeft="5dp"
+        android:textColor="#ff6c6b6f"
+        android:layout_alignTop="@+id/locationicon"
+        android:layout_toLeftOf="@+id/imageView"
+        android:layout_toStartOf="@+id/imageView"
+        android:inputType="textMultiLine" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/message_flat"
+        android:id="@+id/descicon"
+        android:layout_below="@id/auc_bid_location"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Order Summary"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/auc_bid_order_summary"
+        android:layout_below="@id/auc_bid_location"
+        android:layout_alignTop="@id/descicon"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/descicon"
+        android:textColor="#ff6c6b6f"
+        />
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/price_flat"
+        android:id="@+id/imageView"
+        android:layout_alignTop="@+id/locationicon"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="81dp"
+        android:layout_marginEnd="81dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bid_price"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:text="1234"
+        android:layout_alignTop="@+id/auc_bid_location"
+        android:layout_alignLeft="@+id/imageView"
+        android:layout_alignStart="@+id/imageView"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
+        android:textColor="#ff6c6b6f"/>
+
+
+</RelativeLayout>

@@ -73,10 +73,11 @@ public class NotParticipatingCard extends Card {
         {
             ratings="0";
             numRated="0";
-            ratingsView.setRating(Float.parseFloat(ratings));
-            numRatedView.setPaintFlags(numRatedView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-            numRatedView.setText("rated by : "+numRated+" users");
+
         }
+        ratingsView.setRating(Float.parseFloat(ratings));
+        numRatedView.setPaintFlags(numRatedView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        numRatedView.setText("rated by : "+numRated+" users");
         numRatedView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

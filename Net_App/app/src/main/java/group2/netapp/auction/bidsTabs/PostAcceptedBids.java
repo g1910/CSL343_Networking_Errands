@@ -29,7 +29,7 @@ import it.gmariotti.cardslib.library.recyclerview.view.CardRecyclerView;
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass.
  */
-public class AcceptedBids extends Fragment implements Card.OnCardClickListener{
+public class PostAcceptedBids extends Fragment implements Card.OnCardClickListener, PostBidCard.PostBidCardListener{
 
     CardArrayRecyclerViewAdapter bidViewAdapter;
     CardRecyclerView bidView;
@@ -40,11 +40,13 @@ public class AcceptedBids extends Fragment implements Card.OnCardClickListener{
 
     ArrayList<Card> cards;
 
+    int tabPosition;
+
     public interface BidAcceptListener{
         public void openBidRequest(JSONObject bid, boolean isRequest);
     }
 
-    public AcceptedBids() {
+    public PostAcceptedBids() {
         // Required empty public constructor
     }
 
@@ -63,6 +65,7 @@ public class AcceptedBids extends Fragment implements Card.OnCardClickListener{
         Bundle args = getArguments();
         try {
             auc_category = new JSONObject(new JSONTokener(args.getString("auction_category","")));
+            tabPosition = args.getInt("tab",-1);
             setUpBidView(v);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -90,14 +93,14 @@ public class AcceptedBids extends Fragment implements Card.OnCardClickListener{
     }
 
     public ArrayList<Card> setBids(){
-        cards = new ArrayList<Card>();
+        cards = ((AuctionActivity)getActivity()).obtainArrayBids(tabPosition);
         JSONObject bid;
         try {
             for(int i = 0; i< acceptedBids.length(); ++i) {
                 bid = acceptedBids.getJSONObject(i);
                 Log.d("AcceptedTab", "Location:" + bid.getString("location") + " Order:" + bid.getJSONArray("orders").length() + " items ordered");
-                BidCard card;
-                card = new BidCard(getActivity(), bid);
+                PostBidCard card;
+                card = new PostBidCard(getActivity(),bid,this,i);
                 card.setOnClickListener(this);
                 cards.add(card);
             }
@@ -111,11 +114,29 @@ public class AcceptedBids extends Fragment implements Card.OnCardClickListener{
 
     @Override
     public void onClick(Card card, View view) {
-        BidCard bCard = (BidCard) card;
+        PostBidCard bCard = (PostBidCard) card;
         Log.d("Requests", "Fragment Added");
         bListener.openBidRequest(bCard.getBid(), false);
 
 
+    }
+
+    @Override
+    public void onItemChecked(int index, boolean isChecked) {
+
+        for(int i = 0;i<cards.size();++i){
+            if(i<=index) {
+                ((PostBidCard) cards.get(i)).setChecked(isChecked);
+            }else{
+                ((PostBidCard) cards.get(i)).setChecked(false);
+            }
+        }
+//        PostBidCard p = (PostBidCard) cards.get(index);
+//        try {
+//            Toast.makeText(getActivity(),"Bid clicked "+((PostBidCard)cards.get(index)).getBid().getString("location"),Toast.LENGTH_SHORT).show();
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
     }
 
 
