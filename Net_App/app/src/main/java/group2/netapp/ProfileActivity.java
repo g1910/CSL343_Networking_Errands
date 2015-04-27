@@ -1,7 +1,5 @@
 package group2.netapp;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -9,47 +7,35 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class FeedbackActivity extends ActionBarActivity {
+public class ProfileActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_feedback);
+        setContentView(R.layout.activity_profile);
 
         Bundle b = getIntent().getExtras();
         String id = b.getString("id");
-        int tag = b.getInt("tag");
 
 
-        if(tag==0)
-        {
-            ServiceFeedbackFragment fragment = new ServiceFeedbackFragment();
+
+            ProfileFragment fragment = new ProfileFragment();
             Bundle bun = new Bundle();
             bun.putString("id",id);
+            bun.putInt("ishome",0);
             fragment.setArguments(bun);
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
-                    .add(R.id.feedbacksContainer, fragment)
+                    .add(R.id.profileContainer, fragment)
                     .commit();
-        }
-        else
-        {
-            CustomerFeedbackFragment fragment = new CustomerFeedbackFragment();
-            Bundle bun = new Bundle();
-            bun.putString("id",id);
-            fragment.setArguments(bun);
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction()
-                    .add(R.id.feedbacksContainer, fragment)
-                    .commit();
-        }
+
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_feedback, menu);
+        getMenuInflater().inflate(R.menu.menu_profile, menu);
         return true;
     }
 
