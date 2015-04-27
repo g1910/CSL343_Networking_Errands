@@ -106,7 +106,7 @@
         -->
         <activity
             android:name=".FeedbackActivity"
-            android:label="@string/title_activity_broadcast"
+            android:label="@string/title_activity_profile"
             android:parentActivityName=".HomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat"
@@ -153,7 +153,9 @@
         <activity
             android:name=".ProfileActivity"
             android:theme="@style/Theme.AppCompat"
-            android:label="@string/title_activity_profile" >
+            android:label="@string/title_activity_profile"
+            
+            >
         </activity>
     </application>
 
