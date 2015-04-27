@@ -24,7 +24,7 @@
 	while ($row=mysqli_fetch_assoc($result))
 	{
 		$rating=getRating($row['idUser']);
-		$rank=getRank($row['idAuction'],$row['Price']);
+		$rank=getRank($row['idAuction'],$row['Price'],$row['idBid']);
 	//	print json_encode($rating);
 		$row['rank']=$rank;
 		$row['rating']=$rating[0]['rating'];

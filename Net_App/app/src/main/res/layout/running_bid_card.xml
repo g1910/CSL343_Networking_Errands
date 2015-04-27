@@ -109,4 +109,15 @@
         android:layout_toRightOf="@id/descicon"
         android:textColor="#ff6c6b6f"
         />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="See Contact Details"
+        android:layout_below="@id/auc_bid_order_summary"
+        android:layout_marginTop="10dp"
+        android:id="@+id/contact_details_button"
+        android:layout_alignParentRight="true"
+        android:visibility="gone"
+        />
 </RelativeLayout>

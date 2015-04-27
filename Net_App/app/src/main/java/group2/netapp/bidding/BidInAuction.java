@@ -35,16 +35,22 @@ import it.gmariotti.cardslib.library.recyclerview.view.CardRecyclerView;
 public class BidInAuction extends Fragment  implements Card.OnCardClickListener {
 
     RunningBidListener blistener;
+    private AuctionDashboardListener listener;
 
 
+    public interface AuctionDashboardListener{
+        public void openBidRequestFragment(Bundle b);
+    }
 
     public interface RunningBidListener {
         public void openRunningBids(int index,int auctionIndex);
     }
 
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        listener = (AuctionDashboardListener) activity;
         blistener=(RunningBidListener)activity;
     }
 
@@ -60,7 +66,7 @@ public class BidInAuction extends Fragment  implements Card.OnCardClickListener 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.new_bid:
-                newBid();
+               newBid();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -69,7 +75,7 @@ public class BidInAuction extends Fragment  implements Card.OnCardClickListener 
 
     private void newBid() {
 
-        Intent i=new Intent(getActivity(),BidFormActivity.class);
+    //    Intent i=new Intent(getActivity(),BidFormActivity.class);
         Bundle b=new Bundle();
         JSONArray topar = ((CurrAuctionActivity)getActivity()).getNotParticipating();
         try {
@@ -80,8 +86,9 @@ public class BidInAuction extends Fragment  implements Card.OnCardClickListener 
             e.printStackTrace();
         }
 
-        i.putExtras(b);
-        startActivity(i);
+        listener.openBidRequestFragment(b);
+//        i.putExtras(b);
+  //      startActivity(i);
         //    b.putInt("");
     }
 

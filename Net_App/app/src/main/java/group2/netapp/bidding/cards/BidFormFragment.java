@@ -1,25 +1,18 @@
-package group2.netapp.bidding;
+package group2.netapp.bidding.cards;
 
-import android.app.Activity;
+
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+
+import android.preference.PreferenceManager;
+import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.NumberPicker;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -31,41 +24,51 @@ import java.util.ArrayList;
 import java.util.List;
 
 import group2.netapp.R;
+import group2.netapp.bidding.CurrAuctionActivity;
 import group2.netapp.utilFragments.ServerConnect;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
-import it.gmariotti.cardslib.library.internal.ViewToClickToExpand;
 import it.gmariotti.cardslib.library.view.CardListView;
 
-public class BidFormActivity extends Activity implements ServerConnect.OnResponseListener{
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class BidFormFragment extends Fragment {
 
     CardListView listView;
     ArrayList<Card> cards;
     CardArrayAdapter cardListAdapter;
     int idAuction;
 
+
+    public BidFormFragment() {
+        // Required empty public constructor
+    }
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bid_form);
-        Bundle b=getIntent().getExtras();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        final View v= inflater.inflate(R.layout.fragment_bid_form, container, false);
+        Bundle b= getArguments();
         idAuction = b.getInt("idAuction");
 
 
-        listView = (CardListView)findViewById(R.id.BidFormCardList);
+        listView = (CardListView)v.findViewById(R.id.BidFormCardList);
         cards = new ArrayList<Card>();
-        cardListAdapter = new CardArrayAdapter(getApplicationContext(),cards);
+        cardListAdapter = new CardArrayAdapter(getActivity().getApplicationContext(),cards);
 
         if (listView != null) {
             listView.setAdapter(cardListAdapter);
         }
 
         //Adding one order
-        OrderCard a = new OrderCard(getApplicationContext());
+        OrderCard a = new OrderCard(getActivity().getApplicationContext());
         cards.add(a);
         cardListAdapter.notifyDataSetChanged();
 
-        Button AddItem = new Button(getApplicationContext());
+        Button AddItem = new Button(getActivity().getApplicationContext());
         AddItem.setText("Add item");
         listView.addFooterView(AddItem);
 
@@ -79,7 +82,7 @@ public class BidFormActivity extends Activity implements ServerConnect.OnRespons
         AddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                OrderCard a = new OrderCard(getApplicationContext());
+                OrderCard a = new OrderCard(getActivity().getApplicationContext());
                 cards.add(a);
                 int count = cardListAdapter.getCount();
                 params.height = itemMeasuredHeight*count + dividerHeight*(count-1);
@@ -91,18 +94,18 @@ public class BidFormActivity extends Activity implements ServerConnect.OnRespons
             }
         });
 
-        Button placeBid = (Button)findViewById(R.id.PlaceBid_button);
+        Button placeBid = (Button)v.findViewById(R.id.PlaceBid_button);
         placeBid.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View w) {
 
-                EditText locationView=(EditText) findViewById(R.id.locationfield);
-                EditText desView = (EditText) findViewById(R.id.descriptionfield);
+                EditText locationView=(EditText) v.findViewById(R.id.locationfield);
+                EditText desView = (EditText) v.findViewById(R.id.descriptionfield);
 
                 String bidlocation = locationView.getText().toString();
                 String des = desView.getText().toString();
 
-                Log.d("BidFormActivity",idAuction+" ");
+                Log.d("BidFormActivity", idAuction + " ");
                 Log.d("BidFormActivity",bidlocation);
                 Log.d("BidFormActivity",des);
 
@@ -132,10 +135,10 @@ public class BidFormActivity extends Activity implements ServerConnect.OnRespons
 
                 Log.d("BidFormActivity",order.toString());
 
-                ServerConnect myServer=new ServerConnect(BidFormActivity.this);
+                ServerConnect myServer=new ServerConnect(getActivity());
 
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-                SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
                 final String id = saved_values.getString("id",null);
                 nameValuePairs.add(new BasicNameValuePair("id_user", id));
                 nameValuePairs.add(new BasicNameValuePair("idAuction",String.valueOf(idAuction)));
@@ -150,41 +153,10 @@ public class BidFormActivity extends Activity implements ServerConnect.OnRespons
 
             }
         });
-
+        return v;
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_bid_form, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onResponse(JSONArray j) {
-
-        Intent i=new Intent(this,CurrAuctionActivity.class);
-        finish();
-        startActivity(i);
-
-
-    }
 }
 
 class OrderCard extends Card{

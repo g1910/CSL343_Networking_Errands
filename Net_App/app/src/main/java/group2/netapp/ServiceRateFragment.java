@@ -269,7 +269,7 @@ public class ServiceRateFragment extends Fragment {
 
                         ServiceUserReqCard card = new ServiceUserReqCard(getActivity().getApplicationContext(),a.location,a.start_time,a.end_time,a.name);
 
-                        ServiceCustomCardExpand expand = new ServiceCustomCardExpand(getActivity().getApplicationContext(),a.idFeedback,i);
+                        ServiceCustomCardExpand expand = new ServiceCustomCardExpand(getActivity().getApplicationContext(),a.idFeedback,i,a.idUser);
 
                         card.addCardExpand(expand);
 
@@ -298,7 +298,8 @@ class add_review extends AsyncTask<String,String,String>
     Context con;
     Button button;
     int index;
-    public add_review(Context context, ArrayList<NameValuePair> l ,Button b, RatingBar ratingbar , EditText reviewEditText,int id)
+    String idUser;
+    public add_review(Context context, ArrayList<NameValuePair> l ,Button b, RatingBar ratingbar , EditText reviewEditText,int id,String user)
     {
         list=l;
         rating=ratingbar;
@@ -306,6 +307,7 @@ class add_review extends AsyncTask<String,String,String>
         con=context;
         button =b;
         index = id;
+        idUser = user;
     }
 
 
@@ -339,6 +341,13 @@ class add_review extends AsyncTask<String,String,String>
             button.setClickable(false);
             cards.remove(index);
             cardListAdapter.notifyDataSetChanged();
+
+            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
+            nameValuePairs.add(new BasicNameValuePair("id", idUser));
+            nameValuePairs.add(new BasicNameValuePair("message", "You got a new customer feedback"));
+
+            new push_target(nameValuePairs).execute(null,null,null);
+
         }
         else
             System.out.println("Review submission failed");
@@ -346,17 +355,23 @@ class add_review extends AsyncTask<String,String,String>
     }
 }
 
+
+
+
+
 class ServiceCustomCardExpand extends CardExpand {
     //Use your resource ID for your inner layout
     String idFeedback;
     Context con;
     int idf;
-    public ServiceCustomCardExpand(Context context,String id,int index)
+    String idUser;
+    public ServiceCustomCardExpand(Context context,String id,int index,String User)
     {
         super(context, R.layout.service_rate_expand);
         idFeedback=id;
         con=context;
         idf = index;
+        idUser = User;
     }
 
     @Override
@@ -375,12 +390,16 @@ class ServiceCustomCardExpand extends CardExpand {
 
                 String stars = String.valueOf(Math.round(rating.getRating()));
                 String reviewText = review.getText().toString();
-                ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
-                nameValuePairs.add(new BasicNameValuePair("id",idFeedback));
-                nameValuePairs.add(new BasicNameValuePair("star",stars));
-                nameValuePairs.add(new BasicNameValuePair("review",reviewText));
-                new add_review(con,nameValuePairs,submit, rating , review,idf).execute(null,null,null);
-
+                if(reviewText.length()>0 && Integer.parseInt(stars)!=0) {
+                    ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
+                    nameValuePairs.add(new BasicNameValuePair("id", idFeedback));
+                    nameValuePairs.add(new BasicNameValuePair("star", stars));
+                    nameValuePairs.add(new BasicNameValuePair("review", reviewText));
+                    new add_review(con, nameValuePairs, submit, rating, review, idf, idUser).execute(null, null, null);
+                }
+                else{
+                    Toast.makeText(getActivity(),"Please enter the required credentials",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -434,4 +453,37 @@ class ServiceUser{
     public String start_time;
     public String end_time;
     public String name;
+    public String idUser;
+}
+
+class push_target extends AsyncTask<String,String,String>
+{
+    private ArrayList<NameValuePair> list;
+    private String host="http://netapp.byethost33.com/add_rate.php";
+    public push_target(ArrayList<NameValuePair> l)
+    {
+        list=l;
+    }
+
+
+    @Override
+    protected String doInBackground(String... params) {
+
+        HttpClient httpclient = new DefaultHttpClient();
+        HttpPost httppost = new HttpPost(host);
+        httppost.setHeader("Content-Type", "application/x-www-form-urlencoded");
+        try {
+
+            httppost.setEntity(new UrlEncodedFormEntity(list));
+            // Execute HTTP Post Request
+            HttpResponse response = httpclient.execute(httppost);
+
+        } catch (Exception e) {
+            System.out.println(e);
+            // TODO Auto-generated catch block
+        }
+        return null;
+    }
+
+
 }

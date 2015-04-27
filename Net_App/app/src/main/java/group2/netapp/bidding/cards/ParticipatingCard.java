@@ -42,7 +42,7 @@ public class ParticipatingCard extends Card {
             this.idAuction = j.getInt("idAuction");
             temp = j.getString("expctd_time");
             this.expected_time = temp.substring(0,temp.length()-3);
-            this.price = j.getInt("Price");
+            this.price = j.getInt("minPrice");
             this.ratings=j.getString("rating");
             this.numRated=j.getString("numRated");
             this.rank=j.getInt("rank");
