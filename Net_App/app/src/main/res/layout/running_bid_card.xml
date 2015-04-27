@@ -39,12 +39,11 @@
         android:layout_height="wrap_content"
         android:text="Location"
         android:id="@+id/locationtext"
-        android:layout_marginTop="5dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:layout_alignTop="@id/locationpic"
-        android:layout_toRightOf="@id/locationpic"
-        android:layout_marginLeft="10dp"
-        />
+        android:inputType="textMultiLine"
+        android:layout_alignBottom="@+id/rankicon"
+        android:layout_alignLeft="@+id/status"
+        android:layout_alignStart="@+id/status" />
 
     <ImageView
         android:layout_width="30dp"
