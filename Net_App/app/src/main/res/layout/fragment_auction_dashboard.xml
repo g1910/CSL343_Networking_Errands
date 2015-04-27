@@ -17,7 +17,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/auc_pager"
         android:layout_width="match_parent"
-        android:layout_height="405dp">
+        android:layout_height="match_parent">
         <android.support.v4.view.PagerTabStrip
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

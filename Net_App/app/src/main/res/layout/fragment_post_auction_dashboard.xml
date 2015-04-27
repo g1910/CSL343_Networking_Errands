@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Auction has Ended!Take action in"
+        android:text="Auction has Ended! Take action in"
         android:id="@+id/textView6"
         android:layout_gravity="center"
         android:textAlignment="center" />
@@ -33,7 +33,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/auc_pager"
         android:layout_width="match_parent"
-        android:layout_height="405dp">
+        android:layout_height="match_parent">
         <android.support.v4.view.PagerTabStrip
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
