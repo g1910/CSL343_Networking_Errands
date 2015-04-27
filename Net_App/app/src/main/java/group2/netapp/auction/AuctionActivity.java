@@ -113,8 +113,11 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsFrag
     }
 
     public void openDashboard(){
+        Bundle args = new Bundle();
+        args.putString("auction", auctionDetails.toString());
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         Fragment aDashFrag = new AuctionDashboardFragment();
+        aDashFrag.setArguments(args);
         ft.replace(R.id.auction_frame,aDashFrag,"AuctionDashboard");
 //        ft.addToBackStack(null);
         ft.commit();
