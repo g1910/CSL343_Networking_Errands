@@ -2,7 +2,9 @@ package group2.netapp.bidding.currAuctionTabs;
 
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
@@ -70,30 +72,32 @@ public class ToParticipateFragment extends Fragment implements Card.OnCardClickL
 
     public ArrayList<Card> setDummyBids(){
         ArrayList<Card> cards = new ArrayList<Card>();
+        SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+        final String savedid = saved_values.getString("id",null);
 
         JSONArray notParticipating = ((CurrAuctionActivity)getActivity()).getNotParticipating();
 
         for(int i = 0; i <  notParticipating.length() ;++i) {
       //      Card card = new Card(getActivity());
 
-            NotParticipatingCard card = null;
+
+
+
             try {
-                card = new NotParticipatingCard(getActivity(),(JSONObject)notParticipating.get(i),i);
-                card.setOnClickListener(this);
+                JSONObject temp=(JSONObject)notParticipating.get(i);
+                Log.d("USER ID MINE",savedid);
+                Log.d("UDerasdasd",temp.get("idUser").toString());
+                if (!temp.get("idUser").toString().equals(savedid))
+                {
+                    NotParticipatingCard card = null;
+                    card = new NotParticipatingCard(getActivity(),(JSONObject)notParticipating.get(i),i);
+                    card.setOnClickListener(this);
+                    cards.add(card);
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-//            card.setTitle("It's a Card!"+i);
 
-  //          card.setOnClickListener(new Card.OnCardClickListener() {
-    //            @Override
-      //          public void onClick(Card card, View view) {
-        //            Toast.makeText(getActivity().getApplicationContext(), card.getTitle(),
-          //                  Toast.LENGTH_LONG).show();
-            //    }
-          //  });
-
-            cards.add(card);
 
 
 /*            MaterialLargeImageCard card = new MaterialLargeImageCard(getActivity());

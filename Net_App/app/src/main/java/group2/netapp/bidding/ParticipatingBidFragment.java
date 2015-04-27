@@ -5,7 +5,9 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
@@ -31,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import group2.netapp.R;
-import group2.netapp.auction.cards.RunningBidCard;
+import group2.netapp.bidding.cards.RunningBidCard;
 import group2.netapp.bidding.cards.Order_Card;
 import group2.netapp.bidding.cards.ParticipatingCard;
 import group2.netapp.utilFragments.ServerConnect;
@@ -48,9 +50,10 @@ public class ParticipatingBidFragment extends Fragment {
     CardRecyclerView auctionView;
 
     String auctionLocation,desc,idUser,start_time,end_time,expected_time;
-    String ratings,numRated;
+    String ratings,numRated,status;
     int index,idAuction;
-    int bidId,price,rank;
+    int bidId,price;
+    String rank;
     String bidLocation;
     JSONArray order;
     JSONObject auction_details,bid_details;
@@ -89,67 +92,83 @@ public class ParticipatingBidFragment extends Fragment {
 
     private void increaseBid() {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        // Get the layout inflater
-        final LayoutInflater inflater = LayoutInflater.from(getActivity().getApplicationContext());
+        Log.d("Incerasesae",this.status);
+        if (this.status.equals("A"))
+        {
 
-        // Inflate and set the layout for the dialog
-        // Pass null as the parent view because its going in the dialog layout
-        builder.setView(inflater.inflate(R.layout.dialog_increase_bid, null))
-                .setTitle("Increase Bid")
-                        // Add action buttons
-                .setPositiveButton("Submit", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            // Get the layout inflater
+            final LayoutInflater inflater = LayoutInflater.from(getActivity().getApplicationContext());
 
-                        Log.e("Dialog", "HI");
-                        Dialog f = (Dialog) dialog;
-                        EditText e = (EditText) f.findViewById(R.id.increase_bid);
-                        String text = e.getText().toString();
-                        Log.d("Dialog", text);
-                        int newVal = Integer.valueOf(text);
-                        Log.d("New Price", newVal + " ");
-                        Log.d("Old Price", price + " ");
-                        Log.d("Auction ID", idAuction + " ");
-                        Log.d("Bid ID", bidId + " ");
+            // Inflate and set the layout for the dialog
+            // Pass null as the parent view because its going in the dialog layout
+            builder.setView(inflater.inflate(R.layout.dialog_increase_bid, null))
+                    .setTitle("Increase Bid")
+                            // Add action buttons
+                    .setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
 
-                        if (newVal < price) {
-                            Toast toast = Toast.makeText(getActivity().getApplicationContext(),
-                                    "New Price Must be more than old price",
-                                    Toast.LENGTH_LONG);
-                            toast.show();
-                        } else {
-                            Log.d("Here", "Setting new Price");
-                            ServerConnect myServer = new ServerConnect(getActivity());
+                            Log.e("Dialog", "HI");
+                            Dialog f = (Dialog) dialog;
+                            EditText e = (EditText) f.findViewById(R.id.increase_bid);
+                            String text = e.getText().toString();
+                            Log.d("Dialog", text);
+                            int newVal = Integer.valueOf(text);
+                            Log.d("New Price", newVal + " ");
+                            Log.d("Old Price", price + " ");
+                            Log.d("Auction ID", idAuction + " ");
+                            Log.d("Bid ID", bidId + " ");
 
-                            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-                            nameValuePairs.add(new BasicNameValuePair("id_user", "1"));
-                            nameValuePairs.add(new BasicNameValuePair("idAuction",String.valueOf(idAuction)));
-                            nameValuePairs.add(new BasicNameValuePair("idBid",String.valueOf(bidId)));
-                            nameValuePairs.add(new BasicNameValuePair("price",String.valueOf(newVal)));
-                            Log.d("ParticipatingFragment",getString(R.string.IP) + "updatePrice.php");
+                            if (newVal < price) {
+                                Toast toast = Toast.makeText(getActivity().getApplicationContext(),
+                                        "New Price Must be more than old price",
+                                        Toast.LENGTH_LONG);
+                                toast.show();
+                            } else {
+                                Log.d("Here", "Setting new Price");
+                                ServerConnect myServer = new ServerConnect(getActivity());
 
-                            myServer.execute(getString(R.string.IP) + "updatePrice.php", nameValuePairs);
-                            Log.d("ParticipatingFragment", getString(R.string.IP) + "getAllAuctions.php");
-                            Log.e("ParticipatingFragment", "Hi");
+                                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                                SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+                                final String fid = saved_values.getString("id",null);
+                                nameValuePairs.add(new BasicNameValuePair("id_user",fid));
+                                nameValuePairs.add(new BasicNameValuePair("idAuction",String.valueOf(idAuction)));
+                                nameValuePairs.add(new BasicNameValuePair("idBid",String.valueOf(bidId)));
+                                nameValuePairs.add(new BasicNameValuePair("price",String.valueOf(newVal)));
+                                Log.d("ParticipatingFragment",getString(R.string.IP) + "updatePrice.php");
 
-                            Log.d("ParticipatingFragment", "ProgressAuctionOpened");
+                                myServer.execute(getString(R.string.IP) + "updatePrice.php", nameValuePairs);
+                                Log.d("ParticipatingFragment", getString(R.string.IP) + "getAllAuctions.php");
+                                Log.e("Partici                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          patingFragment", "Hi");
 
+                                Log.d("ParticipatingFragment", "ProgressAuctionOpened");
+
+                            }
+
+                            // sign in the user ...
                         }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
 
-                        // sign in the user ...
-                    }
-                })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
+                            Dialog f = (Dialog) dialog;
+                            f.cancel();
+                        }
+                    });
 
-                        Dialog f = (Dialog) dialog;
-                        f.cancel();
-                    }
-                });
+            AlertDialog alert =  builder.create();
+            alert.show();
 
-        AlertDialog alert =  builder.create();
-        alert.show();
+        }
+
+        else
+        {
+            Toast toast = Toast.makeText(getActivity().getApplicationContext(),
+                    "It is still not Accepted",
+                    Toast.LENGTH_LONG);
+            toast.show();
+        }
 
 
 
@@ -178,7 +197,8 @@ public class ParticipatingBidFragment extends Fragment {
                     this.ratings=j.getString("rating");
                     this.numRated=j.getString("numRated");
                     this.bidId=j.getInt("idBid");
-                    this.rank=j.getInt("rank");
+                    this.rank=j.getString("rank");
+                    this.status=j.getString("status");
                     Log.e("Rank",rank+ " ");
 
                     JSONArray jr=((CurrAuctionActivity)getActivity()).getBids();
@@ -319,7 +339,7 @@ public class ParticipatingBidFragment extends Fragment {
         cards.add(card);
 
         RunningBidCard card_run=null;
-        card_run=new RunningBidCard(getActivity(),bid_details,-1);
+        card_run=new RunningBidCard(getActivity(),bid_details,-1,this.rank,this.price,this.status);
         cards.add(card_run);
 
         Log.d("OrderCard",order.toString());

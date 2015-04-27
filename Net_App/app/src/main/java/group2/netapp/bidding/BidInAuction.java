@@ -23,7 +23,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import group2.netapp.R;
-import group2.netapp.auction.cards.RunningBidCard;
+import group2.netapp.bidding.cards.GeneralBidCard;
 import group2.netapp.bidding.cards.NotParticipatingCard;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.recyclerview.internal.CardArrayRecyclerViewAdapter;
@@ -73,6 +73,7 @@ public class BidInAuction extends Fragment  implements Card.OnCardClickListener 
         Bundle b=new Bundle();
         JSONArray topar = ((CurrAuctionActivity)getActivity()).getNotParticipating();
         try {
+            Log.d("IdAuction",((JSONObject)topar.get(index)).getInt("idAuction")+" ");
             b.putInt("idAuction",((JSONObject)topar.get(index)).getInt("idAuction"));
             Log.d("BidInAuction",((JSONObject)topar.get(index)).toString());
         } catch (JSONException e) {
@@ -178,9 +179,9 @@ public class BidInAuction extends Fragment  implements Card.OnCardClickListener 
         for(int i = 0; i <  bids.length() ;++i) {
             //      Card card = new Card(getActivity());
 
-            RunningBidCard card = null;
+            GeneralBidCard card = null;
             try {
-                card = new RunningBidCard(getActivity(),(JSONObject)bids.get(i),i);
+                card = new GeneralBidCard(getActivity(),(JSONObject)bids.get(i),i);
                 card.setOnClickListener(this);
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -194,7 +195,7 @@ public class BidInAuction extends Fragment  implements Card.OnCardClickListener 
 
     @Override
     public void onClick(Card card, View view) {
-        RunningBidCard c=(RunningBidCard) card;
+        GeneralBidCard c=(GeneralBidCard) card;
         Log.d("RunningBIds","HEERE");
         Log.d("RunningBIds",c.getIndex()+" ");
         Log.d("RunningBIds",index+" ");

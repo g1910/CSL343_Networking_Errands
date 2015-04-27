@@ -1,7 +1,9 @@
 package group2.netapp.bidding;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -52,7 +54,9 @@ public class CurrAuctionActivity extends FragmentActivity implements ToParticipa
         ServerConnect myServer=new ServerConnect(this);
 
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-        nameValuePairs.add(new BasicNameValuePair("id_user","1"));
+        SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+        final String id = saved_values.getString("id",null);
+        nameValuePairs.add(new BasicNameValuePair("id_user",id));
         myServer.execute(getString(R.string.IP)+"getAllAuctions.php",nameValuePairs);
         Log.d("CurrAucActivity",getString(R.string.IP)+"getAllAuctions.php");
         Log.e("AuctionActivity","Hi");
