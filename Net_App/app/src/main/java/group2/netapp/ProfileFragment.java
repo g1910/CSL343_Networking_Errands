@@ -32,6 +32,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 import com.matesnetwork.callverification.Cognalys;
 import com.matesnetwork.interfaces.VerificationListner;
 
@@ -47,9 +52,12 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
+import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +76,9 @@ public class ProfileFragment extends Fragment {
     EditText phone;
 
     EditText address;
+    TextView emailText;
+    TextView nameText;
+    ImageView profileImage;
     private OnFragmentInteractionListener mListener;
 
     public static ProfileFragment newInstance(String param1, String param2) {
@@ -99,6 +110,7 @@ public class ProfileFragment extends Fragment {
         View infh = inflater.inflate(R.layout.fragment_profile, container, false);
         if(ishome==0){
             String id = getArguments().getString("id",null);
+            new get_profile(id).execute(null,null,null);
         }
         else
         {
@@ -133,10 +145,10 @@ public class ProfileFragment extends Fragment {
 
 
 
-            TextView emailText = (TextView)infh.findViewById(R.id.emailText);
+            emailText = (TextView)infh.findViewById(R.id.emailText);
             emailText.setText(email);
 
-            TextView nameText = (TextView)infh.findViewById(R.id.nameText);
+           nameText = (TextView)infh.findViewById(R.id.nameText);
             nameText.setText(name);
 
 
@@ -144,7 +156,7 @@ public class ProfileFragment extends Fragment {
             ImageButton editPhone = (ImageButton)infh.findViewById(R.id.editPhone);
             ImageButton editAddress = (ImageButton)infh.findViewById(R.id.editAddress);
 
-            ImageView profileImage=(ImageView)infh.findViewById(R.id.imageView2);
+          profileImage=(ImageView)infh.findViewById(R.id.imageView2);
             if(picpath != null) {
                 Bitmap bitmap = null;
                 File file = new File(picpath, "ProfilePic.jpg");
@@ -317,7 +329,8 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-
+        int ishome = getArguments().getInt("ishome",-1);
+        if(ishome!=0)
         ((HomeActivity) activity).onSectionAttached(1);
     }
 
@@ -440,6 +453,93 @@ public class ProfileFragment extends Fragment {
         }
     }
 
+    class get_profile extends AsyncTask<String,String,String>
+    {
+        private String id;
+        InputStream is;
+        private String host = "http://netapp.byethost33.com/get_profile.php";
+        public  get_profile(String a)
+        {
+            id=a;
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppost = new HttpPost(host);
+            httppost.setHeader("Content-Type", "application/x-www-form-urlencoded");
+            try
+            {
+                // Add your data
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
+                nameValuePairs.add(new BasicNameValuePair("id", id));
+                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                // Execute HTTP Post Request
+                HttpResponse response = httpclient.execute(httppost);
+                if(response != null)
+                {
+                    is = response.getEntity().getContent();
+
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+                // TODO Auto-generated catch block
+            }
+            return null;
+        }
+
+        protected void onPostExecute(String Result) {
+            Reader reader = new InputStreamReader(is);
+            profile_details p=null;
+            try {
+                JsonParser parser = new JsonParser();
+                JsonObject data = parser.parse(reader).getAsJsonObject();
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                Gson gson = gsonBuilder.create();
+
+
+              p = gson.fromJson(data.get("Information"), profile_details.class);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if(p!=null)
+            {
+                address.setText(p.address);
+                phone.setText(p.phone);
+                emailText.setText(p.email);
+                nameText.setText(p.name);
+                new setProfileImage(profileImage).execute(p.picurl);
+            }
+
+        }
+    }
+
+    private class setProfileImage extends AsyncTask<String, Void, Bitmap> {
+        ImageView downloadedImage;
+
+        public setProfileImage(ImageView image) {
+            this.downloadedImage = image;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String url = urls[0];
+            Bitmap icon = null;
+            try {
+                InputStream in = new java.net.URL(url).openStream();
+                icon = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return icon;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            downloadedImage.setImageBitmap(result);
+        }
+    }
+
     class add_address extends AsyncTask<String,String,String>
     {
         private String email;
@@ -546,6 +646,15 @@ public class ProfileFragment extends Fragment {
                 //System.out.println("if ran");
             }
         }
+    }
+
+    class profile_details
+    {
+        String name;
+        String email;
+        String phone;
+        String address;
+        String picurl;
     }
 
 }

@@ -63,7 +63,7 @@ public class ParticipatingCard extends Card {
         auctionLocView.setText(auctionLocation);
         priceView.setText("₹" + price);
         descView.setText(desc);
-        if(ratings.equals("null"))
+        if(ratings == null &&  ratings.equals("null"))
         {
             ratings="0";
             numRated="0";
