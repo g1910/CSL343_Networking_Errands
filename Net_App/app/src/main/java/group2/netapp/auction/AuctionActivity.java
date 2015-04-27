@@ -24,6 +24,7 @@ import java.util.List;
 import group2.netapp.R;
 import group2.netapp.auction.bidsTabs.AcceptedBids;
 import group2.netapp.auction.bidsTabs.PostAcceptedBids;
+import group2.netapp.auction.cards.PostBidCard;
 import group2.netapp.utilFragments.ProgressFragment;
 import group2.netapp.utilFragments.ServerConnect;
 import it.gmariotti.cardslib.library.internal.Card;
@@ -37,6 +38,7 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsFrag
     int isRunning;
 
     ArrayList<ArrayList<Card>> postAuctionBids;
+    ArrayList<Integer> checkIndices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +76,6 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsFrag
                 isRunning = j.getJSONObject(1).getInt("isRunning");
                 if (isRunning == 0){
                     openServerForm();
-                    invalidateOptionsMenu();
                 } else {
                     auctionDetails = j.getJSONObject(2);
                     pendingBids = j.getJSONArray(3);
@@ -84,9 +85,13 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsFrag
                     Log.d("AuctionActivity", runningBids.toString()+" "+runningBids.length());
                     if (isRunning == 1) {
                         openDashboard();
-                        invalidateOptionsMenu();
                     } else if (isRunning == 2) {
-                        postAuctionBids = new ArrayList<>(runningBids.length());
+                        postAuctionBids = new ArrayList<>();
+                        checkIndices = new ArrayList<>();
+                        for(int x = 0;x<runningBids.length();++x){
+                            postAuctionBids.add(new ArrayList<Card>());
+                            checkIndices.add(-1);
+                        }
                         Log.d("AuctionActivity","postAuctionBid length:"+postAuctionBids.size());
                         openPostAuction();
 
@@ -268,5 +273,34 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsFrag
             return c;
         }
         return null;
+    }
+
+    public void setCheckIndex(int index, int checkIndex){
+        checkIndices.set(index,checkIndex);
+    }
+
+    public int getCheckIndex(int index){
+        return checkIndices.get(index);
+    }
+
+    @Override
+    public void confirmBids() {
+        int sum = 0;
+//        PostBidCard c;
+//        for(ArrayList<Card> a : postAuctionBids){
+//            Log.d("PostAuctionActivity",a.size()+"");
+//            for(Card b : a){
+//                c = (PostBidCard)b;
+//                if(c.isChecked()){
+//                    sum++;
+//                    Log.d("PostAuctionActivity",sum+"");
+//                }
+//
+//            }
+//        }
+        for(int i : checkIndices){
+            sum+=(i+1);
+        }
+        Toast.makeText(this,"Bids to confirm: "+sum,Toast.LENGTH_SHORT).show();
     }
 }

@@ -1,6 +1,7 @@
 package group2.netapp.auction.cards;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -32,13 +33,17 @@ public class PostBidCard extends Card implements CompoundButton.OnCheckedChangeL
     TextView bidPrice;
     CheckBox bidCheck;
 
+    int checkIndex = -1;
+
     JSONObject bid;
-    public PostBidCard(Context context, JSONObject bid, PostAcceptedBids a, int index) {
+    public PostBidCard(Context context, JSONObject bid, PostAcceptedBids a, int index,int checkIndex) {
         super(context, R.layout.post_auc_bid_card);
 
         this.bid = bid;
         this.p = a;
         this.index = index;
+        this.checkIndex = checkIndex;
+        Log.d("PostBidCard","hi");
 
     }
 
@@ -50,6 +55,12 @@ public class PostBidCard extends Card implements CompoundButton.OnCheckedChangeL
         bidOrderView = (TextView) parent.findViewById(R.id.auc_bid_order_summary);
         bidPrice = (TextView) parent.findViewById(R.id.bid_price);
         bidCheck = (CheckBox) parent.findViewById(R.id.bid_checkbox);
+        if(index <= checkIndex){
+            setChecked(true);
+        }else{
+            setChecked(false);
+        }
+        Log.d("PostBidCard","InnerView");
 
         try {
             bidLocationView.setText(bid.getString("location"));
@@ -73,9 +84,20 @@ public class PostBidCard extends Card implements CompoundButton.OnCheckedChangeL
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         p.onItemChecked(index, isChecked);
+
     }
 
     public void setChecked(boolean b){
+        bidCheck.setOnCheckedChangeListener(null);
         bidCheck.setChecked(b);
+        bidCheck.setOnCheckedChangeListener(this);
+    }
+
+    public boolean isChecked(){
+        return bidCheck.isChecked();
+    }
+
+    public void setCheckIndex(int index){
+        checkIndex = index;
     }
 }
