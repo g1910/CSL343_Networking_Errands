@@ -3,11 +3,13 @@ package group2.netapp.auction;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,8 +18,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
+import java.util.ArrayList;
+
 import group2.netapp.R;
 import group2.netapp.auction.bidsTabs.BidsTabAdapter;
+import group2.netapp.auction.cards.AuctionDetailCard;
+import group2.netapp.bidding.cards.NotParticipatingCard;
+import it.gmariotti.cardslib.library.internal.Card;
+import it.gmariotti.cardslib.library.recyclerview.internal.CardArrayRecyclerViewAdapter;
+import it.gmariotti.cardslib.library.recyclerview.view.CardRecyclerView;
+import it.gmariotti.cardslib.library.view.CardViewNative;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass.
@@ -26,15 +40,11 @@ public class AuctionDashboardFragment extends Fragment{
 
     private ViewPager viewPager;
     private BidsTabAdapter mAdapter;
+    private JSONObject aucDetails;
 
     private AuctionDashboardListener listener;
-//    private ActionBar actionBar;
-//
-//
-//    private FragmentTabHost aucTabHost;
-//
-//    // Tab titles
-//    private String[] tabs = { "Dashboard", "Requests"};
+
+    CardViewNative cardView;
 
     public AuctionDashboardFragment() {
         // Required empty public constructor
@@ -73,8 +83,18 @@ public class AuctionDashboardFragment extends Fragment{
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_auction_dashboard, container, false);
         Log.d("AuctionDashboard","settingTaba...");
-        setUpTabs(v);
 
+        Bundle args = getArguments();
+        try {
+            aucDetails = new JSONObject(new JSONTokener(args.getString("auction","")));
+
+            cardView = (CardViewNative) v.findViewById(R.id.auc_details_cardview);
+            Card aucCard =  new AuctionDetailCard(getActivity(),aucDetails);
+            cardView.setCard(aucCard);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        setUpTabs(v);
         setHasOptionsMenu(true);
 
         return v;
@@ -90,50 +110,6 @@ public class AuctionDashboardFragment extends Fragment{
             Log.d("AuctionDashboard","nullllllll");
         }
 
-//        actionBar = getActivity().getActionBar();
-//        actionBar.setHomeButtonEnabled(false);
-//        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-//
-////        Adding Tabs
-//        for (String tab_name : tabs) {
-//            actionBar.addTab(actionBar.newTab().setText(tab_name)
-//                    .setTabListener(this));
-//        }
-//
-//        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-//
-//            @Override
-//            public void onPageSelected(int position) {
-//                // on changing the page
-//                // make respected tab selected
-//                actionBar.setSelectedNavigationItem(position);
-//                Log.d("AuctionDashboard", "viewpager onpagechanged " + position);
-//            }
-//
-//            @Override
-//            public void onPageScrolled(int arg0, float arg1, int arg2) {
-//            }
-//
-//            @Override
-//            public void onPageScrollStateChanged(int arg0) {
-//            }
-//        });
     }
 
-
-//    @Override
-//    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-//        viewPager.setCurrentItem(tab.getPosition());
-//        Log.d("AuctionDashboard", "viewpager ontabselected" + tab.getPosition());
-//    }
-//
-//    @Override
-//    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
-//
-//    }
-//
-//    @Override
-//    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-//
-//    }
 }
