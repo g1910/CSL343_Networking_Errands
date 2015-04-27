@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/locationpic"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/location_flat"
+        android:layout_marginLeft="10dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location"
+        android:id="@+id/notparticipatinglocation"
+        android:layout_marginTop="5dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_alignTop="@id/locationpic"
+        android:layout_toRightOf="@id/locationpic"
+        android:layout_marginLeft="5dp"
+        android:textColor="#ff6c6b6f"
+        />
+
+
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/endtimepic"
+        android:layout_below="@id/notparticipatinglocation"
+        android:src="@drawable/red_clock_flat"
+        android:layout_marginTop="10dp"
+        android:layout_alignLeft="@id/locationpic"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ends at:"
+        android:layout_marginTop="5dp"
+        android:id="@+id/endtimetext"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_alignTop="@id/endtimepic"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@id/endtimepic"
+        android:textColor="#ff6c6b6f"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="endtime"
+        android:layout_toRightOf="@id/endtimetext"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_alignTop="@id/endtimetext"
+        android:layout_alignLeft="@+id/notparticipatingprice"
+        android:id="@+id/notparticipatingend_time"
+        android:textColor="#ff6c6b6f"
+        />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/deliverytimepic"
+        android:layout_below="@id/notparticipatingend_time"
+        android:src="@drawable/clock_flat"
+        android:layout_marginTop="10dp"
+        android:layout_alignLeft="@id/endtimepic"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delivery by:"
+        android:layout_marginTop="5dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_alignTop="@id/deliverytimepic"
+        android:layout_marginLeft="5dp"
+        android:textColor="#ff6c6b6f"
+        android:layout_toRightOf="@id/deliverytimepic"
+        android:id="@+id/deliverytimetext"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="expectedtime"
+        android:textColor="#ff6c6b6f"
+        android:layout_toRightOf="@id/deliverytimetext"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_alignTop="@id/deliverytimetext"
+        android:layout_alignLeft="@+id/notparticipatingprice"
+        android:id="@+id/notparticipatingexpected_time"
+        />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/notparticipatingexpected_time"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/rank_flat"
+        android:id="@+id/limitpic"
+        android:layout_alignLeft="@id/deliverytimepic"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Order Limit ~"
+        android:id="@+id/orderlimittext"
+        android:textColor="#ff6c6b6f"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_alignLeft="@+id/deliverytimetext"
+        android:layout_alignStart="@+id/deliverytimetext"
+        android:layout_alignBottom="@+id/limitpic"
+        android:layout_alignTop="@+id/limitpic" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="5"
+        android:layout_alignTop="@id/orderlimittext"
+        android:layout_toRightOf="@id/orderlimittext"
+        android:textColor="#ff6c6b6f"
+        android:id="@+id/participatingorderlimit"
+        android:layout_marginLeft="10dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp"
+        android:id="@+id/notparticipatingdesc"
+        android:layout_marginTop="5dp"
+        android:textColor="#ff6666ad"
+        android:layout_below="@id/limitpic"
+        android:layout_alignLeft="@id/deliverytimepic" />
+
+
+</RelativeLayout>
+
