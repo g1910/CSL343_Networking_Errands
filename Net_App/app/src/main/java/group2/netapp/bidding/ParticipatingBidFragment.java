@@ -339,8 +339,12 @@ public class ParticipatingBidFragment extends Fragment {
         cards.add(card);
 
         RunningBidCard card_run=null;
-        card_run=new RunningBidCard(getActivity(),bid_details,-1,this.rank,this.price,this.status);
+        card_run=new RunningBidCard(getActivity(),bid_details,-1,this.rank,this.price,this.status,this.idUser);
+
+
         cards.add(card_run);
+
+
 
         Log.d("OrderCard",order.toString());
 
