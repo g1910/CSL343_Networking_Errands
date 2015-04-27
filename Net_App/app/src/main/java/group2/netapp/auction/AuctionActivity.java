@@ -124,6 +124,15 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsFrag
                 }
                 finish();
                 startActivity(getIntent());
+            }else if(tag.equals("bid_confirm")){
+                boolean status = ((JSONObject)j.get(1)).getBoolean("status");
+                if(status){
+                    Toast.makeText(this, "Bids successfully confirmed!", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(this, "Bids can't be confirmed!", Toast.LENGTH_SHORT).show();
+                }
+                finish();
+                startActivity(getIntent());
             }
 
         } catch (JSONException e) {
@@ -286,21 +295,30 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsFrag
     @Override
     public void confirmBids() {
         int sum = 0;
-//        PostBidCard c;
-//        for(ArrayList<Card> a : postAuctionBids){
-//            Log.d("PostAuctionActivity",a.size()+"");
-//            for(Card b : a){
-//                c = (PostBidCard)b;
-//                if(c.isChecked()){
-//                    sum++;
-//                    Log.d("PostAuctionActivity",sum+"");
-//                }
-//
-//            }
-//        }
         for(int i : checkIndices){
             sum+=(i+1);
         }
         Toast.makeText(this,"Bids to confirm: "+sum,Toast.LENGTH_SHORT).show();
+
+        if(sum>0){
+
+            try {
+                ServerConnect myServer=new ServerConnect(this);
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                int count = 0,j=0;
+                for(ArrayList<Card> a : postAuctionBids){
+                    for(int i = 0; i<=checkIndices.get(j);++i){
+                        nameValuePairs.add(new BasicNameValuePair("id_bid[]",((PostBidCard)a.get(i)).getBid().getString("idBid")));
+                        count++;
+                    }
+                    j++;
+                }
+                nameValuePairs.add(new BasicNameValuePair("id_auc",auctionDetails.getString("idAuction")));
+                Log.d("AuctionActivity",getString(R.string.IP)+"confirm_bids.php");
+                myServer.execute(getString(R.string.IP)+"confirm_bids.php",nameValuePairs);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
