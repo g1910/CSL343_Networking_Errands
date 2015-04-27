@@ -19,6 +19,8 @@
 	
 	$num=mysqli_num_rows($result);
 
+	$tout=[];
+
 	while ($row=mysqli_fetch_assoc($result))
 	{
 		$rating=getRating($row['idUser']);
