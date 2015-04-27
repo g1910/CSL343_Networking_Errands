@@ -8,11 +8,11 @@
 $response = array();
  
 // check for required fields
-if (isset($_POST['pname']) && isset($_POST['email']) ) {
+if (isset($_POST['pname']) && isset($_POST['email']) && isset($_POST['picurl']) ) {
  
     $name = $_POST['pname'];
     $email = $_POST['email'];
- 
+   $picurl = $_POST['picurl'];
     // include db connect class
     require_once __DIR__ . '/db_connect.php';
  
@@ -26,25 +26,23 @@ if (isset($_POST['pname']) && isset($_POST['email']) ) {
     // mysql inserting a new row
     if($num==0)
     {
-	$addquery = mysql_query("INSERT INTO User(name, emailId) VALUES('$name', '$email')");
+	$addquery = mysql_query("INSERT INTO User(name, emailId, picurl) VALUES('$name', '$email', '$picurl')");
+$res = mysql_query("SELECT idUser FROM User WHERE emailId='$email'")or die(mysql_error()) ;
+ $id=mysql_fetch_array($res);
+	$id=$id['idUser'];
     }
     
  
     // check if row inserted or not
     if ($addquery) {
         // successfully inserted into database
-        $response["success"] = 1;
-        $response["message"] = "User successfully added.";
- 
-        // echoing JSON response
-        echo json_encode($response);
+        echo $id;
     } else {
         // failed to insert row
-        $response["success"] = 0;
-        $response["message"] = "User already present. Not added again.";
- 
-        // echoing JSON response
-        echo json_encode($response);
+ $res = mysql_query("SELECT idUser FROM User WHERE emailId='$email'")or die(mysql_error()) ;
+ $id=mysql_fetch_array($res);
+	$id=$id['idUser'];
+        echo $id;
     }
 } else {
     // required field is missing
@@ -55,3 +53,4 @@ if (isset($_POST['pname']) && isset($_POST['email']) ) {
     echo json_encode($response);
 }
 ?>
+		
