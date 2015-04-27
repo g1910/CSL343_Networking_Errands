@@ -136,9 +136,12 @@ public class CurrAuctionActivity extends FragmentActivity implements ToParticipa
     }
 
     @Override
-    public void openRunningBids(int index) {
+    public void openRunningBids(int index,int auctionIndex) {
         Bundle args = new Bundle();
         args.putInt("index", index);
+        args.putInt("bidIndex",index);
+        args.putInt("auctionIndex",auctionIndex);
+
         //  args.putString("auctionLocation",auctionLocation);
 
         // ,price,desc,idUser,start_time,end_time,expected_time;

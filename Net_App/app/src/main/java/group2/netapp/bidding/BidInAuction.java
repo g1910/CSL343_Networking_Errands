@@ -39,7 +39,7 @@ public class BidInAuction extends Fragment  implements Card.OnCardClickListener 
 
 
     public interface RunningBidListener {
-        public void openRunningBids(int index);
+        public void openRunningBids(int index,int auctionIndex);
     }
 
     @Override
@@ -195,7 +195,7 @@ public class BidInAuction extends Fragment  implements Card.OnCardClickListener 
     public void onClick(Card card, View view) {
         RunningBidCard c=(RunningBidCard) card;
         Log.d("RunningBIds","HEERE");
-        blistener.openRunningBids(c.getIndex());
+        blistener.openRunningBids(c.getIndex(),index);
     }
 
 }
