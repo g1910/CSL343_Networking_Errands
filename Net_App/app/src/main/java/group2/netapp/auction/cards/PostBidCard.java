@@ -29,6 +29,7 @@ public class PostBidCard extends Card implements CompoundButton.OnCheckedChangeL
 
     TextView bidLocationView;
     TextView bidOrderView;
+    TextView bidPrice;
     CheckBox bidCheck;
 
     JSONObject bid;
@@ -47,11 +48,13 @@ public class PostBidCard extends Card implements CompoundButton.OnCheckedChangeL
 
         bidLocationView = (TextView) parent.findViewById(R.id.auc_bid_location);
         bidOrderView = (TextView) parent.findViewById(R.id.auc_bid_order_summary);
+        bidPrice = (TextView) parent.findViewById(R.id.bid_price);
         bidCheck = (CheckBox) parent.findViewById(R.id.bid_checkbox);
 
         try {
             bidLocationView.setText(bid.getString("location"));
             bidOrderView.setText(bid.getJSONArray("orders").length() + " Items Ordered\n"+bid.getString("bid_description"));
+            bidPrice.setText(bid.getString("Price"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
