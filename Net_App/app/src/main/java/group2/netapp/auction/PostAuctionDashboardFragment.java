@@ -38,6 +38,8 @@ public class PostAuctionDashboardFragment extends Fragment{
     private BidsTabAdapter mAdapter;
     private JSONObject aucDetails;
 
+    int isRunning;
+
     private TextView timer;
 
     private PostAuctionDashboardListener listener;
@@ -80,10 +82,12 @@ public class PostAuctionDashboardFragment extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_post_auction_dashboard, container, false);
+        isRunning = ((AuctionActivity) getActivity()).getIsRunning();
         Log.d("AuctionDashboard","settingTaba...");
 
         Bundle args = getArguments();
         try {
+
             aucDetails = new JSONObject(new JSONTokener(args.getString("auction","")));
 
             cardView = (CardViewNative) v.findViewById(R.id.auc_details_cardview);
@@ -104,7 +108,7 @@ public class PostAuctionDashboardFragment extends Fragment{
 
     public void setUpTabs(View v){
         viewPager = (ViewPager) v.findViewById(R.id.auc_pager);
-        mAdapter = new BidsTabAdapter(getChildFragmentManager(),((AuctionActivity) getActivity()).getRunningBids());
+        mAdapter = new BidsTabAdapter(getChildFragmentManager(),((AuctionActivity) getActivity()).getRunningBids(), isRunning);
 
         viewPager.setAdapter(mAdapter);
 

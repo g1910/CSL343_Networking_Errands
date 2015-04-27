@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import group2.netapp.R;
 import group2.netapp.auction.AuctionActivity;
 import group2.netapp.auction.cards.BidCard;
+import group2.netapp.auction.cards.PostBidCard;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.recyclerview.internal.CardArrayRecyclerViewAdapter;
 import it.gmariotti.cardslib.library.recyclerview.view.CardRecyclerView;
@@ -35,6 +37,8 @@ public class AcceptedBids extends Fragment implements Card.OnCardClickListener{
 
     JSONObject auc_category;
     JSONArray  acceptedBids;
+
+    ArrayList<Card> cards;
 
     public interface BidAcceptListener{
         public void openBidRequest(JSONObject bid, boolean isRequest);
@@ -66,6 +70,7 @@ public class AcceptedBids extends Fragment implements Card.OnCardClickListener{
 
 
 
+
         return v;
     }
 
@@ -85,13 +90,14 @@ public class AcceptedBids extends Fragment implements Card.OnCardClickListener{
     }
 
     public ArrayList<Card> setBids(){
-        ArrayList<Card> cards = new ArrayList<Card>();
+        cards = new ArrayList<Card>();
         JSONObject bid;
         try {
             for(int i = 0; i< acceptedBids.length(); ++i) {
                 bid = acceptedBids.getJSONObject(i);
                 Log.d("AcceptedTab", "Location:" + bid.getString("location") + " Order:" + bid.getJSONArray("orders").length() + " items ordered");
-                BidCard card = new BidCard(getActivity(),bid);
+                BidCard card;
+                card = new BidCard(getActivity(), bid);
                 card.setOnClickListener(this);
                 cards.add(card);
             }
@@ -106,14 +112,6 @@ public class AcceptedBids extends Fragment implements Card.OnCardClickListener{
     @Override
     public void onClick(Card card, View view) {
         BidCard bCard = (BidCard) card;
-//        Fragment aBidFrag = new AucBidsFragment();
-//
-//        FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
-////        Fragment oldBidFrag = getFragmentManager().findFragmentByTag("BidFrag");
-//
-//        ft.replace(R.id.auction_frame,aBidFrag,"BidFrag");
-//        ft.commit();
-
         Log.d("Requests", "Fragment Added");
         bListener.openBidRequest(bCard.getBid(), false);
 

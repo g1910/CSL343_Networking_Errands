@@ -42,6 +42,8 @@ public class AuctionDashboardFragment extends Fragment{
     private BidsTabAdapter mAdapter;
     private JSONObject aucDetails;
 
+    int isRunning;
+
     private AuctionDashboardListener listener;
 
     CardViewNative cardView;
@@ -82,6 +84,7 @@ public class AuctionDashboardFragment extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_auction_dashboard, container, false);
+        isRunning = ((AuctionActivity)getActivity()).getIsRunning();
         Log.d("AuctionDashboard","settingTaba...");
 
         Bundle args = getArguments();
@@ -102,7 +105,7 @@ public class AuctionDashboardFragment extends Fragment{
 
     public void setUpTabs(View v){
         viewPager = (ViewPager) v.findViewById(R.id.auc_pager);
-        mAdapter = new BidsTabAdapter(getChildFragmentManager(),((AuctionActivity) getActivity()).getRunningBids());
+        mAdapter = new BidsTabAdapter(getChildFragmentManager(),((AuctionActivity) getActivity()).getRunningBids(),isRunning);
 
         viewPager.setAdapter(mAdapter);
 

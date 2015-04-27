@@ -23,15 +23,17 @@ import java.util.List;
 
 import group2.netapp.R;
 import group2.netapp.auction.bidsTabs.AcceptedBids;
+import group2.netapp.auction.bidsTabs.PostAcceptedBids;
 import group2.netapp.utilFragments.ProgressFragment;
 import group2.netapp.utilFragments.ServerConnect;
 
 
-public class AuctionActivity extends FragmentActivity implements BidRequestsFragment.BidRequestsListener, ServerConnect.OnResponseListener, AcceptedBids.BidAcceptListener, AuctionDashboardFragment.AuctionDashboardListener{
+public class AuctionActivity extends FragmentActivity implements BidRequestsFragment.BidRequestsListener, ServerConnect.OnResponseListener, AcceptedBids.BidAcceptListener, PostAcceptedBids.BidAcceptListener, AuctionDashboardFragment.AuctionDashboardListener, PostAuctionDashboardFragment.PostAuctionDashboardListener{
 
     JSONObject auctionDetails;
     JSONArray pendingBids, runningBids;
     String idUser;
+    int isRunning;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +68,7 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsFrag
         try {
             String tag = ((JSONObject)j.get(0)).getString("tag");
             if(tag.equals("loading")) {
-                int isRunning = j.getJSONObject(1).getInt("isRunning");
+                isRunning = j.getJSONObject(1).getInt("isRunning");
                 if (isRunning == 0){
                     openServerForm();
                 } else {
@@ -239,5 +241,11 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsFrag
         return null;
     }
 
+    public int getIsRunning() {
+        return isRunning;
+    }
 
+    public void setIsRunning(int isRunning) {
+        this.isRunning = isRunning;
+    }
 }
