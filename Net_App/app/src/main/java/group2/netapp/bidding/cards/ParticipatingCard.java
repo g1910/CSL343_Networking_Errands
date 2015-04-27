@@ -35,10 +35,13 @@ public class ParticipatingCard extends Card {
             this.auctionLocation =j.getString("location");
             this.desc = j.getString("description");
             this.idUser = j.getString("idUser");
-            this.start_time = j.getString("start_time");
-            this.end_time = j.getString("end_time");
+            String temp = j.getString("start_time");
+            this.start_time = temp.substring(0,temp.length()-3);
+            temp = j.getString("end_time");
+            this.end_time = temp.substring(0,temp.length()-3);
             this.idAuction = j.getInt("idAuction");
-            this.expected_time = j.getString("expctd_time");
+            temp = j.getString("expctd_time");
+            this.expected_time = temp.substring(0,temp.length()-3);
             this.price = j.getInt("Price");
             this.ratings=j.getString("rating");
             this.numRated=j.getString("numRated");
