@@ -69,7 +69,7 @@ public class NotParticipatingCard extends Card {
         priceView.setText("₹" + price);
         descView.setText(desc);
         orderLimit.setText(order_limit);
-        if(ratings == null && ratings.equals("null"))
+        if(ratings == null || ratings.equals("null"))
         {
             ratings="0";
             numRated="0";
