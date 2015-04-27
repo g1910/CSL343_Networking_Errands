@@ -66,17 +66,21 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsFrag
         try {
             String tag = ((JSONObject)j.get(0)).getString("tag");
             if(tag.equals("loading")) {
-                boolean isRunning = Boolean.valueOf(((JSONObject) j.get(1)).get("isRunning").toString());
-                if (isRunning) {
+                int isRunning = j.getJSONObject(1).getInt("isRunning");
+                if (isRunning == 0){
+                    openServerForm();
+                } else {
                     auctionDetails = j.getJSONObject(2);
                     pendingBids = j.getJSONArray(3);
                     runningBids = j.getJSONArray(4);
                     Log.d("AuctionActivity", auctionDetails.toString());
                     Log.d("AuctionActivity", pendingBids.toString());
                     Log.d("AuctionActivity", runningBids.toString());
-                    openDashboard();
-                } else {
-                    openServerForm();
+                    if (isRunning == 1) {
+                        openDashboard();
+                    } else if (isRunning == 2) {
+                        openPostAuction();
+                    }
                 }
             }else if(tag.equals("bid_request")){
                 boolean status = ((JSONObject)j.get(1)).getBoolean("status");
@@ -119,6 +123,18 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsFrag
         Fragment aDashFrag = new AuctionDashboardFragment();
         aDashFrag.setArguments(args);
         ft.replace(R.id.auction_frame,aDashFrag,"AuctionDashboard");
+//        ft.addToBackStack(null);
+        ft.commit();
+        Log.d("AuctionActivity", "DashboardOpened");
+    }
+
+    public void openPostAuction(){
+        Bundle args = new Bundle();
+        args.putString("auction", auctionDetails.toString());
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        Fragment aPostDashFrag = new PostAuctionDashboardFragment();
+        aPostDashFrag.setArguments(args);
+        ft.replace(R.id.auction_frame,aPostDashFrag,"AuctionDashboard");
 //        ft.addToBackStack(null);
         ft.commit();
         Log.d("AuctionActivity", "DashboardOpened");
