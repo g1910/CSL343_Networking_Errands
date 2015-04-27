@@ -36,7 +36,7 @@ import group2.netapp.utilFragments.TimePickerFragment;
 public class ServerFormActivity extends FragmentActivity implements TimePickerFragment.OnTimeSetListener, DatePickerFragment.OnDateSetListener, ServerConnect.OnResponseListener{
 
     TextView aucEndTime,aucEndDate,aucExpTime,aucExpDate;
-    EditText aucDesc, aucLocation, minPrice;
+    EditText aucDesc, aucLocation, minPrice,orderLimit;
     Button aucStartBtn;
     Activity a = this;
     Calendar c = Calendar.getInstance();
@@ -57,6 +57,7 @@ public class ServerFormActivity extends FragmentActivity implements TimePickerFr
         aucDesc = (EditText) findViewById(R.id.auction_desc);
         aucLocation = (EditText) findViewById(R.id.auction_location);
         minPrice = (EditText) findViewById(R.id.auc_min_price);
+        orderLimit = (EditText) findViewById(R.id.orderLimit);
 
         String time = String.format("%02d:%02d",c.get(Calendar.HOUR_OF_DAY),c.get(Calendar.MINUTE));
         String date = String.format("%04d-%02d-%02d",c.get(Calendar.YEAR),c.get(Calendar.MONTH) + 1,c.get(Calendar.DAY_OF_MONTH));
@@ -165,6 +166,8 @@ public class ServerFormActivity extends FragmentActivity implements TimePickerFr
                 nameValuePairs.add(new BasicNameValuePair("description", aucDesc.getText().toString()));
                 nameValuePairs.add(new BasicNameValuePair("id_user", idUser));
                 nameValuePairs.add(new BasicNameValuePair("min_price", minPrice.getText().toString()));
+                nameValuePairs.add(new BasicNameValuePair("order_limit", orderLimit.getText().toString()));
+
                 ServerConnect myServer = new ServerConnect(a);
 
                 Toast.makeText(a, "Starting a New Auction...", Toast.LENGTH_SHORT).show();
@@ -176,7 +179,7 @@ public class ServerFormActivity extends FragmentActivity implements TimePickerFr
     public boolean validate(){
         Timestamp currentTime, endTime, expectedTime,maxEnTime,maxExTime;
 
-        Calendar maxEndDate,maxExpDate;
+        Calendar maxEndDate,maxExpDate,minExpDate;
         maxEndDate = Calendar.getInstance();
         maxEndDate.add(Calendar.DAY_OF_MONTH,3);
         maxExpDate = Calendar.getInstance();
@@ -201,12 +204,24 @@ public class ServerFormActivity extends FragmentActivity implements TimePickerFr
             Toast.makeText(this,"Expected time of Auction can be within 1 day of the end of Auction!",Toast.LENGTH_SHORT).show();
             return false;
         }
+        if((expectedTime.getTime()-endTime.getTime()) < 21600000){
+            Toast.makeText(this,"Expected time of Auction should be atleast 6 hours after the end of Auction!",Toast.LENGTH_SHORT).show();
+            return false;
+        }
         if(minPrice.getText().toString().isEmpty()){
             Toast.makeText(this,"Please enter the minimum Bid Amount!",Toast.LENGTH_SHORT).show();
             return false;
         }
         if(Integer.valueOf(minPrice.getText().toString())<10){
             Toast.makeText(this,"Minimum Bid Amount should be atleast ₹ 10 !",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(orderLimit.getText().toString().isEmpty()){
+            Toast.makeText(this,"Please enter the Order Limit!",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(Integer.valueOf(orderLimit.getText().toString())<1){
+            Toast.makeText(this,"Order Limit should be atleast 1 !",Toast.LENGTH_SHORT).show();
             return false;
         }
         if(aucLocation.getText().toString().isEmpty()){

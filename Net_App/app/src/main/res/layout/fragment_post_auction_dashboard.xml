@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Auction has Ended! Take action in"
+        android:text="Auction expires in..."
         android:id="@+id/textView6"
         android:layout_gravity="center"
         android:textAlignment="center" />
