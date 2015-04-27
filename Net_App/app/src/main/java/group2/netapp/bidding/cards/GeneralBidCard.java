@@ -1,4 +1,4 @@
-package group2.netapp.auction.cards;
+package group2.netapp.bidding.cards;
 
 import android.content.Context;
 import android.view.View;
@@ -14,12 +14,13 @@ import it.gmariotti.cardslib.library.internal.Card;
 /**
  * Created by mohit on 12/4/15.
  */
-public class RunningBidCard extends Card {
+public class GeneralBidCard extends Card {
 
     String bidLocation, bidOrder;
     int bidId,index;
-    public RunningBidCard(Context context, JSONObject j,int i) {
-        super(context, R.layout.running_bid_card);
+
+    public GeneralBidCard(Context context, JSONObject j,int i) {
+        super(context, R.layout.general_bid_card);
 
         try {
             this.bidLocation = j.getString("location");
@@ -28,7 +29,7 @@ public class RunningBidCard extends Card {
             e.printStackTrace();
         }
         //      this.bidOrder = bidOrder;
-    //    this.bidId = bidId;
+        //    this.bidId = bidId;
     }
 
     @Override
@@ -39,7 +40,7 @@ public class RunningBidCard extends Card {
 //        TextView bidOrderView = (TextView) parent.findViewById(R.id.auc_bid_order_summary);
 
         bidLocationView.setText(bidLocation);
-  //      bidOrderView.setText(bidOrder);
+        //      bidOrderView.setText(bidOrder);
     }
 
     public String getBidLocation() {

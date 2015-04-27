@@ -1,6 +1,7 @@
 package group2.netapp.bidding;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -31,7 +32,21 @@ import it.gmariotti.cardslib.library.recyclerview.view.CardRecyclerView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BidInAuction extends Fragment {
+public class BidInAuction extends Fragment  implements Card.OnCardClickListener {
+
+    RunningBidListener blistener;
+
+
+
+    public interface RunningBidListener {
+        public void openRunningBids(int index,int auctionIndex);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        blistener=(RunningBidListener)activity;
+    }
 
     int index;
 
@@ -97,6 +112,7 @@ public class BidInAuction extends Fragment {
         Bundle b = getArguments();
         if(b!=null){
             index = b.getInt("index",-1);
+            Log.d("Auctionindex",index+ " ");
 
             if(index != -1){
 
@@ -165,7 +181,7 @@ public class BidInAuction extends Fragment {
             RunningBidCard card = null;
             try {
                 card = new RunningBidCard(getActivity(),(JSONObject)bids.get(i),i);
-//                card.setOnClickListener(this);
+                card.setOnClickListener(this);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -174,6 +190,16 @@ public class BidInAuction extends Fragment {
         }
 
         return cards;
+    }
+
+    @Override
+    public void onClick(Card card, View view) {
+        RunningBidCard c=(RunningBidCard) card;
+        Log.d("RunningBIds","HEERE");
+        Log.d("RunningBIds",c.getIndex()+" ");
+        Log.d("RunningBIds",index+" ");
+
+        blistener.openRunningBids(c.getIndex(),index);
     }
 
 }
