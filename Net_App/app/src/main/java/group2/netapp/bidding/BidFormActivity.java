@@ -112,17 +112,21 @@ public class BidFormActivity extends Activity implements ServerConnect.OnRespons
                 {
                     JSONObject temp=new JSONObject();
                     OrderCard c=(OrderCard)cards.get(i);
-                    try {
-                        temp.put("item",c.getItemView().getText().toString()) ;
-                        temp.put("price_per_item",c.getPriceView().getText().toString());
-                        temp.put("quantity",c.getQuantityView().getText().toString());
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                    if (!c.getItemView().getText().toString().equals(""))
+                    {
+                        try {
+                            temp.put("item",c.getItemView().getText().toString()) ;
+                            temp.put("price_per_item",c.getPriceView().getText().toString());
+                            temp.put("quantity",c.getQuantityView().getText().toString());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        Log.d("BidFormActivity",temp.toString());
+
+                        order.put(temp);
+
                     }
 
-                    Log.d("BidFormActivity",temp.toString());
-
-                    order.put(temp);
 
                 }
 
