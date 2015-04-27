@@ -272,7 +272,7 @@ public class CustomerRateFragment extends Fragment {
                         CustomerUser a = posts.get(i);
 
                         CustomerUserReqCard card = new CustomerUserReqCard(getActivity().getApplicationContext(), a.location, a.start_time, a.end_time, a.name);
-                        CustomerCustomCardExpand expand = new CustomerCustomCardExpand(getActivity().getApplicationContext(), a.idFeedback,i);
+                        CustomerCustomCardExpand expand = new CustomerCustomCardExpand(getActivity().getApplicationContext(), a.idFeedback,i,a.idUser);
                         card.addCardExpand(expand);
 
                         cards.add(card);
@@ -299,14 +299,15 @@ public class CustomerRateFragment extends Fragment {
         Context con;
         Button button;
         int index;
-
-        public add_review(Context context, ArrayList<NameValuePair> l, Button b, RatingBar ratingbar, EditText reviewEditText, int id) {
+        String idUser;
+        public add_review(Context context, ArrayList<NameValuePair> l, Button b, RatingBar ratingbar, EditText reviewEditText, int id,String user) {
             list = l;
             rating = ratingbar;
             review = reviewEditText;
             con = context;
             button = b;
             index = id;
+            idUser = user;
         }
 
 
@@ -339,6 +340,12 @@ public class CustomerRateFragment extends Fragment {
                 button.setClickable(false);
                 cards.remove(index);
                 cardListAdapter.notifyDataSetChanged();
+
+                ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
+                nameValuePairs.add(new BasicNameValuePair("id", idUser));
+                nameValuePairs.add(new BasicNameValuePair("message", "You got a new service feedback"));
+
+                new push_target(nameValuePairs).execute(null,null,null);
             } else
                 System.out.println("Review submission failed");
 
@@ -351,11 +358,13 @@ public class CustomerRateFragment extends Fragment {
         String idFeedback;
         Context con;
         int idf;
-        public CustomerCustomCardExpand(Context context, String id,int index) {
+        String idUser;
+        public CustomerCustomCardExpand(Context context, String id,int index,String user) {
             super(context, R.layout.service_rate_expand);
             idFeedback = id;
             con = context;
             idf = index;
+            idUser = user;
         }
 
         @Override
@@ -373,11 +382,15 @@ public class CustomerRateFragment extends Fragment {
                     //ADD REVIEW SUBMIT BUTTON FUNCTIONALITY HERE
                     String stars = String.valueOf(Math.round(rating.getRating()));
                     String reviewText = review.getText().toString();
-                    ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
-                    nameValuePairs.add(new BasicNameValuePair("id", idFeedback));
-                    nameValuePairs.add(new BasicNameValuePair("star", stars));
-                    nameValuePairs.add(new BasicNameValuePair("review", reviewText));
-                    new add_review(con, nameValuePairs, submit, rating, review,idf).execute(null, null, null);
+                    if (reviewText.length() > 0 && Integer.parseInt(stars) != 0) {
+                        ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
+                        nameValuePairs.add(new BasicNameValuePair("id", idFeedback));
+                        nameValuePairs.add(new BasicNameValuePair("star", stars));
+                        nameValuePairs.add(new BasicNameValuePair("review", reviewText));
+                        new add_review(con, nameValuePairs, submit, rating, review, idf, idUser).execute(null, null, null);
+                    } else {
+                        Toast.makeText(getActivity(), "Please enter the required credentials", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
         }
@@ -427,4 +440,5 @@ class CustomerUser{
     public String start_time;
     public String end_time;
     public String name;
+    public String idUser;
 }
