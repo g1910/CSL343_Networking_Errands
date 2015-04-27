@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/locationpic"
+        android:src="@drawable/location_flat"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location"
+        android:id="@+id/locationtext"
+        android:layout_marginTop="5dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_alignTop="@id/locationpic"
+        android:layout_toRightOf="@id/locationpic"
+        android:layout_marginLeft="10dp"
+        />
+
+
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/message_flat"
+        android:id="@+id/descicon"
+        android:layout_below="@id/locationtext"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Order Summary"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/auc_bid_order_summary"
+        android:layout_below="@id/status"
+        android:layout_alignTop="@id/descicon"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/descicon"
+        android:textColor="#ff6c6b6f"
+        />
+</RelativeLayout>
