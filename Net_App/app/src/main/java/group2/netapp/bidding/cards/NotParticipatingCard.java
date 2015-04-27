@@ -42,7 +42,7 @@ public class NotParticipatingCard extends Card {
             temp = j.getString("expctd_time");
             this.expected_time = temp.substring(0,temp.length()-3);
             this.order_limit = j.getString("orderLimit");
-            this.price = "0";
+            this.price = j.getString("minPrice");
             this.ratings=j.getString("rating");
             this.numRated=j.getString("numRated");
         } catch (JSONException e) {
