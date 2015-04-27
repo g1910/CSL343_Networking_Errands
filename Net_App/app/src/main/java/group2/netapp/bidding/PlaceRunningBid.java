@@ -1,6 +1,9 @@
 package group2.netapp.bidding;
 
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
@@ -12,7 +15,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,9 +30,11 @@ import java.util.List;
 import group2.netapp.R;
 import group2.netapp.auction.cards.RunningBidCard;
 import group2.netapp.bidding.cards.AuctionPlacedBidCard;
+import group2.netapp.bidding.cards.GeneralBidCard;
 import group2.netapp.bidding.cards.NotParticipatingCard;
 import group2.netapp.bidding.cards.Order_Card;
 import group2.netapp.bidding.cards.ParticipatingCard;
+import group2.netapp.utilFragments.ServerConnect;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.recyclerview.internal.CardArrayRecyclerViewAdapter;
 import it.gmariotti.cardslib.library.recyclerview.view.CardRecyclerView;
@@ -39,6 +48,7 @@ public class PlaceRunningBid extends Fragment {
     CardRecyclerView auctionView;
     int index;
     int auctionIndex,bidIndex;
+    int auctionId,bidId;
     JSONObject auction_details,bid_details;
     JSONArray order;
 
@@ -68,7 +78,9 @@ public class PlaceRunningBid extends Fragment {
             Log.d("HER",auctionIndex+" ");
             try {
                 auction_details=(JSONObject)((CurrAuctionActivity)getActivity()).getNotParticipating().get(auctionIndex);
+                auctionId=auction_details.getInt("idAuction");
                 bid_details=(JSONObject)((CurrAuctionActivity) getActivity()).getBids().get(bidIndex);
+                bidId=bid_details.getInt("idBid");
                 order=(JSONArray)bid_details.get("order");
                 Log.d("HRE",auction_details.toString());
                 Log.d("HRE",bid_details.toString());
@@ -117,8 +129,8 @@ public class PlaceRunningBid extends Fragment {
 
         }
 
-        RunningBidCard card_run=null;
-        card_run=new RunningBidCard(getActivity(),bid_details,-1);
+        GeneralBidCard card_run=null;
+        card_run=new GeneralBidCard(getActivity(),bid_details,-1);
         cards.add(card_run);
 
         Log.d("OrderCard",order.toString());
@@ -157,5 +169,57 @@ public class PlaceRunningBid extends Fragment {
 
     private void placeBid() {
         Log.d("Success", "Success");
+        Log.d("Sucess",auctionId+" ");
+        Log.d("Success",bidId+" ");
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        // Get the layout inflater
+        final LayoutInflater inflater = LayoutInflater.from(getActivity().getApplicationContext());
+
+        // Inflate and set the layout for the dialog
+        // Pass null as the parent view because its going in the dialog layout
+        builder.setTitle("Place Bid")
+                        // Add action buttons
+                .setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        Log.e("Dialog", "HI");
+                        Dialog f = (Dialog) dialog;
+                        Log.d("Auction ID", auctionId + " ");
+                        Log.d("BID ID", bidId + " ");
+
+                        Log.d("Here", "Setting new Price");
+                        ServerConnect myServer = new ServerConnect(getActivity());
+
+                        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                        nameValuePairs.add(new BasicNameValuePair("idAuction",String.valueOf(auctionId)));
+                        nameValuePairs.add(new BasicNameValuePair("idBid",String.valueOf(bidId)));
+
+                        Log.d("ParticipatingFragment",getString(R.string.IP) + "placeBid.php");
+
+                        myServer.execute(getString(R.string.IP) + "placeBid.php", nameValuePairs);
+
+                        Log.d("ParticipatingFragment", getString(R.string.IP) + "getAllAuctions.php");
+                        Log.e("ParticipatingFragment", "Hi");
+
+                        Log.d("ParticipatingFragment", "ProgressAuctionOpened");
+
+
+                        // sign in the user ...
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        Dialog f = (Dialog) dialog;
+                        f.cancel();
+                    }
+                });
+
+        AlertDialog alert =  builder.create();
+        alert.show();
+
+
     }
 }
