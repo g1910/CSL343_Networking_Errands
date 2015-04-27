@@ -24,7 +24,7 @@ import group2.netapp.bidding.currAuctionTabs.ToParticipateFragment;
 import group2.netapp.utilFragments.ProgressFragment;
 import group2.netapp.utilFragments.ServerConnect;
 
-public class CurrAuctionActivity extends FragmentActivity implements ToParticipateFragment.BidInActivityListener,ServerConnect.OnResponseListener,CurrParticipatingFragment.ParticipatingBidListener {
+public class CurrAuctionActivity extends FragmentActivity implements ToParticipateFragment.BidInActivityListener,ServerConnect.OnResponseListener,CurrParticipatingFragment.ParticipatingBidListener,BidInAuction.RunningBidListener {
 
     JSONArray Participating;
     JSONArray NotParticipating;
@@ -134,6 +134,25 @@ public class CurrAuctionActivity extends FragmentActivity implements ToParticipa
         ft.addToBackStack(null);
         ft.commit();
     }
+
+    @Override
+    public void openRunningBids(int index) {
+        Bundle args = new Bundle();
+        args.putInt("index", index);
+        //  args.putString("auctionLocation",auctionLocation);
+
+        // ,price,desc,idUser,start_time,end_time,expected_time;
+        //   int idAuction;
+        //   String ratings,numRated;
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        Fragment RunningBid = new PlaceRunningBid();
+
+        RunningBid.setArguments(args);
+        ft.replace(R.id.curr_auction_frame, RunningBid, "RunningBid");
+        ft.addToBackStack(null);
+        ft.commit();
+    }
+
 
     @Override
     public void onResponse(JSONArray j) {
