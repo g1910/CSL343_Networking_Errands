@@ -79,7 +79,7 @@
         android:layout_toRightOf="@id/endtimetext"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:layout_alignTop="@id/endtimetext"
-        android:layout_alignLeft="@+id/participatingprice"
+        android:layout_marginLeft="10dp"
         android:id="@+id/participatingend_time"
         android:textColor="#ff6c6b6f"
         />
@@ -114,7 +114,7 @@
         android:layout_toRightOf="@id/deliverytimetext"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:layout_alignTop="@id/deliverytimetext"
-        android:layout_alignLeft="@+id/participatingprice"
+        android:layout_marginLeft="10dp"
         android:id="@+id/participatingexpected_time"
         android:textColor="#ff6c6b6f"
         />

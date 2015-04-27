@@ -87,24 +87,22 @@ public class HomeActivity extends FragmentActivity
 
         pname = getIntent().getStringExtra("pname");
         email = getIntent().getStringExtra("email");
-
+        picurl = getIntent().getStringExtra("picurl");
         SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = saved_values.edit();
 
         String id = saved_values.getString("id","");
-        Log.d("HomeActivity","id : " + id);
 
         if(id.equals("")) {
-            new adduser(pname, email, "http://netapp.byethost33.com/add_user.php").execute(null, null, null);
+            new adduser( "http://netapp.byethost33.com/add_user.php").execute(null, null, null);
         }
         editor.putString("user_name", pname);
         editor.putString("email", email);
-        //editor.putString("picurl", picurl);
+        editor.putString("picurl", picurl);
         editor.apply();
 
         String picpath = saved_values.getString("picpath",null);
         if(picpath == null){
-            picurl = getIntent().getStringExtra("picurl");
             picurl+="0";
             new LoadProfileImage().execute(picurl);
         }
@@ -323,11 +321,9 @@ public class HomeActivity extends FragmentActivity
 
 
     class adduser extends AsyncTask<String, String, String> {
-        private String pname, email, host;
+        private String  host;
 
-        public adduser(String a, String b, String c) {
-            pname = a;
-            email = b;
+        public adduser(String c) {
             host = c;
         }
 
@@ -347,6 +343,7 @@ public class HomeActivity extends FragmentActivity
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
                 nameValuePairs.add(new BasicNameValuePair("pname", pname));
                 nameValuePairs.add(new BasicNameValuePair("email", email));
+                nameValuePairs.add(new BasicNameValuePair("picurl", picurl));
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
                 // Execute HTTP Post Request

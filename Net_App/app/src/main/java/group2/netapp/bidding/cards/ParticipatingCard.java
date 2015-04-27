@@ -3,6 +3,7 @@ package group2.netapp.bidding.cards;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import group2.netapp.FeedbackActivity;
 import group2.netapp.FeedbackFragment;
 import group2.netapp.HomeActivity;
 import group2.netapp.R;
@@ -33,10 +35,13 @@ public class ParticipatingCard extends Card {
             this.auctionLocation =j.getString("location");
             this.desc = j.getString("description");
             this.idUser = j.getString("idUser");
-            this.start_time = j.getString("start_time");
-            this.end_time = j.getString("end_time");
+            String temp = j.getString("start_time");
+            this.start_time = temp.substring(0,temp.length()-3);
+            temp = j.getString("end_time");
+            this.end_time = temp.substring(0,temp.length()-3);
             this.idAuction = j.getInt("idAuction");
-            this.expected_time = j.getString("expctd_time");
+            temp = j.getString("expctd_time");
+            this.expected_time = temp.substring(0,temp.length()-3);
             this.price = j.getInt("Price");
             this.ratings=j.getString("rating");
             this.numRated=j.getString("numRated");
@@ -63,18 +68,24 @@ public class ParticipatingCard extends Card {
         auctionLocView.setText(auctionLocation);
         priceView.setText("₹" + price);
         descView.setText(desc);
-        if(ratings.equals("null"))
+        if(ratings == null &&  ratings.equals("null"))
         {
             ratings="0";
             numRated="0";
+            ratingsView.setRating(Float.parseFloat(ratings));
+            numRatedView.setPaintFlags(numRatedView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+            numRatedView.setText("rated by : " + numRated + " users");
         }
-        ratingsView.setRating(Float.parseFloat(ratings));
-        numRatedView.setPaintFlags(numRatedView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        numRatedView.setText("rated by : " + numRated + " users");
+
         numRatedView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(),"Button clicked",Toast.LENGTH_SHORT).show();
+                Intent mIntent = new Intent(getContext(), FeedbackActivity.class);
+                Bundle mBundle = new Bundle();
+                mBundle.putString("id", idUser);
+                mBundle.putInt("tag",0);
+                mIntent.putExtras(mBundle);
+                getContext().startActivity(mIntent);
             }
         });
         end_timeView.setText(end_time);
