@@ -16,7 +16,7 @@ import it.gmariotti.cardslib.library.internal.Card;
  */
 public class GeneralBidCard extends Card {
 
-    String bidLocation, bidOrder;
+    String bidLocation, bidOrder,description;
     int bidId,index;
 
     public GeneralBidCard(Context context, JSONObject j,int i) {
@@ -24,6 +24,7 @@ public class GeneralBidCard extends Card {
 
         try {
             this.bidLocation = j.getString("location");
+            this.description=j.getString("bid_description");
             this.index=i;
         } catch (JSONException e) {
             e.printStackTrace();
@@ -37,9 +38,11 @@ public class GeneralBidCard extends Card {
         super.setupInnerViewElements(parent, view);
 
         TextView bidLocationView = (TextView) parent.findViewById(R.id.locationtext);
+        TextView desView = (TextView)parent.findViewById(R.id.auc_bid_order_summary);
 //        TextView bidOrderView = (TextView) parent.findViewById(R.id.auc_bid_order_summary);
 
         bidLocationView.setText(bidLocation);
+        desView.setText(description);
         //      bidOrderView.setText(bidOrder);
     }
 
