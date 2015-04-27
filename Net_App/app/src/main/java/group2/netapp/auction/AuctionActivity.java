@@ -24,19 +24,21 @@ import java.util.List;
 import group2.netapp.R;
 import group2.netapp.auction.bidsTabs.AcceptedBids;
 import group2.netapp.auction.bidsTabs.PostAcceptedBids;
+import group2.netapp.auction.cards.PostBidCard;
 import group2.netapp.utilFragments.ProgressFragment;
 import group2.netapp.utilFragments.ServerConnect;
 import it.gmariotti.cardslib.library.internal.Card;
 
 
-public class AuctionActivity extends FragmentActivity implements BidRequestsFragment.BidRequestsListener, ServerConnect.OnResponseListener, AcceptedBids.BidAcceptListener, PostAcceptedBids.BidAcceptListener, AuctionDashboardFragment.AuctionDashboardListener, PostAuctionDashboardFragment.PostAuctionDashboardListener{
+public class AuctionActivity extends FragmentActivity implements BidRequestsFragment.BidRequestsListener, ServerConnect.OnResponseListener, AcceptedBids.BidAcceptListener, PostAcceptedBids.BidAcceptListener, AuctionDashboardFragment.AuctionDashboardListener, PostAuctionDashboardFragment.PostAuctionDashboardListener, ConfirmBidsFragment.ConfirmBidsListener{
 
     JSONObject auctionDetails;
-    JSONArray pendingBids, runningBids;
+    JSONArray pendingBids, runningBids, confirmedBids;
     String idUser;
     int isRunning;
 
     ArrayList<ArrayList<Card>> postAuctionBids;
+    ArrayList<Integer> checkIndices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,22 +76,32 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsFrag
                 isRunning = j.getJSONObject(1).getInt("isRunning");
                 if (isRunning == 0){
                     openServerForm();
-                    invalidateOptionsMenu();
                 } else {
                     auctionDetails = j.getJSONObject(2);
-                    pendingBids = j.getJSONArray(3);
-                    runningBids = j.getJSONArray(4);
-                    Log.d("AuctionActivity", auctionDetails.toString());
-                    Log.d("AuctionActivity", pendingBids.toString());
-                    Log.d("AuctionActivity", runningBids.toString()+" "+runningBids.length());
-                    if (isRunning == 1) {
-                        openDashboard();
-                        invalidateOptionsMenu();
-                    } else if (isRunning == 2) {
-                        postAuctionBids = new ArrayList<>(runningBids.length());
-                        Log.d("AuctionActivity","postAuctionBid length:"+postAuctionBids.size());
-                        openPostAuction();
+                    if(isRunning==3){
+                        confirmedBids = j.getJSONArray(3);
+                        Log.d("AuctionActivity", auctionDetails.toString());
+                        Log.d("AuctionActivity", confirmedBids.toString());
+                        openConfirmBids();
+                    }else {
+                        pendingBids = j.getJSONArray(3);
+                        runningBids = j.getJSONArray(4);
+                        Log.d("AuctionActivity", auctionDetails.toString());
+                        Log.d("AuctionActivity", pendingBids.toString());
+                        Log.d("AuctionActivity", runningBids.toString() + " " + runningBids.length());
+                        if (isRunning == 1) {
+                            openDashboard();
+                        } else if (isRunning == 2) {
+                            postAuctionBids = new ArrayList<>();
+                            checkIndices = new ArrayList<>();
+                            for (int x = 0; x < runningBids.length(); ++x) {
+                                postAuctionBids.add(new ArrayList<Card>());
+                                checkIndices.add(-1);
+                            }
+                            Log.d("AuctionActivity", "postAuctionBid length:" + postAuctionBids.size());
+                            openPostAuction();
 
+                        }
                     }
                 }
             }else if(tag.equals("bid_request")){
@@ -116,6 +128,15 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsFrag
                     Toast.makeText(this, "Bid Request Accepted in new Category!", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(this, "Bid Request can't be Accepted!", Toast.LENGTH_SHORT).show();
+                }
+                finish();
+                startActivity(getIntent());
+            }else if(tag.equals("bid_confirm")){
+                boolean status = ((JSONObject)j.get(1)).getBoolean("status");
+                if(status){
+                    Toast.makeText(this, "Bids successfully confirmed!", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(this, "Bids can't be confirmed!", Toast.LENGTH_SHORT).show();
                 }
                 finish();
                 startActivity(getIntent());
@@ -148,6 +169,18 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsFrag
 //        ft.addToBackStack(null);
         ft.commit();
         Log.d("AuctionActivity", "DashboardOpened");
+    }
+
+    public void openConfirmBids(){
+        Bundle args = new Bundle();
+        args.putString("auction", auctionDetails.toString());
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        Fragment cBidsFrag = new ConfirmBidsFragment();
+        cBidsFrag.setArguments(args);
+        ft.replace(R.id.auction_frame,cBidsFrag,"ConfirmBids");
+//        ft.addToBackStack(null);
+        ft.commit();
+        Log.d("AuctionActivity", "ConfirmBidsOpened");
     }
 
     public void openServerForm(){
@@ -249,6 +282,14 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsFrag
         return null;
     }
 
+    public JSONArray getConfirmedBids() {
+        return confirmedBids;
+    }
+
+    public void setConfirmedBids(JSONArray confirmedBids) {
+        this.confirmedBids = confirmedBids;
+    }
+
     public int getIsRunning() {
         return isRunning;
     }
@@ -268,5 +309,56 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsFrag
             return c;
         }
         return null;
+    }
+
+    public void setCheckIndex(int index, int checkIndex){
+        checkIndices.set(index,checkIndex);
+    }
+
+    public int getCheckIndex(int index){
+        return checkIndices.get(index);
+    }
+
+    @Override
+    public void confirmBids() {
+        int sum = 0;
+        for(int i : checkIndices){
+            sum+=(i+1);
+        }
+        Toast.makeText(this,"Bids to confirm: "+sum,Toast.LENGTH_SHORT).show();
+
+        if(sum>0){
+
+            try {
+                ServerConnect myServer=new ServerConnect(this);
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                int count = 0,j=0;
+                for(ArrayList<Card> a : postAuctionBids){
+                    for(int i = 0; i<=checkIndices.get(j);++i){
+                        nameValuePairs.add(new BasicNameValuePair("id_bid[]",((PostBidCard)a.get(i)).getBid().getString("idBid")));
+                        count++;
+                    }
+                    j++;
+                }
+                nameValuePairs.add(new BasicNameValuePair("id_auc",auctionDetails.getString("idAuction")));
+                Log.d("AuctionActivity",getString(R.string.IP)+"confirm_bids.php");
+                myServer.execute(getString(R.string.IP)+"confirm_bids.php",nameValuePairs);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void openConfirmedBid(JSONObject bid) {
+        Bundle args = new Bundle();
+        args.putString("bid", bid.toString());
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        Fragment cBids = new ConfirmBidsDisplayFragment();
+        cBids.setArguments(args);
+        ft.replace(R.id.auction_frame, cBids, "ConfirmedBids");
+        ft.addToBackStack(null);
+        ft.commit();
+        Log.d("AuctionActivity", "ConfirmedBids");
     }
 }

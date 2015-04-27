@@ -82,13 +82,14 @@ public class PostAcceptedBids extends Fragment implements Card.OnCardClickListen
             acceptedBids = auc_category.getJSONArray("bids");
         }
         bidView = (CardRecyclerView) v.findViewById(R.id.auc_acc_bids_recyclerview);
-        bidView.setHasFixedSize(false);
+        bidView.setHasFixedSize(true);
 
         bidViewAdapter = new CardArrayRecyclerViewAdapter(getActivity(), setBids());
         bidView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         if(bidView != null){
             bidView.setAdapter(bidViewAdapter);
+//            bidView.scrollToPosition(acceptedBids.length()-1);
         }
     }
 
@@ -100,7 +101,7 @@ public class PostAcceptedBids extends Fragment implements Card.OnCardClickListen
                 bid = acceptedBids.getJSONObject(i);
                 Log.d("AcceptedTab", "Location:" + bid.getString("location") + " Order:" + bid.getJSONArray("orders").length() + " items ordered");
                 PostBidCard card;
-                card = new PostBidCard(getActivity(),bid,this,i);
+                card = new PostBidCard(getActivity(),bid,this,i,((AuctionActivity)getActivity()).getCheckIndex(tabPosition));
                 card.setOnClickListener(this);
                 cards.add(card);
             }
@@ -123,14 +124,21 @@ public class PostAcceptedBids extends Fragment implements Card.OnCardClickListen
 
     @Override
     public void onItemChecked(int index, boolean isChecked) {
-
-        for(int i = 0;i<cards.size();++i){
-            if(i<=index) {
-                ((PostBidCard) cards.get(i)).setChecked(isChecked);
-            }else{
-                ((PostBidCard) cards.get(i)).setChecked(false);
-            }
+        if(!isChecked){
+            index = -1;
         }
+        ((AuctionActivity)getActivity()).setCheckIndex(tabPosition,index);
+        for(int i = 0;i<cards.size();++i){
+            Log.d("PostAcceptedBids","onItem: "+i);
+            Log.d("PostAcceptedBids",((PostBidCard) cards.get(i)).getBid().toString());
+            ((PostBidCard) cards.get(i)).setCheckIndex(index);
+//            if(i<=index) {
+//                ((PostBidCard) cards.get(i)).setChecked(isChecked);
+//            }else{
+//                ((PostBidCard) cards.get(i)).setChecked(false);
+//            }
+        }
+        bidViewAdapter.notifyDataSetChanged();
 //        PostBidCard p = (PostBidCard) cards.get(index);
 //        try {
 //            Toast.makeText(getActivity(),"Bid clicked "+((PostBidCard)cards.get(index)).getBid().getString("location"),Toast.LENGTH_SHORT).show();

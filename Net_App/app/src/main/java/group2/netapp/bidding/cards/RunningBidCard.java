@@ -1,6 +1,7 @@
-package group2.netapp.auction.cards;
+package group2.netapp.bidding.cards;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -16,14 +17,35 @@ import it.gmariotti.cardslib.library.internal.Card;
  */
 public class RunningBidCard extends Card {
 
-    String bidLocation, bidOrder,description;
+    String bidLocation,description;
+    String status,rank;
+    int price;
     int bidId,index;
-    public RunningBidCard(Context context, JSONObject j,int i) {
+    public RunningBidCard(Context context, JSONObject j,int i,String ranks,int prices,String statuses) {
         super(context, R.layout.running_bid_card);
 
         try {
             this.bidLocation = j.getString("location");
             this.description=j.getString("bid_description");
+            this.price = prices;
+            Log.d("HERER", statuses);
+            Log.d("HERER",statuses.equals("P")+" ");
+            if (statuses.equals("P"))
+            {
+                this.status="Pending";
+                this.rank="";
+            }
+            else if (statuses.equals("A"))
+            {
+                this.status="Accepted";
+                this.rank=ranks;
+            }
+            else if (statuses.equals("C"))
+            {
+                this.status="Confirmed";
+                this.rank="";
+            }
+
             this.index=i;
         } catch (JSONException e) {
             e.printStackTrace();
@@ -38,10 +60,16 @@ public class RunningBidCard extends Card {
 
         TextView bidLocationView = (TextView) parent.findViewById(R.id.locationtext);
         TextView desView = (TextView)parent.findViewById(R.id.auc_bid_order_summary);
+        TextView rankView=(TextView) parent.findViewById(R.id.participatingrank);
+        TextView statusView=(TextView) parent.findViewById(R.id.status);
+        TextView priceView=(TextView) parent.findViewById(R.id.pricetext);
 //        TextView bidOrderView = (TextView) parent.findViewById(R.id.auc_bid_order_summary);
 
         bidLocationView.setText(bidLocation);
         desView.setText(description);
+        rankView.setText(rank);
+        statusView.setText(status);
+        priceView.setText(price+"");
   //      bidOrderView.setText(bidOrder);
     }
 
@@ -53,13 +81,6 @@ public class RunningBidCard extends Card {
         this.bidLocation = bidLocation;
     }
 
-    public String getBidOrder() {
-        return bidOrder;
-    }
-
-    public void setBidOrder(String bidOrder) {
-        this.bidOrder = bidOrder;
-    }
 
     public int getBidId() {
         return bidId;

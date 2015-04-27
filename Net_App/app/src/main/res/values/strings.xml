@@ -25,11 +25,11 @@
     <string name="title_activity_maps">Map</string>
 '    <string name="title_activity_decide_auction">DecideAuctionActivity</string>
     <string name="title_activity_curr_auction">Running Auctions</string>
-    <string name="title_activity_auction">AuctionActivity</string>
-    <string name="title_activity_server_form">serverFormActivity</string>
+    <string name="title_activity_auction">My Auction</string>
+    <string name="title_activity_server_form">Auction form</string>
     <string name="title_activity_bids">BidsActivity</string>
     <string name="IP">http://netapp.byethost33.com/Server/</string>
-    <string name="title_activity_bid_form">BidFormActivity</string>
+    <string name="title_activity_bid_form">New bid form</string>
     <string name="title_activity_feedback">Feedbacks</string>
     <string name="title_activity_profile">User details</string>
 

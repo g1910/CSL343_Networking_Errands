@@ -51,7 +51,7 @@ public class PostAuctionDashboardFragment extends Fragment{
     }
 
     public interface PostAuctionDashboardListener{
-        public void openBidRequestFragment();
+        public void confirmBids();
     }
 
     @Override
@@ -63,14 +63,14 @@ public class PostAuctionDashboardFragment extends Fragment{
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_dashboard,menu);
+        inflater.inflate(R.menu.menu_post_dashboard,menu);
         Log.d("AuctionDashboard", "Menu inflated");
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
-            case R.id.action_requests: listener.openBidRequestFragment();
+            case R.id.action_confirm: listener.confirmBids();
                 break;
             default: break;
         }
@@ -101,7 +101,7 @@ public class PostAuctionDashboardFragment extends Fragment{
         setUpTabs(v);
 
 
-        setHasOptionsMenu(false);
+        setHasOptionsMenu(true);
 
         return v;
     }

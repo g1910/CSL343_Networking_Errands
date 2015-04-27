@@ -21,6 +21,7 @@
         android:layout_toRightOf="@id/bidlocationpic"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
+        android:textColor="#ff6c6b6f"
         />
 
     <ImageView
@@ -43,5 +44,6 @@
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#ff6c6b6f"
         />
 </RelativeLayout>
