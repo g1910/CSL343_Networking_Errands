@@ -93,7 +93,7 @@ public class ProfileFragment extends Fragment {
     public ProfileFragment() {
         // Required empty public constructor
 
-        this.setArguments(new Bundle());
+        //this.setArguments(new Bundle());
     }
 
     @Override
@@ -108,8 +108,18 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         int ishome = getArguments().getInt("ishome",-1);
         View infh = inflater.inflate(R.layout.fragment_profile, container, false);
+        phone = (EditText)infh.findViewById(R.id.editText3);
+        address = (EditText)infh.findViewById(R.id.editText4);
+        emailText = (TextView)infh.findViewById(R.id.emailText);
+        nameText = (TextView)infh.findViewById(R.id.nameText);
+        ImageButton editPhone = (ImageButton)infh.findViewById(R.id.editPhone);
+        ImageButton editAddress = (ImageButton)infh.findViewById(R.id.editAddress);
         if(ishome==0){
             String id = getArguments().getString("id",null);
+            System.out.println("here "+id);
+
+            editAddress.setVisibility(View.INVISIBLE);
+            editPhone.setVisibility(View.INVISIBLE);
             new get_profile(id).execute(null,null,null);
         }
         else
@@ -123,7 +133,7 @@ public class ProfileFragment extends Fragment {
             String address_text = saved_values.getString("address",null);
 
 
-            phone = (EditText)infh.findViewById(R.id.editText3);
+
             if(phone_number==null)
             {
                 new get_phone(email).execute(null,null,null);
@@ -132,7 +142,7 @@ public class ProfileFragment extends Fragment {
             {
                 phone.setText(phone_number);
             }
-            address = (EditText)infh.findViewById(R.id.editText4);
+
 
             if(address_text==null)
             {
@@ -145,16 +155,15 @@ public class ProfileFragment extends Fragment {
 
 
 
-            emailText = (TextView)infh.findViewById(R.id.emailText);
+
             emailText.setText(email);
 
-           nameText = (TextView)infh.findViewById(R.id.nameText);
+
             nameText.setText(name);
 
 
 
-            ImageButton editPhone = (ImageButton)infh.findViewById(R.id.editPhone);
-            ImageButton editAddress = (ImageButton)infh.findViewById(R.id.editAddress);
+
 
           profileImage=(ImageView)infh.findViewById(R.id.imageView2);
             if(picpath != null) {
@@ -468,6 +477,7 @@ public class ProfileFragment extends Fragment {
 
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost(host);
+            System.out.println("here2 "+id);
             httppost.setHeader("Content-Type", "application/x-www-form-urlencoded");
             try
             {
@@ -480,6 +490,25 @@ public class ProfileFragment extends Fragment {
                 if(response != null)
                 {
                     is = response.getEntity().getContent();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+                    StringBuilder sb = new StringBuilder();
+
+                    String line = null;
+                    try {
+                        while ((line = reader.readLine()) != null) {
+                            sb.append(line + "\n");
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        try {
+                            is.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    String text = sb.toString();
+                    System.out.println(id + "ssdvs" + text);
 
                 }
             } catch (Exception e) {

@@ -29,6 +29,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
+import com.parse.ParseInstallation;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -88,6 +89,8 @@ public class HomeActivity extends FragmentActivity
         pname = getIntent().getStringExtra("pname");
         email = getIntent().getStringExtra("email");
         picurl = getIntent().getStringExtra("picurl");
+
+
         SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = saved_values.edit();
 
@@ -96,11 +99,15 @@ public class HomeActivity extends FragmentActivity
         if(id.equals("")) {
             new adduser( "http://netapp.byethost33.com/add_user.php").execute(null, null, null);
         }
+
+
         editor.putString("user_name", pname);
         editor.putString("email", email);
         editor.putString("picurl", picurl);
         editor.apply();
 
+        ParseInstallation.getCurrentInstallation().put("emailId",email);
+        ParseInstallation.getCurrentInstallation().saveInBackground();
         String picpath = saved_values.getString("picpath",null);
         if(picpath == null){
             picurl+="0";

@@ -394,6 +394,7 @@ class ServiceCustomCardExpand extends CardExpand {
                     ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
                     nameValuePairs.add(new BasicNameValuePair("id", idFeedback));
                     nameValuePairs.add(new BasicNameValuePair("star", stars));
+                    nameValuePairs.add(new BasicNameValuePair("tag", String.valueOf(1)));
                     nameValuePairs.add(new BasicNameValuePair("review", reviewText));
                     new add_review(con, nameValuePairs, submit, rating, review, idf, idUser).execute(null, null, null);
                 }

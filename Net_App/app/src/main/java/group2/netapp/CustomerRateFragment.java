@@ -343,7 +343,7 @@ public class CustomerRateFragment extends Fragment {
 
                 ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
                 nameValuePairs.add(new BasicNameValuePair("id", idUser));
-                nameValuePairs.add(new BasicNameValuePair("message", "You got a new service feedback"));
+                nameValuePairs.add(new BasicNameValuePair("message", "You got a new feedback"));
 
                 new push_target(nameValuePairs).execute(null,null,null);
             } else
@@ -386,6 +386,7 @@ public class CustomerRateFragment extends Fragment {
                         ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
                         nameValuePairs.add(new BasicNameValuePair("id", idFeedback));
                         nameValuePairs.add(new BasicNameValuePair("star", stars));
+                        nameValuePairs.add(new BasicNameValuePair("tag", String.valueOf(2)));
                         nameValuePairs.add(new BasicNameValuePair("review", reviewText));
                         new add_review(con, nameValuePairs, submit, rating, review, idf, idUser).execute(null, null, null);
                     } else {

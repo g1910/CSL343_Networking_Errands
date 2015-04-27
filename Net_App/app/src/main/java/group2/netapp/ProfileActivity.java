@@ -22,6 +22,7 @@ public class ProfileActivity extends ActionBarActivity {
             ProfileFragment fragment = new ProfileFragment();
             Bundle bun = new Bundle();
             bun.putString("id",id);
+            System.out.println("in activity" +id);
             bun.putInt("ishome",0);
             fragment.setArguments(bun);
             FragmentManager fragmentManager = getSupportFragmentManager();
