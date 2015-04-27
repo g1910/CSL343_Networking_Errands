@@ -1,7 +1,9 @@
 package group2.netapp.bidding.cards;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RatingBar;
@@ -11,6 +13,7 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import group2.netapp.FeedbackActivity;
 import group2.netapp.R;
 import it.gmariotti.cardslib.library.internal.Card;
 
@@ -74,7 +77,12 @@ public class NotParticipatingCard extends Card {
         numRatedView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Button clicked", Toast.LENGTH_SHORT).show();
+                Intent mIntent = new Intent(getContext(), FeedbackActivity.class);
+                Bundle mBundle = new Bundle();
+                mBundle.putString("id", idUser);
+                mBundle.putInt("tag",1);
+                mIntent.putExtras(mBundle);
+                getContext().startActivity(mIntent);
             }
         });
         end_timeView.setText(String.valueOf(end_time));

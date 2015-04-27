@@ -3,6 +3,7 @@ package group2.netapp.bidding.cards;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import group2.netapp.FeedbackActivity;
 import group2.netapp.FeedbackFragment;
 import group2.netapp.HomeActivity;
 import group2.netapp.R;
@@ -67,14 +69,20 @@ public class ParticipatingCard extends Card {
         {
             ratings="0";
             numRated="0";
+            ratingsView.setRating(Float.parseFloat(ratings));
+            numRatedView.setPaintFlags(numRatedView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+            numRatedView.setText("rated by : " + numRated + " users");
         }
-        ratingsView.setRating(Float.parseFloat(ratings));
-        numRatedView.setPaintFlags(numRatedView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        numRatedView.setText("rated by : " + numRated + " users");
+
         numRatedView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(),"Button clicked",Toast.LENGTH_SHORT).show();
+                Intent mIntent = new Intent(getContext(), FeedbackActivity.class);
+                Bundle mBundle = new Bundle();
+                mBundle.putString("id", idUser);
+                mBundle.putInt("tag",0);
+                mIntent.putExtras(mBundle);
+                getContext().startActivity(mIntent);
             }
         });
         end_timeView.setText(end_time);
