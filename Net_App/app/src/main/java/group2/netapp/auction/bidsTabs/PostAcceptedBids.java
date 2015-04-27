@@ -40,6 +40,8 @@ public class PostAcceptedBids extends Fragment implements Card.OnCardClickListen
 
     ArrayList<Card> cards;
 
+    int tabPosition;
+
     public interface BidAcceptListener{
         public void openBidRequest(JSONObject bid, boolean isRequest);
     }
@@ -63,6 +65,7 @@ public class PostAcceptedBids extends Fragment implements Card.OnCardClickListen
         Bundle args = getArguments();
         try {
             auc_category = new JSONObject(new JSONTokener(args.getString("auction_category","")));
+            tabPosition = args.getInt("tab",-1);
             setUpBidView(v);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -90,7 +93,7 @@ public class PostAcceptedBids extends Fragment implements Card.OnCardClickListen
     }
 
     public ArrayList<Card> setBids(){
-        cards = new ArrayList<Card>();
+        cards = ((AuctionActivity)getActivity()).obtainArrayBids(tabPosition);
         JSONObject bid;
         try {
             for(int i = 0; i< acceptedBids.length(); ++i) {
