@@ -177,11 +177,13 @@ public class AucBidsFragment extends Fragment {
                             int auctionId = ((AuctionActivity)getActivity()).getAuctionDetails().getInt("idAuction");
                             int bidId = bid.getInt("idBid");
                             int catId = aucCategories.getJSONObject(rG.getCheckedRadioButtonId()%100).getInt("idCategory");
+                            int minPrice = aucCategories.getJSONObject(rG.getCheckedRadioButtonId()%100).getInt("minPrice");
                             ServerConnect myServer=new ServerConnect(getActivity());
                             List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
                             nameValuePairs.add(new BasicNameValuePair("id_auc",auctionId+""));
                             nameValuePairs.add(new BasicNameValuePair("id_bid",bidId+""));
                             nameValuePairs.add(new BasicNameValuePair("id_cat",catId+""));
+                            nameValuePairs.add(new BasicNameValuePair("min_price",catId+""));
                             Log.d("AuctionActivity",getString(R.string.IP)+"accept_bid.php");
                             myServer.execute(getString(R.string.IP)+"accept_bid.php",nameValuePairs);
                         } catch (JSONException e) {

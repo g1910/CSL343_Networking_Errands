@@ -1,5 +1,7 @@
 package group2.netapp.auction;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -328,24 +330,43 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsFrag
         Toast.makeText(this,"Bids to confirm: "+sum,Toast.LENGTH_SHORT).show();
 
         if(sum>0){
+            final ServerConnect myServer=new ServerConnect(this);
+            AlertDialog.Builder builder= new AlertDialog.Builder(this);
+            builder.setTitle("Bids Confirmation")
+                    .setMessage("Are you sure?")
+                    .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            try {
 
-            try {
-                ServerConnect myServer=new ServerConnect(this);
-                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-                int count = 0,j=0;
-                for(ArrayList<Card> a : postAuctionBids){
-                    for(int i = 0; i<=checkIndices.get(j);++i){
-                        nameValuePairs.add(new BasicNameValuePair("id_bid[]",((PostBidCard)a.get(i)).getBid().getString("idBid")));
-                        count++;
-                    }
-                    j++;
-                }
-                nameValuePairs.add(new BasicNameValuePair("id_auc",auctionDetails.getString("idAuction")));
-                Log.d("AuctionActivity",getString(R.string.IP)+"confirm_bids.php");
-                myServer.execute(getString(R.string.IP)+"confirm_bids.php",nameValuePairs);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+                                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                                int j=0;
+                                for(ArrayList<Card> a : postAuctionBids){
+                                    for(int i = 0; i<=checkIndices.get(j);++i){
+                                        nameValuePairs.add(new BasicNameValuePair("id_bid[]",((PostBidCard)a.get(i)).getBid().getString("idBid")));
+                                        nameValuePairs.add(new BasicNameValuePair("id_bid_user[]",((PostBidCard)a.get(i)).getBid().getString("idUser")));
+                                    }
+                                    j++;
+                                }
+                                nameValuePairs.add(new BasicNameValuePair("id_auc",auctionDetails.getString("idAuction")));
+                                nameValuePairs.add(new BasicNameValuePair("id_auc_user",auctionDetails.getString("idUser")));
+                                Log.d("AuctionActivity",getString(R.string.IP)+"confirm_bids.php");
+                                myServer.execute(getString(R.string.IP)+"confirm_bids.php",nameValuePairs);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                    .show();
+
+        }else{
+            Toast.makeText(this,"Select at least 1 bid for confirmation",Toast.LENGTH_SHORT).show();
         }
     }
 

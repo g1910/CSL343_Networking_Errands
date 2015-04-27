@@ -174,19 +174,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Order Limit"
-        android:id="@+id/limittext"
+        android:id="@+id/orderLimit"
         android:layout_below="@id/auc_min_price"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
-        />
+        android:inputType="number" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start Button"
+        android:text="Start Auction"
         android:id="@+id/auc_start_btn"
         android:layout_marginTop="10dp"
-        android:layout_below="@id/limittext"
+        android:layout_below="@id/orderLimit"
         android:layout_centerHorizontal="true" />
 
 

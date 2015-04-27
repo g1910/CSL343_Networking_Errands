@@ -21,12 +21,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import group2.netapp.R;
+import group2.netapp.bidding.cards.BidFormFragment;
 import group2.netapp.bidding.currAuctionTabs.CurrParticipatingFragment;
 import group2.netapp.bidding.currAuctionTabs.ToParticipateFragment;
 import group2.netapp.utilFragments.ProgressFragment;
 import group2.netapp.utilFragments.ServerConnect;
 
-public class CurrAuctionActivity extends FragmentActivity implements ToParticipateFragment.BidInActivityListener,ServerConnect.OnResponseListener,CurrParticipatingFragment.ParticipatingBidListener,BidInAuction.RunningBidListener {
+public class CurrAuctionActivity extends FragmentActivity implements ToParticipateFragment.BidInActivityListener,ServerConnect.OnResponseListener,CurrParticipatingFragment.ParticipatingBidListener,BidInAuction.RunningBidListener,BidInAuction.AuctionDashboardListener {
 
     JSONArray Participating;
     JSONArray NotParticipating;
@@ -224,4 +225,20 @@ public class CurrAuctionActivity extends FragmentActivity implements ToParticipa
     }
 
 
+    @Override
+    public void openBidRequestFragment(Bundle b) {
+
+        //  args.putString("auctionLocation",auctionLocation);
+
+        // ,price,desc,idUser,start_time,end_time,expected_time;
+        //   int idAuction;
+        //   String ratings,numRated;
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        Fragment RunningBid = new BidFormFragment();
+
+        RunningBid.setArguments(b);
+        ft.replace(R.id.curr_auction_frame, RunningBid, "RunningBid");
+        ft.addToBackStack(null);
+        ft.commit();
+    }
 }
