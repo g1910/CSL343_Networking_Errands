@@ -22,6 +22,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -154,20 +156,56 @@ public class ServerFormActivity extends FragmentActivity implements TimePickerFr
     View.OnClickListener startNewAuction = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-            nameValuePairs.add(new BasicNameValuePair("location", aucLocation.getText().toString()));
-            Log.e("OrderIt",aucEndDate.getText().toString() + " " + aucEndTime.getText().toString()+":00");
-            nameValuePairs.add(new BasicNameValuePair("endtime",aucEndDate.getText().toString() + " " + aucEndTime.getText().toString()+":00"));
-            nameValuePairs.add(new BasicNameValuePair("expected",aucExpDate.getText().toString() + " " + aucExpTime.getText().toString()+":00"));
-            nameValuePairs.add(new BasicNameValuePair("description",aucDesc.getText().toString()));
-            nameValuePairs.add(new BasicNameValuePair("id_user",idUser));
-            nameValuePairs.add(new BasicNameValuePair("min_price",minPrice.getText().toString()));
-            ServerConnect myServer=new ServerConnect(a);
+            if(validate()) {
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                nameValuePairs.add(new BasicNameValuePair("location", aucLocation.getText().toString()));
+                Log.e("OrderIt", aucEndDate.getText().toString() + " " + aucEndTime.getText().toString() + ":00");
+                nameValuePairs.add(new BasicNameValuePair("endtime", aucEndDate.getText().toString() + " " + aucEndTime.getText().toString() + ":00"));
+                nameValuePairs.add(new BasicNameValuePair("expected", aucExpDate.getText().toString() + " " + aucExpTime.getText().toString() + ":00"));
+                nameValuePairs.add(new BasicNameValuePair("description", aucDesc.getText().toString()));
+                nameValuePairs.add(new BasicNameValuePair("id_user", idUser));
+                nameValuePairs.add(new BasicNameValuePair("min_price", minPrice.getText().toString()));
+                ServerConnect myServer = new ServerConnect(a);
 
-            Toast.makeText(a, "Starting a New Auction...", Toast.LENGTH_SHORT).show();
-            myServer.execute(getString(R.string.IP)+"auction.php",nameValuePairs,this);
+                Toast.makeText(a, "Starting a New Auction...", Toast.LENGTH_SHORT).show();
+                myServer.execute(getString(R.string.IP) + "auction.php", nameValuePairs, this);
+            }
         }
     };
+
+    public boolean validate(){
+        Timestamp currentTime, endTime, expectedTime,maxEnTime,maxExTime;
+
+        Calendar maxEndDate,maxExpDate;
+        maxEndDate = Calendar.getInstance();
+        maxEndDate.add(Calendar.DAY_OF_MONTH,3);
+        maxExpDate = Calendar.getInstance();
+        maxExpDate.add(Calendar.DAY_OF_MONTH,4);
+
+        currentTime = new Timestamp(Calendar.getInstance().getTime().getTime());
+        maxEnTime = new Timestamp(maxEndDate.getTime().getTime());
+        maxExTime = new Timestamp(maxExpDate.getTime().getTime());
+
+        endTime = Timestamp.valueOf(aucEndDate.getText().toString()+ " "+aucEndTime.getText().toString()+":00.0");
+        expectedTime = Timestamp.valueOf(aucExpDate.getText().toString()+ " "+aucExpTime.getText().toString()+":00.0");
+
+        if(endTime.before(currentTime) || expectedTime.before(currentTime)){
+            Toast.makeText(this,"End Time and Expected Time should be sometime in future!",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(endTime.after(maxEnTime)){
+            Toast.makeText(this,"Max duration of Auction can be 3 days!",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(expectedTime.before(endTime) || expectedTime.after(maxExTime)){
+            Toast.makeText(this,"Expected time of Auction can be within 1 day of the end of Auction!",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        Log.d("ServerFormActivity",currentTime.toString()+" "+endTime.toString()+" "+expectedTime.toString());
+
+        return true;
+    }
 
     @Override
     public void onTimePicked(int view,int hourOfDay, int minute) {
