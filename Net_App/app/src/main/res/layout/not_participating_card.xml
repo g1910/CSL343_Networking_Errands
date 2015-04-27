@@ -2,7 +2,8 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    >
 
     <ImageView
         android:layout_width="30dp"
@@ -58,7 +59,7 @@
         android:layout_toRightOf="@id/endtimetext"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:layout_alignTop="@id/endtimetext"
-        android:layout_alignLeft="@+id/notparticipatingprice"
+        android:layout_marginLeft="10dp"
         android:id="@+id/notparticipatingend_time"
         android:textColor="#ff6c6b6f"
         />
@@ -94,7 +95,7 @@
         android:layout_toRightOf="@id/deliverytimetext"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:layout_alignTop="@id/deliverytimetext"
-        android:layout_alignLeft="@+id/notparticipatingprice"
+        android:layout_marginLeft="10dp"
         android:id="@+id/notparticipatingexpected_time"
         />
 
