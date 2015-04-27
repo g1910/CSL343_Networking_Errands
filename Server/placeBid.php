@@ -10,7 +10,7 @@ mysqli_query($con,"INSERT INTO `Placed`(`idBid`, `idAuction`, `status`) VALUES (
 
 	$output=[];
 	$arr = array(
-		    "Message" => "Success", 
+		    "Tag" => "Update", 
 		);
 	$output[]=$arr;
 
