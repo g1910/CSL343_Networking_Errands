@@ -10,7 +10,7 @@ $order= json_decode($_GET['order']);
 $con=mysqli_connect($IP,$user,$pass,$db);
 
 //echo "INSERT INTO `Bid`( `location`, `idUser`) VALUES (\"$location\",$id_user)";
-mysqli_query($con,"INSERT INTO `Bid`( `location`, `idUser`) VALUES (\"$location\",$id_user)")  or die(mysqli_error($con));
+mysqli_query($con,"INSERT INTO `Bid`( `location`, `idUser`,`bid_description`) VALUES (\"$location\",$id_user,\"$desc\")")  or die(mysqli_error($con));
 
 //echo "Select `idBid` from  `Bid` where `location`=\"$location\"  and `idUser` = $id_user";
 $result =mysqli_query($con,"Select `idBid` from  `Bid` where `location`=\"$location\"  and `idUser` = $id_user")  or die(mysqli_error($con));
