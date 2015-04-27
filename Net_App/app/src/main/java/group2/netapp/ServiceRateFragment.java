@@ -269,7 +269,7 @@ public class ServiceRateFragment extends Fragment {
 
                         ServiceUserReqCard card = new ServiceUserReqCard(getActivity().getApplicationContext(),a.location,a.start_time,a.end_time,a.name);
 
-                        ServiceCustomCardExpand expand = new ServiceCustomCardExpand(getActivity().getApplicationContext(),a.idFeedback);
+                        ServiceCustomCardExpand expand = new ServiceCustomCardExpand(getActivity().getApplicationContext(),a.idFeedback,i);
 
                         card.addCardExpand(expand);
 
@@ -286,11 +286,8 @@ public class ServiceRateFragment extends Fragment {
                 }
             }
         }
+
     }
-
-
-
-}
 class add_review extends AsyncTask<String,String,String>
 {
     private ArrayList<NameValuePair> list;
@@ -300,13 +297,15 @@ class add_review extends AsyncTask<String,String,String>
     HttpResponse response;
     Context con;
     Button button;
-    public add_review(Context context, ArrayList<NameValuePair> l ,Button b, RatingBar ratingbar , EditText reviewEditText)
+    int index;
+    public add_review(Context context, ArrayList<NameValuePair> l ,Button b, RatingBar ratingbar , EditText reviewEditText,int id)
     {
         list=l;
         rating=ratingbar;
         review=reviewEditText;
         con=context;
         button =b;
+        index = id;
     }
 
 
@@ -338,21 +337,26 @@ class add_review extends AsyncTask<String,String,String>
             rating.setClickable(false);
             review.setClickable(false);
             button.setClickable(false);
+            cards.remove(index);
+            cardListAdapter.notifyDataSetChanged();
         }
         else
             System.out.println("Review submission failed");
 
     }
 }
+
 class ServiceCustomCardExpand extends CardExpand {
     //Use your resource ID for your inner layout
     String idFeedback;
     Context con;
-    public ServiceCustomCardExpand(Context context,String id)
+    int idf;
+    public ServiceCustomCardExpand(Context context,String id,int index)
     {
         super(context, R.layout.service_rate_expand);
         idFeedback=id;
         con=context;
+        idf = index;
     }
 
     @Override
@@ -375,7 +379,7 @@ class ServiceCustomCardExpand extends CardExpand {
                 nameValuePairs.add(new BasicNameValuePair("id",idFeedback));
                 nameValuePairs.add(new BasicNameValuePair("star",stars));
                 nameValuePairs.add(new BasicNameValuePair("review",reviewText));
-                new add_review(con,nameValuePairs,submit, rating , review).execute(null,null,null);
+                new add_review(con,nameValuePairs,submit, rating , review,idf).execute(null,null,null);
 
             }
         });
@@ -385,10 +389,11 @@ class ServiceCustomCardExpand extends CardExpand {
 
 
 }
-
+}
 class ServiceUserReqCard extends Card {
 
     private String  location, end_time, start_time, ratename;
+
 
     public ServiceUserReqCard(Context context, String loc, String st, String et, String name){
         super(context, R.layout.service_rate_card);
@@ -423,6 +428,7 @@ class ServiceUserReqCard extends Card {
 }
 
 class ServiceUser{
+
     public String idFeedback;
     public String location;
     public String start_time;

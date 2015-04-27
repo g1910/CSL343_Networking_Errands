@@ -107,7 +107,7 @@ public class CustomerRateFragment extends Fragment {
         View infh = inflater.inflate(R.layout.fragment_service_rate, container, false);
 
         cards = new ArrayList<Card>();
-        cardListAdapter = new CardArrayAdapter(getActivity().getApplicationContext(),cards);
+        cardListAdapter = new CardArrayAdapter(getActivity().getApplicationContext(), cards);
 
         listView = (CardListView) infh.findViewById(R.id.ServiceReqCardList);
         if (listView != null) {
@@ -127,31 +127,30 @@ public class CustomerRateFragment extends Fragment {
         listView.addFooterView(LoadMore);
 
 
-
         LoadMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 counter++;
                 SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-                String email = saved_values.getString("email",null);
+                String email = saved_values.getString("email", null);
                 ArrayList<NameValuePair> list1 = new ArrayList<NameValuePair>();
                 list1.add(new BasicNameValuePair("tag", "2"));          //tag = 2 for customer rates
                 list1.add(new BasicNameValuePair("counter", String.valueOf(counter)));
-                list1.add(new BasicNameValuePair("email",email));
-                if(asynctask.getStatus() == AsyncTask.Status.PENDING || asynctask.getStatus() == AsyncTask.Status.RUNNING)
+                list1.add(new BasicNameValuePair("email", email));
+                if (asynctask.getStatus() == AsyncTask.Status.PENDING || asynctask.getStatus() == AsyncTask.Status.RUNNING)
                     asynctask.cancel(true);
                 asynctask = new get_review(list1, "http://netapp.byethost33.com/service_rate.php").execute(null, null, null);
             }
         });
 
         SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-        String email = saved_values.getString("email",null);
+        String email = saved_values.getString("email", null);
         ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-        nameValuePairs.add(new BasicNameValuePair("tag","2"));
+        nameValuePairs.add(new BasicNameValuePair("tag", "2"));
         nameValuePairs.add(new BasicNameValuePair("counter", String.valueOf(counter)));
-        nameValuePairs.add(new BasicNameValuePair("email",email));
+        nameValuePairs.add(new BasicNameValuePair("email", email));
 
-        asynctask = new get_review(nameValuePairs,"http://netapp.byethost33.com/service_rate.php").execute(null,null,null);
+        asynctask = new get_review(nameValuePairs, "http://netapp.byethost33.com/service_rate.php").execute(null, null, null);
         return infh;
     }
 
@@ -178,7 +177,7 @@ public class CustomerRateFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-        if(asynctask.getStatus() == AsyncTask.Status.PENDING || asynctask.getStatus() == AsyncTask.Status.RUNNING)
+        if (asynctask.getStatus() == AsyncTask.Status.PENDING || asynctask.getStatus() == AsyncTask.Status.RUNNING)
             asynctask.cancel(true);
     }
 
@@ -197,23 +196,21 @@ public class CustomerRateFragment extends Fragment {
         public void onFragmentInteraction(Uri uri);
     }
 
-    class get_review extends AsyncTask<String,String,String>
-    {
+    class get_review extends AsyncTask<String, String, String> {
         public boolean running = true;
         private ArrayList<NameValuePair> list;
         private String host;
         HttpResponse response;
         private InputStream is;
-        public get_review(ArrayList<NameValuePair> l,String h)
-        {
-            list=l;
-            host=h;
+
+        public get_review(ArrayList<NameValuePair> l, String h) {
+            list = l;
+            host = h;
         }
 
         @Override
-        protected  void onPreExecute()
-        {
-                progressdialoglistview.show();
+        protected void onPreExecute() {
+            progressdialoglistview.show();
         }
 
         @Override
@@ -229,8 +226,7 @@ public class CustomerRateFragment extends Fragment {
             httppost.setHeader("Content-Type", "application/x-www-form-urlencoded");
 
             try {
-                if(running)
-                {
+                if (running) {
                     httppost.setEntity(new UrlEncodedFormEntity(list));
 
                     // Execute HTTP Post Request
@@ -250,8 +246,8 @@ public class CustomerRateFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String Result) {
-            if(running)
-            {Reader reader = new InputStreamReader(is);
+            if (running) {
+                Reader reader = new InputStreamReader(is);
                 List<CustomerUser> posts = new ArrayList<CustomerUser>();
                 try {
                     JsonParser parser = new JsonParser();
@@ -268,21 +264,21 @@ public class CustomerRateFragment extends Fragment {
                 }
 
                 cards.clear();
-                if(posts==null){
-                    Toast.makeText(getActivity().getApplicationContext(),"No pending customer reviews found",Toast.LENGTH_SHORT).show();
+                if (posts == null) {
+                    Toast.makeText(getActivity().getApplicationContext(), "No pending customer reviews found", Toast.LENGTH_SHORT).show();
                 }
                 if (posts != null && running)
                     for (int i = 0; i < posts.size(); ++i) {
                         CustomerUser a = posts.get(i);
 
-                        CustomerUserReqCard card = new CustomerUserReqCard(getActivity().getApplicationContext(),a.location,a.start_time,a.end_time,a.name);
-                        CustomerCustomCardExpand expand = new CustomerCustomCardExpand(getActivity().getApplicationContext(),a.idFeedback);
+                        CustomerUserReqCard card = new CustomerUserReqCard(getActivity().getApplicationContext(), a.location, a.start_time, a.end_time, a.name);
+                        CustomerCustomCardExpand expand = new CustomerCustomCardExpand(getActivity().getApplicationContext(), a.idFeedback,i);
                         card.addCardExpand(expand);
 
                         cards.add(card);
                     }
                 cardListAdapter.notifyDataSetChanged();
-                if(progressdialoglistview.isShowing())
+                if (progressdialoglistview.isShowing())
                     progressdialoglistview.dismiss();
                 try {
                     reader.close();
@@ -294,41 +290,97 @@ public class CustomerRateFragment extends Fragment {
         }
     }
 
-}
+    class add_review extends AsyncTask<String, String, String> {
+        private ArrayList<NameValuePair> list;
+        private String host = "http://netapp.byethost33.com/add_rate.php";
+        private RatingBar rating;
+        private EditText review;
+        HttpResponse response;
+        Context con;
+        Button button;
+        int index;
 
-class CustomerCustomCardExpand extends CardExpand {
-    //Use your resource ID for your inner layout
-    String idFeedback;
-    Context con;
-    public CustomerCustomCardExpand(Context context,String id)
-    {
-        super(context, R.layout.service_rate_expand);
-        idFeedback=id;
-        con=context;
+        public add_review(Context context, ArrayList<NameValuePair> l, Button b, RatingBar ratingbar, EditText reviewEditText, int id) {
+            list = l;
+            rating = ratingbar;
+            review = reviewEditText;
+            con = context;
+            button = b;
+            index = id;
+        }
+
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppost = new HttpPost(host);
+            httppost.setHeader("Content-Type", "application/x-www-form-urlencoded");
+            try {
+
+                httppost.setEntity(new UrlEncodedFormEntity(list));
+                // Execute HTTP Post Request
+                response = httpclient.execute(httppost);
+
+            } catch (Exception e) {
+                System.out.println(e);
+                // TODO Auto-generated catch block
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String Result) {
+
+            if (response != null) {
+                Toast.makeText(con, "Review submitted", Toast.LENGTH_SHORT).show();
+                rating.setClickable(false);
+                review.setClickable(false);
+                button.setClickable(false);
+                cards.remove(index);
+                cardListAdapter.notifyDataSetChanged();
+            } else
+                System.out.println("Review submission failed");
+
+        }
     }
 
-    @Override
-    public void setupInnerViewElements(ViewGroup parent, final View view) {
 
-        if (view == null) return;
+    class CustomerCustomCardExpand extends CardExpand {
+        //Use your resource ID for your inner layout
+        String idFeedback;
+        Context con;
+        int idf;
+        public CustomerCustomCardExpand(Context context, String id,int index) {
+            super(context, R.layout.service_rate_expand);
+            idFeedback = id;
+            con = context;
+            idf = index;
+        }
 
-        final RatingBar rating = (RatingBar) view.findViewById(R.id.serviceratingBar);
-        final EditText review = (EditText) view.findViewById(R.id.servicereviewedit);
-        final Button submit = (Button)view.findViewById(R.id.servicereviewsubmit);
+        @Override
+        public void setupInnerViewElements(ViewGroup parent, final View view) {
 
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //ADD REVIEW SUBMIT BUTTON FUNCTIONALITY HERE
-                String stars = String.valueOf(Math.round(rating.getRating()));
-                String reviewText = review.getText().toString();
-                ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
-                nameValuePairs.add(new BasicNameValuePair("id",idFeedback));
-                nameValuePairs.add(new BasicNameValuePair("star",stars));
-                nameValuePairs.add(new BasicNameValuePair("review",reviewText));
-                new add_review(con,nameValuePairs,submit, rating , review).execute(null,null,null);
-            }
-        });
+            if (view == null) return;
+
+            final RatingBar rating = (RatingBar) view.findViewById(R.id.serviceratingBar);
+            final EditText review = (EditText) view.findViewById(R.id.servicereviewedit);
+            final Button submit = (Button) view.findViewById(R.id.servicereviewsubmit);
+
+            submit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //ADD REVIEW SUBMIT BUTTON FUNCTIONALITY HERE
+                    String stars = String.valueOf(Math.round(rating.getRating()));
+                    String reviewText = review.getText().toString();
+                    ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
+                    nameValuePairs.add(new BasicNameValuePair("id", idFeedback));
+                    nameValuePairs.add(new BasicNameValuePair("star", stars));
+                    nameValuePairs.add(new BasicNameValuePair("review", reviewText));
+                    new add_review(con, nameValuePairs, submit, rating, review,idf).execute(null, null, null);
+                }
+            });
+        }
     }
 }
 
