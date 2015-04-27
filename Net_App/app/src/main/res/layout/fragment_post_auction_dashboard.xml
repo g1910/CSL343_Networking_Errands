@@ -1,0 +1,51 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    tools:context="group2.netapp.auction.AuctionDashboardFragment">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Auction has Ended!Take action in"
+        android:id="@+id/textView6"
+        android:layout_gravity="center"
+        android:textAlignment="center" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="00:00"
+        android:id="@+id/auc_countdown"
+        android:layout_gravity="center_horizontal" />
+
+    <it.gmariotti.cardslib.library.view.CardViewNative
+        android:id="@+id/auc_details_cardview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+     />
+
+    <android.support.v4.view.ViewPager
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/auc_pager"
+        android:layout_width="match_parent"
+        android:layout_height="405dp">
+        <android.support.v4.view.PagerTabStrip
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:id="@+id/auc_pagerTab"
+            />
+
+
+    </android.support.v4.view.ViewPager>
+
+
+</LinearLayout>
+
+
+
