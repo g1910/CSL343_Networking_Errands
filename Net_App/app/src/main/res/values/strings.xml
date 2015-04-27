@@ -30,7 +30,7 @@
     <string name="title_activity_bids">BidsActivity</string>
     <string name="IP">http://netapp.byethost33.com/Server/</string>
     <string name="title_activity_bid_form">BidFormActivity</string>
-    <string name="title_activity_feedback">FeedbackActivity</string>
-    <string name="title_activity_profile">ProfileActivity</string>
+    <string name="title_activity_feedback">Feedbacks</string>
+    <string name="title_activity_profile">User details</string>
 
 </resources>

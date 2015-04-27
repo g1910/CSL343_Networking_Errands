@@ -103,7 +103,6 @@ public class HomeActivity extends FragmentActivity
 
         String picpath = saved_values.getString("picpath",null);
         if(picpath == null){
-            picurl = getIntent().getStringExtra("picurl");
             picurl+="0";
             new LoadProfileImage().execute(picurl);
         }
