@@ -112,6 +112,7 @@ public class BidInAuction extends Fragment  implements Card.OnCardClickListener 
         Bundle b = getArguments();
         if(b!=null){
             index = b.getInt("index",-1);
+            Log.d("Auctionindex",index+ " ");
 
             if(index != -1){
 
@@ -195,6 +196,9 @@ public class BidInAuction extends Fragment  implements Card.OnCardClickListener 
     public void onClick(Card card, View view) {
         RunningBidCard c=(RunningBidCard) card;
         Log.d("RunningBIds","HEERE");
+        Log.d("RunningBIds",c.getIndex()+" ");
+        Log.d("RunningBIds",index+" ");
+
         blistener.openRunningBids(c.getIndex(),index);
     }
 
