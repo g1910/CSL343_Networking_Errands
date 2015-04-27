@@ -152,6 +152,7 @@
         </activity>
         <activity
             android:name=".ProfileActivity"
+            android:theme="@style/Theme.AppCompat"
             android:label="@string/title_activity_profile" >
         </activity>
     </application>
