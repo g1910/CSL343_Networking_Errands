@@ -201,6 +201,18 @@ public class ServerFormActivity extends FragmentActivity implements TimePickerFr
             Toast.makeText(this,"Expected time of Auction can be within 1 day of the end of Auction!",Toast.LENGTH_SHORT).show();
             return false;
         }
+        if(minPrice.getText().toString().isEmpty()){
+            Toast.makeText(this,"Please enter the minimum Bid Amount!",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(Integer.valueOf(minPrice.getText().toString())<10){
+            Toast.makeText(this,"Minimum Bid Amount should be atleast ₹ 10 !",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(aucLocation.getText().toString().isEmpty()){
+            Toast.makeText(this,"Please enter the Location!",Toast.LENGTH_SHORT).show();
+            return false;
+        }
 
         Log.d("ServerFormActivity",currentTime.toString()+" "+endTime.toString()+" "+expectedTime.toString());
 
