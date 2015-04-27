@@ -22,6 +22,8 @@ import java.util.List;
 
 import group2.netapp.R;
 import group2.netapp.auction.cards.RunningBidCard;
+import group2.netapp.bidding.cards.AuctionPlacedBidCard;
+import group2.netapp.bidding.cards.NotParticipatingCard;
 import group2.netapp.bidding.cards.Order_Card;
 import group2.netapp.bidding.cards.ParticipatingCard;
 import it.gmariotti.cardslib.library.internal.Card;
@@ -93,9 +95,27 @@ public class PlaceRunningBid extends Fragment {
     private List<Card> setDummyBids() {
         ArrayList<Card> cards = new ArrayList<Card>();
 
-/*        ParticipatingCard card=null;
-        card=new ParticipatingCard(getActivity(),auction_details,-1);
+        NotParticipatingCard card=null;
+        card=new NotParticipatingCard(getActivity(),auction_details,-1);
         cards.add(card);
+
+        JSONArray placed= null;
+        try {
+            placed = (JSONArray)bid_details.get("placed");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        for (int i=0;i<placed.length();i++)
+        {
+            AuctionPlacedBidCard aucCard=null;
+            try {
+                aucCard=new AuctionPlacedBidCard(getActivity(),bid_details.get("location").toString(),"pending",1,1,Integer.parseInt(((JSONObject) placed.get(i)).get("idAuction").toString()));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            cards.add(aucCard);
+
+        }
 
         RunningBidCard card_run=null;
         card_run=new RunningBidCard(getActivity(),bid_details,-1);
@@ -114,7 +134,7 @@ public class PlaceRunningBid extends Fragment {
                 e.printStackTrace();
             }
             cards.add(orderCard);
-        }*/
+        }
         return cards;
     }
 
