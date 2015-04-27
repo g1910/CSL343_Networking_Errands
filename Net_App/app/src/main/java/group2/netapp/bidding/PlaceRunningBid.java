@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import group2.netapp.R;
-import group2.netapp.auction.cards.RunningBidCard;
+import group2.netapp.bidding.cards.RunningBidCard;
 import group2.netapp.bidding.cards.AuctionPlacedBidCard;
 import group2.netapp.bidding.cards.GeneralBidCard;
 import group2.netapp.bidding.cards.NotParticipatingCard;
@@ -111,27 +111,56 @@ public class PlaceRunningBid extends Fragment {
         card=new NotParticipatingCard(getActivity(),auction_details,-1);
         cards.add(card);
 
+        GeneralBidCard card_run=null;
+        card_run=new GeneralBidCard(getActivity(),bid_details,-1);
+        cards.add(card_run);
+
         JSONArray placed= null;
+        Log.d("HmMmm","HMMMM");
         try {
             placed = (JSONArray)bid_details.get("placed");
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        JSONArray partiAuctions=((CurrAuctionActivity)getActivity()).getParticipating();
+
         for (int i=0;i<placed.length();i++)
         {
             AuctionPlacedBidCard aucCard=null;
             try {
-                aucCard=new AuctionPlacedBidCard(getActivity(),bid_details.get("location").toString(),"pending",1,1,Integer.parseInt(((JSONObject) placed.get(i)).get("idAuction").toString()));
+                String loc=null;
+                String ranks=null;
+                String prices=null;
+                String status=null;
+
+                Log.d("LOL",partiAuctions.length()+" ");
+                String tempId=((JSONObject)(placed.get(i))).getString("idAuction");
+
+                for (int j=0;j<partiAuctions.length();j++)
+                {
+                    JSONObject tm=((JSONObject)partiAuctions.get(j));
+                    Log.e("Check HERE",tm.getString("idAuction").toString());
+                    Log.d("CHECK LOL",tempId);
+                    if (tm.getString("idAuction").toString().equals(tempId))
+                    {
+                        loc=tm.getString("location");
+                        ranks=tm.getString("rank");
+                        prices=tm.getString("Price");
+                        status=tm.getString("status");
+                        break;
+                    }
+                }
+
+
+
+
+                aucCard=new AuctionPlacedBidCard(getActivity(),loc,status,ranks,prices,Integer.parseInt(((JSONObject) placed.get(i)).get("idAuction").toString()));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
             cards.add(aucCard);
 
         }
-
-        GeneralBidCard card_run=null;
-        card_run=new GeneralBidCard(getActivity(),bid_details,-1);
-        cards.add(card_run);
 
         Log.d("OrderCard",order.toString());
 

@@ -17,17 +17,30 @@ import it.gmariotti.cardslib.library.internal.Card;
 public class AuctionPlacedBidCard extends Card {
 
     String bidLocation,status;
-    int rank,price;
+    String rank,price;
     int index;
 
-    public AuctionPlacedBidCard(Context context,String bidloc,String status,int ra,int pric,int i) {
+    public AuctionPlacedBidCard(Context context,String bidloc,String status,String ra,String pric,int i) {
         super(context, R.layout.auction_placed_bid_card);
 
             this.bidLocation = bidloc;
             this.index=i;
-            this.rank=ra;
             this.price=pric;
-            this.status=status;
+        if (status.equals("P"))
+        {
+            this.status="Pending";
+            this.rank="";
+        }
+        else if (status.equals("A"))
+        {
+            this.status="Accepted";
+            this.rank=ra;
+        }
+        else if (status.equals("C"))
+        {
+            this.status="Confirmed";
+            this.rank="";
+        }
     }
 
     @Override
