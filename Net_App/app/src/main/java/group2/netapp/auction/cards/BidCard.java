@@ -1,6 +1,7 @@
 package group2.netapp.auction.cards;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -18,7 +19,7 @@ public class BidCard extends Card {
 
     JSONObject bid;
     public BidCard(Context context, JSONObject bid) {
-        super(context, R.layout.running_bid_card);
+        super(context, R.layout.card_auction_bid);
 
       this.bid = bid;
 
@@ -30,7 +31,7 @@ public class BidCard extends Card {
 
         TextView bidLocationView = (TextView) parent.findViewById(R.id.auc_bid_location);
         TextView bidOrderView = (TextView) parent.findViewById(R.id.auc_bid_order_summary);
-
+        Log.d("bidCard", bid.toString());
         try {
             bidLocationView.setText(bid.getString("location"));
             bidOrderView.setText(bid.getJSONArray("orders").length() + " Items Ordered\n"+bid.getString("bid_description"));
