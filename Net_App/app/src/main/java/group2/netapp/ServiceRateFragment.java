@@ -359,7 +359,7 @@ class add_review extends AsyncTask<String,String,String>
             review.setClickable(false);
             button.setClickable(false);
             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
-            nameValuePairs.add(new BasicNameValuePair("id", idUser));
+            nameValuePairs.add(new BasicNameValuePair("user", idUser));
             nameValuePairs.add(new BasicNameValuePair("message", "You got a new feedback"));
             new push_target(nameValuePairs).execute(null, null, null);
             cards.remove(index);
@@ -495,6 +495,27 @@ class push_target extends AsyncTask<String,String,String>
             httppost.setEntity(new UrlEncodedFormEntity(list));
             // Execute HTTP Post Request
             HttpResponse response = httpclient.execute(httppost);
+            if(response!=null)
+            {InputStream is = response.getEntity().getContent();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+            StringBuilder sb = new StringBuilder();
+
+            String line = null;
+            try {
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line + "\n");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    is.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            String id = sb.toString();
+            System.out.println(id);}
 
         } catch (Exception e) {
             System.out.println(e);

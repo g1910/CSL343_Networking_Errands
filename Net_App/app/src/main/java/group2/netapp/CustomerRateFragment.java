@@ -355,7 +355,7 @@ public class CustomerRateFragment extends Fragment {
                 button.setClickable(false);
 
                 ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
-                nameValuePairs.add(new BasicNameValuePair("id", idUser));
+                nameValuePairs.add(new BasicNameValuePair("user", idUser));
                 nameValuePairs.add(new BasicNameValuePair("message", "You got a new feedback"));
                 new push_target(nameValuePairs).execute(null, null, null);
                 cards.remove(index);
