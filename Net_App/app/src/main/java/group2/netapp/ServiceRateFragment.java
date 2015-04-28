@@ -418,7 +418,7 @@ class ServiceCustomCardExpand extends CardExpand {
                     new add_review(con, nameValuePairs, submit, rating, review, idf, idUser).execute(null, null, null);
                 }
                 else{
-                    Toast.makeText(getActivity(),"Please enter the required credentials",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"Please enter the rating and description",Toast.LENGTH_SHORT).show();
                 }
             }
         });

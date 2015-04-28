@@ -148,14 +148,19 @@
         </activity>
         <activity
             android:name=".bidding.BidFormActivity"
-            android:label="@string/title_activity_bid_form" >
+            android:label="@string/title_activity_bid_form"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ProfileActivity"
             android:theme="@style/Theme.AppCompat"
             android:label="@string/title_activity_profile"
+<<<<<<< HEAD
+            android:screenOrientation="portrait">
+=======
             
             >
+>>>>>>> e275b95f8495a15ac207f78ffcaf0f34a6955a57
         </activity>
     </application>
 
