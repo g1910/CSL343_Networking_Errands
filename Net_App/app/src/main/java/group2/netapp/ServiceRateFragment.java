@@ -358,14 +358,12 @@ class add_review extends AsyncTask<String,String,String>
             rating.setClickable(false);
             review.setClickable(false);
             button.setClickable(false);
+            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
+            nameValuePairs.add(new BasicNameValuePair("id", idUser));
+            nameValuePairs.add(new BasicNameValuePair("message", "You got a new feedback"));
+            new push_target(nameValuePairs).execute(null, null, null);
             cards.remove(index);
             cardListAdapter.notifyDataSetChanged();
-
-            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-            nameValuePairs.add(new BasicNameValuePair("id", idUser));
-            nameValuePairs.add(new BasicNameValuePair("message", "You got a new customer feedback"));
-
-            new push_target(nameValuePairs).execute(null,null,null);
 
         }
         else

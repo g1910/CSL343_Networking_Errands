@@ -353,14 +353,16 @@ public class CustomerRateFragment extends Fragment {
                 rating.setClickable(false);
                 review.setClickable(false);
                 button.setClickable(false);
-                cards.remove(index);
-                cardListAdapter.notifyDataSetChanged();
 
                 ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
                 nameValuePairs.add(new BasicNameValuePair("id", idUser));
                 nameValuePairs.add(new BasicNameValuePair("message", "You got a new feedback"));
-
                 new push_target(nameValuePairs).execute(null, null, null);
+                cards.remove(index);
+                cardListAdapter.notifyDataSetChanged();
+
+
+
             } else
                 System.out.println("Review submission failed");
 
