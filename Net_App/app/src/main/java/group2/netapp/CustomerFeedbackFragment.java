@@ -144,7 +144,7 @@ public class CustomerFeedbackFragment extends Fragment {
         });
 
         String id = getArguments().getString("id",null);
-        ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+        ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
         nameValuePairs.add(new BasicNameValuePair("tag", "2"));
         nameValuePairs.add(new BasicNameValuePair("counter", String.valueOf(counter)));
         nameValuePairs.add(new BasicNameValuePair("id", id));
@@ -169,8 +169,8 @@ public class CustomerFeedbackFragment extends Fragment {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
         }*/
-        int ishome = getArguments().getInt("ishome",-1);
-        if(ishome==1)
+//        int ishome = getArguments().getInt("ishome",-1);
+//        if(ishome==1)
             ((HomeActivity) activity).onSectionAttached(2);
     }
 

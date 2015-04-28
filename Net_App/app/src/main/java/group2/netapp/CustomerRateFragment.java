@@ -34,6 +34,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -145,7 +147,7 @@ public class CustomerRateFragment extends Fragment {
 
         SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
         String email = saved_values.getString("email", null);
-        ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+        ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
         nameValuePairs.add(new BasicNameValuePair("tag", "2"));
         nameValuePairs.add(new BasicNameValuePair("counter", String.valueOf(counter)));
         nameValuePairs.add(new BasicNameValuePair("email", email));
@@ -233,6 +235,19 @@ public class CustomerRateFragment extends Fragment {
                     response = httpclient.execute(httppost);
                     if (response != null) {
                         is = response.getEntity().getContent();
+//                        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+//                        StringBuilder sb = new StringBuilder();
+//
+//                        String line = null;
+//                        try {
+//                            while ((line = reader.readLine()) != null) {
+//                                sb.append(line + "\n");
+//                            }
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
+//                        String text = sb.toString();
+//                        System.out.println("ssdvs" + text);
 
                     }
                 }
@@ -345,7 +360,7 @@ public class CustomerRateFragment extends Fragment {
                 nameValuePairs.add(new BasicNameValuePair("id", idUser));
                 nameValuePairs.add(new BasicNameValuePair("message", "You got a new feedback"));
 
-                new push_target(nameValuePairs).execute(null,null,null);
+                new push_target(nameValuePairs).execute(null, null, null);
             } else
                 System.out.println("Review submission failed");
 
