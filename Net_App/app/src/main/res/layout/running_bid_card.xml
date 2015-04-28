@@ -43,7 +43,8 @@
         android:inputType="textMultiLine"
         android:layout_alignBottom="@+id/rankicon"
         android:layout_alignLeft="@+id/status"
-        android:layout_alignStart="@+id/status" />
+        android:textColor="#ff6c6b6f"
+        android:layout_alignStart="@+id/status"/>
 
     <ImageView
         android:layout_width="30dp"
@@ -76,7 +77,8 @@
         android:layout_alignTop="@id/status"
         android:id="@+id/pricetext"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:text="1234"/>
+        android:text="1234"
+        android:textColor="#ff6c6b6f"/>
 
     <ImageView
         android:layout_width="30dp"
