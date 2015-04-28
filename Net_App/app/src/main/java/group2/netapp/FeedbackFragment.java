@@ -95,7 +95,7 @@ public class FeedbackFragment extends Fragment {
                 frag.setArguments(b);
                 return frag;
             } else if (position == 1) {
-                CustomerRateFragment frag = new CustomerRateFragment();
+                CustomerFeedbackFragment frag = new CustomerFeedbackFragment();
                 Bundle b = new Bundle();
                 b.putString("id",id);
                 frag.setArguments(b);

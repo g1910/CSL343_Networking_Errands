@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name" translatable="false">Net app</string>
+    <string name="app_name" translatable="false">OrderIt</string>
     <string name="logout">Logout</string>
     <string name="loginText">Login using your Google Account</string>
     <string name="action_settings">Settings</string>

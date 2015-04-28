@@ -149,7 +149,7 @@ public class ServiceRateFragment extends Fragment {
 
         SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
         String email = saved_values.getString("email",null);
-        ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+        ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
         nameValuePairs.add(new BasicNameValuePair("tag","1"));
         nameValuePairs.add(new BasicNameValuePair("counter", String.valueOf(counter)));
         nameValuePairs.add(new BasicNameValuePair("email",email));
@@ -230,6 +230,25 @@ public class ServiceRateFragment extends Fragment {
                     response = httpclient.execute(httppost);
                     if (response != null) {
                         is = response.getEntity().getContent();
+//                        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+//                        StringBuilder sb = new StringBuilder();
+//
+//                        String line = null;
+//                        try {
+//                            while ((line = reader.readLine()) != null) {
+//                                sb.append(line + "\n");
+//                            }
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        } finally {
+//                            try {
+//                                is.close();
+//                            } catch (IOException e) {
+//                                e.printStackTrace();
+//                            }
+//                        }
+//                        String text = sb.toString();
+//                        System.out.println("ssdvs" + text);
                     }
                 }
 
@@ -339,14 +358,12 @@ class add_review extends AsyncTask<String,String,String>
             rating.setClickable(false);
             review.setClickable(false);
             button.setClickable(false);
+            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
+            nameValuePairs.add(new BasicNameValuePair("user", idUser));
+            nameValuePairs.add(new BasicNameValuePair("message", "You got a new feedback"));
+            new push_target(nameValuePairs).execute(null, null, null);
             cards.remove(index);
             cardListAdapter.notifyDataSetChanged();
-
-            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
-            nameValuePairs.add(new BasicNameValuePair("id", idUser));
-            nameValuePairs.add(new BasicNameValuePair("message", "You got a new customer feedback"));
-
-            new push_target(nameValuePairs).execute(null,null,null);
 
         }
         else
@@ -399,7 +416,7 @@ class ServiceCustomCardExpand extends CardExpand {
                     new add_review(con, nameValuePairs, submit, rating, review, idf, idUser).execute(null, null, null);
                 }
                 else{
-                    Toast.makeText(getActivity(),"Please enter the required credentials",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"Please enter the rating and description",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -460,7 +477,7 @@ class ServiceUser{
 class push_target extends AsyncTask<String,String,String>
 {
     private ArrayList<NameValuePair> list;
-    private String host="http://netapp.byethost33.com/add_rate.php";
+    private String host="http://netapp.byethost33.com/targeted_broadcast.php";
     public push_target(ArrayList<NameValuePair> l)
     {
         list=l;
@@ -478,6 +495,27 @@ class push_target extends AsyncTask<String,String,String>
             httppost.setEntity(new UrlEncodedFormEntity(list));
             // Execute HTTP Post Request
             HttpResponse response = httpclient.execute(httppost);
+            if(response!=null)
+            {InputStream is = response.getEntity().getContent();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+            StringBuilder sb = new StringBuilder();
+
+            String line = null;
+            try {
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line + "\n");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    is.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            String id = sb.toString();
+            System.out.println(id);}
 
         } catch (Exception e) {
             System.out.println(e);
