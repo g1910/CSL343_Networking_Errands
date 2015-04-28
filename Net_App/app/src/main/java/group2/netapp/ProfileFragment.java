@@ -47,6 +47,9 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -93,7 +96,7 @@ public class ProfileFragment extends Fragment {
     public ProfileFragment() {
         // Required empty public constructor
 
-        //this.setArguments(new Bundle());
+        this.setArguments(new Bundle());
     }
 
     @Override
@@ -114,6 +117,7 @@ public class ProfileFragment extends Fragment {
         nameText = (TextView)infh.findViewById(R.id.nameText);
         ImageButton editPhone = (ImageButton)infh.findViewById(R.id.editPhone);
         ImageButton editAddress = (ImageButton)infh.findViewById(R.id.editAddress);
+        profileImage=(ImageView)infh.findViewById(R.id.imageView2);
         if(ishome==0){
             String id = getArguments().getString("id",null);
             System.out.println("here "+id);
@@ -165,7 +169,7 @@ public class ProfileFragment extends Fragment {
 
 
 
-          profileImage=(ImageView)infh.findViewById(R.id.imageView2);
+
             if(picpath != null) {
                 Bitmap bitmap = null;
                 File file = new File(picpath, "ProfilePic.jpg");
@@ -510,6 +514,8 @@ public class ProfileFragment extends Fragment {
                     String text = sb.toString();
                     System.out.println(id + "ssdvs" + text);
 
+                    return text;
+
                 }
             } catch (Exception e) {
                 System.out.println(e);
@@ -520,25 +526,33 @@ public class ProfileFragment extends Fragment {
 
         protected void onPostExecute(String Result) {
             Reader reader = new InputStreamReader(is);
-            profile_details p=null;
+            profile_details pi=null;
             try {
-                JsonParser parser = new JsonParser();
-                JsonObject data = parser.parse(reader).getAsJsonObject();
-                GsonBuilder gsonBuilder = new GsonBuilder();
-                Gson gson = gsonBuilder.create();
+//                JsonParser parser = new JsonParser();
+//                JsonObject data = parser.parse(Result).getAsJsonObject();
+//                GsonBuilder gsonBuilder = new GsonBuilder();
+//                Gson gson = gsonBuilder.create();
+//
+//
+//              p = gson.fromJson(data.get("Informations"), profile_details.class);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//            Log.d("ProfileFragment",p.toString());
+                JSONObject js = new JSONObject(new JSONTokener(Result));
+                JSONArray ja = js.getJSONArray("Informations");
+                JSONObject p = ja.getJSONObject(0);
+                if(p!=null)
+                {
+                    address.setText(p.getString("address"));
+                    phone.setText(p.getString("phone"));
+                    emailText.setText(p.getString("email"));
+                    nameText.setText(p.getString("name"));
+                    new setProfileImage(profileImage).execute(p.getString("picurl"));
+                }
 
-
-              p = gson.fromJson(data.get("Information"), profile_details.class);
             } catch (Exception e) {
                 e.printStackTrace();
-            }
-            if(p!=null)
-            {
-                address.setText(p.address);
-                phone.setText(p.phone);
-                emailText.setText(p.email);
-                nameText.setText(p.name);
-                new setProfileImage(profileImage).execute(p.picurl);
             }
 
         }

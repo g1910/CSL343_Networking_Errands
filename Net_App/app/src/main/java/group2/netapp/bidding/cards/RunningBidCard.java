@@ -34,6 +34,7 @@ public class RunningBidCard extends Card {
             this.bidLocation = j.getString("location");
             this.description=j.getString("bid_description");
             this.price = prices;
+            this.IDS = IDS;
             Log.d("HERER", statuses);
             Log.d("HERER",statuses.equals("P")+" ");
             if (statuses.equals("P"))
@@ -78,6 +79,7 @@ public class RunningBidCard extends Card {
                 public void onClick(View v) {
                     Intent mIntent = new Intent(getContext(), ProfileActivity.class);
                     Bundle mBundle = new Bundle();
+                    Log.d("IDS",IDS);
                     mBundle.putString("id", IDS);
                     mBundle.putInt("tag",0);
                     mIntent.putExtras(mBundle);
