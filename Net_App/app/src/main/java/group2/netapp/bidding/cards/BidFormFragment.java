@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -44,6 +45,11 @@ public class BidFormFragment extends Fragment {
     public BidFormFragment() {
         // Required empty public constructor
     }
+
+
+    String bidlocation;
+    String des;
+    JSONArray order;
 
 
     @Override
@@ -102,14 +108,14 @@ public class BidFormFragment extends Fragment {
                 EditText locationView=(EditText) v.findViewById(R.id.locationfield);
                 EditText desView = (EditText) v.findViewById(R.id.descriptionfield);
 
-                String bidlocation = locationView.getText().toString();
-                String des = desView.getText().toString();
+                bidlocation = locationView.getText().toString();
+                des = desView.getText().toString();
 
                 Log.d("BidFormActivity", idAuction + " ");
                 Log.d("BidFormActivity",bidlocation);
                 Log.d("BidFormActivity",des);
 
-                JSONArray order=new JSONArray();
+                order=new JSONArray();
 
                 for (int i=0;i<cards.size();i++)
                 {
@@ -134,26 +140,51 @@ public class BidFormFragment extends Fragment {
                 }
 
                 Log.d("BidFormActivity",order.toString());
+                if(validate()) {
+                    ServerConnect myServer = new ServerConnect(getActivity());
 
-                ServerConnect myServer=new ServerConnect(getActivity());
+                    List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                    SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+                    final String id = saved_values.getString("id", null);
+                    nameValuePairs.add(new BasicNameValuePair("id_user", id));
+                    nameValuePairs.add(new BasicNameValuePair("idAuction", String.valueOf(idAuction)));
+                    nameValuePairs.add(new BasicNameValuePair("location", String.valueOf(bidlocation)));
+                    nameValuePairs.add(new BasicNameValuePair("desc", String.valueOf(des)));
+                    nameValuePairs.add(new BasicNameValuePair("order", order.toString()));
 
-                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-                SharedPreferences saved_values = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-                final String id = saved_values.getString("id",null);
-                nameValuePairs.add(new BasicNameValuePair("id_user", id));
-                nameValuePairs.add(new BasicNameValuePair("idAuction",String.valueOf(idAuction)));
-                nameValuePairs.add(new BasicNameValuePair("location",String.valueOf(bidlocation)));
-                nameValuePairs.add(new BasicNameValuePair("desc",String.valueOf(des)));
-                nameValuePairs.add(new BasicNameValuePair("order",order.toString()));
+                    Log.d("ParticipatingFragment", getString(R.string.IP) + "addBid.php");
 
-                Log.d("ParticipatingFragment",getString(R.string.IP) + "addBid.php");
+                    myServer.execute(getString(R.string.IP) + "addBid.php", nameValuePairs);
 
-                myServer.execute(getString(R.string.IP) + "addBid.php", nameValuePairs);
-
-
+                }
             }
         });
         return v;
+    }
+
+    public boolean validate(){
+        if(bidlocation.isEmpty()){
+            Toast.makeText(getActivity(),"Location should not be empty",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(order.length()==0){
+            Toast.makeText(getActivity(),"There should be atleast 1 order",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        try {
+            JSONObject j;
+            for(int i=0;i<order.length();++i){
+                j = order.getJSONObject(i);
+                if(j.getString("item").isEmpty() || j.getString("price_per_item").isEmpty() || j.getString("quantity").isEmpty()){
+                    Toast.makeText(getActivity(),"None of the order fields should be empty",Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return true;
     }
 
 
