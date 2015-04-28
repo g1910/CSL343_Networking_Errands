@@ -208,10 +208,11 @@ public class AuctionActivity extends FragmentActivity implements BidRequestsFrag
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_requests) {
-//            openBidRequestFragment();
-//            return true;
-//        }
+        if (id == R.id.reload) {
+            finish();
+            startActivity(getIntent());
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
