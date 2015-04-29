@@ -29,6 +29,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -95,10 +96,19 @@ public class Broadcast extends FragmentActivity implements TimePickerFragment.On
                         ((EditText)findViewById(R.id.locationfield)).requestFocus();
                     }
                 }
-                else
-                //new add_broadcast(item,location,description,time_hour,time_minute,date_day,date_month,date_year,"http://netapp.byethost33.com/add_broadcast.php").execute(null,null,null);
-                    new add_broadcast(item,location,description,time,date,"http://netapp.byethost33.com/add_broadcast.php").execute(null,null,null);
-                //finish();
+                else {
+                    Timestamp currentTime = new Timestamp(Calendar.getInstance().getTime().getTime());
+                    Timestamp bTime = Timestamp.valueOf(date+" "+time+":00");
+                    if(bTime.before(currentTime)){
+                        Toast.makeText(getApplicationContext(), "Time must be before current time", Toast.LENGTH_SHORT).show();
+                    }else {
+
+                        //new add_broadcast(item,location,description,time_hour,time_minute,date_day,date_month,date_year,"http://netapp.byethost33.com/add_broadcast.php").execute(null,null,null);
+
+                        new add_broadcast(item, location, description, time, date, "http://netapp.byethost33.com/add_broadcast.php").execute(null, null, null);
+                        //finish();
+                    }
+                }
             }
         });
     }
