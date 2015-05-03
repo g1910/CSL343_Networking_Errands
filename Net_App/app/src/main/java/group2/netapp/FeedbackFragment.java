@@ -92,12 +92,14 @@ public class FeedbackFragment extends Fragment {
                 ServiceFeedbackFragment frag = new ServiceFeedbackFragment();
                 Bundle b = new Bundle();
                 b.putString("id",id);
+                b.putInt("ishome",1);
                 frag.setArguments(b);
                 return frag;
             } else if (position == 1) {
                 CustomerFeedbackFragment frag = new CustomerFeedbackFragment();
                 Bundle b = new Bundle();
                 b.putString("id",id);
+                b.putInt("ishome",1);
                 frag.setArguments(b);
                 return frag;
             }
