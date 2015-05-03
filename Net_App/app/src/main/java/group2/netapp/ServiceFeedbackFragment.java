@@ -169,8 +169,8 @@ public class ServiceFeedbackFragment extends Fragment {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
         }*/
-//        int ishome = getArguments().getInt("ishome",-1);
-//        if(ishome==1)
+        int ishome = getArguments().getInt("ishome",-1);
+        if(ishome==1)
         ((HomeActivity) activity).onSectionAttached(2);
     }
 
