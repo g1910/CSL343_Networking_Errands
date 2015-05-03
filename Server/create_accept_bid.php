@@ -14,7 +14,7 @@
 
 	mysqli_query($con,"INSERT INTO `Auction_Categories`(`idAuction`,`minPrice`) VALUES (".$id_auc.",".$min_price.")") or die(mysqli_error($con));
 
-	mysqli_query($con,"update `Placed` set status='A', idCategory=".mysqli_insert_id($con)." where idBid=".$id_bid." and idAuction=".$id_auc) or die("Error: ".mysqli_error($con));
+	mysqli_query($con,"update `Placed` set status='A', idCategory=".mysqli_insert_id($con).", Price=".$min_price." where idBid=".$id_bid." and idAuction=".$id_auc) or die("Error: ".mysqli_error($con));
 
 	if(!mysqli_commit($con)){
 		$status = array('status' => false, );
