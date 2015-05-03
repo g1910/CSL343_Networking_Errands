@@ -23,7 +23,7 @@ import it.gmariotti.cardslib.library.internal.Card;
 
 public class ParticipatingCard extends Card {
 
-    String auctionLocation,desc,idUser,start_time,end_time,expected_time;
+    String auctionLocation,desc,idUser,start_time,end_time,expected_time,order_limit;
     String ratings,numRated;
     int index,idAuction,price,rank;
 
@@ -43,6 +43,7 @@ public class ParticipatingCard extends Card {
             temp = j.getString("expctd_time");
             this.expected_time = temp.substring(0,temp.length()-3);
             this.price = j.getInt("minPrice");
+            this.order_limit = j.getString("orderLimit");
             this.ratings=j.getString("rating");
             this.numRated=j.getString("numRated");
             this.rank=j.getInt("rank");
@@ -64,10 +65,12 @@ public class ParticipatingCard extends Card {
         TextView end_timeView = (TextView)parent.findViewById(R.id.participatingend_time);
         TextView expected_timeView = (TextView)parent.findViewById(R.id.participatingexpected_time);
         TextView rankView=(TextView)parent.findViewById(R.id.participatingrank);
+        TextView orderLimit = (TextView)parent.findViewById(R.id.participatingorderlimit);
 
         auctionLocView.setText(auctionLocation);
         priceView.setText("₹" + price);
         descView.setText(desc);
+        orderLimit.setText(order_limit);
         if(ratings == null ||  ratings.equals("null"))
         {
             ratings="0";
